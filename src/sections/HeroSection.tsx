@@ -325,7 +325,7 @@ export default function HeroSection() {
           duration: 0.14,
           ease: "back.out(1.4)",
         },
-        0.64,
+        0.3,
       );
 
       /* G — hold */
