@@ -159,7 +159,7 @@ export default function HeroSection() {
         logo,
         {
           scale: 0.75,
-          x: -120,
+          x: -170,
           y: -110,
           duration: 0.4,
           ease: "power2.inOut",
