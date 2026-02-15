@@ -62,7 +62,7 @@ export default function HeroSection() {
   const revealL1Ref = useRef<HTMLDivElement>(null);
   const revealL2Ref = useRef<HTMLDivElement>(null);
   const revealSubRef = useRef<HTMLDivElement>(null);
-  const revealCtaRef = useRef<HTMLAnchorElement>(null);
+  const revealCtaRef = useRef<HTMLDivElement>(null);
   const heroWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -516,7 +516,7 @@ export default function HeroSection() {
             350+ premium properties delivered — luxury villas, penthouses &amp;
             exclusive estates crafted for those who demand the extraordinary.
           </div>
-          <div ref={revealCtaRef}>
+          <div className="rg-reveal__cta" ref={revealCtaRef}>
             <BtnSecondary label="Explore Properties" />
           </div>
         </div>

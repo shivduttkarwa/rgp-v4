@@ -197,48 +197,6 @@ a {
   opacity: 0;
 }
 
-.rg-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem; /* 8px */
-  padding: 0.72rem 1.28rem; /* 20% smaller */
-  background:
-    linear-gradient(135deg, rgba(245, 196, 94, 0.95), rgba(231, 139, 72, 0.9));
-  color: #1b2f4b;
-  border-radius: 999px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  font-size: 0.56rem; /* 20% smaller */
-  text-transform: uppercase;
-  border: 1px solid rgba(245, 196, 94, 0.35);
-  width: fit-content;
-  box-shadow:
-    0 0.8rem 2.2rem rgba(245, 196, 94, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    filter 0.25s ease;
-}
-
-.rg-btn:hover {
-  transform: translateY(-0.125rem); /* -2px */
-  box-shadow:
-    0 1.1rem 3rem rgba(245, 196, 94, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  filter: brightness(1.04);
-}
-
-.rg-btn__icon {
-  width: 1.5rem; /* 20% smaller */
-  height: 1.5rem; /* 20% smaller */
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: rgba(16, 46, 80, 0.16);
-  font-size: 0.6rem; /* 20% smaller */
-}
-
 /* ─── BADGE ─── */
 .rg-hero__badge {
   position: absolute;
@@ -279,9 +237,7 @@ a {
   padding: var(--rg-pad);
 }
 
-.rg-reveal__line {
-  /* overflow: hidden; - removed to show full slide animation */
-}
+/* .rg-reveal__line - overflow: hidden removed to show full slide animation */
 
 .rg-reveal__text {
   font-family: var(--font-title);
@@ -316,28 +272,7 @@ a {
 }
 
 .rg-reveal__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem; /* 10px */
-  padding: 0.9375rem 1.875rem; /* 15px 30px */
-  background: linear-gradient(135deg, var(--rg-gold), var(--rg-amber));
-  color: var(--rg-navy);
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.8125rem; /* 13px */
-  letter-spacing: 0.03125rem; /* 0.5px */
-  box-shadow: 0 1.125rem 2.8125rem rgba(245, 196, 94, 0.25); /* 18px 45px */
   pointer-events: auto;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-  will-change: transform, opacity;
-}
-
-.rg-reveal__cta:hover {
-  transform: translateY(-0.125rem) scale(1.02); /* -2px */
-  box-shadow: 0 1.375rem 3.4375rem rgba(245, 196, 94, 0.35); /* 22px 55px */
 }
 
 /* ─── VIGNETTE ─── */

@@ -4,36 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gold · navy · luxe edge — 5 buttons</title>
-    <!-- Fonts -->
+    <title>Elegant Buttons</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- Font Awesome for subtle icons (optional but adds finesse) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            background: #0c1a2c;
-            /* deep navy base */
-            background-image: radial-gradient(circle at 20% 30%, rgba(245, 196, 94, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(16, 46, 80, 0.4) 0%, transparent 50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-body);
-            padding: 1.5rem;
-        }
-
-        /* ----- your exact theme (preserved) ----- */
         :root {
             --rg-navy: #102e50;
             --rg-gold: #f5c45e;
@@ -46,451 +23,251 @@
             --rg-max: 90rem;
             --rg-pad: clamp(1.125rem, 2vw, 1.75rem);
             --rg-radius: 1.125rem;
-
             --font-title: "Bona Nova SC", serif;
             --font-body: "Bricolage Grotesque", sans-serif;
         }
 
-        /* ----- main container: dark luxe card (navy & gold) ----- */
-        .luxe-card {
-            max-width: 1200px;
-            width: 100%;
-            background: rgba(7, 20, 37, 0.8);
-            /* rg-darker with transparency */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 3rem;
-            padding: 3.5rem 3rem;
-            box-shadow: 0 40px 70px -20px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(245, 196, 94, 0.15) inset,
-                0 0 0 2px rgba(245, 196, 94, 0.05);
-            border: 1px solid rgba(245, 196, 94, 0.2);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* header with strong gold accent */
-        .header-luxe {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .title-group h1 {
-            font-family: var(--font-title);
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            line-height: 1;
-            color: var(--rg-ink);
-            letter-spacing: -0.02em;
-        }
-
-        .title-group h1 span {
-            color: var(--rg-gold);
-            text-shadow: 0 0 10px rgba(245, 196, 94, 0.3);
-            display: inline-block;
-            position: relative;
-        }
-
-        .title-group h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: 6px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--rg-gold), transparent);
-        }
-
-        .sub-luxe {
+        body {
             font-family: var(--font-body);
-            color: var(--rg-ink-2);
-            font-size: 1.2rem;
-            font-weight: 400;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-            border-left: 3px solid var(--rg-gold);
-            padding-left: 1.2rem;
-        }
-
-        .swatch-set {
-            display: flex;
-            gap: 0.6rem;
-            background: rgba(16, 46, 80, 0.5);
-            padding: 0.8rem 1.5rem;
-            border-radius: 60px;
-            border: 1px solid rgba(245, 196, 94, 0.2);
-            backdrop-filter: blur(8px);
-        }
-
-        .swatch {
-            width: 32px;
-            height: 32px;
-            border-radius: 32px;
-            border: 2px solid rgba(240, 234, 214, 0.3);
-            transition: transform 0.2s ease;
-            cursor: default;
-        }
-
-        .swatch:hover {
-            transform: scale(1.2);
-            border-color: var(--rg-gold);
-        }
-
-        .swatch-navy {
             background: var(--rg-navy);
-        }
-
-        .swatch-gold {
-            background: var(--rg-gold);
-        }
-
-        .swatch-amber {
-            background: var(--rg-amber);
-        }
-
-        .swatch-crimson {
-            background: var(--rg-crimson);
-        }
-
-        .swatch-ink {
-            background: var(--rg-ink);
-        }
-
-        /* ----- button grid: 5 distinct, ultra-premium styles (navy/gold focus) ----- */
-        .button-luxe-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2.2rem;
-            margin: 3.5rem 0 3rem;
-        }
-
-        .btn-luxe-wrapper {
-            background: rgba(16, 46, 80, 0.3);
-            /* navy base */
-            border-radius: 2.5rem;
-            padding: 2rem 1.5rem 1.8rem;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(245, 196, 94, 0.15);
-            box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.6);
-            transition: all 0.3s ease;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
-        }
-
-        .btn-luxe-wrapper:hover {
-            border-color: rgba(245, 196, 94, 0.5);
-            box-shadow: 0 25px 40px -15px #000, 0 0 0 1px rgba(245, 196, 94, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .btn-tag {
-            font-family: var(--font-title);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--rg-gold);
-            opacity: 0.8;
-            background: rgba(7, 20, 37, 0.6);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            border: 1px solid rgba(245, 196, 94, 0.2);
-        }
-
-        /* base button style — clean slate */
-        .btn-luxe {
-            padding: 1rem 2rem;
-            border-radius: 3rem;
-            /* pill shape, extra modern */
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1.1rem;
-            line-height: 1.2;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            width: 100%;
-            white-space: nowrap;
-            letter-spacing: 0.3px;
+            padding: 3rem;
+            gap: 3rem;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            color: var(--rg-ink);
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            max-width: 900px;
+        }
+
+        .card {
+            background: var(--rg-dark);
+            padding: 2.5rem;
+            border-radius: var(--rg-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            min-width: 220px;
+        }
+
+        .card span {
+            color: var(--rg-ink-2);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Base Button Styles */
+        .btn {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            padding: 0.875rem 2rem;
+            border-radius: var(--rg-radius);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+            letter-spacing: 0.025em;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* 1. PRIMARY — gold royalty with depth */
-        .btn-primary-luxe {
-            background: linear-gradient(145deg, #f5c45e, #dba54b);
-            color: #071425;
-            font-weight: 700;
-            box-shadow: 0 10px 20px -5px rgba(245, 196, 94, 0.4), 0 0 0 1px rgba(255, 215, 120, 0.5) inset;
-        }
-
-        .btn-primary-luxe:hover {
-            background: linear-gradient(145deg, #ffd77a, #e8b852);
-            transform: scale(1.03) translateY(-3px);
-            box-shadow: 0 20px 30px -8px #f5c45e, 0 0 0 2px rgba(255, 255, 200, 0.5) inset;
-        }
-
-        .btn-primary-luxe i {
-            color: #071425;
-        }
-
-        /* 2. OUTLINE — navy & gold refined (thicker border, golden hover) */
-        .btn-outline-luxe {
-            background: transparent;
-            color: var(--rg-gold);
-            border: 2px solid var(--rg-gold);
-            box-shadow: inset 0 0 15px rgba(245, 196, 94, 0.2), 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-outline-luxe:hover {
+        /* 1. Royal Gold - Primary CTA */
+        .btn-royal {
             background: var(--rg-gold);
-            color: var(--rg-darker);
-            border-color: var(--rg-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px -8px #f5c45e, 0 0 30px rgba(245, 196, 94, 0.4);
+            color: var(--rg-dark);
+            border: 2px solid var(--rg-gold);
+            box-shadow: 0 4px 14px rgba(245, 196, 94, 0.25);
         }
 
-        /* 3. GHOST — minimal, but with gold shimmer on dark */
-        .btn-ghost-luxe {
-            background: rgba(16, 46, 80, 0.6);
-            color: var(--rg-ink);
-            border: 1px solid rgba(245, 196, 94, 0.3);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .btn-ghost-luxe:hover {
-            background: rgba(245, 196, 94, 0.15);
-            color: var(--rg-gold);
-            border-color: var(--rg-gold);
-            backdrop-filter: blur(12px);
+        .btn-royal:hover {
+            background: var(--rg-amber);
+            border-color: var(--rg-amber);
+            box-shadow: 0 6px 20px rgba(245, 196, 94, 0.35);
             transform: translateY(-2px);
-            box-shadow: 0 15px 25px -10px #000;
         }
 
-        /* 4. ICON BUTTON — navy + gold icon treatment */
-        .btn-icon-luxe {
-            background: var(--rg-navy);
-            color: var(--rg-gold);
-            border: 1px solid rgba(245, 196, 94, 0.3);
-            box-shadow: 0 10px 20px -8px #000, 0 0 0 1px rgba(245, 196, 94, 0.2) inset;
-            padding: 0.9rem 1.8rem;
+        .btn-royal:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(245, 196, 94, 0.25);
         }
 
-        .btn-icon-luxe i,
-        .btn-icon-luxe svg {
-            filter: drop-shadow(0 2px 3px gold);
-            transition: transform 0.25s ease;
-        }
-
-        .btn-icon-luxe:hover {
-            background: #1a3d66;
-            /* brighter navy */
-            border-color: var(--rg-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 18px 28px -10px #000, 0 0 0 2px rgba(245, 196, 94, 0.4) inset;
-        }
-
-        .btn-icon-luxe:hover i,
-        .btn-icon-luxe:hover svg {
-            transform: scale(1.2) rotate(2deg);
-        }
-
-        /* 5. CTA — gradient with gold/navy dominance (amber as accent) */
-        .btn-cta-luxe {
-            background: linear-gradient(135deg, #102e50 0%, #1e4a7a 40%, #f5c45e 180%);
-            background-size: 200% 200%;
+        /* 2. Navy Outline - Secondary */
+        .btn-outline {
+            background: transparent;
             color: var(--rg-ink);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(245, 196, 94, 0.4);
-            box-shadow: 0 15px 25px -10px #000, 0 0 30px rgba(245, 196, 94, 0.3);
+            border: 2px solid var(--rg-ink);
             position: relative;
+            z-index: 1;
         }
 
-        .btn-cta-luxe::before {
+        .btn-outline::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, var(--rg-gold), transparent 50%, var(--rg-navy));
-            border-radius: 3rem;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--rg-ink);
+            transition: width 0.3s ease;
             z-index: -1;
+            border-radius: calc(var(--rg-radius) - 2px);
+        }
+
+        .btn-outline:hover {
+            color: var(--rg-dark);
+            border-color: var(--rg-ink);
+        }
+
+        .btn-outline:hover::before {
+            width: 100%;
+        }
+
+        /* 3. Crimson Accent - Destructive/Important */
+        .btn-crimson {
+            background: var(--rg-crimson);
+            color: var(--rg-ink);
+            border: 2px solid var(--rg-crimson);
+            font-family: var(--font-title);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            padding: 1rem 2.5rem;
+        }
+
+        .btn-crimson:hover {
+            background: transparent;
+            border-color: var(--rg-crimson);
+            box-shadow: 0 8px 24px rgba(190, 61, 42, 0.3);
+        }
+
+        .btn-crimson:active {
+            box-shadow: 0 4px 12px rgba(190, 61, 42, 0.2);
+        }
+
+        /* 4. Ink Ghost - Subtle/Tertiary */
+        .btn-ghost {
+            background: rgba(240, 234, 214, 0.08);
+            color: var(--rg-ink);
+            border: 1px solid rgba(240, 234, 214, 0.2);
+            backdrop-filter: blur(8px);
+            font-weight: 400;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(240, 234, 214, 0.15);
+            border-color: var(--rg-gold);
+            box-shadow: 0 0 0 3px rgba(245, 196, 94, 0.1);
+        }
+
+        .btn-ghost:active {
+            box-shadow: 0 0 0 3px rgba(245, 196, 94, 0.2);
+        }
+
+        /* 5. Dark Elevated - Premium/Special */
+        .btn-elevated {
+            background: var(--rg-darker);
+            color: var(--rg-gold);
+            border: 1px solid var(--rg-gold);
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.2),
+                0 4px 8px rgba(10, 26, 46, 0.15),
+                0 12px 24px rgba(7, 20, 37, 0.15);
+            font-family: var(--font-title);
+            padding: 1.125rem 2.75rem;
+        }
+
+        .btn-elevated::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--rg-gold);
+            border-radius: var(--rg-radius);
+            transform: translate(-50%, -50%);
             opacity: 0;
-            transition: opacity 0.4s;
+            transition: all 0.3s ease;
         }
 
-        .btn-cta-luxe:hover {
-            background: linear-gradient(135deg, #1a3d66, #2b5a8c, #f5c45e);
-            transform: scale(1.02) translateY(-4px);
-            box-shadow: 0 25px 35px -12px gold;
+        .btn-elevated:hover {
+            color: var(--rg-ink);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(10, 26, 46, 0.2),
+                0 16px 32px rgba(7, 20, 37, 0.2);
+            transform: translateY(-2px);
         }
 
-        .btn-cta-luxe:hover::before {
-            opacity: 0.6;
+        .btn-elevated:hover::after {
+            opacity: 0.5;
+            width: calc(100% + 10px);
+            height: calc(100% + 10px);
         }
 
-        .btn-cta-luxe i {
-            color: var(--rg-gold);
+        /* Focus States for Accessibility */
+        .btn:focus {
+            outline: none;
         }
 
-        /* responsive */
-        @media (max-width: 700px) {
-            .luxe-card {
-                padding: 2.5rem 1.5rem;
-            }
-
-            .btn-luxe {
-                white-space: normal;
-            }
-
-            .btn-luxe-wrapper {
-                padding: 1.8rem 1rem;
-            }
-        }
-
-        /* bottom bar - pure gold/navy showcase */
-        .foot-luxe {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(245, 196, 94, 0.2);
-        }
-
-        .pill-group {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .pill {
-            background: rgba(16, 46, 80, 0.7);
-            border: 1px solid rgba(245, 196, 94, 0.3);
-            color: var(--rg-ink-2);
-            padding: 0.4rem 1.3rem;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            backdrop-filter: blur(4px);
-        }
-
-        .pill strong {
-            color: var(--rg-gold);
-            font-weight: 700;
-            margin-right: 4px;
-        }
-
-        .gold-text {
-            color: var(--rg-gold);
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-        }
-
-        .gold-text i {
-            margin-right: 6px;
-        }
-
-        /* icon adjustments */
-        .btn-luxe i,
-        .btn-luxe svg {
-            font-size: 1.2rem;
+        .btn:focus-visible {
+            outline: 2px solid var(--rg-gold);
+            outline-offset: 3px;
         }
     </style>
 </head>
 
 <body>
-    <div class="luxe-card">
-        <!-- header: navy & gold statement -->
-        <div class="header-luxe">
-            <div class="title-group">
-                <h1>
-                    <span>gold</span>·navy
-                </h1>
-                <div class="sub-luxe">five buttons · royal tension</div>
-            </div>
-            <div class="swatch-set">
-                <div class="swatch swatch-navy" title="rg-navy"></div>
-                <div class="swatch swatch-gold" title="rg-gold"></div>
-                <div class="swatch swatch-amber" title="rg-amber"></div>
-                <div class="swatch swatch-crimson" title="rg-crimson"></div>
-                <div class="swatch swatch-ink" title="rg-ink"></div>
-            </div>
+    <h1>Elegant Buttons</h1>
+
+    <div class="button-group">
+        <div class="card">
+            <span>Primary</span>
+            <button class="btn btn-royal">Get Started</button>
         </div>
 
-        <!-- 5 BUTTON GRID — each button distinct, premium, navy/gold combo at core -->
-        <div class="button-luxe-grid">
-            <!-- 1. primary gold -->
-            <div class="btn-luxe-wrapper">
-                <span class="btn-tag">primary</span>
-                <button class="btn-luxe btn-primary-luxe">
-                    <i class="fas fa-crown"></i> Get Started
-                </button>
-            </div>
-
-            <!-- 2. outline (navy/gold outline) -->
-            <div class="btn-luxe-wrapper">
-                <span class="btn-tag">outline</span>
-                <button class="btn-luxe btn-outline-luxe">
-                    <i class="fas fa-compass"></i> Learn More
-                </button>
-            </div>
-
-            <!-- 3. ghost (dark with gold shimmer) -->
-            <div class="btn-luxe-wrapper">
-                <span class="btn-tag">ghost</span>
-                <button class="btn-luxe btn-ghost-luxe">
-                    <i class="fas fa-star"></i> Skip for now
-                </button>
-            </div>
-
-            <!-- 4. icon (navy + gold icon) -->
-            <div class="btn-luxe-wrapper">
-                <span class="btn-tag">icon</span>
-                <button class="btn-luxe btn-icon-luxe">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Confirm</span>
-                </button>
-            </div>
-
-            <!-- 5. CTA (gradient navy → gold) -->
-            <div class="btn-luxe-wrapper">
-                <span class="btn-tag">cta</span>
-                <button class="btn-luxe btn-cta-luxe">
-                    <i class="fas fa-bolt"></i> Limited Offer →
-                </button>
-            </div>
+        <div class="card">
+            <span>Secondary</span>
+            <button class="btn btn-outline">Learn More</button>
         </div>
 
-        <!-- bottom line: rich details -->
-        <div class="foot-luxe">
-            <div class="pill-group">
-                <span class="pill"><strong>rg-navy</strong> #102e50</span>
-                <span class="pill"><strong>rg-gold</strong> #f5c45e</span>
-                <span class="pill"><strong>amber</strong> accent</span>
-            </div>
-            <div class="gold-text">
-                <i class="fas fa-gem"></i> 5 modern interactions · gold/navy dominance
-            </div>
+        <div class="card">
+            <span>Accent</span>
+            <button class="btn btn-crimson">Buy Now</button>
         </div>
 
-        <!-- tiny micro detail: golden rule line -->
-        <div
-            style="margin-top: 1.5rem; text-align: right; font-size: 0.8rem; color: rgba(245, 196, 94, 0.3); letter-spacing: 2px;">
-            ✦ ROYG ✦
+        <div class="card">
+            <span>Subtle</span>
+            <button class="btn btn-ghost">View Details</button>
+        </div>
+
+        <div class="card">
+            <span>Premium</span>
+            <button class="btn btn-elevated">Exclusive</button>
         </div>
     </div>
 </body>

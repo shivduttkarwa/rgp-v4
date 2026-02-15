@@ -35,16 +35,7 @@ export default function BtnPrimary({
       style={buttonStyle}
       onClick={onClick}
     >
-      <span className="bp-bg"></span>
-      <span className="bp-shine"></span>
-      <span className="bp-glow"></span>
-      <span className="bp-content">
-        <span className="bp-label">{label}</span>
-        <span className="bp-arrow">
-          <span className="bp-arrow-line"></span>
-          <span className="bp-arrow-head"></span>
-        </span>
-      </span>
+      {label}
     </button>
   );
 }

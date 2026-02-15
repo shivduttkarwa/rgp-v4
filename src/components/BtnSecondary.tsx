@@ -35,23 +35,7 @@ export default function BtnSecondary({
       style={buttonStyle}
       onClick={onClick}
     >
-      <span className="bs-border"></span>
-      <span className="bs-glow"></span>
-      <span className="bs-content">
-        <span className="bs-label">{label}</span>
-        <span className="bs-icon">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </span>
-      </span>
+      <span className="bs-text">{label}</span>
     </button>
   );
 }
