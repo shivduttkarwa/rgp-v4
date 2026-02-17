@@ -53,8 +53,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: clamp(1.25rem, 3vw, 2.25rem);
 
-  /* ✅ TOP aligned (was bottom aligned) */
-  align-items: start;
+  align-items: center;
 }
 
 .rg-about__copy {

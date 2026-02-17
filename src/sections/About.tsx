@@ -24,7 +24,7 @@ type AboutProps = {
 
 const About: React.FC<AboutProps> = ({
   introKicker = "REAL GOLD PROPERTIES",
-  introHeadline = "Among Australia’s most liveable neighbourhoods, a modern real estate partner that helps you buy, sell, and rent homes with confidence — guided by local expertise and genuine care.",
+  introHeadline = "A modern real estate partner — buying, selling, and renting with local expertise and genuine care.",
 
   sectionKicker = "MAKING MOVES",
   sectionTitle = "HOMES BOUGHT & SOLD WITH CLARITY.\nRENTALS HANDLED WITH CARE.\nLOCAL INSIGHT THAT SAVES YOU TIME.",

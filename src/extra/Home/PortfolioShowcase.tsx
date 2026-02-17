@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./PortfolioShowcase.css";
 import GlassButton from "../UI/GlassButton";
-import TiltTextGsap from "../UI/TiltTextGsap";
-import BtnPrimary from "../../components/BtnPrimary";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,6 +15,7 @@ const getImagePath = (imageName: string) =>
     : `${publicUrl}/images/${imageName}`;
 
 export interface ShowcaseProject {
+  id: string;
   title: string;
   location: string;
   price: string;
@@ -25,7 +25,6 @@ export interface ShowcaseProject {
   beds: number;
   baths: number;
   area: string;
-  link?: string;
 }
 
 interface PortfolioShowcaseProps {
@@ -37,6 +36,7 @@ interface PortfolioShowcaseProps {
 
 const defaultProjects: ShowcaseProject[] = [
   {
+    id: "hawcliffe-manor",
     title: "Hawcliffe Manor",
     location: "Toorak, VIC",
     price: "$4,250,000",
@@ -46,6 +46,7 @@ const defaultProjects: ShowcaseProject[] = [
     beds: 5, baths: 4, area: "3,800",
   },
   {
+    id: "northshore-penthouse",
     title: "Northshore Penthouse",
     location: "North Sydney, NSW",
     price: "$3,100,000",
@@ -55,6 +56,7 @@ const defaultProjects: ShowcaseProject[] = [
     beds: 3, baths: 2, area: "2,100",
   },
   {
+    id: "garden-terrace",
     title: "The Garden Terrace",
     location: "Brighton, VIC",
     price: "$2,750,000",
@@ -64,6 +66,7 @@ const defaultProjects: ShowcaseProject[] = [
     beds: 4, baths: 3, area: "2,400",
   },
   {
+    id: "evoke-residences",
     title: "Evoke Residences",
     location: "South Yarra, VIC",
     price: "$1,850,000",
@@ -73,6 +76,7 @@ const defaultProjects: ShowcaseProject[] = [
     beds: 2, baths: 2, area: "1,200",
   },
   {
+    id: "heritage-estate",
     title: "Heritage Estate",
     location: "Vaucluse, NSW",
     price: "$6,800,000",
@@ -230,7 +234,12 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       </div>
                     </div>
 
-                    <BtnPrimary label="View Property" />
+                    <Link
+                      to={`/properties/${project.id}`}
+                      className="btn-primary pc-view-btn"
+                    >
+                      View Property
+                    </Link>
                   </div>
 
                   {/* Decorative corner */}

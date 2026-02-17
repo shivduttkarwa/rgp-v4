@@ -3,11 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Menu from "./components/Menu";
 import Footer from "./sections/Footer";
 
-const HomePage        = lazy(() => import("./pages/HomePage"));
-const AboutPage       = lazy(() => import("./pages/AboutPage"));
-const ServicesPage    = lazy(() => import("./pages/ServicesPage"));
+const HomePage         = lazy(() => import("./pages/HomePage"));
+const AboutPage        = lazy(() => import("./pages/AboutPage"));
+const ServicesPage     = lazy(() => import("./pages/ServicesPage"));
 const TestimonialsPage = lazy(() => import("./pages/TestimonialsPage"));
-const ContactPage     = lazy(() => import("./pages/ContactPage"));
+const ContactPage      = lazy(() => import("./pages/ContactPage"));
+const PropertyPage     = lazy(() => import("./pages/PropertyPage"));
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Route path="/about"        element={<AboutPage />} />
           <Route path="/services"     element={<ServicesPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
-          <Route path="/contact"      element={<ContactPage />} />
+          <Route path="/contact"           element={<ContactPage />} />
+          <Route path="/properties/:id"   element={<PropertyPage />} />
         </Routes>
       </Suspense>
       <Footer />
