@@ -1,15 +1,12 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BtnSecondary from "../components/BtnSecondary";
 import "./HeroSection.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════
    COMPONENT
    ═══════════════════════════════════════════════════ */
-export default function HeroSection() {
+export default function HeroSection({ ready = false }: { ready?: boolean }) {
   const bgRef = useRef<HTMLDivElement>(null);
   const vignetteRef = useRef<HTMLDivElement>(null);
   const accentLRef = useRef<HTMLDivElement>(null);
@@ -18,8 +15,8 @@ export default function HeroSection() {
   const revealL2Ref = useRef<HTMLDivElement>(null);
   const revealSubRef = useRef<HTMLDivElement>(null);
   const revealCtaRef = useRef<HTMLDivElement>(null);
-  const heroWrapRef = useRef<HTMLDivElement>(null);
 
+  // Set initial states on mount — bg fully visible, only content hidden
   useEffect(() => {
     const bg = bgRef.current;
     const vignette = vignetteRef.current;
@@ -29,144 +26,50 @@ export default function HeroSection() {
     const revealL2 = revealL2Ref.current;
     const revealSub = revealSubRef.current;
     const revealCta = revealCtaRef.current;
-    const heroWrap = heroWrapRef.current;
 
-    if (
-      !bg ||
-      !vignette ||
-      !accentL ||
-      !accentR ||
-      !revealL1 ||
-      !revealL2 ||
-      !revealSub ||
-      !revealCta ||
-      !heroWrap
-    )
-      return;
+    if (!bg || !vignette || !accentL || !accentR || !revealL1 || !revealL2 || !revealSub || !revealCta) return;
 
-    /* ── initial states ── */
-    gsap.set([revealL1, revealL2, revealSub, revealCta], {
-      x: -100,
-      opacity: 0,
-    });
-    gsap.set(revealCta, { scale: 0.85 });
-    gsap.set(bg, { opacity: 1, scale: 1.05 });
-    gsap.set(vignette, { opacity: 0 });
-    gsap.set(accentL, { height: 0, opacity: 0 });
-    gsap.set(accentR, { height: 0, opacity: 0 });
-
-    /* ── scroll timeline (animates when hero comes into view) ── */
-    const scrollTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: heroWrap,
-        start: "top center",
-        end: "center center",
-        toggleActions: "play none none none", // Only play once, don't reverse
-      },
-    });
-
-    /* A — vignette */
-    scrollTL.to(
-      vignette,
-      {
-        opacity: 0.5,
-        duration: 0.6,
-        ease: "power2.out",
-      },
-      0,
-    );
-
-    /* B — BG */
-    scrollTL.to(
-      bg,
-      {
-        scale: 1.02,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      0,
-    );
-
-    /* C — accents */
-    scrollTL.to(
-      accentL,
-      {
-        height: "55vh",
-        opacity: 0.5,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      0.2,
-    );
-    scrollTL.to(
-      accentR,
-      {
-        height: "45vh",
-        opacity: 0.4,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      0.3,
-    );
-
-    /* D — reveal (all slide from left to right, staggered) */
-    scrollTL.to(
-      revealL1,
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power4.out",
-      },
-      0.4,
-    );
-
-    scrollTL.to(
-      revealL2,
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power4.out",
-      },
-      0.5,
-    );
-
-    scrollTL.to(
-      revealSub,
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power4.out",
-      },
-      0.6,
-    );
-
-    scrollTL.to(
-      revealCta,
-      {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "power4.out",
-      },
-      0.7,
-    );
-
-    /* ── cleanup ── */
-    return () => {
-      scrollTL.scrollTrigger?.kill();
-      scrollTL.kill();
-    };
+    // BG visible from the start — no animation needed
+    gsap.set(bg, { opacity: 1, scale: 1.02 });
+    gsap.set(vignette, { opacity: 0.5 });
+    // Content starts hidden
+    gsap.set([revealL1, revealL2, revealSub, revealCta], { x: -60, opacity: 0 });
+    gsap.set(revealCta, { scale: 0.9 });
+    gsap.set(accentL, { height: "55vh", opacity: 0 });
+    gsap.set(accentR, { height: "45vh", opacity: 0 });
   }, []);
+
+  // Animate content once curtain finishes rising (~750ms after ready)
+  useEffect(() => {
+    if (!ready) return;
+
+    const accentL = accentLRef.current;
+    const accentR = accentRRef.current;
+    const revealL1 = revealL1Ref.current;
+    const revealL2 = revealL2Ref.current;
+    const revealSub = revealSubRef.current;
+    const revealCta = revealCtaRef.current;
+
+    if (!accentL || !accentR || !revealL1 || !revealL2 || !revealSub || !revealCta) return;
+
+    // ready fires at progress=100, curtain takes 120ms+750ms=870ms to exit
+    const tl = gsap.timeline({ delay: 0.95 });
+
+    tl.to(accentL, { opacity: 0.5, duration: 0.6, ease: "power3.out" }, 0);
+    tl.to(accentR, { opacity: 0.4, duration: 0.6, ease: "power3.out" }, 0.1);
+    tl.to(revealL1, { x: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, 0.1);
+    tl.to(revealL2, { x: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, 0.2);
+    tl.to(revealSub, { x: 0, opacity: 1, duration: 0.7, ease: "power4.out" }, 0.35);
+    tl.to(revealCta, { x: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power4.out" }, 0.45);
+
+    return () => { tl.kill(); };
+  }, [ready]);
 
   /* ═══════════════════════════════════════════════════
      JSX
      ═══════════════════════════════════════════════════ */
   return (
-    <div className="rg-hero-wrap" ref={heroWrapRef}>
+    <div className="rg-hero-wrap">
       <section className="rg-hero">
         <div
           className="rg-hero__bg"

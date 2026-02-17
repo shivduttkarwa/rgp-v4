@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Menu from "./Menu";
 import "./Header.css";
 
-export default function Header() {
+export default function Header({ ready = false }: { ready?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const headerBgRef = useRef<HTMLDivElement>(null);
@@ -62,16 +62,24 @@ export default function Header() {
     if (!headerRef.current) return;
 
     if (location.pathname === "/" || location.pathname === publicUrl) {
-      gsap.to(headerRef.current, {
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: 0.6,
-      });
+      // Homepage: header slides in after hero content via the ready effect
     } else {
       gsap.set(headerRef.current, { y: 0 });
     }
   }, [location.pathname, publicUrl]);
+
+  // Slide header in after hero content finishes animating
+  useEffect(() => {
+    if (!ready || !headerRef.current) return;
+    if (location.pathname !== "/" && location.pathname !== publicUrl) return;
+
+    gsap.to(headerRef.current, {
+      y: 0,
+      duration: 0.7,
+      ease: "power3.out",
+      delay: 2.2,
+    });
+  }, [ready, location.pathname, publicUrl]);
 
   useEffect(() => {
     const logo = headerRef.current?.querySelector(

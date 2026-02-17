@@ -18,10 +18,10 @@ function App() {
     <>
       <Preloader onComplete={() => setLoaded(true)} />
       <div style={{ visibility: loaded ? "visible" : "hidden" }}>
-        <Header />
+        <Header ready={loaded} />
         <Suspense fallback={null}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage ready={loaded} />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/testimonials" element={<TestimonialsPage />} />

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import "./Preloader.css";
 
 interface PreloaderProps {
@@ -17,8 +18,14 @@ const PARTICLE_COLORS = ["#f5d67b", "#d4a84b", "#b8860b", "#ffd700", "#e6c35c"];
 
 export default function Preloader({ onComplete }: PreloaderProps) {
   const particlesRef = useRef<HTMLDivElement>(null);
-  const [rising, setRising] = useState(false);
+  const preloaderRef = useRef<HTMLDivElement>(null);
+  const onCompleteRef = useRef(onComplete);
   const [hidden, setHidden] = useState(false);
+
+  // Keep ref in sync without causing effect re-runs
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  });
 
   // Create particles
   useEffect(() => {
@@ -40,7 +47,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     return () => { container.innerHTML = ""; };
   }, []);
 
-  // Progress + curtain trigger
+  // Progress + curtain — no onComplete in deps, use ref instead
   useEffect(() => {
     let progress = 0;
     let currentStage = 0;
@@ -51,11 +58,22 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       if (cancelled) return;
 
       if (currentStage >= STAGES.length) {
-        onComplete?.();
+        // Fire immediately so browser gets 120ms to paint newly-visible content
+        // before the curtain animation starts — prevents jank frame during slide
+        onCompleteRef.current?.();
+
         timerId = setTimeout(() => {
           if (cancelled) return;
-          setRising(true);
-          setTimeout(() => setHidden(true), 750);
+          const el = preloaderRef.current;
+          if (!el) return;
+
+          gsap.to(el, {
+            y: "-100%",
+            duration: 0.75,
+            ease: "power3.inOut",
+            overwrite: true,
+            onComplete: () => setHidden(true),
+          });
         }, 120);
         return;
       }
@@ -77,12 +95,12 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       cancelled = true;
       clearTimeout(timerId);
     };
-  }, [onComplete]);
+  }, []); // empty deps — onComplete accessed via ref
 
   if (hidden) return null;
 
   return (
-    <div className={`preloader${rising ? " preloader--rising" : ""}`} aria-hidden="true">
+    <div className="preloader" ref={preloaderRef} aria-hidden="true">
       {/* Corner decorations */}
       <div className="preloader-corner preloader-corner-tl" />
       <div className="preloader-corner preloader-corner-tr" />

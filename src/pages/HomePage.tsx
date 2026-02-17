@@ -8,7 +8,7 @@ import PhilosophyPillars from "@/sections/Philosophy";
 import WhyUs from "@/sections/WhyUs";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 
-export default function HomePage() {
+export default function HomePage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function HomePage() {
 
   return (
     <div ref={pageRef}>
-      <HeroSection />
+      <HeroSection ready={ready} />
       <About />
       <PropertyListingSection />
       <ServiceSelection />
