@@ -243,18 +243,18 @@ a {
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: 0.02em;
-  color: #f0ead6;
+  color: #ffffff;
   text-transform: uppercase;
   text-shadow: 0 0.1875rem 2.5rem rgba(0, 0, 0, 0.4); /* 3px 40px */
   will-change: transform, opacity;
 }
 
 .rg-reveal__text .rg-gold {
-  color: var(--rg-gold);
+  color: #F5C842;
 }
 
 .rg-reveal__text .rg-amber {
-  color: var(--rg-amber);
+  color: #F5A55A;
 }
 
 .rg-reveal__sub {
@@ -262,7 +262,7 @@ a {
   font-size: clamp(0.8125rem, 1.5vw, 1.125rem); /* 13-18px */
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: rgba(240, 234, 214, 0.95);
+  color: rgba(255, 255, 255, 0.92);
   line-height: 1.65;
   max-width: 46ch;
   text-shadow: 0 0.125rem 0.9375rem rgba(0, 0, 0, 0.3); /* 2px 15px */

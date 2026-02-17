@@ -9,8 +9,6 @@ import "./HeroSection.css";
 export default function HeroSection({ ready = false }: { ready?: boolean }) {
   const bgRef = useRef<HTMLDivElement>(null);
   const vignetteRef = useRef<HTMLDivElement>(null);
-  const accentLRef = useRef<HTMLDivElement>(null);
-  const accentRRef = useRef<HTMLDivElement>(null);
   const revealL1Ref = useRef<HTMLDivElement>(null);
   const revealL2Ref = useRef<HTMLDivElement>(null);
   const revealSubRef = useRef<HTMLDivElement>(null);
@@ -20,14 +18,12 @@ export default function HeroSection({ ready = false }: { ready?: boolean }) {
   useEffect(() => {
     const bg = bgRef.current;
     const vignette = vignetteRef.current;
-    const accentL = accentLRef.current;
-    const accentR = accentRRef.current;
     const revealL1 = revealL1Ref.current;
     const revealL2 = revealL2Ref.current;
     const revealSub = revealSubRef.current;
     const revealCta = revealCtaRef.current;
 
-    if (!bg || !vignette || !accentL || !accentR || !revealL1 || !revealL2 || !revealSub || !revealCta) return;
+    if (!bg || !vignette || !revealL1 || !revealL2 || !revealSub || !revealCta) return;
 
     // BG visible from the start — no animation needed
     gsap.set(bg, { opacity: 1, scale: 1.02 });
@@ -35,28 +31,22 @@ export default function HeroSection({ ready = false }: { ready?: boolean }) {
     // Content starts hidden
     gsap.set([revealL1, revealL2, revealSub, revealCta], { x: -60, opacity: 0 });
     gsap.set(revealCta, { scale: 0.9 });
-    gsap.set(accentL, { height: "55vh", opacity: 0 });
-    gsap.set(accentR, { height: "45vh", opacity: 0 });
   }, []);
 
   // Animate content once curtain finishes rising (~750ms after ready)
   useEffect(() => {
     if (!ready) return;
 
-    const accentL = accentLRef.current;
-    const accentR = accentRRef.current;
     const revealL1 = revealL1Ref.current;
     const revealL2 = revealL2Ref.current;
     const revealSub = revealSubRef.current;
     const revealCta = revealCtaRef.current;
 
-    if (!accentL || !accentR || !revealL1 || !revealL2 || !revealSub || !revealCta) return;
+    if (!revealL1 || !revealL2 || !revealSub || !revealCta) return;
 
     // ready fires at progress=100, curtain takes 120ms+750ms=870ms to exit
     const tl = gsap.timeline({ delay: 0.95 });
 
-    tl.to(accentL, { opacity: 0.5, duration: 0.6, ease: "power3.out" }, 0);
-    tl.to(accentR, { opacity: 0.4, duration: 0.6, ease: "power3.out" }, 0.1);
     tl.to(revealL1, { x: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, 0.1);
     tl.to(revealL2, { x: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, 0.2);
     tl.to(revealSub, { x: 0, opacity: 1, duration: 0.7, ease: "power4.out" }, 0.35);
@@ -85,17 +75,6 @@ export default function HeroSection({ ready = false }: { ready?: boolean }) {
           ref={vignetteRef}
           aria-hidden="true"
         ></div>
-        <div
-          className="rg-hero__accent rg-hero__accent--left"
-          ref={accentLRef}
-          aria-hidden="true"
-        ></div>
-        <div
-          className="rg-hero__accent rg-hero__accent--right"
-          ref={accentRRef}
-          aria-hidden="true"
-        ></div>
-
         {/* ── REVEAL (animates on scroll) ── */}
         <div className="rg-hero__reveal">
           <div className="rg-reveal__line">
