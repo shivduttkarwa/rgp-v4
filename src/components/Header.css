@@ -1,0 +1,50 @@
+/* Simple header: logo left, hamburger right */
+.rg-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 600;
+  background: rgba(12, 12, 12, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212, 160, 86, 0.18);
+  transition: opacity 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+}
+
+.rg-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 88px;
+}
+
+.rg-header .hamburger {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: 650;
+}
+
+.rg-header--menu-open {
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+}
+
+.rg-header--menu-open .rg-header__logo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rg-header__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.rg-header__logo img {
+  width: clamp(80px, 9vw, 130px);
+  margin-top: 4px;
+  height: auto;
+  display: block;
+}

@@ -2,53 +2,70 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Menu.css";
 
-export default function Menu() {
-  const [isOpen, setIsOpen] = useState(false);
+interface MenuProps {
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  showButton?: boolean;
+}
+
+export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = typeof isOpen === "boolean";
+  const open = isControlled ? isOpen : internalOpen;
+
+  const setOpen = (next: boolean) => {
+    if (!isControlled) {
+      setInternalOpen(next);
+    }
+    onOpenChange?.(next);
+  };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setOpen(!open);
   };
 
   const closeMenu = () => {
-    setIsOpen(false);
+    setOpen(false);
   };
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        setIsOpen(false);
+      if (e.key === "Escape" && open) {
+        setOpen(false);
       }
     };
 
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [isOpen]);
+  }, [open]);
 
   useEffect(() => {
-    if (isOpen) {
+    if (open) {
       document.body.classList.add("menu-open");
     } else {
       document.body.classList.remove("menu-open");
     }
-  }, [isOpen]);
+  }, [open]);
 
   return (
     <>
       {/* Hamburger Button */}
-      <button
-        className={`hamburger ${isOpen ? "active" : ""}`}
-        onClick={toggleMenu}
-        aria-label="Toggle Menu"
-      >
-        <div className="hamburger-box">
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </div>
-      </button>
+      {showButton && (
+        <button
+          className={`hamburger ${open ? "active" : ""}`}
+          onClick={toggleMenu}
+          aria-label="Toggle Menu"
+        >
+          <div className="hamburger-box">
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+          </div>
+        </button>
+      )}
 
       {/* Overlay Menu */}
-      <nav className={`overlay-menu ${isOpen ? "active" : ""}`}>
+      <nav className={`overlay-menu ${open ? "active" : ""}`}>
         {/* Animated Background Panels */}
         <div className="menu-bg">
           <div className="menu-bg-panel"></div>

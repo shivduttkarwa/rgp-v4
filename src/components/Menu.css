@@ -30,8 +30,8 @@ body.menu-open {
 }
 
 .hamburger.active {
-  border-color: #f0ead6;
-  background: transparent;
+  border-color: var(--rg-text-dark);
+  background: rgba(44, 24, 16, 0.08);
 }
 
 .hamburger-box {
@@ -79,7 +79,7 @@ body.menu-open {
 
 /* Hamburger Active State */
 .hamburger.active .hamburger-line {
-  background: #f0ead6;
+  background: var(--rg-text-dark);
 }
 
 .hamburger.active .hamburger-line:nth-child(1) {
@@ -103,7 +103,7 @@ body.menu-open {
 .overlay-menu {
   position: fixed;
   inset: 0;
-  z-index: 150;
+  z-index: 500;
   pointer-events: none;
   visibility: hidden;
   transition: visibility 0s linear 1.2s;

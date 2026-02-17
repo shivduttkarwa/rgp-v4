@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import Menu from "./components/Menu";
+import Header from "./components/Header";
 import Footer from "./sections/Footer";
 
 const HomePage         = lazy(() => import("./pages/HomePage"));
@@ -13,7 +13,7 @@ const PropertyPage     = lazy(() => import("./pages/PropertyPage"));
 function App() {
   return (
     <>
-      <Menu />
+      <Header />
       <Suspense fallback={null}>
         <Routes>
           <Route path="/"             element={<HomePage />} />
