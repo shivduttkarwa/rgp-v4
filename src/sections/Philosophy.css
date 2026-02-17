@@ -234,14 +234,33 @@
   outline-offset: 4px;
 }
 
+/* Mobile swiper — hidden on desktop */
+.rg-philo__swiper-wrap {
+  display: none;
+  padding-bottom: 2.5rem;
+}
+
+.rg-philo__swiper-wrap .swiper-slide {
+  height: auto;
+}
+
+.rg-philo__swiper-wrap .swiper-pagination-bullet {
+  background: var(--rg-gold);
+  opacity: 0.4;
+}
+
+.rg-philo__swiper-wrap .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
 /* Responsive */
 @media (max-width: 980px) {
   .rg-philo__grid {
-    grid-template-columns: 1fr;
+    display: none;
   }
 
-  .rg-philo__media {
-    aspect-ratio: 16 / 10;
+  .rg-philo__swiper-wrap {
+    display: block;
   }
 }
 

@@ -1,5 +1,9 @@
 // Philosophy.tsx
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import "./Philosophy.css";
 
 type Pillar = {
@@ -49,29 +53,17 @@ export default function Philosophy() {
 
         <div className="rg-philo__divider" role="separator" />
 
+        {/* Desktop grid */}
         <div className="rg-philo__grid" aria-label="Philosophy pillars">
           {PILLARS.map((p) => (
-            <article
-              key={p.title}
-              className="rg-philo__card"
-              data-tint={p.tintVar}
-            >
+            <article key={p.title} className="rg-philo__card" data-tint={p.tintVar}>
               <div className="rg-philo__media">
-                <img
-                  className="rg-philo__img"
-                  src={p.img}
-                  alt={p.title}
-                  loading="lazy"
-                />
+                <img className="rg-philo__img" src={p.img} alt={p.title} loading="lazy" />
               </div>
-
-              {/* Bottom blend title strip (visible by default) */}
               <div className="rg-philo__pill">
                 <div className="rg-philo__pillKicker">{p.kicker}</div>
                 <div className="rg-philo__pillTitle">{p.title}</div>
               </div>
-
-              {/* Hover reveal sheet (slides up to cover image) */}
               <div className="rg-philo__reveal" aria-hidden="true">
                 <div className="rg-philo__revealInner">
                   <div className="rg-philo__revealKicker">{p.kicker}</div>
@@ -81,6 +73,40 @@ export default function Philosophy() {
               </div>
             </article>
           ))}
+        </div>
+
+        {/* Mobile swiper */}
+        <div className="rg-philo__swiper-wrap">
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={16}
+            slidesPerView={1.08}
+            grabCursor
+            speed={420}
+            pagination={{ clickable: true, dynamicBullets: true }}
+            breakpoints={{ 480: { slidesPerView: 1.2, spaceBetween: 20 } }}
+          >
+            {PILLARS.map((p) => (
+              <SwiperSlide key={p.title}>
+                <article className="rg-philo__card" data-tint={p.tintVar}>
+                  <div className="rg-philo__media">
+                    <img className="rg-philo__img" src={p.img} alt={p.title} loading="lazy" />
+                  </div>
+                  <div className="rg-philo__pill">
+                    <div className="rg-philo__pillKicker">{p.kicker}</div>
+                    <div className="rg-philo__pillTitle">{p.title}</div>
+                  </div>
+                  <div className="rg-philo__reveal" aria-hidden="true">
+                    <div className="rg-philo__revealInner">
+                      <div className="rg-philo__revealKicker">{p.kicker}</div>
+                      <div className="rg-philo__revealTitle">{p.title}</div>
+                      <p className="rg-philo__revealDesc">{p.desc}</p>
+                    </div>
+                  </div>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
