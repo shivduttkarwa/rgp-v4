@@ -1,58 +1,82 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import gsap from "gsap";
 import Menu from "./Menu";
 import "./Header.css";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-  const [isInHero, setIsInHero] = useState(false);
-  const lastScrollY = useRef(0);
+  const headerRef = useRef<HTMLElement>(null);
+  const headerBgRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const publicUrl = import.meta.env.BASE_URL || "/";
   const logoSrc = `${import.meta.env.BASE_URL}images/RGP-logo.png`;
 
   useEffect(() => {
-    const heroEl =
-      (document.querySelector(".rg-hero") as HTMLElement | null) ||
-      (document.querySelector(".pd-hero") as HTMLElement | null) ||
-      (document.querySelector(".hero-section") as HTMLElement | null);
+    let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      const current = window.scrollY;
-      const goingDown = current > lastScrollY.current;
+      const currentScrollY = window.scrollY;
+      const isScrollingUp = currentScrollY < lastScrollY;
 
-      if (current > 120 && goingDown) {
-        setIsHidden(true);
-      } else {
-        setIsHidden(false);
+      if (headerRef.current) {
+        if (isScrollingUp && currentScrollY > 100) {
+          gsap.to(headerRef.current, {
+            y: 0,
+            duration: 0.4,
+            ease: "power3.out",
+          });
+          if (headerBgRef.current) {
+            gsap.to(headerBgRef.current, {
+              opacity: 1,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          }
+        } else if (currentScrollY > 200) {
+          gsap.to(headerRef.current, {
+            y: "-100%",
+            duration: 0.4,
+            ease: "power3.out",
+          });
+        }
+
+        if (currentScrollY <= 100 && headerBgRef.current) {
+          gsap.to(headerBgRef.current, {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
       }
 
-      if (heroEl) {
-        const rect = heroEl.getBoundingClientRect();
-        setIsInHero(rect.bottom > 0);
-      } else {
-        setIsInHero(false);
-      }
-
-      lastScrollY.current = current;
+      lastScrollY = currentScrollY;
     };
 
-    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!headerRef.current) return;
+
+    if (location.pathname === "/" || location.pathname === publicUrl) {
+      gsap.to(headerRef.current, {
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.6,
+      });
+    } else {
+      gsap.set(headerRef.current, { y: 0 });
+    }
+  }, [location.pathname, publicUrl]);
 
   return (
     <>
-      <header
-        className={`rg-header ${isOpen ? "rg-header--menu-open" : ""} ${
-          isHidden ? "rg-header--hidden" : ""
-        } ${isInHero ? "rg-header--hero" : ""}`}
-        aria-label="Site header"
-      >
+      <header ref={headerRef} className="rg-header" aria-label="Site header">
+        <div ref={headerBgRef} className="rg-header__bg" />
         <div className="rg-header__inner">
           <Link
             to="/"

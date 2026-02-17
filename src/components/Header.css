@@ -5,12 +5,8 @@
   left: 0;
   right: 0;
   z-index: 600;
-  background: rgba(12, 12, 12, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(212, 160, 86, 0.18);
-  transform: translateY(0);
-  transition: transform 0.4s ease, background 0.4s ease,
-    border-color 0.4s ease, backdrop-filter 0.4s ease, opacity 0.4s ease;
+  transform: translateY(-100%);
+  transition: none;
 }
 
 .rg-header__inner {
@@ -19,6 +15,17 @@
   justify-content: space-between;
   padding: 0 2rem;
   height: 88px;
+  position: relative;
+  z-index: 1;
+}
+
+.rg-header__bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.65);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  z-index: 0;
 }
 
 .rg-header .hamburger {
@@ -28,26 +35,6 @@
   z-index: 650;
 }
 
-.rg-header--menu-open {
-  background: transparent;
-  border-color: transparent;
-  backdrop-filter: none;
-}
-
-.rg-header--menu-open .rg-header__logo {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.rg-header--hidden {
-  transform: translateY(-100%);
-}
-
-.rg-header--hero {
-  background: transparent;
-  border-color: transparent;
-  backdrop-filter: none;
-}
 
 .rg-header__logo {
   display: inline-flex;
