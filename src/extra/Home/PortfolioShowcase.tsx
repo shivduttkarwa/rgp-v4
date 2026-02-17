@@ -20,8 +20,8 @@ export interface ShowcaseProject {
   location: string;
   price: string;
   status: string;
-  bg: string;
   thumb: string;
+  bg: string;
   beds: number;
   baths: number;
   area: string;
@@ -41,8 +41,8 @@ const defaultProjects: ShowcaseProject[] = [
     location: "Toorak, VIC",
     price: "$4,250,000",
     status: "For Sale",
+    thumb: getImagePath("ps1 (1).jpg"),
     bg: getImagePath("ps1 (1).jpg"),
-    thumb: getImagePath("ps1 (2).jpg"),
     beds: 5, baths: 4, area: "3,800",
   },
   {
@@ -50,8 +50,8 @@ const defaultProjects: ShowcaseProject[] = [
     location: "North Sydney, NSW",
     price: "$3,100,000",
     status: "For Sale",
+    thumb: getImagePath("ps1 (2).jpg"),
     bg: getImagePath("ps1 (2).jpg"),
-    thumb: getImagePath("ps1 (3).jpg"),
     beds: 3, baths: 2, area: "2,100",
   },
   {
@@ -59,8 +59,8 @@ const defaultProjects: ShowcaseProject[] = [
     location: "Brighton, VIC",
     price: "$2,750,000",
     status: "New Listing",
+    thumb: getImagePath("ps1 (3).jpg"),
     bg: getImagePath("ps1 (3).jpg"),
-    thumb: getImagePath("ps1 (4).jpg"),
     beds: 4, baths: 3, area: "2,400",
   },
   {
@@ -68,8 +68,8 @@ const defaultProjects: ShowcaseProject[] = [
     location: "South Yarra, VIC",
     price: "$1,850,000",
     status: "For Sale",
+    thumb: getImagePath("ps1 (4).jpg"),
     bg: getImagePath("ps1 (4).jpg"),
-    thumb: getImagePath("ps1 (5).jpg"),
     beds: 2, baths: 2, area: "1,200",
   },
   {
@@ -77,15 +77,15 @@ const defaultProjects: ShowcaseProject[] = [
     location: "Vaucluse, NSW",
     price: "$6,800,000",
     status: "Exclusive",
+    thumb: getImagePath("ps1 (5).jpg"),
     bg: getImagePath("ps1 (5).jpg"),
-    thumb: getImagePath("ps1 (6).jpg"),
     beds: 6, baths: 5, area: "4,500",
   },
 ];
 
 const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   projects = defaultProjects,
-  heading = "Explore Properties",
+  heading = "Featured Properties",
   ctaText = "View All Properties",
   ctaHref = "/properties",
 }) => {
@@ -156,13 +156,7 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
     <section className="project-feature" ref={sectionRef}>
       <div className="pf-header">
         <span className="rg-eyebrow">REAL GOLD PROPERTIES</span>
-        <div className="block-text">
-          <div className="block-text-col">
-            <TiltTextGsap tag="h3" startTrigger="top 70%" endTrigger="bottom -10%">
-              {heading}
-            </TiltTextGsap>
-          </div>
-        </div>
+        <h3 className="rg-section-title">{heading}</h3>
         <p className="rg-section-subtitle">
           Handpicked residences across Australia's most coveted neighbourhoods —
           every listing curated for quality, location, and lasting value.
@@ -172,10 +166,11 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
       <div className="projects-wrapper">
         {projects.map((project, index) => (
           <div className="project" key={project.title}>
-            <figure>
-              <img src={project.bg} alt={`${project.title} exterior`} data-speed="0.25" />
+
+            {/* ── Parallax background image ── */}
+            <figure className="project-bg" aria-hidden="true">
+              <img src={project.bg} alt="" data-speed="0.25" />
             </figure>
-            <div className="project__gradient" />
 
             <div className="content">
               <div className="sticky">

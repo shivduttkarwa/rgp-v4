@@ -134,20 +134,20 @@
 }
 
 /* Watermark (same) */
-.rg-about__watermark::before {
+.rg-about__watermark2::before {
   content: "";
   position: absolute;
-  left: calc(var(--rg-pad) * -0.2);
-  top: 12%;
-  width: min(18rem, 34vw);
-  height: min(18rem, 34vw);
+  left: clamp(-1.25rem, -2vw, -0.25rem);
+  top: -6%;
+  width: clamp(9rem, 16vw, 12rem);
+  height: clamp(9rem, 16vw, 12rem);
   pointer-events: none;
-  opacity: 0.08;
+  opacity: 0.07;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left top;
-  filter: blur(0.1px);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320'%3E%3Cg fill='none' stroke='%235C4D42' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' opacity='1'%3E%3Cpath d='M55 150 L160 70 L265 150'/%3E%3Cpath d='M85 140 V255 H235 V140'/%3E%3Cpath d='M150 255 V195 Q160 180 170 195 V255'/%3E%3Cpath d='M110 170 H140 V205 H110 Z'/%3E%3Cpath d='M180 170 H210 V205 H180 Z'/%3E%3Cpath d='M95 255 H245'/%3E%3Cpath d='M210 85 V60 H240 V110'/%3E%3C/g%3E%3C/svg%3E");
+  filter: blur(0.12px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23D4A056' stroke-width='5' stroke-linecap='round'%3E%3Cpath d='M70 120 H350' opacity='0.35'/%3E%3Cpath d='M70 170 H350' opacity='0.25'/%3E%3Cpath d='M70 220 H350' opacity='0.18'/%3E%3Cpath d='M70 270 H350' opacity='0.12'/%3E%3Cpath d='M120 85 V335' opacity='0.18'/%3E%3Cpath d='M180 85 V335' opacity='0.14'/%3E%3Cpath d='M240 85 V335' opacity='0.12'/%3E%3Cpath d='M300 85 V335' opacity='0.10'/%3E%3C/g%3E%3Cg fill='none' stroke='%23D4A056' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M115 310 V165 Q115 140 140 140 H280 Q305 140 305 165 V310'/%3E%3Cpath d='M155 310 V215 Q155 195 175 195 H245 Q265 195 265 215 V310'/%3E%3Cpath d='M140 170 H280'/%3E%3Cpath d='M140 170 V195'/%3E%3Cpath d='M185 170 V195'/%3E%3Cpath d='M235 170 V195'/%3E%3Cpath d='M280 170 V195'/%3E%3Cpath d='M115 310 H305'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* 3) Split block: left image + right content */
@@ -252,20 +252,20 @@
   object-fit: cover;
 }
 
-.rg-about__watermark2::before {
+.rg-about__watermark::before {
   content: "";
   position: absolute;
-  left: calc(var(--rg-pad) * -0.25);
-  top: -4%;
-  width: min(16rem, 30vw);
-  height: min(16rem, 30vw);
+  left: clamp(-1.25rem, -2vw, -0.25rem);
+  top: 8%;
+  width: clamp(9.5rem, 18vw, 13rem);
+  height: clamp(9.5rem, 18vw, 13rem);
   pointer-events: none;
-  opacity: 0.07;
+  opacity: 0.075;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left top;
-  filter: blur(0.1px);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320'%3E%3Cg fill='none' stroke='%23D4A056' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M70 250 V105 Q70 85 90 85 H230 Q250 85 250 105 V250'/%3E%3Cpath d='M110 250 V165 Q110 145 130 145 H190 Q210 145 210 165 V250'/%3E%3Cpath d='M100 115 H220'/%3E%3Cpath d='M100 115 V145'/%3E%3Cpath d='M140 115 V145'/%3E%3Cpath d='M180 115 V145'/%3E%3Cpath d='M220 115 V145'/%3E%3Cpath d='M70 250 H250'/%3E%3C/g%3E%3C/svg%3E");
+  filter: blur(0.12px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%235C4D42' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M70 185 L210 92 L350 185'/%3E%3Cpath d='M110 176 V310'/%3E%3Cpath d='M310 176 V310'/%3E%3Cpath d='M140 310 H280'/%3E%3Cpath d='M160 310 V230 Q160 200 190 200 H230 Q260 200 260 230 V310'/%3E%3Cpath d='M155 228 H265'/%3E%3Cpath d='M118 220 H144'/%3E%3Cpath d='M276 220 H302'/%3E%3Cpath d='M325 120 V92 H350 V150'/%3E%3C/g%3E%3Cg fill='none' stroke='%235C4D42' stroke-width='4' stroke-linecap='round' opacity='0.55'%3E%3Cpath d='M90 330 H330'/%3E%3Cpath d='M95 346 H325'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Responsive */

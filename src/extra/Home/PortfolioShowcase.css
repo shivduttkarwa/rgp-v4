@@ -32,12 +32,12 @@ section.project-feature {
 }
 
 /* ─── Section Header ─── */
-.pf-header {
+section.project-feature .pf-header {
   max-width: var(--rg-max, 1280px);
   margin: 0 auto;
   padding: 0 var(--rg-pad, 2rem);
   text-align: center;
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,31 +100,29 @@ section.project-feature .projects-wrapper .project {
   color: inherit;
 }
 
-/* Full-screen background image */
-section.project-feature .projects-wrapper .project > figure,
-section.project-feature .projects-wrapper .project > figure > img {
-  width: 100%;
-  height: 100vh;
-}
-
-section.project-feature .projects-wrapper .project > figure > img {
-  object-fit: cover;
-  object-position: center;
-  will-change: transform;
-  transform: translate3d(0, 0, 0) scale(1.05);
-}
-
-/* Gradient overlay — bottom-heavy so info panel reads on top */
-.project__gradient {
+/* ─── Parallax background figure ─── */
+section.project-feature .projects-wrapper .project .project-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(7, 20, 37, 0.72) 0%,
-    rgba(7, 20, 37, 0.45) 50%,
-    rgba(7, 20, 37, 0.18) 100%
-  );
-  z-index: 1;
+  z-index: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+section.project-feature .projects-wrapper .project .project-bg img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+}
+
+/* Dark overlay on top of bg image */
+section.project-feature .projects-wrapper .project .project-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 20, 37, 0.62);
   pointer-events: none;
 }
 
