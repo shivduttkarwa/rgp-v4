@@ -14,10 +14,7 @@ const STAGES = [
   { target: 100, speed: 14 },
 ];
 
-const PARTICLE_COLORS = ["#f5d67b", "#d4a84b", "#b8860b", "#ffd700", "#e6c35c"];
-
 export default function Preloader({ onComplete }: PreloaderProps) {
-  const particlesRef = useRef<HTMLDivElement>(null);
   const preloaderRef = useRef<HTMLDivElement>(null);
   const onCompleteRef = useRef(onComplete);
   const [hidden, setHidden] = useState(false);
@@ -26,26 +23,6 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   useEffect(() => {
     onCompleteRef.current = onComplete;
   });
-
-  // Create particles
-  useEffect(() => {
-    const container = particlesRef.current;
-    if (!container) return;
-    for (let i = 0; i < 24; i++) {
-      const el = document.createElement("div");
-      el.className = "preloader-particle";
-      const size = Math.random() * 3 + 1;
-      el.style.width = size + "px";
-      el.style.height = size + "px";
-      el.style.left = Math.random() * 100 + "%";
-      el.style.animationDelay = Math.random() * 3 + "s";
-      el.style.animationDuration = Math.random() * 2 + 2.5 + "s";
-      el.style.background =
-        PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)];
-      container.appendChild(el);
-    }
-    return () => { container.innerHTML = ""; };
-  }, []);
 
   // Progress + curtain — no onComplete in deps, use ref instead
   useEffect(() => {
@@ -107,19 +84,11 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       <div className="preloader-corner preloader-corner-bl" />
       <div className="preloader-corner preloader-corner-br" />
 
-      {/* Floating particles */}
-      <div className="preloader-particles" ref={particlesRef} />
-
       {/* Logo ring + animated house */}
       <div className="preloader-logo-container">
         <div className="preloader-outer-ring" />
         <div className="preloader-inner-ring" />
         <div className="preloader-dashed-ring" />
-
-        <div className="preloader-diamond" />
-        <div className="preloader-diamond" />
-        <div className="preloader-diamond" />
-        <div className="preloader-diamond" />
 
         <div className="preloader-house-icon">
           <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
