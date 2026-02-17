@@ -248,7 +248,7 @@ a {
 
 .rg-reveal__text {
   font-family: var(--font-title);
-  font-size: clamp(1.87rem, 5.44vw, 4.42rem); /* 30-71px (20% smaller) */
+  font-size: clamp(1.683rem, 4.896vw, 3.978rem); /* -10% */
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: 0.02em;
@@ -269,7 +269,7 @@ a {
 .rg-reveal__sub {
   margin-top: 4rem;
   font-family: var(--font-body);
-  font-size: clamp(0.8125rem, 1.5vw, 1.125rem); /* 13-18px */
+  font-size: clamp(0.772rem, 1.425vw, 1.069rem); /* -5% */
   font-weight: 400;
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.92);
@@ -378,6 +378,19 @@ a {
   .rg-hero {
     min-height: 43.75rem; /* 700px */
   }
+
+  .rg-hero__reveal {
+    transform: translateY(-10rem);
+  }
+
+  .rg-reveal__text {
+    font-size: clamp(2.244rem, 6.528vw, 5.304rem); /* +20% */
+  }
+
+  .rg-reveal__sub {
+    font-size: clamp(0.975rem, 1.8vw, 1.35rem); /* +20% */
+  }
+
 
   .rg-hero__brand {
     font-size: 1.375rem; /* 22px */
