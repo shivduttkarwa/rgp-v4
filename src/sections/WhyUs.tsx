@@ -15,6 +15,7 @@ export default function WhyUs() {
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const tipTitleRef = useRef<HTMLDivElement | null>(null);
   const tipBodyRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   const activeRef = useRef<HTMLElement | null>(null);
 
@@ -61,11 +62,12 @@ export default function WhyUs() {
   );
 
   useEffect(() => {
+    const section = sectionRef.current;
     const tooltip = tooltipRef.current;
     const tipTitle = tipTitleRef.current;
     const tipBody = tipBodyRef.current;
 
-    if (!tooltip || !tipTitle || !tipBody) return;
+    if (!section || !tooltip || !tipTitle || !tipBody) return;
 
     const measureTooltip = () => {
       const prevOpacity = tooltip.style.opacity;
@@ -165,6 +167,16 @@ export default function WhyUs() {
       ty.current = py;
     };
 
+    const onSectionLeave = (e: MouseEvent) => {
+      if (!section.contains(e.relatedTarget as Node)) {
+        hide();
+      }
+    };
+
+    const onScroll = () => {
+      hide();
+    };
+
     const onEnter = (e: Event) => {
       const el = e.currentTarget as HTMLElement;
       const me = e as MouseEvent;
@@ -212,6 +224,8 @@ export default function WhyUs() {
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("keydown", onKey);
     window.addEventListener("resize", measureTooltip);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    section.addEventListener("mouseleave", onSectionLeave);
 
     itemEls.forEach((el) => {
       el.addEventListener("mouseenter", onEnter);
@@ -225,6 +239,8 @@ export default function WhyUs() {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", measureTooltip);
+      window.removeEventListener("scroll", onScroll);
+      section.removeEventListener("mouseleave", onSectionLeave);
 
       itemEls.forEach((el) => {
         el.removeEventListener("mouseenter", onEnter);
@@ -239,7 +255,12 @@ export default function WhyUs() {
   }, []);
 
   return (
-    <section className="whyus" id="benefits" aria-label="Why Us section">
+    <section
+      ref={sectionRef}
+      className="whyus"
+      id="benefits"
+      aria-label="Why Us section"
+    >
       <div
         className="whyus__bg"
         aria-hidden="true"
