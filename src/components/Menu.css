@@ -506,7 +506,7 @@ body.menu-open {
 .overlay-menu.active .menu-aside {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.5s;
+  transition-delay: 0.8s;
 }
 
 /* Closing */
@@ -795,6 +795,9 @@ body.menu-open {
   .menu-social a:hover::before {
     transform: translateY(0);
   }
+  .menu-social a:active::before {
+    transform: translateY(0);
+  }
 
   .menu-social a svg {
     width: 18px;
@@ -808,16 +811,23 @@ body.menu-open {
   .menu-social a:hover svg {
     color: #00032e;
   }
+  .menu-social a:active svg {
+    color: #00032e;
+  }
 
   .menu-info-block {
     margin-bottom: 0;
   }
 
   .menu-main {
-    padding-left: 0;
+    padding-left: 0.75rem;
     /* center nav vertically so Home never hides behind the header */
     justify-content: flex-start;
     padding-bottom: 0;
+  }
+
+  .menu-cta {
+    display: none;
   }
 
   .menu-deco {
