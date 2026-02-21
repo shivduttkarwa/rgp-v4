@@ -90,15 +90,14 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
           <div className="menu-main">
             <ul className="menu-nav">
               {[
-                { num: "01", label: "Home",         to: "/" },
-                { num: "02", label: "About",        to: "/about" },
-                { num: "03", label: "Services",     to: "/services" },
-                { num: "04", label: "Testimonials", to: "/testimonials" },
-                { num: "05", label: "Contact",      to: "/contact" },
-              ].map(({ num, label, to }) => (
+                { label: "Home",         to: "/" },
+                { label: "About",        to: "/about" },
+                { label: "Services",     to: "/services" },
+                { label: "Testimonials", to: "/testimonials" },
+                { label: "Contact",      to: "/contact" },
+              ].map(({ label, to }) => (
                 <li className="menu-item" key={to}>
                   <Link to={to} className="menu-link" onClick={closeMenu}>
-                    <span className="menu-number">{num}</span>
                     <span className="menu-text">{label}</span>
                     <svg
                       className="menu-arrow"

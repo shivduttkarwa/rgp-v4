@@ -204,11 +204,12 @@ body.menu-open {
 
 .menu-item {
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  transition: border-color 0.4s ease;
 }
 
 .menu-item:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0);
 }
 
 .menu-link {
@@ -247,6 +248,35 @@ body.menu-open {
   transition-delay: 0.7s;
 }
 
+.overlay-menu.active .menu-item {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.overlay-menu.active .menu-item:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.overlay-menu.active .menu-item:nth-child(2) {
+  transition-delay: 0.4s;
+}
+
+.overlay-menu.active .menu-item:nth-child(3) {
+  transition-delay: 0.5s;
+}
+
+.overlay-menu.active .menu-item:nth-child(4) {
+  transition-delay: 0.6s;
+}
+
+.overlay-menu.active .menu-item:nth-child(5) {
+  transition-delay: 0.7s;
+}
+
+.overlay-menu:not(.active) .menu-item {
+  border-color: rgba(255, 255, 255, 0);
+  transition-delay: 0s;
+}
+
 /* Closing: stagger from last to first */
 .overlay-menu:not(.active) .menu-item:nth-child(1) .menu-link {
   transition-delay: 0.4s;
@@ -266,15 +296,6 @@ body.menu-open {
 
 .overlay-menu:not(.active) .menu-item:nth-child(5) .menu-link {
   transition-delay: 0s;
-}
-
-.menu-number {
-  font-family: var(--font-body);
-  font-size: clamp(1.6rem, 4vw, 3.2rem);
-  color: var(--rg-gold);
-  opacity: 0.6;
-  min-width: 2rem;
-  transition: opacity 0.3s ease;
 }
 
 .menu-text {
@@ -304,10 +325,6 @@ body.menu-open {
   color: var(--rg-gold);
 }
 
-.menu-link:hover .menu-number {
-  opacity: 1;
-}
-
 .menu-link:hover .menu-text {
   color: var(--rg-gold);
   transform: translateX(0.5rem);
@@ -319,7 +336,7 @@ body.menu-open {
 
 .menu-link:hover .menu-arrow {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(2);
 }
 
 /* Right Side - Info */
