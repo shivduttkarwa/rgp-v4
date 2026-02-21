@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import HeroSection from "../sections/HeroSection";
 import About from "../sections/About";
+import NewAbout from "../sections/NewAbout";
 import PortfolioShowcase from "../sections/PortfolioShowcase";
 import PropertyListingSection from "@/sections/PropertyListingSection";
 import ServiceSelection from "@/sections/ServiceSelection";
@@ -41,6 +42,7 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
     <div ref={pageRef}>
       <HeroSection ready={ready} />
       <About />
+      <NewAbout />
       <PropertyListingSection />
       <ServiceSelection />
       <PhilosophyPillars />

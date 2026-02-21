@@ -1,247 +1,990 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Reveal Animation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Listings</title>
+<link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rg-beige-light: #00032e;
+  --rg-beige: #05094a;
+  --rg-beige-dark: #0a1260;
+  --rg-beige-darker: #0f1870;
+  --rg-text-dark: #ffffff;
+  --rg-text-medium: rgba(255, 255, 255, 0.72);
+  --rg-text-light: rgba(255, 255, 255, 0.45);
+  --rg-gold: #f9c307;
+  --rg-amber: #f9c307;
+  --rg-crimson: #f9c307;
+  --rg-navy: #00032e;
+  --rg-dark: #000220;
+  --rg-darker: #00032e;
+  --rg-ink: #ffffff;
+  --rg-ink-2: rgba(255, 255, 255, 0.72);
+  --rg-max: 90rem;
+  --rg-pad: clamp(1.5rem, 4vw, 3rem);
+  --rg-radius: 1.125rem;
+  --font-title: "Bona Nova SC", serif;
+  --font-body: "Bricolage Grotesque", sans-serif;
+  --bg: #00032e;
+  --ink: #ffffff;
+  --green: #f9c307;
+  --green-2: #d4a200;
+  --line: rgba(249, 195, 7, 0.22);
+  --accent: #f9c307;
+  --max: 1180px;
+  --pad: clamp(18px, 2.2vw, 30px);
+  --radius: 14px;
+}
 
-        body {
-            background: #0a0a0a;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            overflow: hidden;
-        }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
+body {
+  background: var(--rg-beige-light);
+  font-family: var(--font-body);
+  color: var(--rg-text-dark);
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+}
 
-        .title-wrapper {
-            text-align: center;
-        }
+/* ───── Page Header ───── */
+.page-header {
+  max-width: var(--max);
+  margin: 0 auto 3rem;
+  text-align: center;
+}
 
-        .title-line {
-            overflow: hidden;
-            margin-bottom: 0.2em;
-        }
+.page-header h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--rg-text-dark);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
 
-        .title-line .word {
-            display: inline-block;
-            overflow: hidden;
-            margin-right: 0.3em;
-            vertical-align: top;
-        }
+.page-header h1 span {
+  color: var(--rg-gold);
+}
 
-        .title-line .char {
-            display: inline-block;
-            color: #f5f5f5;
-            font-size: clamp(2.5rem, 8vw, 7rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            transform: translateY(120%);
-            opacity: 0;
-        }
+.page-header p {
+  color: var(--rg-text-light);
+  font-size: 1.05rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
-        .subtitle {
-            overflow: hidden;
-            margin-top: 1.5rem;
-        }
+/* ───── Grid ───── */
+.listings-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+}
 
-        .subtitle span {
-            display: inline-block;
-            color: #555;
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            transform: translateY(100%);
-            opacity: 0;
-        }
+/* ───── Property Card ───── */
+.property-card {
+  background: var(--rg-beige);
+  border-radius: var(--rg-radius);
+  overflow: hidden;
+  border: 1px solid rgba(249, 195, 7, 0.08);
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+              border-color 0.4s ease;
+  position: relative;
+  cursor: pointer;
+}
 
-        .line-accent {
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #fff, transparent);
-            margin: 2rem auto 0;
-            opacity: 0;
-        }
+.property-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--rg-radius);
+  background: linear-gradient(
+    165deg,
+    rgba(249, 195, 7, 0.04) 0%,
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
 
-        .scroll-hint {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            opacity: 0;
-        }
+.property-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(249, 195, 7, 0.15),
+    0 0 80px rgba(249, 195, 7, 0.06);
+  border-color: rgba(249, 195, 7, 0.2);
+}
 
-        .scroll-hint span {
-            color: #333;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
+.property-card:hover::before {
+  opacity: 1;
+}
 
-        .scroll-hint .arrow {
-            width: 1px;
-            height: 30px;
-            background: #333;
-            position: relative;
-        }
+/* ── Image Section ── */
+.card-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
 
-        .scroll-hint .arrow::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -3px;
-            width: 7px;
-            height: 7px;
-            border-right: 1px solid #333;
-            border-bottom: 1px solid #333;
-            transform: rotate(45deg);
-        }
-    </style>
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+              filter 0.4s ease;
+}
+
+.property-card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+/* Image Overlay Gradient */
+.card-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, var(--rg-beige), transparent);
+  pointer-events: none;
+}
+
+/* Top Badges Row */
+.card-badges {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.badge {
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.badge-featured {
+  background: var(--rg-gold);
+  color: var(--rg-dark);
+}
+
+.badge-status {
+  background: rgba(0, 3, 46, 0.65);
+  color: var(--rg-text-dark);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.badge-new {
+  background: rgba(249, 195, 7, 0.15);
+  color: var(--rg-gold);
+  border: 1px solid rgba(249, 195, 7, 0.25);
+}
+
+/* Favorite Button */
+.card-fav {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 3, 46, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card-fav:hover {
+  background: rgba(249, 195, 7, 0.2);
+  border-color: rgba(249, 195, 7, 0.4);
+  transform: scale(1.1);
+}
+
+.card-fav.active {
+  background: rgba(249, 195, 7, 0.2);
+  border-color: var(--rg-gold);
+}
+
+.card-fav svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--rg-text-medium);
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+.card-fav:hover svg {
+  stroke: var(--rg-gold);
+}
+
+.card-fav.active svg {
+  fill: var(--rg-gold);
+  stroke: var(--rg-gold);
+}
+
+/* Image Pagination Dots */
+.image-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.image-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transition: all 0.3s ease;
+}
+
+.image-dots span.active {
+  background: var(--rg-gold);
+  width: 18px;
+  border-radius: 3px;
+}
+
+/* ── Card Body ── */
+.card-body {
+  padding: 1.4rem 1.5rem 1.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.card-location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.65rem;
+}
+
+.card-location svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: var(--rg-gold);
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.card-location span {
+  font-size: 0.78rem;
+  color: var(--rg-gold);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.card-title {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  color: var(--rg-text-dark);
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+  transition: color 0.3s ease;
+}
+
+.property-card:hover .card-title {
+  color: var(--rg-gold);
+}
+
+.card-description {
+  font-size: 0.88rem;
+  color: var(--rg-text-light);
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 300;
+}
+
+/* Property Stats */
+.card-stats {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.3rem;
+  background: var(--rg-beige-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(249, 195, 7, 0.06);
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  gap: 0.3rem;
+  position: relative;
+}
+
+.stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background: rgba(249, 195, 7, 0.1);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--rg-text-light);
+  stroke-width: 1.8;
+}
+
+.stat-value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--rg-text-dark);
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--rg-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Card Footer ── */
+.card-footer {
+  padding: 1rem 1.5rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(249, 195, 7, 0.08);
+}
+
+.card-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-label {
+  font-size: 0.68rem;
+  color: var(--rg-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.15rem;
+}
+
+.price-value {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--rg-text-dark);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.price-value .currency {
+  font-size: 0.85rem;
+  color: var(--rg-gold);
+  font-weight: 400;
+  margin-right: 2px;
+}
+
+.price-period {
+  font-size: 0.75rem;
+  color: var(--rg-text-light);
+  font-weight: 300;
+}
+
+/* CTA Button */
+.card-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.3rem;
+  background: transparent;
+  border: 1px solid rgba(249, 195, 7, 0.3);
+  border-radius: 100px;
+  color: var(--rg-gold);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--rg-gold);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: -1;
+}
+
+.card-cta:hover {
+  color: var(--rg-dark);
+  border-color: var(--rg-gold);
+}
+
+.card-cta:hover::before {
+  transform: scaleX(1);
+}
+
+.card-cta svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: transform 0.3s ease;
+}
+
+.card-cta:hover svg {
+  transform: translateX(3px);
+}
+
+/* ───── Featured Card (Horizontal) ───── */
+.property-card.card-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+
+.property-card.card-featured .card-image {
+  height: 100%;
+  min-height: 340px;
+}
+
+.property-card.card-featured .card-body {
+  padding: 2rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-card.card-featured .card-title {
+  font-size: 1.75rem;
+}
+
+.property-card.card-featured .card-description {
+  -webkit-line-clamp: 3;
+  margin-bottom: 1.5rem;
+}
+
+.property-card.card-featured .card-stats {
+  margin-top: auto;
+}
+
+.property-card.card-featured .card-footer {
+  padding: 1.2rem 2rem 2rem;
+}
+
+.property-card.card-featured .price-value {
+  font-size: 1.85rem;
+}
+
+/* Featured Gold Glow */
+.property-card.card-featured {
+  border-color: rgba(249, 195, 7, 0.15);
+  box-shadow: 0 4px 40px rgba(249, 195, 7, 0.04);
+}
+
+/* ───── Agent Mini ───── */
+.card-agent {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+
+.agent-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(249, 195, 7, 0.25);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.agent-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.agent-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-name {
+  font-size: 0.82rem;
+  color: var(--rg-text-dark);
+  font-weight: 500;
+}
+
+.agent-role {
+  font-size: 0.7rem;
+  color: var(--rg-text-light);
+}
+
+/* ───── Tags ───── */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  background: rgba(249, 195, 7, 0.08);
+  color: var(--rg-gold);
+  border: 1px solid rgba(249, 195, 7, 0.12);
+}
+
+/* ───── Responsive ───── */
+@media (max-width: 768px) {
+  .listings-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .property-card.card-featured {
+    grid-template-columns: 1fr;
+  }
+  
+  .property-card.card-featured .card-image {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 420px) {
+  .card-stats {
+    flex-wrap: wrap;
+  }
+  
+  .stat:not(:last-child)::after {
+    display: none;
+  }
+  
+  .card-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .card-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Shimmer line decoration ── */
+.shimmer-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(249, 195, 7, 0.3) 50%,
+    transparent 100%
+  );
+  max-width: var(--max);
+  margin: 0 auto 3rem;
+}
+</style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="title-wrapper">
-            <div class="title-line" data-line="1">
-                <span class="word" data-word="We">
-                    <!-- chars injected by JS -->
-                </span>
-                <span class="word" data-word="Create">
-                </span>
-            </div>
-            <div class="title-line" data-line="2">
-                <span class="word" data-word="Beautiful">
-                </span>
-            </div>
-            <div class="title-line" data-line="3">
-                <span class="word" data-word="Experiences">
-                </span>
-            </div>
-            <div class="subtitle">
-                <span>Design · Develop · Deliver</span>
-            </div>
-            <div class="line-accent"></div>
+<!-- Page Header -->
+<header class="page-header">
+  <h1>Curated <span>Residences</span></h1>
+  <p>Exceptional properties · Timeless elegance</p>
+</header>
+
+<div class="shimmer-line"></div>
+
+<!-- Listings Grid -->
+<div class="listings-grid">
+
+  <!-- ★ Featured Card (Horizontal) -->
+  <article class="property-card card-featured">
+    <div class="card-image">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="Luxury Villa" loading="lazy">
+      <div class="card-badges">
+        <span class="badge badge-featured">★ Featured</span>
+      </div>
+      <button class="card-fav" onclick="this.classList.toggle('active')" aria-label="Save to favorites">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="image-dots">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div>
+      <div class="card-body">
+        <div class="card-location">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Beverly Hills, California</span>
         </div>
-
-        <div class="scroll-hint">
-            <span>Scroll</span>
-            <div class="arrow"></div>
+        <h3 class="card-title">The Lumière Estate</h3>
+        <p class="card-description">An architectural masterpiece set against the Santa Monica Mountains, featuring floor-to-ceiling glass walls, a cantilevered infinity pool, and panoramic views stretching to the Pacific horizon.</p>
+        <div class="card-tags">
+          <span class="tag">Smart Home</span>
+          <span class="tag">Infinity Pool</span>
+          <span class="tag">Wine Cellar</span>
+          <span class="tag">Home Theater</span>
         </div>
-    </section>
+        <div class="card-agent">
+          <div class="agent-avatar">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Agent">
+          </div>
+          <div class="agent-info">
+            <span class="agent-name">Alexander Mercer</span>
+            <span class="agent-role">Senior Estate Advisor</span>
+          </div>
+        </div>
+        <div class="card-stats">
+          <div class="stat">
+            <span class="stat-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </span>
+            <span class="stat-value">6</span>
+            <span class="stat-label">Beds</span>
+          </div>
+          <div class="stat">
+            <span class="stat-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v4h2V3h3a2 2 0 0 1 2 2v7"/></svg>
+            </span>
+            <span class="stat-value">8</span>
+            <span class="stat-label">Baths</span>
+          </div>
+          <div class="stat">
+            <span class="stat-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+            </span>
+            <span class="stat-value">12,400</span>
+            <span class="stat-label">Sq Ft</span>
+          </div>
+          <div class="stat">
+            <span class="stat-icon">
+              <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="23 3 16 8.5 16 16 23 21 23 3"/></svg>
+            </span>
+            <span class="stat-value">3</span>
+            <span class="stat-label">Garage</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-price">
+          <span class="price-label">Asking Price</span>
+          <span class="price-value"><span class="currency">$</span>24,500,000</span>
+        </div>
+        <button class="card-cta">
+          View Estate
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </article>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script>
-        // Split words into characters
-        document.querySelectorAll('.word').forEach(wordEl => {
-            const text = wordEl.getAttribute('data-word');
-            wordEl.innerHTML = '';
-            text.split('').forEach(char => {
-                const span = document.createElement('span');
-                span.classList.add('char');
-                span.textContent = char;
-                wordEl.appendChild(span);
-            });
-        });
+  <!-- Card 2 -->
+  <article class="property-card">
+    <div class="card-image">
+      <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Modern Penthouse" loading="lazy">
+      <div class="card-badges">
+        <span class="badge badge-new">New</span>
+      </div>
+      <button class="card-fav" onclick="this.classList.toggle('active')" aria-label="Save to favorites">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="image-dots">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-location">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Manhattan, New York</span>
+      </div>
+      <h3 class="card-title">Skyline Penthouse</h3>
+      <p class="card-description">Perched above the city with sweeping Central Park views, this duplex penthouse redefines urban luxury living.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <span class="stat-value">4</span>
+          <span class="stat-label">Beds</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v4h2V3h3a2 2 0 0 1 2 2v7"/></svg>
+          </span>
+          <span class="stat-value">5</span>
+          <span class="stat-label">Baths</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          </span>
+          <span class="stat-value">6,200</span>
+          <span class="stat-label">Sq Ft</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-price">
+        <span class="price-label">Price</span>
+        <span class="price-value"><span class="currency">$</span>18,750,000</span>
+      </div>
+      <button class="card-cta">
+        Details
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </article>
 
-        // Master timeline
-        const tl = gsap.timeline({
-            defaults: {
-                ease: 'power4.out',
-            },
-            delay: 0.3
-        });
+  <!-- Card 3 -->
+  <article class="property-card">
+    <div class="card-image">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Waterfront Villa" loading="lazy">
+      <div class="card-badges">
+        <span class="badge badge-status">Exclusive</span>
+      </div>
+      <button class="card-fav active" onclick="this.classList.toggle('active')" aria-label="Save to favorites">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="image-dots">
+        <span></span>
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-location">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Côte d'Azur, France</span>
+      </div>
+      <h3 class="card-title">Villa Méditerranée</h3>
+      <p class="card-description">A sun-drenched retreat along the French Riviera with private beach access, Mediterranean gardens, and timeless Provençal elegance.</p>
+      <div class="card-tags">
+        <span class="tag">Beachfront</span>
+        <span class="tag">Private Dock</span>
+      </div>
+      <div class="card-stats">
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <span class="stat-value">5</span>
+          <span class="stat-label">Beds</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v4h2V3h3a2 2 0 0 1 2 2v7"/></svg>
+          </span>
+          <span class="stat-value">6</span>
+          <span class="stat-label">Baths</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          </span>
+          <span class="stat-value">9,800</span>
+          <span class="stat-label">Sq Ft</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-price">
+        <span class="price-label">Price</span>
+        <span class="price-value"><span class="currency">€</span>15,200,000</span>
+      </div>
+      <button class="card-cta">
+        Details
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </article>
 
-        // Line 1 chars
-        tl.to('[data-line="1"] .char', {
-            y: '0%',
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.04,
-        });
+  <!-- Card 4 -->
+  <article class="property-card">
+    <div class="card-image">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Contemporary Home" loading="lazy">
+      <div class="card-badges">
+        <span class="badge badge-new">Just Listed</span>
+      </div>
+      <button class="card-fav" onclick="this.classList.toggle('active')" aria-label="Save to favorites">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="image-dots">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-location">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Malibu, California</span>
+      </div>
+      <h3 class="card-title">Pacific Crest Residence</h3>
+      <p class="card-description">Minimalist coastal living with walls of glass that dissolve the boundary between the interior and the vast Pacific canvas.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <span class="stat-value">3</span>
+          <span class="stat-label">Beds</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v4h2V3h3a2 2 0 0 1 2 2v7"/></svg>
+          </span>
+          <span class="stat-value">4</span>
+          <span class="stat-label">Baths</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          </span>
+          <span class="stat-value">4,850</span>
+          <span class="stat-label">Sq Ft</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-price">
+        <span class="price-label">Starting at</span>
+        <span class="price-value"><span class="currency">$</span>9,200,000</span>
+      </div>
+      <button class="card-cta">
+        Details
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </article>
 
-        // Line 2 chars (overlap)
-        tl.to('[data-line="2"] .char', {
-            y: '0%',
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.03,
-        }, '-=0.8');
+  <!-- Card 5 -->
+  <article class="property-card">
+    <div class="card-image">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Modern Villa" loading="lazy">
+      <div class="card-badges">
+        <span class="badge badge-status">Under Contract</span>
+      </div>
+      <button class="card-fav" onclick="this.classList.toggle('active')" aria-label="Save to favorites">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="image-dots">
+        <span></span>
+        <span></span>
+        <span class="active"></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-location">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Dubai Marina, UAE</span>
+      </div>
+      <h3 class="card-title">Marina Crescent Tower</h3>
+      <p class="card-description">A full-floor residence in the clouds with private elevator access, bespoke Italian finishes, and breathtaking marina vistas.</p>
+      <div class="card-tags">
+        <span class="tag">Full Floor</span>
+        <span class="tag">Private Lift</span>
+        <span class="tag">Concierge</span>
+      </div>
+      <div class="card-stats">
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <span class="stat-value">5</span>
+          <span class="stat-label">Beds</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v4h2V3h3a2 2 0 0 1 2 2v7"/></svg>
+          </span>
+          <span class="stat-value">7</span>
+          <span class="stat-label">Baths</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          </span>
+          <span class="stat-value">11,300</span>
+          <span class="stat-label">Sq Ft</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-price">
+        <span class="price-label">Price</span>
+        <span class="price-value"><span class="currency">$</span>32,000,000</span>
+      </div>
+      <button class="card-cta">
+        Details
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </article>
 
-        // Line 3 chars (overlap)
-        tl.to('[data-line="3"] .char', {
-            y: '0%',
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.03,
-        }, '-=0.8');
+</div>
 
-        // Subtitle
-        tl.to('.subtitle span', {
-            y: '0%',
-            opacity: 1,
-            duration: 1,
-        }, '-=0.5');
-
-        // Accent line
-        tl.to('.line-accent', {
-            width: '120px',
-            opacity: 0.4,
-            duration: 1.2,
-            ease: 'power2.inOut',
-        }, '-=0.6');
-
-        // Scroll hint
-        tl.to('.scroll-hint', {
-            opacity: 1,
-            duration: 1,
-        }, '-=0.4');
-
-        // Subtle floating animation on scroll hint
-        gsap.to('.scroll-hint .arrow', {
-            y: 5,
-            duration: 1.2,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power1.inOut',
-            delay: 3,
-        });
-
-        // Hover interaction on chars
-        document.querySelectorAll('.char').forEach(char => {
-            char.addEventListener('mouseenter', () => {
-                gsap.to(char, {
-                    color: '#ffffff',
-                    scale: 1.15,
-                    duration: 0.3,
-                    ease: 'power2.out',
-                });
-            });
-            char.addEventListener('mouseleave', () => {
-                gsap.to(char, {
-                    color: '#f5f5f5',
-                    scale: 1,
-                    duration: 0.5,
-                    ease: 'power2.out',
-                });
-            });
-        });
-    </script>
 </body>
 </html>
