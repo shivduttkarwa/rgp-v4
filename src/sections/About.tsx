@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import "./About.css";
 
 type AboutProps = {
@@ -30,6 +31,11 @@ const AutoSlider: React.FC<AutoSliderProps> = ({
   heightClassName = "",
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const slidesRef = useRef<HTMLDivElement[]>([]);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const prevIndexRef = useRef(0);
+  const directionRef = useRef<1 | -1>(1);
+  const timerRef = useRef<number | null>(null);
   const [isActive, setIsActive] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -50,32 +56,91 @@ const AutoSlider: React.FC<AutoSliderProps> = ({
   }, []);
 
   useEffect(() => {
+    if (!images || images.length === 0) return;
+
+    slidesRef.current.forEach((slide, idx) => {
+      if (!slide) return;
+      gsap.set(slide, {
+        xPercent: idx === 0 ? 0 : 100,
+        autoAlpha: idx === 0 ? 1 : 0,
+        zIndex: idx === 0 ? 2 : 1,
+      });
+
+      const img = imagesRef.current[idx];
+      if (img) gsap.set(img, { xPercent: 0 });
+    });
+  }, [images]);
+
+  useEffect(() => {
     if (!images || images.length <= 1) return;
     if (!isActive) return;
 
-    const intervalId = window.setInterval(() => {
+    if (timerRef.current) window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => {
+      directionRef.current = 1;
       setIndex((prev) => (prev + 1) % images.length);
     }, 5200);
 
-    return () => window.clearInterval(intervalId);
-  }, [images, isActive]);
+    return () => {
+      if (timerRef.current) window.clearTimeout(timerRef.current);
+    };
+  }, [index, images, isActive]);
+
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    if (!isActive) return;
+
+    const prevIndex = prevIndexRef.current;
+    if (prevIndex === index) return;
+
+    const prevSlide = slidesRef.current[prevIndex];
+    const nextSlide = slidesRef.current[index];
+    if (!prevSlide || !nextSlide) return;
+
+    const dir = directionRef.current;
+    const enterFrom = dir === 1 ? 100 : -100;
+    const exitTo = dir === 1 ? -15 : 15;
+    gsap.set(nextSlide, { autoAlpha: 1, xPercent: enterFrom, zIndex: 3 });
+    gsap.set(prevSlide, { autoAlpha: 1, zIndex: 2 });
+
+    const tl = gsap.timeline({
+      defaults: { duration: 0.9, ease: "power3.out" },
+    });
+
+    tl.to(nextSlide, { xPercent: 0 }, 0);
+    tl.to(prevSlide, { xPercent: exitTo, duration: 0.8, ease: "power2.out" }, 0);
+
+    tl.set(prevSlide, { xPercent: 0, zIndex: 1 });
+
+    prevIndexRef.current = index;
+  }, [index, isActive, images]);
 
   return (
-    <div className="rg-about__slider" aria-live="off" ref={containerRef}>
-      <div
-        className="rg-about__sliderTrack"
-        style={{ transform: `translateX(-${index * 100}%)` }}
-      >
-        {images.map((src, idx) => (
+    <div
+      className={`rg-about__slider ${heightClassName}`}
+      aria-live="off"
+      ref={containerRef}
+    >
+      {images.map((src, idx) => (
+        <div
+          key={`${src}-${idx}`}
+          className="rg-about__slide"
+          ref={(el) => {
+            if (el) slidesRef.current[idx] = el;
+          }}
+          aria-hidden={idx !== index}
+        >
           <img
-            key={`${src}-${idx}`}
-            className={`rg-about__slideImg ${imgClassName} ${heightClassName}`}
+            ref={(el) => {
+              if (el) imagesRef.current[idx] = el;
+            }}
+            className={`rg-about__slideImg ${imgClassName}`}
             src={src}
             alt={alt}
             loading={idx === 0 ? "eager" : "lazy"}
           />
-        ))}
-      </div>
+        </div>
+      ))}
       <div className="rg-about__sliderPagination" role="tablist">
         {images.map((_, idx) => (
           <button
@@ -84,7 +149,10 @@ const AutoSlider: React.FC<AutoSliderProps> = ({
             className={`rg-about__sliderDot ${idx === index ? "is-active" : ""}`}
             aria-label={`Go to slide ${idx + 1}`}
             aria-pressed={idx === index}
-            onClick={() => setIndex(idx)}
+            onClick={() => {
+              directionRef.current = idx >= index ? 1 : -1;
+              setIndex(idx);
+            }}
           />
         ))}
       </div>
@@ -186,6 +254,7 @@ const About: React.FC<AboutProps> = ({
               images={splitImageSlides}
               alt="Neighbourhood lifestyle"
               imgClassName="rg-about__splitImg"
+              heightClassName="rg-about__splitImg"
             />
           </figure>
 

@@ -262,18 +262,40 @@
   overflow: hidden;
   position: relative;
   background: transparent;
+  min-height: 1px;
 }
 
-.rg-about__sliderTrack {
-  display: flex;
+.rg-about__slide {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  transform: translateX(0%);
-  transition: transform 900ms cubic-bezier(0.22, 0.7, 0.2, 1);
-  will-change: transform;
+  height: 100%;
+  overflow: hidden;
 }
 
 .rg-about__slideImg {
   display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Slider height presets (applied to container) */
+.rg-about__slider.rg-about__wideImg {
+  height: clamp(240px, 28vw, 360px);
+}
+
+.rg-about__slider.rg-about__wideImg--tall {
+  height: clamp(420px, 42vw, 620px);
+}
+
+.rg-about__slider.rg-about__splitImg {
+  height: clamp(320px, 34vw, 520px);
+}
+
+.rg-about__slider.rg-about__bottomImg {
+  height: clamp(260px, 28vw, 420px);
 }
 
 .rg-about__sliderPagination {
@@ -286,6 +308,7 @@
   justify-content: center;
   align-items: center;
   pointer-events: none;
+  z-index: 5;
 }
 
 .rg-about__sliderDot {
@@ -359,7 +382,7 @@
   }
 
   /* ✅ keep image tall on mobile */
-  .rg-about__wideImg--tall {
+  .rg-about__slider.rg-about__wideImg--tall {
     height: clamp(320px, 68vw, 560px);
   }
 
@@ -375,7 +398,7 @@
     order: 2;
   }
 
-  .rg-about__splitImg {
+  .rg-about__slider.rg-about__splitImg {
     height: clamp(300px, 60vw, 520px);
   }
 }
