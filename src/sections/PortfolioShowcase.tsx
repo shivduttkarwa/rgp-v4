@@ -101,7 +101,7 @@ const defaultProjects: ShowcaseProject[] = [
 
 const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   projects = defaultProjects,
-  heading = "Featured Properties",
+  heading: _heading = "Featured Properties",
 }) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
