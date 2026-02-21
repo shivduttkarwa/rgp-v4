@@ -126,7 +126,7 @@ body.menu-open {
 
 .menu-bg-panel {
   flex: 1;
-  background: var(--rg-beige-dark);
+  background: var(--rg-dark);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
