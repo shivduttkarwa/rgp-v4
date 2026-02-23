@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -28,9 +26,7 @@
             --font-body: "Bricolage Grotesque", sans-serif;
         }
 
-        *,
-        *::before,
-        *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -40,222 +36,205 @@
             background: var(--rg-dark);
             font-family: var(--font-body);
             color: var(--rg-text-dark);
-            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* ══════════════════════════════════════════════════════
-       SECTION CONTAINER
-    ══════════════════════════════════════════════════════ */
+        /* Animated Background */
         .team-section {
             position: relative;
-            min-height: 100vh;
-            padding: 8rem 2rem;
+            padding: 6rem 1.5rem;
             overflow: hidden;
         }
 
-        /* Animated mesh gradient background */
-        .team-bg {
+        .team-section::before {
+            content: '';
             position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(15, 24, 112, 0.5) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(249, 195, 7, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse 50% 80% at 50% 100%, rgba(10, 18, 96, 0.6) 0%, transparent 40%),
-                var(--rg-dark);
-            z-index: 0;
-        }
-
-        /* Grain texture overlay */
-        .team-grain {
-            position: absolute;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(249, 195, 7, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(249, 195, 7, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(10, 18, 96, 0.3) 0%, transparent 70%);
+            animation: bgPulse 12s ease-in-out infinite alternate;
             pointer-events: none;
-            z-index: 1;
         }
 
-        /* Floating orbs */
-        .floating-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(249, 195, 7, 0.12);
-            top: 10%;
-            right: -5%;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: rgba(15, 24, 112, 0.4);
-            bottom: 20%;
-            left: -8%;
-            animation-delay: -7s;
-        }
-
-        .orb-3 {
-            width: 200px;
-            height: 200px;
-            background: rgba(249, 195, 7, 0.08);
-            top: 50%;
-            left: 30%;
-            animation-delay: -14s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
+        @keyframes bgPulse {
+            0% {
                 transform: translate(0, 0) scale(1);
             }
 
-            25% {
-                transform: translate(30px, -30px) scale(1.05);
-            }
-
             50% {
-                transform: translate(-20px, 20px) scale(0.95);
+                transform: translate(-2%, 1%) scale(1.02);
             }
 
-            75% {
-                transform: translate(20px, 30px) scale(1.02);
+            100% {
+                transform: translate(1%, -1%) scale(1);
             }
         }
 
-        .team-inner {
-            position: relative;
-            max-width: 1400px;
-            margin: 0 auto;
-            z-index: 2;
-        }
-
-        /* ══════════════════════════════════════════════════════
-       HEADER
-    ══════════════════════════════════════════════════════ */
-        .team-header {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: end;
-            gap: 3rem;
-            margin-bottom: 5rem;
-        }
-
-        .header-content {
-            max-width: 700px;
-        }
-
-        .team-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-        }
-
-        .label-line {
-            width: 40px;
-            height: 1px;
-            background: linear-gradient(90deg, var(--rg-gold), transparent);
-        }
-
-        .label-text {
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--rg-gold);
-        }
-
-        .team-title {
-            font-family: var(--font-title);
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            font-weight: 700;
-            line-height: 1;
-            letter-spacing: -0.02em;
-            opacity: 0;
-            animation: fadeUp 0.8s ease 0.1s forwards;
-        }
-
-        .title-row {
-            display: block;
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
             overflow: hidden;
         }
 
-        .title-row span {
-            display: inline-block;
-        }
-
-        .title-outline {
-            -webkit-text-stroke: 1.5px var(--rg-text-dark);
-            -webkit-text-fill-color: transparent;
-            margin-left: 0.15em;
-        }
-
-        .title-gold {
-            background: linear-gradient(135deg, var(--rg-gold) 0%, #ffe066 50%, var(--rg-amber) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-        }
-
-        .team-subtitle {
-            font-size: clamp(1rem, 1.5vw, 1.15rem);
-            font-weight: 300;
-            color: var(--rg-text-medium);
-            line-height: 1.8;
-            margin-top: 1.5rem;
-            max-width: 480px;
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--rg-gold);
+            border-radius: 50%;
             opacity: 0;
-            animation: fadeUp 0.8s ease 0.2s forwards;
+            animation: particleFloat linear infinite;
         }
 
-        /* Header decoration */
-        .header-deco {
-            display: flex;
-            flex-direction: column;
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-duration: 18s;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            left: 25%;
+            animation-duration: 22s;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(3) {
+            left: 40%;
+            animation-duration: 16s;
+            animation-delay: 6s;
+        }
+
+        .particle:nth-child(4) {
+            left: 55%;
+            animation-duration: 20s;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(5) {
+            left: 70%;
+            animation-duration: 24s;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(6) {
+            left: 85%;
+            animation-duration: 19s;
+            animation-delay: 8s;
+        }
+
+        .particle:nth-child(7) {
+            left: 15%;
+            animation-duration: 21s;
+            animation-delay: 4s;
+            width: 2px;
+            height: 2px;
+        }
+
+        .particle:nth-child(8) {
+            left: 60%;
+            animation-duration: 17s;
+            animation-delay: 7s;
+            width: 2px;
+            height: 2px;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.4;
+            }
+
+            90% {
+                opacity: 0.15;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-label {
+            display: inline-flex;
             align-items: center;
             gap: 0.75rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--rg-gold);
+            margin-bottom: 1.5rem;
             opacity: 0;
-            animation: fadeUp 0.8s ease 0.3s forwards;
+            animation: fadeSlideDown 0.8s ease forwards 0.2s;
         }
 
-        .deco-number {
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 2rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--rg-gold));
+        }
+
+        .section-label::after {
+            background: linear-gradient(90deg, var(--rg-gold), transparent);
+        }
+
+        .section-title {
             font-family: var(--font-title);
-            font-size: 5rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            line-height: 1;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            opacity: 0;
+            animation: fadeSlideDown 0.8s ease forwards 0.4s;
+        }
+
+        .section-title .highlight {
+            background: linear-gradient(135deg, var(--rg-gold), #ffd84a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .deco-label {
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--rg-text-light);
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--rg-text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeSlideDown 0.8s ease forwards 0.6s;
         }
 
-        @keyframes fadeUp {
+        @keyframes fadeSlideDown {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(-20px);
             }
 
             to {
@@ -264,303 +243,167 @@
             }
         }
 
-        /* ══════════════════════════════════════════════════════
-       BENTO GRID
-    ══════════════════════════════════════════════════════ */
-        .team-bento {
+        /* Grid Layout */
+        .team-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: minmax(180px, auto);
-            gap: 1.25rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
-        /* ══════════════════════════════════════════════════════
-       TEAM CARD - 3D Tilt Effect
-    ══════════════════════════════════════════════════════ */
+        /* Team Card */
         .team-card {
             position: relative;
-            border-radius: calc(var(--rg-radius) + 4px);
+            border-radius: var(--rg-radius);
             overflow: hidden;
+            background: linear-gradient(145deg, var(--rg-beige), var(--rg-beige-light));
+            border: 1px solid rgba(249, 195, 7, 0.08);
             cursor: pointer;
-            transform-style: preserve-3d;
-            perspective: 1000px;
             opacity: 0;
-            animation: cardReveal 0.8s ease forwards;
+            animation: cardReveal 0.7s ease forwards;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                border-color 0.4s ease;
         }
 
         .team-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .team-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .team-card:nth-child(3) {
             animation-delay: 0.3s;
         }
 
+        .team-card:nth-child(2) {
+            animation-delay: 0.45s;
+        }
+
+        .team-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
         .team-card:nth-child(4) {
-            animation-delay: 0.4s;
+            animation-delay: 0.75s;
         }
 
         .team-card:nth-child(5) {
-            animation-delay: 0.5s;
+            animation-delay: 0.9s;
         }
 
         .team-card:nth-child(6) {
-            animation-delay: 0.6s;
+            animation-delay: 1.05s;
+        }
+
+        .team-card:nth-child(7) {
+            animation-delay: 1.2s;
+        }
+
+        .team-card:nth-child(8) {
+            animation-delay: 1.35s;
         }
 
         @keyframes cardReveal {
             from {
                 opacity: 0;
-                transform: translateY(60px) rotateX(10deg);
+                transform: translateY(40px) scale(0.95);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0) rotateX(0);
+                transform: translateY(0) scale(1);
             }
         }
 
-        .card-tilt {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-style: preserve-3d;
+        .team-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(249, 195, 7, 0.12),
+                0 0 0 1px rgba(249, 195, 7, 0.15);
+            border-color: rgba(249, 195, 7, 0.2);
         }
 
-        .team-card:hover .card-tilt {
-            transform: translateZ(20px);
-        }
-
-        /* Animated gradient border */
-        .card-border {
+        /* Card Glow Effect */
+        .team-card::before {
+            content: '';
             position: absolute;
             inset: 0;
-            border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(135deg,
-                    rgba(255, 255, 255, 0.1) 0%,
-                    rgba(255, 255, 255, 0.03) 50%,
-                    rgba(249, 195, 7, 0.2) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.6;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(249, 195, 7, 0.12), transparent 60%);
+            opacity: 0;
             transition: opacity 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .team-card:hover .card-border {
+        .team-card:hover::before {
             opacity: 1;
-            background: linear-gradient(135deg,
-                    rgba(249, 195, 7, 0.5) 0%,
-                    rgba(255, 255, 255, 0.1) 50%,
-                    rgba(249, 195, 7, 0.3) 100%);
         }
 
-        /* Inner card */
-        .card-inner {
+        /* Image Container */
+        .card-image-wrapper {
             position: relative;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(165deg,
-                    rgba(10, 18, 96, 0.5) 0%,
-                    rgba(5, 9, 74, 0.3) 100%);
-            backdrop-filter: blur(20px);
-            border-radius: inherit;
+            aspect-ratio: 3/3.5;
             overflow: hidden;
         }
 
-        /* Spotlight effect */
-        .card-spotlight {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                    rgba(249, 195, 7, 0.06),
-                    transparent 40%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .team-card:hover .card-spotlight {
-            opacity: 1;
-        }
-
-        /* Card image */
-        .card-image {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .card-image img {
+        .card-image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), filter 0.5s ease;
-            filter: grayscale(30%) brightness(0.7);
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+                filter 0.5s ease;
+            filter: brightness(0.85) saturate(0.9);
         }
 
-        .team-card:hover .card-image img {
-            transform: scale(1.1);
-            filter: grayscale(0%) brightness(0.85);
+        .team-card:hover .card-image-wrapper img {
+            transform: scale(1.08);
+            filter: brightness(1) saturate(1);
         }
 
-        /* Image overlay */
-        .card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg,
-                    transparent 0%,
-                    rgba(0, 2, 32, 0.3) 40%,
-                    rgba(0, 2, 32, 0.95) 100%);
-            z-index: 2;
-            transition: background 0.5s ease;
-        }
-
-        .team-card:hover .card-overlay {
-            background: linear-gradient(180deg,
-                    rgba(249, 195, 7, 0.03) 0%,
-                    rgba(0, 2, 32, 0.2) 30%,
-                    rgba(0, 2, 32, 0.9) 100%);
-        }
-
-        /* Card content */
-        .card-content {
+        /* Image Overlay Gradient */
+        .card-image-wrapper::after {
+            content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 2rem;
-            z-index: 4;
-            transform: translateY(20px);
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            height: 50%;
+            background: linear-gradient(to top, var(--rg-beige) 0%, transparent 100%);
+            pointer-events: none;
         }
 
-        .team-card:hover .card-content {
-            transform: translateY(0);
-        }
-
-        .card-role {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--rg-gold);
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-        }
-
-        .card-name {
-            font-family: var(--font-title);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--rg-text-dark);
-            line-height: 1.2;
-            margin-bottom: 0.75rem;
-            transition: color 0.3s ease;
-        }
-
-        .team-card:hover .card-name {
-            color: #fff;
-        }
-
-        .card-bio {
-            font-size: 0.85rem;
-            font-weight: 300;
-            color: var(--rg-text-light);
-            line-height: 1.6;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .team-card:hover .card-bio {
-            max-height: 100px;
-            opacity: 1;
-            margin-bottom: 1rem;
-        }
-
-        /* Social links */
-        .card-socials {
-            display: flex;
-            gap: 0.5rem;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.4s ease 0.1s;
-        }
-
-        .team-card:hover .card-socials {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--rg-text-medium);
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(10px);
-        }
-
-        .social-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .social-btn:hover {
-            background: var(--rg-gold);
-            border-color: var(--rg-gold);
-            color: var(--rg-dark);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(249, 195, 7, 0.25);
-        }
-
-        /* Top indicator */
-        .card-indicator {
+        /* Status Badge */
+        .card-status {
             position: absolute;
-            top: 1.25rem;
-            left: 1.25rem;
-            z-index: 5;
+            top: 1rem;
+            right: 1rem;
+            z-index: 3;
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 100px;
-            background: rgba(0, 2, 32, 0.6);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.35rem 0.75rem;
+            background: rgba(0, 3, 46, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--rg-gold);
+            border: 1px solid rgba(249, 195, 7, 0.15);
             opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.4s ease;
+            transform: translateY(-8px);
+            transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
         }
 
-        .team-card:hover .card-indicator {
+        .team-card:hover .card-status {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .indicator-dot {
+        .status-dot {
             width: 6px;
             height: 6px;
+            background: #4ade80;
             border-radius: 50%;
-            background: #10b981;
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -569,174 +412,228 @@
             0%,
             100% {
                 opacity: 1;
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4);
             }
 
             50% {
-                opacity: 0.5;
+                opacity: 0.7;
+                box-shadow: 0 0 0 4px rgba(74, 222, 128, 0);
             }
         }
 
-        .indicator-text {
-            font-size: 0.65rem;
+        /* Card Content */
+        .card-content {
+            padding: 1.25rem 1.5rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-name {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .team-card:hover .card-name {
+            color: var(--rg-gold);
+        }
+
+        .card-role {
+            font-size: 0.8rem;
+            color: var(--rg-gold);
             font-weight: 500;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.75rem;
+            opacity: 0.85;
+        }
+
+        .card-bio {
+            font-size: 0.82rem;
+            color: var(--rg-text-light);
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 1.25rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        .team-card:hover .card-bio {
             color: var(--rg-text-medium);
-            letter-spacing: 0.05em;
         }
 
-        /* ══════════════════════════════════════════════════════
-       GRID PLACEMENTS
-    ══════════════════════════════════════════════════════ */
-
-        /* Hero card - large */
-        .team-card.card-hero {
-            grid-column: span 6;
-            grid-row: span 2;
-        }
-
-        .team-card.card-hero .card-content {
-            padding: 2.5rem;
-        }
-
-        .team-card.card-hero .card-name {
-            font-size: 2rem;
-        }
-
-        .team-card.card-hero .card-bio {
-            max-width: 350px;
-        }
-
-        /* Medium cards */
-        .team-card.card-medium {
-            grid-column: span 6;
-            grid-row: span 1;
-        }
-
-        /* Standard cards */
-        .team-card.card-standard {
-            grid-column: span 4;
-            grid-row: span 1;
-        }
-
-        /* Wide card */
-        .team-card.card-wide {
-            grid-column: span 8;
-            grid-row: span 1;
-        }
-
-        .team-card.card-wide .card-content {
+        /* Social Links */
+        .card-socials {
             display: flex;
-            align-items: flex-end;
-            gap: 2rem;
-        }
-
-        .team-card.card-wide .card-info {
-            flex: 1;
-        }
-
-        .team-card.card-wide .card-socials {
-            transform: none;
+            gap: 0.5rem;
+            transform: translateY(8px);
             opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.05s,
+                opacity 0.4s ease 0.05s;
         }
 
-        .team-card.card-wide:hover .card-socials {
+        .team-card:hover .card-socials {
+            transform: translateY(0);
             opacity: 1;
         }
 
-        /* ══════════════════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════════════════ */
-        @media (max-width: 1200px) {
-            .team-bento {
-                grid-template-columns: repeat(8, 1fr);
-            }
+        .social-link {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(249, 195, 7, 0.08);
+            border: 1px solid rgba(249, 195, 7, 0.12);
+            color: var(--rg-text-medium);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
 
-            .team-card.card-hero {
-                grid-column: span 8;
-                grid-row: span 1;
-                min-height: 400px;
-            }
+        .social-link:hover {
+            background: var(--rg-gold);
+            border-color: var(--rg-gold);
+            color: var(--rg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(249, 195, 7, 0.3);
+        }
 
-            .team-card.card-medium {
-                grid-column: span 4;
-            }
+        .social-link svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
 
-            .team-card.card-standard {
-                grid-column: span 4;
-            }
+        /* Divider Line */
+        .card-divider {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--rg-gold), transparent);
+            margin-bottom: 1rem;
+            transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
-            .team-card.card-wide {
-                grid-column: span 8;
+        .team-card:hover .card-divider {
+            width: 100%;
+        }
+
+        /* Decorative corner */
+        .card-corner {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .team-card:hover .card-corner {
+            opacity: 0.15;
+        }
+
+        .card-corner::before {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--rg-gold);
+            border-radius: 50%;
+        }
+
+        /* Bottom CTA */
+        .team-cta {
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeSlideDown 0.8s ease forwards 1.5s;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--rg-dark);
+            background: linear-gradient(135deg, var(--rg-gold), #ffd84a);
+            border: none;
+            border-radius: 3rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.4s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 40px rgba(249, 195, 7, 0.35);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
             }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 800px) {
             .team-section {
-                padding: 5rem 1.5rem;
+                padding: 4rem 1.25rem;
             }
 
-            .team-header {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+            }
+
+            .section-header {
                 margin-bottom: 3.5rem;
             }
 
-            .header-deco {
-                display: none;
-            }
-
-            .team-bento {
-                grid-template-columns: repeat(6, 1fr);
-                gap: 1rem;
-            }
-
-            .team-card.card-hero,
-            .team-card.card-medium,
-            .team-card.card-wide {
-                grid-column: span 6;
-                min-height: 350px;
-            }
-
-            .team-card.card-standard {
-                grid-column: span 3;
-                min-height: 300px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .team-section {
-                padding: 4rem 1rem;
-            }
-
-            .team-title {
-                font-size: 2.5rem;
-            }
-
-            .title-outline {
-                -webkit-text-stroke-width: 1px;
-            }
-
-            .team-bento {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .team-card.card-hero,
-            .team-card.card-medium,
-            .team-card.card-standard,
-            .team-card.card-wide {
-                grid-column: span 1;
-                min-height: 380px;
-            }
-
             .card-content {
-                padding: 1.5rem;
-                transform: translateY(0);
-            }
-
-            .card-bio {
-                max-height: none;
-                opacity: 1;
-                margin-bottom: 1rem;
+                padding: 1rem 1.25rem 1.25rem;
             }
 
             .card-socials {
@@ -744,37 +641,38 @@
                 transform: translateY(0);
             }
 
-            .card-indicator {
+            .card-status {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
 
-            .team-card.card-wide .card-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
+        @media (max-width: 550px) {
+            .team-section {
+                padding: 3rem 1rem;
             }
-        }
 
-        /* ══════════════════════════════════════════════════════
-       CURSOR FOLLOWER
-    ══════════════════════════════════════════════════════ */
-        .cursor-glow {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(249, 195, 7, 0.08), transparent 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            mix-blend-mode: screen;
-        }
+            .team-grid {
+                grid-template-columns: 1fr;
+                max-width: 380px;
+                gap: 1.5rem;
+            }
 
-        .team-section:hover .cursor-glow {
-            opacity: 1;
+            .card-image-wrapper {
+                aspect-ratio: 3/3;
+            }
+
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .card-name {
+                font-size: 1.15rem;
+            }
+
+            .team-cta {
+                margin-top: 3rem;
+            }
         }
     </style>
 </head>
@@ -782,335 +680,373 @@
 <body>
 
     <section class="team-section">
-        <!-- Background layers -->
-        <div class="team-bg"></div>
-        <div class="team-grain"></div>
+        <!-- Floating Particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
 
-        <!-- Floating orbs -->
-        <div class="floating-orb orb-1"></div>
-        <div class="floating-orb orb-2"></div>
-        <div class="floating-orb orb-3"></div>
+        <!-- Section Header -->
+        <div class="section-header">
+            <div class="section-label">
+                Our Team
+            </div>
+            <h2 class="section-title">
+                Meet the <span class="highlight">Visionaries</span><br>
+                Behind the Mission
+            </h2>
+            <p class="section-desc">
+                A curated collective of world-class talent dedicated to pushing boundaries and crafting extraordinary
+                experiences.
+            </p>
+        </div>
 
-        <!-- Cursor glow -->
-        <div class="cursor-glow"></div>
+        <!-- Team Grid -->
+        <div class="team-grid">
 
-        <div class="team-inner">
-
-            <!-- Header -->
-            <header class="team-header">
-                <div class="header-content">
-                    <div class="team-label">
-                        <span class="label-line"></span>
-                        <span class="label-text">The Visionaries</span>
-                    </div>
-                    <h1 class="team-title">
-                        <span class="title-row">
-                            <span>Meet the</span>
-                            <span class="title-outline">minds</span>
-                        </span>
-                        <span class="title-row">
-                            <span class="title-gold">behind the magic</span>
-                        </span>
-                    </h1>
-                    <p class="team-subtitle">
-                        A curated collective of dreamers and doers, united by obsession for craft and relentless pursuit
-                        of excellence.
-                    </p>
+            <!-- Card 1 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
                 </div>
-                <div class="header-deco">
-                    <span class="deco-number">06</span>
-                    <span class="deco-label">Team Members</span>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=600&fit=crop&crop=face"
+                        alt="Alexander Reed" loading="lazy">
                 </div>
-            </header>
-
-            <!-- Bento Grid -->
-            <div class="team-bento">
-
-                <!-- Card 1: Hero -->
-                <article class="team-card card-hero">
-                    <div class="card-border"></div>
-                    <div class="card-tilt">
-                        <div class="card-inner">
-                            <div class="card-spotlight"></div>
-                            <div class="card-image">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1000&h=1200&fit=crop&crop=face"
-                                    alt="Alexander Mercer" loading="eager">
-                            </div>
-                            <div class="card-overlay"></div>
-                            <div class="card-indicator">
-                                <span class="indicator-dot"></span>
-                                <span class="indicator-text">Founder</span>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-role">Founder & CEO</span>
-                                <h3 class="card-name">Alexander Mercer</h3>
-                                <p class="card-bio">
-                                    Visionary leader with 15+ years shaping iconic brands at the intersection of luxury,
-                                    technology, and human experience.
-                                </p>
-                                <div class="card-socials">
-                                    <a href="#" class="social-btn" aria-label="LinkedIn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="Twitter">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="Email">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card-content">
+                    <h3 class="card-name">Alexander Reed</h3>
+                    <p class="card-role">Chief Executive Officer</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">Visionary leader with 15+ years driving innovation in technology and strategic
+                        growth.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                        </a>
                     </div>
-                </article>
+                </div>
+                <div class="card-corner"></div>
+            </div>
 
-                <!-- Card 2: Medium -->
-                <article class="team-card card-medium">
-                    <div class="card-border"></div>
-                    <div class="card-tilt">
-                        <div class="card-inner">
-                            <div class="card-spotlight"></div>
-                            <div class="card-image">
-                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=600&fit=crop&crop=face"
-                                    alt="Sophia Laurent" loading="lazy">
-                            </div>
-                            <div class="card-overlay"></div>
-                            <div class="card-indicator">
-                                <span class="indicator-dot"></span>
-                                <span class="indicator-text">Creative</span>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-role">Creative Director</span>
-                                <h3 class="card-name">Sophia Laurent</h3>
-                                <p class="card-bio">
-                                    Award-winning designer transforming abstract concepts into visual masterpieces.
-                                </p>
-                                <div class="card-socials">
-                                    <a href="#" class="social-btn" aria-label="LinkedIn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="Dribbble">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308a10.174 10.174 0 004.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4a10.15 10.15 0 006.29 2.166c1.42 0 2.77-.29 4.006-.816z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Card 2 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
+                </div>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=600&fit=crop&crop=face"
+                        alt="Victoria Chen" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Victoria Chen</h3>
+                    <p class="card-role">Chief Technology Officer</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">Engineering maestro architecting scalable systems that power millions of users
+                        worldwide.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
                     </div>
-                </article>
+                </div>
+                <div class="card-corner"></div>
+            </div>
 
-                <!-- Card 3: Standard -->
-                <article class="team-card card-standard">
-                    <div class="card-border"></div>
-                    <div class="card-tilt">
-                        <div class="card-inner">
-                            <div class="card-spotlight"></div>
-                            <div class="card-image">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face"
-                                    alt="Marcus Chen" loading="lazy">
-                            </div>
-                            <div class="card-overlay"></div>
-                            <div class="card-indicator">
-                                <span class="indicator-dot"></span>
-                                <span class="indicator-text">Tech</span>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-role">CTO</span>
-                                <h3 class="card-name">Marcus Chen</h3>
-                                <p class="card-bio">
-                                    Engineering excellence through elegant, scalable solutions.
-                                </p>
-                                <div class="card-socials">
-                                    <a href="#" class="social-btn" aria-label="GitHub">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="LinkedIn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Card 3 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
+                </div>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop&crop=face"
+                        alt="Marcus Williams" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Marcus Williams</h3>
+                    <p class="card-role">Creative Director</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">Award-winning designer transforming abstract concepts into breathtaking visual
+                        narratives.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Dribbble">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308a10.174 10.174 0 004.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4a10.143 10.143 0 006.29 2.166c1.42 0 2.77-.29 4.006-.816zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702A10.146 10.146 0 0012 1.822c-.83 0-1.634.1-2.4.23zm10.335 3.483c-.218.29-1.91 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.31-6.38z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                        </a>
                     </div>
-                </article>
+                </div>
+                <div class="card-corner"></div>
+            </div>
 
-                <!-- Card 4: Standard -->
-                <article class="team-card card-standard">
-                    <div class="card-border"></div>
-                    <div class="card-tilt">
-                        <div class="card-inner">
-                            <div class="card-spotlight"></div>
-                            <div class="card-image">
-                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=face"
-                                    alt="Elena Vasquez" loading="lazy">
-                            </div>
-                            <div class="card-overlay"></div>
-                            <div class="card-indicator">
-                                <span class="indicator-dot"></span>
-                                <span class="indicator-text">Strategy</span>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-role">Brand Strategist</span>
-                                <h3 class="card-name">Elena Vasquez</h3>
-                                <p class="card-bio">
-                                    Crafting narratives that forge lasting emotional connections.
-                                </p>
-                                <div class="card-socials">
-                                    <a href="#" class="social-btn" aria-label="LinkedIn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="Twitter">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Card 4 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
+                </div>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&h=600&fit=crop&crop=face"
+                        alt="Sophia Laurent" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Sophia Laurent</h3>
+                    <p class="card-role">Head of Product</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">Product strategist turning user insights into elegant, market-leading digital
+                        solutions.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                        </a>
                     </div>
-                </article>
+                </div>
+                <div class="card-corner"></div>
+            </div>
 
-                <!-- Card 5: Standard -->
-                <article class="team-card card-standard">
-                    <div class="card-border"></div>
-                    <div class="card-tilt">
-                        <div class="card-inner">
-                            <div class="card-spotlight"></div>
-                            <div class="card-image">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face"
-                                    alt="James Whitfield" loading="lazy">
-                            </div>
-                            <div class="card-overlay"></div>
-                            <div class="card-indicator">
-                                <span class="indicator-dot"></span>
-                                <span class="indicator-text">Product</span>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-role">Head of Product</span>
-                                <h3 class="card-name">James Whitfield</h3>
-                                <p class="card-bio">
-                                    Bridging vision and execution with user-centric design.
-                                </p>
-                                <div class="card-socials">
-                                    <a href="#" class="social-btn" aria-label="LinkedIn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="Twitter">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Card 5 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
+                </div>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=600&fit=crop&crop=face"
+                        alt="James Nakamura" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">James Nakamura</h3>
+                    <p class="card-role">Lead Engineer</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">Full-stack architect building robust, performant platforms with cutting-edge
+                        technology.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                        </a>
                     </div>
-                </article>
+                </div>
+                <div class="card-corner"></div>
+            </div>
 
-                <!-- Card 6: Wide -->
-                <article class="team-card card-wide">
-                    <div class="card-border"></div>
-                    <div class="card-tilt">
-                        <div class="card-inner">
-                            <div class="card-spotlight"></div>
-                            <div class="card-image">
-                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=600&fit=crop&crop=face"
-                                    alt="Aria Kim" loading="lazy">
-                            </div>
-                            <div class="card-overlay"></div>
-                            <div class="card-indicator">
-                                <span class="indicator-dot"></span>
-                                <span class="indicator-text">Operations</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-info">
-                                    <span class="card-role">Chief Operating Officer</span>
-                                    <h3 class="card-name">Aria Kim</h3>
-                                    <p class="card-bio">
-                                        Orchestrating seamless operations with precision and a passion for efficiency.
-                                    </p>
-                                </div>
-                                <div class="card-socials">
-                                    <a href="#" class="social-btn" aria-label="LinkedIn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="Twitter">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="social-btn" aria-label="Email">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Card 6 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
+                </div>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=500&h=600&fit=crop&crop=face"
+                        alt="Elena Petrova" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Elena Petrova</h3>
+                    <p class="card-role">UX Research Lead</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">Human-centered researcher uncovering deep user behavior patterns through data
+                        storytelling.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                        </a>
                     </div>
-                </article>
+                </div>
+                <div class="card-corner"></div>
+            </div>
 
+            <!-- Card 7 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
+                </div>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&h=600&fit=crop&crop=face"
+                        alt="Daniel Okafor" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Daniel Okafor</h3>
+                    <p class="card-role">VP of Marketing</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">Growth strategist crafting compelling brand narratives that resonate across
+                        global markets.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-corner"></div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="team-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Available
+                </div>
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&h=600&fit=crop&crop=face"
+                        alt="Aria Johansson" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Aria Johansson</h3>
+                    <p class="card-role">Data Science Lead</p>
+                    <div class="card-divider"></div>
+                    <p class="card-bio">AI & ML specialist transforming raw data into actionable intelligence and
+                        predictive models.</p>
+                    <div class="card-socials">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-corner"></div>
             </div>
 
         </div>
+
+        <!-- CTA -->
+        <div class="team-cta">
+            <a href="#" class="cta-button">
+                Join Our Team
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+
     </section>
 
     <script>
-        // ═══════════════════════════════════════════════════════
-        // CURSOR GLOW FOLLOWER
-        // ═══════════════════════════════════════════════════════
-        const cursorGlow = document.querySelector('.cursor-glow');
-        let cursorX = 0, cursorY = 0;
-        let glowX = 0, glowY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            cursorX = e.clientX;
-            cursorY = e.clientY;
-        });
-
-        function animateCursor() {
-            glowX += (cursorX - glowX) * 0.08;
-            glowY += (cursorY - glowY) * 0.08;
-            cursorGlow.style.left = glowX + 'px';
-            cursorGlow.style.top = glowY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // ═══════════════════════════════════════════════════════
-        // CARD SPOTLIGHT EFFECT
-        // ═══════════════════════════════════════════════════════
+        // Card glow follows mouse
         document.querySelectorAll('.team-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -1121,28 +1057,23 @@
             });
         });
 
-        // ═══════════════════════════════════════════════════════
-        // 3D TILT EFFECT
-        // ═══════════════════════════════════════════════════════
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
         document.querySelectorAll('.team-card').forEach(card => {
-            const tilt = card.querySelector('.card-tilt');
-
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = ((y - centerY) / centerY) * -8;
-                const rotateY = ((x - centerX) / centerX) * 8;
-
-                tilt.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                tilt.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-            });
+            card.style.animationPlayState = 'paused';
+            observer.observe(card);
         });
     </script>
 

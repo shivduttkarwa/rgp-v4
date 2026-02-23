@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import gsap from "gsap";
 import "./Team.css";
 
 interface TeamMember {
@@ -24,11 +25,10 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: "James Morrison",
+    name: "Rahul Singh",
     role: "Founder & Chief Executive",
     bio: "Visionary leader with over two decades of experience reshaping luxury real estate across three continents. Pioneer of the boutique estate concept.",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80",
+    image: "/images/rahul-singh.jpg",
     stats: [
       { value: "22", label: "Years Exp." },
       { value: "$4.2B", label: "Sales Volume" },
@@ -120,7 +120,81 @@ const teamMembers: TeamMember[] = [
 ];
 
 const Team = () => {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const defaultActiveId = 1;
+  const [activeCard, setActiveCard] = useState<number | null>(defaultActiveId);
+  const cardRefs = useRef<Array<HTMLElement | null>>([]);
+  const hasAnimated = useRef(false);
+  const members = useMemo(() => teamMembers, []);
+
+  useEffect(() => {
+    const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
+    if (!cards.length || activeCard == null) return;
+
+    const activeEl = cards.find(
+      (card) => Number(card.dataset.cardId) === activeCard
+    );
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    cards.forEach((card) => {
+      const isActive = card === activeEl;
+      const content = card.querySelector(".content") as HTMLElement | null;
+      const blend = card.querySelector(".card-blend") as HTMLElement | null;
+
+      gsap.killTweensOf(card);
+      if (blend) gsap.killTweensOf(blend);
+      if (content) gsap.killTweensOf(content);
+
+      if (!isMobile) {
+        gsap.to(card, {
+          flexGrow: isActive ? 5 : 1,
+          duration: 0.7,
+          ease: "power3.out",
+        });
+      } else {
+        gsap.set(card, { flexGrow: 0 });
+      }
+
+      if (blend) {
+        if (isMobile) {
+          gsap.set(blend, { autoAlpha: 1 });
+        } else {
+          gsap.to(blend, {
+            autoAlpha: isActive ? 1 : 0,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        }
+      }
+
+      if (!content) return;
+
+      if (isMobile) {
+        gsap.set(content, { autoAlpha: 1 });
+        return;
+      }
+
+      if (isActive) {
+        gsap.set(content, { autoAlpha: 1 });
+        const items = content.querySelectorAll("[data-animate]");
+        gsap.killTweensOf(items);
+        gsap.set(items, { y: 22, autoAlpha: 0 });
+        gsap.to(items, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.55,
+          ease: "power3.out",
+          stagger: 0.08,
+          delay: hasAnimated.current ? 0 : 0.15,
+          onComplete: () => {
+            hasAnimated.current = true;
+          },
+        });
+      } else {
+        gsap.set(content, { autoAlpha: 0 });
+      }
+    });
+  }, [activeCard]);
 
   return (
     <section className="team-section">
@@ -138,37 +212,45 @@ const Team = () => {
 
       {/* Expanding Cards */}
       <div className="team-expanding">
-        {teamMembers.map((member, index) => (
+        {members.map((member) => (
           <article
             key={member.id}
+            ref={(el) => {
+              cardRefs.current[member.id] = el;
+            }}
+            data-card-id={member.id}
             className={`exp-card ${activeCard === member.id ? "active" : ""}`}
             onMouseEnter={() => setActiveCard(member.id)}
-            onMouseLeave={() => setActiveCard(null)}
+            onMouseLeave={() => setActiveCard(defaultActiveId)}
+            onClick={() => setActiveCard(member.id)}
           >
             <div className="card-image">
               <img src={member.image} alt={member.name} loading="lazy" />
             </div>
-
-            <span className="card-number">
-              {String(index + 1).padStart(2, "0")}
-            </span>
+            <div className="card-blend" aria-hidden="true"></div>
 
             <h3 className="vertical-name">{member.name}</h3>
 
             <div className="content">
-              <h3 className="member-name">{member.name}</h3>
-              <p className="member-role">{member.role}</p>
-              <div className="content-divider"></div>
+              <h3 className="member-name" data-animate="fade-up">
+                {member.name}
+              </h3>
+              <p className="member-role" data-animate="fade-up">
+                {member.role}
+              </p>
+              <div className="content-divider" data-animate="fade-up"></div>
 
               {member.quote && (
-                <div className="member-quote">
+                <div className="member-quote" data-animate="fade-up">
                   <p>"{member.quote}"</p>
                 </div>
               )}
 
-              <p className="member-bio">{member.bio}</p>
+              <p className="member-bio" data-animate="fade-up">
+                {member.bio}
+              </p>
 
-              <div className="member-stats">
+              <div className="member-stats" data-animate="fade-up">
                 {member.stats.map((stat, idx) => (
                   <div key={idx} className="stat">
                     <span className="stat-value">{stat.value}</span>
@@ -177,7 +259,7 @@ const Team = () => {
                 ))}
               </div>
 
-              <div className="member-tags">
+              <div className="member-tags" data-animate="fade-up">
                 {member.tags.map((tag, idx) => (
                   <span key={idx} className="tag">
                     {tag}
@@ -185,7 +267,7 @@ const Team = () => {
                 ))}
               </div>
 
-              <div className="member-actions">
+              <div className="member-actions" data-animate="fade-up">
                 <button className="btn-profile">
                   View Profile
                   <svg viewBox="0 0 24 24">

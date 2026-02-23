@@ -101,16 +101,17 @@ body {
 
 .exp-card {
   position: relative;
-  flex: 1;
+  flex: 1 1 0;
   min-width: 90px;
   border-radius: 24px;
   overflow: hidden;
   cursor: pointer;
-  transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #000220;
+  isolation: isolate;
 }
 
 .exp-card.active {
-  flex: 5;
+  flex-grow: 5;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -128,74 +129,39 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition:
-    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.5s ease;
   filter: saturate(0.7) brightness(0.9);
-  transform: scale(1);
 }
 
 .exp-card.active .card-image img {
-  transform: scale(1.03);
   filter: saturate(1) brightness(1);
+  object-position: center top;
 }
 
 /* ═══════════════════════════════════════════════════════════
    GRADIENT OVERLAYS
    ═══════════════════════════════════════════════════════════ */
 
-.exp-card::before {
-  content: "";
+/* Blend overlay for content side */
+.exp-card .card-blend {
   position: absolute;
-  inset: 0;
+  inset: 0 auto 0 0;
+  width: 100%;
   background: linear-gradient(
-    to top,
-    rgba(0, 2, 32, 0.98) 0%,
-    rgba(0, 2, 32, 0.75) 30%,
-    rgba(0, 2, 32, 0.4) 55%,
-    transparent 100%
+    90deg,
+    rgba(10, 18, 96, 0.75) 0%,
+    rgba(10, 18, 96, 0.5) 45%,
+    rgba(249, 195, 7, 0.18) 65%,
+    rgba(0, 2, 32, 0) 100%
   );
-  z-index: 1;
-  transition: opacity 0.5s ease;
-}
-
-.exp-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(249, 195, 7, 0.05) 0%,
-    transparent 50%
-  );
-  z-index: 1;
+  mix-blend-mode: overlay;
   opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.exp-card.active::after {
-  opacity: 1;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* ═══════════════════════════════════════════════════════════
    CARD NUMBER (Top Left)
    ═══════════════════════════════════════════════════════════ */
-
-.exp-card .card-number {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  z-index: 4;
-  font-family: var(--font-title);
-  font-size: 0.85rem;
-  color: var(--rg-gold);
-  opacity: 0.4;
-  transition: opacity 0.4s ease;
-}
-
-.exp-card.active .card-number {
-  opacity: 0.7;
-}
 
 /* ═══════════════════════════════════════════════════════════
    COLLAPSED STATE - VERTICAL NAME
@@ -215,7 +181,6 @@ body {
   white-space: nowrap;
   letter-spacing: 0.05em;
   opacity: 1;
-  transition: opacity 0.3s ease;
 }
 
 .exp-card.active .vertical-name {
@@ -229,20 +194,40 @@ body {
 
 .exp-card .content {
   position: absolute;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2.5rem;
+  padding: 1.25rem 2.5rem 2.25rem;
   z-index: 4;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
+  background: rgba(0, 2, 32, 0.22);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.35rem;
+}
+
+.exp-card .content > * {
+  position: relative;
+  z-index: 1;
 }
 
 .exp-card.active .content {
   opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.4s ease 0.15s;
+}
+
+.exp-card.active .card-image {
+  inset: 0 0 0 auto;
+  width: 35%;
+}
+
+.exp-card.active .content {
+  left: 0;
+  right: 35%;
 }
 
 /* Name */
@@ -252,12 +237,6 @@ body {
   color: var(--rg-text-dark);
   line-height: 1.1;
   margin-bottom: 0.3rem;
-  transform: translateY(20px);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
-}
-
-.exp-card.active .member-name {
-  transform: translateY(0);
 }
 
 /* Role */
@@ -268,25 +247,14 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 1.2rem;
-  transform: translateY(20px);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
-}
-
-.exp-card.active .member-role {
-  transform: translateY(0);
 }
 
 /* Divider */
 .exp-card .content-divider {
-  width: 0;
+  width: 100%;
   height: 1px;
   background: linear-gradient(90deg, var(--rg-gold), transparent);
   margin-bottom: 1.2rem;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-}
-
-.exp-card.active .content-divider {
-  width: 100%;
 }
 
 /* Bio */
@@ -297,12 +265,6 @@ body {
   font-weight: 300;
   margin-bottom: 1.5rem;
   max-width: 450px;
-  transform: translateY(20px);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
-}
-
-.exp-card.active .member-bio {
-  transform: translateY(0);
 }
 
 /* Stats Row */
@@ -310,12 +272,6 @@ body {
   display: flex;
   gap: 2rem;
   margin-bottom: 1.5rem;
-  transform: translateY(20px);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-}
-
-.exp-card.active .member-stats {
-  transform: translateY(0);
 }
 
 .exp-card .stat {
@@ -344,12 +300,6 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 1.8rem;
-  transform: translateY(20px);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
-}
-
-.exp-card.active .member-tags {
-  transform: translateY(0);
 }
 
 .exp-card .tag {
@@ -360,7 +310,6 @@ body {
   font-size: 0.72rem;
   color: var(--rg-text-medium);
   font-weight: 500;
-  transition: all 0.3s ease;
 }
 
 .exp-card .tag:hover {
@@ -374,12 +323,6 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  transform: translateY(20px);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
-}
-
-.exp-card.active .member-actions {
-  transform: translateY(0);
 }
 
 /* View Profile Button */
@@ -396,7 +339,6 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .exp-card .btn-profile:hover {
@@ -410,7 +352,6 @@ body {
   stroke: var(--rg-dark);
   fill: none;
   stroke-width: 2;
-  transition: transform 0.3s ease;
 }
 
 .exp-card .btn-profile:hover svg {
@@ -432,7 +373,6 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .exp-card .social-link:hover {
@@ -445,7 +385,6 @@ body {
   width: 18px;
   height: 18px;
   fill: var(--rg-text-medium);
-  transition: fill 0.3s ease;
 }
 
 .exp-card .social-link:hover svg {
@@ -464,7 +403,6 @@ body {
   color: var(--rg-text-medium);
   font-size: 0.8rem;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .exp-card .email-link:hover {
@@ -489,12 +427,6 @@ body {
   position: relative;
   padding-left: 1rem;
   margin-bottom: 1.5rem;
-  transform: translateY(20px);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.22s;
-}
-
-.exp-card.active .member-quote {
-  transform: translateY(0);
 }
 
 .exp-card .member-quote::before {
@@ -587,23 +519,78 @@ body {
     padding: 4rem 1.25rem;
   }
 
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
+  .team-expanding {
+    height: auto;
+    max-height: none;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    scroll-padding-left: 1.25rem;
   }
 
-
   .exp-card {
-    min-height: 120px;
+    flex: 0 0 78%;
+    min-width: 78%;
+    height: auto;
+    scroll-snap-align: center;
+    border-radius: 20px;
   }
 
   .exp-card.active {
-    min-height: 550px;
+    flex: 0 0 78%;
+    min-height: auto;
+  }
+
+  .exp-card::before,
+  .exp-card::after {
+    display: none;
+  }
+
+  .exp-card .card-image {
+    position: relative;
+    height: 260px;
+    background: var(--rg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .exp-card .card-image img {
+    transform: none;
+    filter: saturate(0.95) brightness(0.98);
+    object-position: center;
+    object-fit: contain;
+  }
+
+  .exp-card .vertical-name {
+    display: none;
   }
 
   .exp-card .content {
-    padding: 1.75rem 1.5rem;
-    max-height: calc(550px - 3.5rem);
+    position: relative;
+    padding: 1.5rem;
+    opacity: 1;
+    pointer-events: auto;
+    max-height: none;
+  }
+
+  .exp-card .card-blend {
+    opacity: 1;
+  }
+
+  .exp-card.active .card-image {
+    inset: 0;
+    width: 100%;
+  }
+
+  .exp-card.active .content {
+    right: 0;
+  }
+
+  .exp-card .content::before {
+    mix-blend-mode: screen;
   }
 
   .exp-card .member-name {
@@ -648,12 +635,8 @@ body {
     font-size: 2rem;
   }
 
-  .exp-card.active {
-    min-height: 500px;
-  }
-
-  .exp-card .content {
-    max-height: calc(500px - 3.5rem);
+  .exp-card .card-image {
+    height: 200px;
   }
 
   .exp-card .member-name {
