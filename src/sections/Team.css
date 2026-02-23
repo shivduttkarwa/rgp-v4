@@ -81,8 +81,6 @@ body {
   line-height: 1.7;
 }
 
-
-
 /* ═══════════════════════════════════════════════════════════
    EXPANDING CARDS CONTAINER
    ═══════════════════════════════════════════════════════════ */
@@ -354,7 +352,10 @@ body {
   font-size: 0.72rem;
   color: var(--rg-text-medium);
   font-weight: 500;
-  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .tag:hover {
@@ -575,6 +576,22 @@ body {
 
   .team-swiper .swiper-slide {
     height: auto;
+  }
+
+  /* Card enter/exit animation */
+  .team-swiper .swiper-slide .swiper-card {
+    transform: scale(0.85) translateY(14px);
+    opacity: 0.55;
+    transition:
+      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity 0.5s ease,
+      box-shadow 0.5s ease;
+    will-change: transform, opacity;
+  }
+
+  .team-swiper .swiper-slide-active .swiper-card {
+    transform: scale(1) translateY(0);
+    opacity: 1;
   }
 
   /* Card */
