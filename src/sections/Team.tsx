@@ -31,7 +31,7 @@ const teamMembers: TeamMember[] = [
     name: "Rahul Singh",
     role: "Founder & Chief Executive",
     bio: "Visionary leader with over two decades of experience reshaping luxury real estate across three continents. Pioneer of the boutique estate concept.",
-    image: "/images/rahul-singh.jpg",
+    image: "images/rahul-singh.jpg",
     stats: [
       { value: "12", label: "Years Exp." },
       { value: "$850M", label: "Sales Volume" },
@@ -47,7 +47,7 @@ const teamMembers: TeamMember[] = [
     name: "Sarah Chen",
     role: "Creative Director",
     bio: "Award-winning designer bringing editorial elegance and cinematic vision to luxury property presentation. Former Art Director at Architectural Digest.",
-    image: "/images/team3.png",
+    image: "images/team3.png",
     stats: [
       { value: "10", label: "Years Exp." },
       { value: "6", label: "Awards" },
@@ -63,7 +63,7 @@ const teamMembers: TeamMember[] = [
     name: "Michael Ross",
     role: "Head of Global Sales",
     bio: "Master negotiator with an unparalleled network of UHNW clients. Closed over $2B in transactions with a reputation for discretion and results.",
-    image: "/images/team4.png",
+    image: "images/team4.png",
     stats: [
       { value: "10", label: "Years Exp." },
       { value: "$620M", label: "Closed Deals" },
@@ -79,7 +79,7 @@ const teamMembers: TeamMember[] = [
     name: "Emma Williams",
     role: "Principal Architect",
     bio: "RIBA-certified architect merging sustainability with timeless design. Leads our in-house architectural evaluation and renovation advisory team.",
-    image: "/images/team2.png",
+    image: "images/team2.png",
     stats: [
       { value: "9", label: "Years Exp." },
       { value: "42", label: "Projects" },
@@ -95,7 +95,7 @@ const teamMembers: TeamMember[] = [
     name: "David Park",
     role: "Investment Director",
     bio: "Former Goldman Sachs VP now directing strategic property investments. Specializes in portfolio optimization for family offices and institutions.",
-    image: "/images/team5.png",
+    image: "images/team5.png",
     stats: [
       { value: "8", label: "Years Exp." },
       { value: "$320M", label: "AUM" },
@@ -109,6 +109,7 @@ const teamMembers: TeamMember[] = [
 ];
 
 const Team = () => {
+  const publicUrl = import.meta.env.BASE_URL || "/";
   const defaultActiveId = 1;
   const [activeCard, setActiveCard] = useState<number | null>(defaultActiveId);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
@@ -275,7 +276,7 @@ const Team = () => {
             <SwiperSlide key={member.id}>
               <article className="swiper-card">
                 <div className="swiper-card-image">
-                  <img src={member.image} alt={member.name} loading="lazy" />
+                  <img src={`${publicUrl}${member.image}`} alt={member.name} loading="lazy" />
                 </div>
                 <div className="swiper-card-body">
                   <h3 className="member-name">{member.name}</h3>
@@ -374,7 +375,7 @@ const Team = () => {
             onClick={() => setActiveCard(member.id)}
           >
             <div className="card-image">
-              <img src={member.image} alt={member.name} loading="lazy" />
+              <img src={`${publicUrl}${member.image}`} alt={member.name} loading="lazy" />
             </div>
             <div className="card-blend" aria-hidden="true"></div>
 
