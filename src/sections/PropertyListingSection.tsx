@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -399,6 +399,30 @@ const PropertyListingSection = () => {
   );
   const [isExiting, setIsExiting] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
+  const filterTabsRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
+  const pillInitialized = useRef(false);
+
+  useLayoutEffect(() => {
+    const container = filterTabsRef.current;
+    const pill = pillRef.current;
+    if (!container || !pill) return;
+    const activeBtn = container.querySelector<HTMLElement>(".filter-tab.active");
+    if (!activeBtn) return;
+
+    if (!pillInitialized.current) {
+      gsap.set(pill, { left: activeBtn.offsetLeft, width: activeBtn.offsetWidth });
+      pillInitialized.current = true;
+    } else {
+      gsap.to(pill, {
+        left: activeBtn.offsetLeft,
+        width: activeBtn.offsetWidth,
+        duration: 0.45,
+        ease: "power3.inOut",
+        overwrite: true,
+      });
+    }
+  }, [activeFilter]);
 
   useEffect(() => {
     const cards =
@@ -471,11 +495,13 @@ const PropertyListingSection = () => {
           data-gsap-delay="0.1"
         >
           <div
+            ref={filterTabsRef}
             className="filter-tabs"
             data-gsap="fade-right"
             data-gsap-stagger="0.09"
             data-gsap-delay="0.25"
           >
+            <div ref={pillRef} className="filter-pill" />
             <button
               onClick={() => handleFilterChange("*")}
               className={`filter-tab ${activeFilter === "*" ? "active" : ""}`}
