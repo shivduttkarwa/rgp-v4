@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./PropertySlider.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export type PSSlide = {
   tab: string;
@@ -338,6 +341,7 @@ type Props = {
 
 const PropertySlider: React.FC<Props> = ({ slides = DEFAULT_SLIDES }) => {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [sectionVisible, setSectionVisible] = useState(false);
   const isAnimatingRef = useRef(false);
   const autoRef = useRef<number | null>(null);
   const activeIdxRef = useRef(0);
@@ -347,59 +351,99 @@ const PropertySlider: React.FC<Props> = ({ slides = DEFAULT_SLIDES }) => {
   const floatRefs = useRef<(HTMLDivElement | null)[]>([]);
   const archRefs = useRef<(SVGSVGElement | null)[]>([]);
   const progressRef = useRef<HTMLSpanElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const accentRef = useRef<HTMLDivElement>(null);
 
   const AUTO_DELAY = 6200;
 
-  /* ── initial layout ── */
+  /* ── initial layout — everything starts hidden; ScrollTrigger fires entrance ── */
   useEffect(() => {
+    // Hide accent panel
+    const accent = accentRef.current;
+    if (accent) gsap.set(accent, { x: -60, autoAlpha: 0 });
+
     slides.forEach((_, i) => {
       const cover = coverRefs.current[i];
       const content = contentRefs.current[i];
       const float = floatRefs.current[i];
       const arch = archRefs.current[i];
 
+      if (cover) gsap.set(cover, { autoAlpha: 0 });
+      if (float) gsap.set(float, { autoAlpha: 0, x: 60 });
+      if (arch) gsap.set(arch, { opacity: 0, y: i === 0 ? 40 : 30 });
+
       if (i === 0) {
-        if (cover) gsap.set(cover, { autoAlpha: 1 });
-        if (content) gsap.set(content, { autoAlpha: 1 });
-        if (float) gsap.set(float, { autoAlpha: 1, x: 0 });
-        if (arch) gsap.set(arch, { opacity: 0, y: 40 });
+        // Keep content container visible but hide children for stagger
+        if (content) {
+          gsap.set(content, { autoAlpha: 1 });
+          const kids = Array.from(content.children) as HTMLElement[];
+          gsap.set(kids, { y: 48, autoAlpha: 0 });
+        }
       } else {
-        if (cover) gsap.set(cover, { autoAlpha: 0 });
         if (content) gsap.set(content, { autoAlpha: 0 });
-        if (float) gsap.set(float, { autoAlpha: 0, x: 60 });
-        if (arch) gsap.set(arch, { opacity: 0, y: 30 });
       }
     });
+  }, [slides]);
 
-    /* animate first slide content in */
-    const c0 = contentRefs.current[0];
-    if (c0) {
-      const kids = Array.from(c0.children) as HTMLElement[];
-      gsap.fromTo(
-        kids,
-        { y: 48, autoAlpha: 0 },
-        {
-          y: 0,
-          autoAlpha: 1,
-          stagger: 0.12,
-          duration: 0.85,
-          ease: "power3.out",
-          delay: 0.25,
+  /* ── scroll-triggered entrance ── */
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+          once: true,
         },
-      );
-    }
-
-    /* animate first arch in */
-    const a0 = archRefs.current[0];
-    if (a0) {
-      gsap.to(a0, {
-        y: 0,
-        opacity: 0.1,
-        duration: 0.9,
-        ease: "power3.out",
-        delay: 0.2,
+        onComplete: () => setSectionVisible(true),
       });
-    }
+
+      // Accent panel: slide in from left
+      const accent = accentRef.current;
+      if (accent) {
+        tl.fromTo(accent, { x: -60, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.9 }, 0);
+      }
+
+      // Cover image: fade in with subtle scale
+      const cover0 = coverRefs.current[0];
+      if (cover0) {
+        tl.fromTo(
+          cover0,
+          { autoAlpha: 0, scale: 1.05 },
+          { autoAlpha: 1, scale: 1, duration: 1.1, ease: "power2.out" },
+          0.05,
+        );
+      }
+
+      // Float frame: slide in from right
+      const float0 = floatRefs.current[0];
+      if (float0) {
+        tl.fromTo(float0, { x: 80, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.9 }, 0.2);
+      }
+
+      // Arch mark: fade up
+      const arch0 = archRefs.current[0];
+      if (arch0) {
+        tl.fromTo(arch0, { y: 40, opacity: 0 }, { y: 0, opacity: 0.1, duration: 1.0 }, 0.25);
+      }
+
+      // Content children: stagger up
+      const c0 = contentRefs.current[0];
+      if (c0) {
+        const kids = Array.from(c0.children) as HTMLElement[];
+        tl.fromTo(
+          kids,
+          { y: 48, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, stagger: 0.12, duration: 0.85 },
+          0.35,
+        );
+      }
+    }, container);
+
+    return () => ctx.revert();
   }, [slides]);
 
   /* ── progress bar reset helper ── */
@@ -512,8 +556,9 @@ const PropertySlider: React.FC<Props> = ({ slides = DEFAULT_SLIDES }) => {
     [resetProgress],
   );
 
-  /* ── auto-advance ── */
+  /* ── auto-advance — only after section enters viewport ── */
   useEffect(() => {
+    if (!sectionVisible) return;
     resetProgress();
     if (autoRef.current) window.clearTimeout(autoRef.current);
     autoRef.current = window.setTimeout(() => {
@@ -522,7 +567,7 @@ const PropertySlider: React.FC<Props> = ({ slides = DEFAULT_SLIDES }) => {
     return () => {
       if (autoRef.current) window.clearTimeout(autoRef.current);
     };
-  }, [activeIdx, goTo, slides.length, resetProgress]);
+  }, [activeIdx, sectionVisible, goTo, slides.length, resetProgress]);
 
   /* ── derived ── */
   const isFirst = activeIdx === 0;
@@ -530,9 +575,9 @@ const PropertySlider: React.FC<Props> = ({ slides = DEFAULT_SLIDES }) => {
   const padded = (n: number) => String(n + 1).padStart(2, "0");
 
   return (
-    <div className="rg-ps">
+    <div className="rg-ps" ref={containerRef}>
       {/* ── Left accent panel ── */}
-      <div className="rg-ps__accent" aria-hidden="true">
+      <div className="rg-ps__accent" ref={accentRef} aria-hidden="true">
         <div className="rg-ps__accentNoise" />
 
         {/* Stacked architectural SVG marks */}
