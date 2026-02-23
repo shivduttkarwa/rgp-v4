@@ -45,7 +45,6 @@ const teamMembers: TeamMember[] = [
     name: "Sarah Chen",
     role: "Creative Director",
     bio: "Award-winning designer bringing editorial elegance and cinematic vision to luxury property presentation. Former Art Director at Architectural Digest.",
-    quote: "Every property has a soul. Our job is to reveal it.",
     image:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
     stats: [
@@ -97,7 +96,6 @@ const teamMembers: TeamMember[] = [
     name: "David Park",
     role: "Investment Director",
     bio: "Former Goldman Sachs VP now directing strategic property investments. Specializes in portfolio optimization for family offices and institutions.",
-    quote: "Real estate isn't just property—it's generational wealth.",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
     stats: [
