@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import HeroSection from "../sections/HeroSection";
 import About from "../sections/About";
+import Team from "../sections/Team";
 
 import PortfolioShowcase from "../sections/PortfolioShowcase";
 import PropertyListingSection from "@/sections/PropertyListingSection";
@@ -43,6 +44,7 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
       <HeroSection ready={ready} />
       <PropertyListingSection />
       <About />
+      <Team />
 
       <ServiceSelection />
       <PhilosophyPillars />

@@ -1,0 +1,714 @@
+@import url("https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --rg-beige-light: #00032e;
+  --rg-beige: #05094a;
+  --rg-beige-dark: #0a1260;
+  --rg-beige-darker: #0f1870;
+  --rg-text-dark: #ffffff;
+  --rg-text-medium: rgba(255, 255, 255, 0.72);
+  --rg-text-light: rgba(255, 255, 255, 0.45);
+  --rg-gold: #f9c307;
+  --rg-amber: #f9c307;
+  --rg-navy: #00032e;
+  --rg-dark: #000220;
+  --rg-radius: 1.125rem;
+  --font-title: "Bona Nova SC", serif;
+  --font-body: "Bricolage Grotesque", sans-serif;
+  --line: rgba(249, 195, 7, 0.22);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--rg-beige-light);
+  font-family: var(--font-body);
+  color: var(--rg-text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTION HEADER
+   ═══════════════════════════════════════════════════════════ */
+
+.team-section {
+  padding: 6rem 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.section-header-left {
+  max-width: 600px;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--rg-gold);
+  margin-bottom: 1rem;
+}
+
+.section-label::before {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: var(--rg-gold);
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--rg-text-dark);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.section-title span {
+  color: var(--rg-gold);
+  font-style: italic;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--rg-text-light);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.section-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.team-count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.team-count-number {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  color: var(--rg-gold);
+  line-height: 1;
+}
+
+.team-count-label {
+  font-size: 0.75rem;
+  color: var(--rg-text-light);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EXPANDING CARDS CONTAINER
+   ═══════════════════════════════════════════════════════════ */
+
+.team-expanding {
+  display: flex;
+  gap: 12px;
+  height: 75vh;
+  min-height: 550px;
+  max-height: 750px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INDIVIDUAL CARD
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-card {
+  position: relative;
+  flex: 1;
+  min-width: 90px;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-card.active {
+  flex: 5;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARD IMAGE
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-card .card-image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.exp-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.5s ease;
+  filter: saturate(0.7) brightness(0.9);
+  transform: scale(1);
+}
+
+.exp-card.active .card-image img {
+  transform: scale(1.03);
+  filter: saturate(1) brightness(1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GRADIENT OVERLAYS
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 2, 32, 0.98) 0%,
+    rgba(0, 2, 32, 0.75) 30%,
+    rgba(0, 2, 32, 0.4) 55%,
+    transparent 100%
+  );
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.exp-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(249, 195, 7, 0.05) 0%,
+    transparent 50%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.exp-card.active::after {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARD NUMBER (Top Left)
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-card .card-number {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 4;
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  color: var(--rg-gold);
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+}
+
+.exp-card.active .card-number {
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COLLAPSED STATE - VERTICAL NAME
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-card .vertical-name {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 1.8rem;
+  z-index: 4;
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: var(--rg-text-dark);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.exp-card.active .vertical-name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EXPANDED STATE - MAIN CONTENT
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-card .content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem;
+  z-index: 4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.exp-card.active .content {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.4s ease 0.15s;
+}
+
+/* Name */
+.exp-card .member-name {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  color: var(--rg-text-dark);
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+.exp-card.active .member-name {
+  transform: translateY(0);
+}
+
+/* Role */
+.exp-card .member-role {
+  font-size: 0.9rem;
+  color: var(--rg-gold);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+}
+
+.exp-card.active .member-role {
+  transform: translateY(0);
+}
+
+/* Divider */
+.exp-card .content-divider {
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--rg-gold), transparent);
+  margin-bottom: 1.2rem;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.exp-card.active .content-divider {
+  width: 100%;
+}
+
+/* Bio */
+.exp-card .member-bio {
+  font-size: 0.88rem;
+  color: var(--rg-text-medium);
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  max-width: 450px;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+}
+
+.exp-card.active .member-bio {
+  transform: translateY(0);
+}
+
+/* Stats Row */
+.exp-card .member-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+.exp-card.active .member-stats {
+  transform: translateY(0);
+}
+
+.exp-card .stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.exp-card .stat-value {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  color: var(--rg-text-dark);
+  line-height: 1;
+}
+
+.exp-card .stat-label {
+  font-size: 0.7rem;
+  color: var(--rg-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* Expertise Tags */
+.exp-card .member-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.8rem;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
+}
+
+.exp-card.active .member-tags {
+  transform: translateY(0);
+}
+
+.exp-card .tag {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  color: var(--rg-text-medium);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.exp-card .tag:hover {
+  background: rgba(249, 195, 7, 0.1);
+  border-color: rgba(249, 195, 7, 0.3);
+  color: var(--rg-gold);
+}
+
+/* Actions Row */
+.exp-card .member-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+}
+
+.exp-card.active .member-actions {
+  transform: translateY(0);
+}
+
+/* View Profile Button */
+.exp-card .btn-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--rg-gold);
+  border: none;
+  border-radius: 14px;
+  color: var(--rg-dark);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-card .btn-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(249, 195, 7, 0.25);
+}
+
+.exp-card .btn-profile svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--rg-dark);
+  fill: none;
+  stroke-width: 2;
+  transition: transform 0.3s ease;
+}
+
+.exp-card .btn-profile:hover svg {
+  transform: translateX(4px);
+}
+
+/* Social Links */
+.exp-card .social-links {
+  display: flex;
+  gap: 8px;
+}
+
+.exp-card .social-link {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-card .social-link:hover {
+  background: rgba(249, 195, 7, 0.15);
+  border-color: rgba(249, 195, 7, 0.4);
+  transform: translateY(-2px);
+}
+
+.exp-card .social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--rg-text-medium);
+  transition: fill 0.3s ease;
+}
+
+.exp-card .social-link:hover svg {
+  fill: var(--rg-gold);
+}
+
+/* Email Link */
+.exp-card .email-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: var(--rg-text-medium);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-card .email-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--rg-text-dark);
+}
+
+.exp-card .email-link svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   QUOTE HIGHLIGHT
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-card .member-quote {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.22s;
+}
+
+.exp-card.active .member-quote {
+  transform: translateY(0);
+}
+
+.exp-card .member-quote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--rg-gold);
+  border-radius: 1px;
+}
+
+.exp-card .member-quote p {
+  font-size: 0.9rem;
+  color: var(--rg-text-medium);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 1200px) {
+  .team-expanding {
+    height: auto;
+    max-height: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .exp-card {
+    min-height: 140px;
+    flex: none !important;
+  }
+
+  .exp-card.active {
+    flex: none !important;
+    min-height: 600px;
+  }
+
+  .exp-card .vertical-name {
+    writing-mode: horizontal-tb;
+    transform: none;
+    bottom: 2rem;
+    left: 2rem;
+  }
+
+  .exp-card.active .vertical-name {
+    transform: translateY(-10px);
+  }
+
+  .exp-card .content {
+    max-height: calc(600px - 5rem);
+    overflow-y: auto;
+    padding-right: 2rem;
+  }
+
+  /* Custom scrollbar for content */
+  .exp-card .content::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .exp-card .content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+  }
+
+  .exp-card .content::-webkit-scrollbar-thumb {
+    background: rgba(249, 195, 7, 0.3);
+    border-radius: 2px;
+  }
+
+  .exp-card .content::-webkit-scrollbar-thumb:hover {
+    background: rgba(249, 195, 7, 0.5);
+  }
+
+  .exp-card .member-name {
+    font-size: 1.8rem;
+  }
+
+  .exp-card .member-stats {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-section {
+    padding: 4rem 1.25rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-header-right {
+    align-self: flex-start;
+  }
+
+  .exp-card {
+    min-height: 120px;
+  }
+
+  .exp-card.active {
+    min-height: 550px;
+  }
+
+  .exp-card .content {
+    padding: 1.75rem 1.5rem;
+    max-height: calc(550px - 3.5rem);
+  }
+
+  .exp-card .member-name {
+    font-size: 1.6rem;
+  }
+
+  .exp-card .member-bio {
+    font-size: 0.85rem;
+  }
+
+  .exp-card .member-stats {
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-card .stat-value {
+    font-size: 1.4rem;
+  }
+
+  .exp-card .member-actions {
+    flex-wrap: wrap;
+  }
+
+  .exp-card .btn-profile {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .exp-card .social-links {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .exp-card .email-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .exp-card.active {
+    min-height: 500px;
+  }
+
+  .exp-card .content {
+    max-height: calc(500px - 3.5rem);
+  }
+
+  .exp-card .member-name {
+    font-size: 1.4rem;
+  }
+
+  .exp-card .member-stats {
+    gap: 1rem;
+  }
+
+  .exp-card .stat-value {
+    font-size: 1.2rem;
+  }
+
+  .exp-card .stat-label {
+    font-size: 0.65rem;
+  }
+}
