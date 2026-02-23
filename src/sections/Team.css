@@ -580,7 +580,7 @@ body {
 
   /* Card enter/exit animation */
   .team-swiper .swiper-slide .swiper-card {
-    transform: scale(0.85) translateY(14px);
+    transform: scale(0.9) translateY(14px);
     opacity: 0.55;
     transition:
       transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
