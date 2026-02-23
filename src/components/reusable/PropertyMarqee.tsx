@@ -329,35 +329,61 @@ export default function PropertyMarquee() {
     // Pause control
     const shouldAutoMove = () => !isDown;
 
+    let startY = 0;
+    let hasIntent = false;
+    const INTENT_PX = 6;
+
+    const getClient = (e: PointerEvent | TouchEvent) => {
+      const t = (e as TouchEvent).touches && (e as TouchEvent).touches[0];
+      return t ? { x: t.clientX, y: t.clientY } : { x: (e as PointerEvent).clientX, y: (e as PointerEvent).clientY };
+    };
+
     const onDown = (e: PointerEvent | TouchEvent) => {
-      isDown = true;
-      viewport.classList.add("rgMarquee_dragging");
-
-      const clientX =
-        (e as TouchEvent).touches && (e as TouchEvent).touches[0]
-          ? (e as TouchEvent).touches[0].clientX
-          : (e as PointerEvent).clientX;
-
+      const { x: clientX, y: clientY } = getClient(e);
       startX = clientX;
+      startY = clientY;
       startOffset = x;
-
       velocity = 0;
       lastMoveTime = performance.now();
       lastMoveX = clientX;
-
-      // prevent image ghost drag
-      if ("preventDefault" in e) e.preventDefault();
+      const isPointer = "pointerType" in e;
+      const isMouse = isPointer && (e as PointerEvent).pointerType === "mouse";
+      if (isMouse) {
+        hasIntent = true;
+        isDown = true;
+        viewport.classList.add("rgMarquee_dragging");
+      } else {
+        hasIntent = false;
+        isDown = false;
+      }
+      // don't prevent default here to allow vertical scroll on touch
     };
 
     const onMove = (e: PointerEvent | TouchEvent) => {
+      const isPointer = "pointerType" in e;
+      const isMouse = isPointer && (e as PointerEvent).pointerType === "mouse";
+      if (isMouse && !(e as PointerEvent).buttons) {
+        return;
+      }
+      const { x: clientX, y: clientY } = getClient(e);
+      const dx = clientX - startX;
+      const dy = clientY - startY;
+
+      if (!hasIntent) {
+        if (Math.abs(dx) > Math.abs(dy) + INTENT_PX) {
+          hasIntent = true;
+          isDown = true;
+          viewport.classList.add("rgMarquee_dragging");
+        } else if (Math.abs(dy) > Math.abs(dx) + INTENT_PX) {
+          // vertical scroll intent
+          return;
+        } else {
+          return;
+        }
+      }
+
       if (!isDown) return;
 
-      const clientX =
-        (e as TouchEvent).touches && (e as TouchEvent).touches[0]
-          ? (e as TouchEvent).touches[0].clientX
-          : (e as PointerEvent).clientX;
-
-      const dx = clientX - startX;
       x = startOffset + dx;
 
       const now = performance.now();
@@ -367,11 +393,16 @@ export default function PropertyMarquee() {
 
       lastMoveTime = now;
       lastMoveX = clientX;
+      if ("preventDefault" in e) e.preventDefault();
     };
 
     const onUp = () => {
-      if (!isDown) return;
+      if (!isDown) {
+        viewport.classList.remove("rgMarquee_dragging");
+        return;
+      }
       isDown = false;
+      hasIntent = false;
       viewport.classList.remove("rgMarquee_dragging");
 
       // Inertia
