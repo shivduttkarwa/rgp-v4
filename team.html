@@ -246,8 +246,8 @@
         .device-frame {
             width: 100%;
             height: 100%;
-            border-radius: 1.5rem;
-            border: 2px solid rgba(249, 195, 7, 0.1);
+            border-radius: 0;
+            border: none;
             overflow: hidden;
             position: relative;
             background: var(--rg-beige);
@@ -257,19 +257,7 @@
 
         /* Frame decorative top bar */
         .frame-top-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 36px;
-            background: rgba(0, 2, 32, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            display: none;
         }
 
         .frame-dot-dec {
@@ -286,18 +274,7 @@
 
         /* Frame bottom bar */
         .frame-bottom-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 48px;
-            background: rgba(0, 2, 32, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: none;
         }
 
         .frame-indicator {
@@ -310,7 +287,7 @@
         /* Image stack inside frame */
         .frame-images {
             position: absolute;
-            inset: 36px 0 48px 0;
+            inset: 0;
             overflow: hidden;
             transform-style: preserve-3d;
         }
@@ -356,10 +333,7 @@
 
         /* Step indicator dots below frame */
         .frame-step-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1.25rem;
+            display: none;
         }
 
         .frame-step-dot {
@@ -503,7 +477,6 @@
         .m-val   { color: #00032e; }
         .m-label { color: rgba(0, 2, 32, 0.5); }
 
-        .device-frame { border-color: rgba(0, 2, 32, 0.25); }
         .device-frame.flipping { box-shadow: 0 0 40px rgba(0, 2, 32, 0.12); }
 
         .frame-step-dot        { background: rgba(0, 2, 32, 0.18); }
