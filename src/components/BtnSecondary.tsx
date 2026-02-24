@@ -1,12 +1,11 @@
-import type { CSSProperties } from "react";
+import type { ButtonHTMLAttributes, CSSProperties } from "react";
 import "./BtnSecondary.css";
 
-interface BtnSecondaryProps {
+interface BtnSecondaryProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   width?: string | number;
   height?: string | number;
   color?: string;
-  onClick?: () => void;
   className?: string;
 }
 
@@ -15,8 +14,8 @@ export default function BtnSecondary({
   width,
   height,
   color = "#f5c45e",
-  onClick,
   className = "",
+  ...rest
 }: BtnSecondaryProps) {
   const buttonStyle: CSSProperties = {
     width: width ? (typeof width === "number" ? `${width}px` : width) : "auto",
@@ -33,7 +32,7 @@ export default function BtnSecondary({
     <button
       className={`btn-secondary ${className}`}
       style={buttonStyle}
-      onClick={onClick}
+      {...rest}
     >
       <span className="bs-text">{label}</span>
     </button>

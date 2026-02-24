@@ -20,6 +20,27 @@ export default function AboutPage() {
   const introMaxProgressRef = useRef(0);
 
   useEffect(() => {
+    // Clear one-time init guards so StrictMode's double-invoke doesn't skip animations
+    const guards = [
+      "clipRevealInit",
+      "clipRevealRtlInit",
+      "clipRevealTopInit",
+      "clipRevealLeftInit",
+      "clipRevealRightInit",
+      "wordRevealInit",
+      "wordWriteInit",
+      "clipSmoothInit",
+      "clipSmoothDownInit",
+      "charRevealInit",
+    ];
+    guards.forEach((key) => {
+      pageRef.current
+        ?.querySelectorAll<HTMLElement>(
+          `[data-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}]`,
+        )
+        .forEach((el) => delete el.dataset[key]);
+    });
+
     const cleanup = initGsapSwitchAnimations(pageRef.current);
     return () => cleanup?.();
   }, []);
@@ -165,28 +186,57 @@ export default function AboutPage() {
         <section className="split-green">
           <div className="container">
             <div className="wrap">
-              <div className="img-card">
-                <img alt="Coastal residence" src={img("ps1 (6).jpg")} />
+              <div
+                className="img-card"
+              >
+                <div
+                  className="split-img-clip"
+                  data-gsap="clip-smooth-down"
+                  data-gsap-start="top 90%"
+                  data-gsap-delay="0.05"
+                  data-gsap-mobile="clip-smooth-down"
+                  data-gsap-mobile-cards-start="top 90%"
+                >
+                  <img alt="Coastal residence" src={img("ps1 (6).jpg")} />
+                </div>
               </div>
               <div className="stack">
-                <h3 className="h-serif">
+                <h3
+                  className="h-serif"
+                  data-gsap="char-reveal"
+                  data-gsap-start="top 90%"
+                >
                   More Beautiful Than
                   <br />
                   You Expect
                 </h3>
-                <p className="split-desc">
+                <p
+                  className="split-desc"
+                  data-gsap="fade-up"
+                  data-gsap-start="top 90%"
+                  data-gsap-delay="0.15"
+                >
                   We craft homes that become the center of life — places where
                   family, friends, and community gather year after year. Each
                   residence is designed to feel timeless, effortless, and deeply
                   personal.
                 </p>
-                <p className="split-desc">
+                <p
+                  className="split-desc"
+                  data-gsap="fade-up"
+                  data-gsap-start="top 90%"
+                  data-gsap-delay="0.25"
+                >
                   From curated coastal enclaves to private city retreats, every
                   detail is considered: light, scale, flow, and the quiet
                   luxuries that make a home feel truly yours.
                 </p>
                 <div className="split-cta">
-                  <BtnSecondary label="Explore Our Homes" />
+                  <BtnSecondary
+                    label="Explore Our Homes"
+                    data-gsap="btn-clip-reveal"
+                    data-gsap-delay="0.2"
+                  />
                 </div>
               </div>
             </div>
