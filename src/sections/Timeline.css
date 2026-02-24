@@ -103,7 +103,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-right: 3.5rem;
+  padding-right: 4rem;
   position: relative;
 }
 
@@ -116,8 +116,8 @@
   width: 0.6875rem;
   height: 0.6875rem;
   border-radius: 50%;
-  background: rgba(249, 195, 7, 0.25);
-  border: 0.125rem solid rgba(249, 195, 7, 0.2);
+  background: rgba(249, 195, 7, 0.2);
+  border: 0.125rem solid rgba(249, 195, 7, 0.18);
   z-index: 2;
   transition: all 0.5s ease;
 }
@@ -125,82 +125,166 @@
 .rg-panel.rg-active .rg-panel-dot {
   background: #f9c307;
   border-color: #f9c307;
-  box-shadow: 0 0 0.875rem rgba(249, 195, 7, 0.35);
+  box-shadow: 0 0 1rem rgba(249, 195, 7, 0.4);
 }
 
-.rg-panel-step {
+/* ── Kicker: — 01 / 05 ── */
+.rg-panel-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(249, 195, 7, 0.35);
-  margin-bottom: 0.6rem;
-  transition:
-    color 0.5s ease,
-    opacity 0.5s ease;
+  color: rgba(249, 195, 7, 0.3);
+  margin: 0 0 1.75rem;
+  transition: color 0.5s ease;
 }
 
-.rg-panel.rg-active .rg-panel-step {
-  color: rgba(249, 195, 7, 0.85);
+.rg-panel-kicker-line {
+  display: block;
+  width: 2rem;
+  height: 0.0625rem;
+  background: rgba(249, 195, 7, 0.25);
+  flex-shrink: 0;
+  transition: width 0.6s ease, background 0.5s ease;
 }
 
+.rg-panel.rg-active .rg-panel-kicker {
+  color: rgba(249, 195, 7, 0.8);
+}
+
+.rg-panel.rg-active .rg-panel-kicker-line {
+  width: 3.5rem;
+  background: rgba(249, 195, 7, 0.6);
+}
+
+/* ── Year — hero typographic element ── */
 .rg-panel-year {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(4.5rem, 9vw, 7.5rem);
   font-weight: 700;
-  line-height: 1;
-  color: rgba(249, 195, 7, 0.06);
-  margin-bottom: 0.15rem;
-  transition: color 0.6s ease;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: rgba(249, 195, 7, 0.08);
+  margin: 0 0 0.75rem;
+  transition: color 0.7s ease;
 }
 
 .rg-panel.rg-active .rg-panel-year {
-  color: rgba(249, 195, 7, 0.14);
+  color: rgba(249, 195, 7, 0.22);
 }
 
+/* ── Title ── */
 .rg-panel-title {
   font-family: var(--font-title);
-  font-size: clamp(2.125rem, 3vw, 2.75rem);
+  font-size: clamp(1.875rem, 2.8vw, 2.5rem);
   font-weight: 400;
-  line-height: 1.25;
-  margin-bottom: 1rem;
+  line-height: 1.15;
   color: #f9c307;
+  margin: 0 0 1.5rem;
 }
 
+/* ── Gold separator line (expands on active) ── */
+.rg-panel-sep {
+  width: 2.5rem;
+  height: 0.0625rem;
+  background: rgba(249, 195, 7, 0.2);
+  margin: 0 0 1.375rem;
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease;
+}
+
+.rg-panel.rg-active .rg-panel-sep {
+  width: 5rem;
+  background: rgba(249, 195, 7, 0.55);
+}
+
+/* ── Description ── */
 .rg-panel-desc {
-  font-size: 1.05rem;
+  font-size: 0.9375rem;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.7;
-  max-width: 26.875rem;
-  margin-bottom: 1.75rem;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.8;
+  max-width: 28rem;
+  margin: 0 0 2rem;
   transition: color 0.5s ease;
 }
 
 .rg-panel.rg-active .rg-panel-desc {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.75);
 }
 
-.rg-panel-metrics {
+/* ── Stats ── */
+.rg-panel-stats {
   display: flex;
-  gap: 2.5rem;
+  gap: 3rem;
+  align-items: flex-end;
+  padding-top: 1.25rem;
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 1.75rem;
+  transition: border-color 0.5s ease;
 }
 
-.rg-m-val {
+.rg-panel.rg-active .rg-panel-stats {
+  border-top-color: rgba(249, 195, 7, 0.18);
+}
+
+.rg-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.rg-stat-val {
   font-family: var(--font-title);
-  font-size: 1.35rem;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
   font-weight: 700;
-  color: #f9c307;
   line-height: 1;
+  color: rgba(249, 195, 7, 0.35);
+  letter-spacing: -0.02em;
+  transition: color 0.6s ease;
 }
 
-.rg-m-label {
-  font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.45);
+.rg-panel.rg-active .rg-stat-val {
+  color: #f9c307;
+}
+
+.rg-stat-label {
+  font-size: 0.575rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-top: 0.2rem;
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 0.35rem;
+  transition: color 0.5s ease;
+}
+
+.rg-panel.rg-active .rg-stat-label {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Tags — dot separated ── */
+.rg-panel-tags {
+  font-size: 0.575rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+  transition: color 0.5s ease;
+}
+
+.rg-panel.rg-active .rg-panel-tags {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.rg-tag-dot {
+  margin: 0 0.6rem;
+  color: rgba(249, 195, 7, 0.3);
+}
+
+.rg-panel.rg-active .rg-tag-dot {
+  color: rgba(249, 195, 7, 0.6);
 }
 
 /* ── RIGHT: Sticky image frame ── */

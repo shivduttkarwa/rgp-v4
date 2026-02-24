@@ -12,6 +12,7 @@ interface Step {
   title: string;
   desc: string;
   metrics: { val: string; label: string }[];
+  tags: string[];
   imgSrc: string;
   imgAlt: string;
 }
@@ -19,66 +20,71 @@ interface Step {
 const STEPS: Step[] = [
   {
     index: 0,
-    step: 'Step 01',
+    step: '01',
     year: '2009',
     title: 'The Foundation',
-    desc: "Real Gold Properties opened with three people and a conviction: luxury real estate deserves a personal touch. We chose to grow slowly, earn trust deeply, and never compromise on quality.",
+    desc: "Three people. One conviction. We opened in Sydney knowing that genuine luxury is built on trust — earned slowly, never shortcut.",
     metrics: [
-      { val: '3', label: 'Team Members' },
+      { val: '3', label: 'Founders' },
       { val: '12', label: 'Properties' },
     ],
+    tags: ['Sydney', 'Boutique', 'Founded'],
     imgSrc: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=700&fit=crop',
     imgAlt: '2009',
   },
   {
     index: 1,
-    step: 'Step 02',
+    step: '02',
     year: '2013',
     title: 'Breaking Through',
-    desc: "We crossed $100 million in annual transactions. More importantly, our referral rate hit 78%. Clients weren't just returning — they were sending everyone they knew.",
+    desc: "Clients stopped finding us through advertising. At 78% referral rate, they were sending everyone they loved. Trust became our only growth engine.",
     metrics: [
       { val: '$100M+', label: 'Annual Sales' },
       { val: '78%', label: 'Referrals' },
     ],
+    tags: ['Milestone', 'Growth', 'Trust'],
     imgSrc: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=700&fit=crop',
     imgAlt: '2013',
   },
   {
     index: 2,
-    step: 'Step 03',
+    step: '03',
     year: '2017',
     title: 'Going Global',
-    desc: "Our clients invested across borders, so we followed. Offices in Dubai and London extended our curated approach internationally — same principles, wider canvas.",
+    desc: "Our clients invested across borders, so we followed. Dubai. London. Same rigorous standards — now on a global stage.",
     metrics: [
       { val: '3', label: 'Offices' },
       { val: '6', label: 'Countries' },
     ],
+    tags: ['Dubai', 'London', 'International'],
     imgSrc: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&h=700&fit=crop',
     imgAlt: '2017',
   },
   {
     index: 3,
-    step: 'Step 04',
+    step: '04',
     year: '2021',
     title: 'Redefining Luxury',
-    desc: "We launched Sustainable Estates — proving luxury and environmental responsibility aren't opposites. Our first net-zero development sold out in 90 days.",
+    desc: "Luxury and responsibility are not opposites. Our first net-zero Sustainable Estates development proved it — and sold out in 90 days.",
     metrics: [
-      { val: '90', label: 'Days Sold Out' },
+      { val: '90', label: 'Days to Sell Out' },
       { val: 'Net-Zero', label: 'Certified' },
     ],
+    tags: ['Sustainable', 'Net-Zero', 'Award'],
     imgSrc: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500&h=700&fit=crop',
     imgAlt: '2021',
   },
   {
     index: 4,
-    step: 'Step 05',
+    step: '05',
     year: '2024',
     title: 'The Next Chapter',
-    desc: "$2.4 billion in managed assets. 850+ families across three continents. Zero unresolved disputes. Every promise kept. The next fifteen years start now.",
+    desc: "$2.4 billion. 850 families. Zero unresolved disputes. Every promise made in 2009 has been kept. The next chapter starts now.",
     metrics: [
       { val: '$2.4B', label: 'Portfolio' },
       { val: '850+', label: 'Families' },
     ],
+    tags: ['Global', '15 Years', 'Legacy'],
     imgSrc: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=700&fit=crop',
     imgAlt: '2024',
   },
@@ -192,7 +198,7 @@ export default function Timeline() {
       }
 
       const els = panel.querySelectorAll<HTMLElement>(
-        '.rg-panel-step, .rg-panel-year, .rg-panel-title, .rg-panel-desc, .rg-panel-metrics'
+        '.rg-panel-kicker, .rg-panel-year, .rg-panel-title, .rg-panel-sep, .rg-panel-desc, .rg-panel-stats, .rg-panel-tags'
       );
       gsap.set(els, { y: 25, opacity: 0 });
       triggers.push(
@@ -276,18 +282,44 @@ export default function Timeline() {
                 ref={(el) => { panelRefs.current[i] = el; }}
               >
                 <div className="rg-panel-dot" />
-                <p className="rg-panel-step">{s.step}</p>
+
+                {/* Kicker: — 01 / 05 */}
+                <p className="rg-panel-kicker">
+                  <span className="rg-panel-kicker-line" />
+                  <span>{s.step} / 05</span>
+                </p>
+
+                {/* Year — hero typographic element */}
                 <p className="rg-panel-year">{s.year}</p>
+
+                {/* Title */}
                 <h2 className="rg-panel-title">{s.title}</h2>
+
+                {/* Gold expanding separator */}
+                <div className="rg-panel-sep" />
+
+                {/* Description — short and sharp */}
                 <p className="rg-panel-desc">{s.desc}</p>
-                <div className="rg-panel-metrics">
+
+                {/* Stats */}
+                <div className="rg-panel-stats">
                   {s.metrics.map((m) => (
-                    <div key={m.label}>
-                      <div className="rg-m-val">{m.val}</div>
-                      <div className="rg-m-label">{m.label}</div>
+                    <div key={m.label} className="rg-stat">
+                      <span className="rg-stat-val">{m.val}</span>
+                      <span className="rg-stat-label">{m.label}</span>
                     </div>
                   ))}
                 </div>
+
+                {/* Tags — dot separated */}
+                <p className="rg-panel-tags">
+                  {s.tags.map((t, ti) => (
+                    <span key={t}>
+                      {ti > 0 && <span className="rg-tag-dot">·</span>}
+                      {t}
+                    </span>
+                  ))}
+                </p>
               </div>
             ))}
           </div>

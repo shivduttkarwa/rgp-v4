@@ -1,32 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timeline — Real Gold Properties</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <title>Golden Timeline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --rg-beige-light: #00032e;
-            --rg-beige: #05094a;
-            --rg-beige-dark: #0a1260;
-            --rg-beige-darker: #0f1870;
-            --rg-text-dark: #ffffff;
-            --rg-text-medium: rgba(255, 255, 255, 0.72);
-            --rg-text-light: rgba(255, 255, 255, 0.45);
-            --rg-gold: #f9c307;
-            --rg-navy: #00032e;
-            --rg-dark: #000220;
-            --rg-radius: 1.125rem;
-            --font-title: "Bona Nova SC", serif;
-            --font-body: "Bricolage Grotesque", sans-serif;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -34,859 +13,779 @@
         }
 
         body {
-            background: var(--rg-dark);
-            font-family: var(--font-body);
-            color: var(--rg-text-dark);
-            -webkit-font-smoothing: antialiased;
+            background: #0a0a0a;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-        }
-
-        /* ═══ INTRO ═══ */
-        .intro {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
             position: relative;
         }
 
-        .intro-eyebrow {
-            font-size: 0.68rem;
-            font-weight: 600;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--rg-gold);
-            margin-bottom: 1.25rem;
+        /* Ambient Background Effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(184, 134, 11, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(218, 165, 32, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, rgba(255, 215, 0, 0.04) 0%, transparent 50%);
+            animation: ambientFloat 20s ease-in-out infinite;
+            z-index: 0;
         }
 
-        .intro-title {
-            font-family: var(--font-title);
-            font-size: clamp(2rem, 4.5vw, 3.25rem);
-            font-weight: 700;
-            line-height: 1.2;
-            max-width: 580px;
-            margin-bottom: 1rem;
+        @keyframes ambientFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, -2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); }
         }
 
-        .intro-desc {
-            font-size: 0.92rem;
-            font-weight: 300;
-            color: var(--rg-text-light);
-            max-width: 400px;
-            line-height: 1.75;
+        /* Floating Gold Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* ═══ TIMELINE CONTAINER ═══ */
-        .timeline-container {
-            position: relative;
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .timeline-layout {
-            display: flex;
-            gap: 4rem;
-            align-items: stretch;
-        }
-
-        /* ── LEFT: All 5 content panels stacked ── */
-        .content-rail {
-            flex: 1.3;
-            position: relative;
-        }
-
-        /* Vertical progress line */
-        .progress-track {
+        .particle {
             position: absolute;
-            right: 0;
+            width: 3px;
+            height: 3px;
+            background: gold;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 80px 20px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #b8860b, #ffd700, #b8860b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeDown 1s ease 0.3s forwards;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #b8860b 0%, #ffd700 25%, #fff8dc 50%, #ffd700 75%, #b8860b 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldShimmer 4s ease-in-out infinite, fadeDown 1s ease 0.5s forwards;
+            opacity: 0;
+            line-height: 1.2;
+            text-shadow: none;
+            position: relative;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .header p {
+            color: rgba(255, 215, 0, 0.5);
+            font-size: 1rem;
+            margin-top: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeDown 1s ease 0.7s forwards;
+        }
+
+        @keyframes goldShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Timeline Container */
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px 100px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Central Gold Line */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
             top: 0;
             bottom: 0;
-            width: 1px;
-            background: rgba(249, 195, 7, 0.06);
-            z-index: 1;
+            width: 2px;
+            transform: translateX(-50%);
         }
 
-        .progress-fill {
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 0%;
-            background: var(--rg-gold);
-            transition: none;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent,
+                rgba(255, 215, 0, 0.1) 5%,
+                rgba(255, 215, 0, 0.3) 20%,
+                rgba(255, 215, 0, 0.3) 80%,
+                rgba(255, 215, 0, 0.1) 95%,
+                transparent
+            );
         }
 
-        .panel {
-            height: 100vh;
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -3px;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent,
+                rgba(255, 215, 0, 0.05) 20%,
+                rgba(255, 215, 0, 0.05) 80%,
+                transparent
+            );
+            filter: blur(4px);
+        }
+
+        /* Timeline Item */
+        .timeline-item {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Gold Node */
+        .timeline-node {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            padding-right: 3.5rem;
+        }
+
+        .node-ring {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #b8860b, #ffd700, #fff8dc, #ffd700, #b8860b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: nodeRotate 6s linear infinite;
+            position: relative;
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.3),
+                0 0 60px rgba(255, 215, 0, 0.1);
+        }
+
+        .node-ring::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #b8860b, #ffd700, #fff8dc, #ffd700, #b8860b);
+            filter: blur(8px);
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        @keyframes nodeRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .node-inner {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: #ffd700;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Connector Line from Node to Card */
+        .timeline-connector {
+            width: calc(50% - 60px);
+            height: 1px;
             position: relative;
         }
 
-        /* First panel aligns with frame */
-        .panel:first-child {
-            padding-top: 0;
+        .timeline-item:nth-child(odd) .timeline-connector {
+            background: linear-gradient(to left, rgba(255, 215, 0, 0.4), transparent);
         }
 
-        /* Dot on line */
-        .panel-dot {
+        .timeline-item:nth-child(even) .timeline-connector {
+            background: linear-gradient(to right, rgba(255, 215, 0, 0.4), transparent);
+        }
+
+        /* Card */
+        .timeline-card {
+            width: calc(50% - 60px);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card-content {
+            background: linear-gradient(135deg, 
+                rgba(184, 134, 11, 0.08) 0%,
+                rgba(10, 10, 10, 0.95) 50%,
+                rgba(184, 134, 11, 0.05) 100%
+            );
+            border: 1px solid rgba(255, 215, 0, 0.12);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-content::before {
+            content: '';
             position: absolute;
-            right: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: var(--rg-dark);
-            border: 2px solid rgba(249, 195, 7, 0.12);
-            z-index: 2;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 215, 0, 0.03), 
+                transparent
+            );
+            transition: left 0.8s ease;
+        }
+
+        .card-content:hover::before {
+            left: 100%;
+        }
+
+        .card-content:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(255, 215, 0, 0.08),
+                inset 0 1px 0 rgba(255, 215, 0, 0.1);
+        }
+
+        /* Gold Corner Accents */
+        .card-content::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            height: 2px;
+            background: linear-gradient(90deg, #ffd700, transparent 40%, transparent 60%, #ffd700);
+            opacity: 0.4;
+        }
+
+        .card-year {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #b8860b, #ffd700);
+            padding: 5px 14px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffd700, #fff8dc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            color: rgba(255, 215, 0, 0.6);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .card-tag:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        /* Icon in card */
+        .card-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 2rem;
+            opacity: 0.15;
             transition: all 0.5s ease;
         }
 
-        .panel.active .panel-dot {
-            background: var(--rg-gold);
-            border-color: var(--rg-gold);
-            box-shadow: 0 0 14px rgba(249, 195, 7, 0.3);
+        .card-content:hover .card-icon {
+            opacity: 0.3;
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .panel-step {
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--rg-gold);
-            opacity: 0.4;
-            margin-bottom: 0.6rem;
-            transition: opacity 0.5s ease;
-        }
-
-        .panel.active .panel-step {
-            opacity: 1;
-        }
-
-        .panel-year {
-            font-family: var(--font-title);
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 700;
-            line-height: 1;
-            color: rgba(255, 255, 255, 0.035);
-            margin-bottom: 0.15rem;
-            transition: color 0.6s ease;
-        }
-
-        .panel.active .panel-year {
-            color: rgba(255, 255, 255, 0.07);
-        }
-
-        .panel-title {
-            font-family: var(--font-title);
-            font-size: clamp(1.3rem, 2.5vw, 1.85rem);
-            font-weight: 700;
-            line-height: 1.25;
-            margin-bottom: 1rem;
-        }
-
-        .panel-desc {
-            font-size: 0.88rem;
-            font-weight: 300;
-            color: var(--rg-text-light);
-            line-height: 1.85;
-            max-width: 430px;
-            margin-bottom: 1.75rem;
-            transition: color 0.5s ease;
-        }
-
-        .panel.active .panel-desc {
-            color: var(--rg-text-medium);
-        }
-
-        .panel-metrics {
+        /* Status Indicator */
+        .card-status {
             display: flex;
-            gap: 2.5rem;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
         }
 
-        .m-val {
-            font-family: var(--font-title);
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--rg-gold);
-            line-height: 1;
-        }
-
-        .m-label {
-            font-size: 0.6rem;
-            color: var(--rg-text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-top: 0.2rem;
-            font-weight: 500;
-        }
-
-        /* ── RIGHT: Sticky image frame ── */
-        .image-rail {
-            flex: 0.7;
-            position: relative;
-        }
-
-        .frame-container {
-            position: sticky;
-            top: calc(50vh - 250px);
-            width: 100%;
-            aspect-ratio: 3/4;
-            max-height: 500px;
-            perspective: 1500px;
-            /* must be on direct parent of the rotated element */
-            /* natural starting position = sticky position, so no jump on entry */
-            margin-top: calc(50vh - 250px);
-        }
-
-        /* The phone/frame border */
-        .device-frame {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-            border: none;
-            overflow: hidden;
-            position: relative;
-            background: var(--rg-beige);
-            will-change: transform;
-            transform-origin: center center;
-        }
-
-        /* Frame decorative top bar */
-        .frame-top-bar {
-            display: none;
-        }
-
-        .frame-dot-dec {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .frame-dot-dec.gold {
-            background: var(--rg-gold);
-            opacity: 0.5;
-        }
-
-        /* Frame bottom bar */
-        .frame-bottom-bar {
-            display: none;
-        }
-
-        .frame-indicator {
-            width: 36px;
-            height: 4px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Image stack inside frame */
-        .frame-images {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-
-        .frame-img {
-            position: absolute;
-            inset: 0;
-            will-change: transform, opacity;
-            backface-visibility: hidden;
-            transform-style: preserve-3d;
-        }
-
-        .frame-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .frame-img-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(0, 2, 32, 0.5) 100%);
-            pointer-events: none;
-        }
-
-        .frame-img-label {
-            position: absolute;
-            bottom: 0.85rem;
-            left: 0.85rem;
-            font-size: 0.55rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--rg-gold);
-            background: rgba(0, 2, 32, 0.6);
-            backdrop-filter: blur(6px);
-            padding: 0.25rem 0.65rem;
-            border-radius: 2rem;
-            border: 1px solid rgba(249, 195, 7, 0.08);
-            z-index: 2;
-        }
-
-        /* Step indicator dots below frame */
-        .frame-step-dots {
-            display: none;
-        }
-
-        .frame-step-dot {
+        .status-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
-            transition: all 0.5s ease;
+            background: #ffd700;
+            animation: statusPulse 2s ease-in-out infinite;
         }
 
-        .frame-step-dot.active {
-            background: var(--rg-gold);
-            box-shadow: 0 0 8px rgba(249, 195, 7, 0.25);
-            transform: scale(1.3);
+        .status-dot.completed { background: #ffd700; }
+        .status-dot.in-progress { background: #ff8c00; }
+        .status-dot.upcoming { background: rgba(255, 215, 0, 0.3); }
+
+        @keyframes statusPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0); }
         }
 
-        /* Flip animation glow effect */
-        .device-frame.flipping {
-            box-shadow: 0 0 40px rgba(249, 195, 7, 0.15);
+        .status-text {
+            font-size: 0.7rem;
+            color: rgba(255, 215, 0, 0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
-        /* ═══ END ═══ */
-        .end-section {
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .end-line {
-            width: 1px;
-            height: 50px;
-            background: linear-gradient(to bottom, var(--rg-gold), transparent);
-            margin-bottom: 1.25rem;
-            opacity: 0.3;
-        }
-
-        .end-text {
-            font-family: var(--font-title);
-            font-size: 1.05rem;
-            color: var(--rg-text-light);
-        }
-
-        .end-text span {
-            color: var(--rg-gold);
-        }
-
-        /* ═══ RESPONSIVE ═══ */
-        @media (max-width: 860px) {
-            .timeline-layout {
-                flex-direction: column;
-                gap: 0;
-            }
-
-            .image-rail {
-                order: -1;
-                padding: 0 1rem;
-            }
-
-            .frame-container {
-                position: sticky;
-                top: 1rem;
-                max-height: 280px;
-                aspect-ratio: 16/10;
-                margin: 0 auto;
-                max-width: 360px;
-                z-index: 10;
-            }
-
-            .content-rail {
-                padding-left: 2.5rem;
-            }
-
-            .progress-track {
-                right: auto;
-                left: 0;
-            }
-
-            .panel-dot {
-                right: auto;
-                left: -5px;
-            }
-
-            .panel {
-                padding-right: 0;
-                height: 80vh;
-            }
-
-            .frame-step-dots {
-                display: none;
-            }
-        }
-
-        @media (max-width: 520px) {
-            .frame-container {
-                max-height: 220px;
-            }
-
-            .panel {
-                height: 85vh;
-            }
-
-            .panel-year {
-                font-size: 2.5rem;
-            }
-
-            .content-rail {
-                padding-left: 2rem;
-            }
-        }
-
-        /* ═══ GOLD THEME ═══ */
-        body {
-            background: #f9c307;
-            color: #00032e;
-        }
-
-        .intro-eyebrow {
-            color: rgba(0, 2, 32, 0.55);
-        }
-
-        .intro-title {
-            color: #00032e;
-        }
-
-        .intro-desc {
-            color: rgba(0, 2, 32, 0.62);
-        }
-
-        .progress-track {
-            background: rgba(0, 2, 32, 0.1);
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
         }
 
         .progress-fill {
-            background: #00032e;
+            height: 100%;
+            background: linear-gradient(90deg, #b8860b, #ffd700);
+            border-radius: 2px;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
-        .panel-dot {
-            background: #f9c307;
-            border-color: rgba(0, 2, 32, 0.22);
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -2px;
+            width: 6px;
+            height: 6px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
         }
 
-        .panel.active .panel-dot {
-            background: #00032e;
-            border-color: #00032e;
-            box-shadow: 0 0 14px rgba(0, 2, 32, 0.22);
+        /* End Marker */
+        .timeline-end {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 40px 0;
         }
 
-        .panel-step {
-            color: rgba(0, 2, 32, 0.4);
+        .end-diamond {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #b8860b, #ffd700);
+            transform: rotate(45deg);
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            animation: diamondPulse 3s ease-in-out infinite;
         }
 
-        .panel.active .panel-step {
-            color: rgba(0, 2, 32, 0.85);
-            opacity: 1;
-        }
-
-        .panel-year {
-            color: rgba(0, 2, 32, 0.07);
-        }
-
-        .panel.active .panel-year {
-            color: rgba(0, 2, 32, 0.12);
-        }
-
-        .panel-title {
-            color: #00032e;
-        }
-
-        .panel-desc {
-            color: rgba(0, 2, 32, 0.6);
-        }
-
-        .panel.active .panel-desc {
-            color: rgba(0, 2, 32, 0.82);
-        }
-
-        .m-val {
-            color: #00032e;
-        }
-
-        .m-label {
-            color: rgba(0, 2, 32, 0.5);
-        }
-
-        .device-frame.flipping {
-            box-shadow: 0 0 40px rgba(0, 2, 32, 0.12);
-        }
-
-        .frame-step-dot {
-            background: rgba(0, 2, 32, 0.18);
-        }
-
-        .frame-step-dot.active {
-            background: #00032e;
-            box-shadow: 0 0 8px rgba(0, 2, 32, 0.2);
-        }
-
-        .end-line {
-            background: linear-gradient(to bottom, #00032e, transparent);
+        @keyframes diamondPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); }
         }
 
         .end-text {
-            color: rgba(0, 2, 32, 0.5);
+            margin-top: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: rgba(255, 215, 0, 0.3);
         }
 
-        .end-text span {
-            color: #00032e;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 70px;
+                margin-bottom: 50px;
+            }
+
+            .timeline-node {
+                left: 30px;
+                top: 0;
+            }
+
+            .timeline-connector {
+                display: none;
+            }
+
+            .timeline-card {
+                width: 100%;
+            }
+
+            .card-content {
+                padding: 25px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
-
 <body>
 
-    <section class="intro">
-        <p class="intro-eyebrow">Our Journey</p>
-        <h1 class="intro-title">Fifteen Years of Building Trust</h1>
-        <p class="intro-desc">Every milestone shaped who we are. Scroll to walk through our story.</p>
-    </section>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
 
-    <section class="timeline-container">
-        <div class="timeline-layout">
+    <!-- Header -->
+    <div class="header">
+        <div class="subtitle">Journey Through Excellence</div>
+        <h1>The Golden Path</h1>
+        <p>Every milestone tells a story</p>
+    </div>
 
-            <!-- ── LEFT: CONTENT PANELS ── -->
-            <div class="content-rail">
-                <div class="progress-track">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
+    <!-- Timeline -->
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
 
-                <div class="panel" data-index="0">
-                    <div class="panel-dot"></div>
-                    <p class="panel-step">Step 01</p>
-                    <p class="panel-year">2009</p>
-                    <h2 class="panel-title">The Foundation</h2>
-                    <p class="panel-desc">Real Gold Properties opened with three people and a conviction: luxury real
-                        estate deserves a personal touch. We chose to grow slowly, earn trust deeply, and never
-                        compromise on quality.</p>
-                    <div class="panel-metrics">
-                        <div>
-                            <div class="m-val">3</div>
-                            <div class="m-label">Team Members</div>
-                        </div>
-                        <div>
-                            <div class="m-val">12</div>
-                            <div class="m-label">Properties</div>
-                        </div>
+        <!-- Step 1 -->
+        <div class="timeline-item">
+            <div class="timeline-card">
+                <div class="card-content">
+                    <div class="card-icon">💡</div>
+                    <span class="card-year">Step 01 — Genesis</span>
+                    <h3 class="card-title">The Vision Ignites</h3>
+                    <p class="card-description">Every empire begins with a single spark. We crafted the blueprint that would reshape the landscape of innovation and design.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Strategy</span>
+                        <span class="card-tag">Vision</span>
+                        <span class="card-tag">Blueprint</span>
                     </div>
-                </div>
-
-                <div class="panel" data-index="1">
-                    <div class="panel-dot"></div>
-                    <p class="panel-step">Step 02</p>
-                    <p class="panel-year">2013</p>
-                    <h2 class="panel-title">Breaking Through</h2>
-                    <p class="panel-desc">We crossed $100 million in annual transactions. More importantly, our referral
-                        rate hit 78%. Clients weren't just returning — they were sending everyone they knew.</p>
-                    <div class="panel-metrics">
-                        <div>
-                            <div class="m-val">$100M+</div>
-                            <div class="m-label">Annual Sales</div>
-                        </div>
-                        <div>
-                            <div class="m-val">78%</div>
-                            <div class="m-label">Referrals</div>
-                        </div>
+                    <div class="card-status">
+                        <div class="status-dot completed"></div>
+                        <span class="status-text">Completed</span>
                     </div>
-                </div>
-
-                <div class="panel" data-index="2">
-                    <div class="panel-dot"></div>
-                    <p class="panel-step">Step 03</p>
-                    <p class="panel-year">2017</p>
-                    <h2 class="panel-title">Going Global</h2>
-                    <p class="panel-desc">Our clients invested across borders, so we followed. Offices in Dubai and
-                        London extended our curated approach internationally — same principles, wider canvas.</p>
-                    <div class="panel-metrics">
-                        <div>
-                            <div class="m-val">3</div>
-                            <div class="m-label">Offices</div>
-                        </div>
-                        <div>
-                            <div class="m-val">6</div>
-                            <div class="m-label">Countries</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel" data-index="3">
-                    <div class="panel-dot"></div>
-                    <p class="panel-step">Step 04</p>
-                    <p class="panel-year">2021</p>
-                    <h2 class="panel-title">Redefining Luxury</h2>
-                    <p class="panel-desc">We launched Sustainable Estates — proving luxury and environmental
-                        responsibility aren't opposites. Our first net-zero development sold out in 90 days.</p>
-                    <div class="panel-metrics">
-                        <div>
-                            <div class="m-val">90</div>
-                            <div class="m-label">Days Sold Out</div>
-                        </div>
-                        <div>
-                            <div class="m-val">Net-Zero</div>
-                            <div class="m-label">Certified</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel" data-index="4">
-                    <div class="panel-dot"></div>
-                    <p class="panel-step">Step 05</p>
-                    <p class="panel-year">2024</p>
-                    <h2 class="panel-title">The Next Chapter</h2>
-                    <p class="panel-desc">$2.4 billion in managed assets. 850+ families across three continents. Zero
-                        unresolved disputes. Every promise kept. The next fifteen years start now.</p>
-                    <div class="panel-metrics">
-                        <div>
-                            <div class="m-val">$2.4B</div>
-                            <div class="m-label">Portfolio</div>
-                        </div>
-                        <div>
-                            <div class="m-val">850+</div>
-                            <div class="m-label">Families</div>
-                        </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="100"></div>
                     </div>
                 </div>
             </div>
-
-            <!-- ── RIGHT: STICKY FRAME ── -->
-            <div class="image-rail">
-                <div class="frame-container">
-                    <div class="device-frame" id="deviceFrame">
-                        <div class="frame-top-bar">
-                            <div class="frame-dot-dec"></div>
-                            <div class="frame-dot-dec gold"></div>
-                            <div class="frame-dot-dec"></div>
-                        </div>
-                        <div class="frame-images" id="frameImages">
-                            <div class="frame-img" data-img="0">
-                                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=700&fit=crop"
-                                    alt="2009">
-                                <div class="frame-img-overlay"></div>
-                                <span class="frame-img-label">2009</span>
-                            </div>
-                            <div class="frame-img" data-img="1">
-                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=700&fit=crop"
-                                    alt="2013">
-                                <div class="frame-img-overlay"></div>
-                                <span class="frame-img-label">2013</span>
-                            </div>
-                            <div class="frame-img" data-img="2">
-                                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&h=700&fit=crop"
-                                    alt="2017">
-                                <div class="frame-img-overlay"></div>
-                                <span class="frame-img-label">2017</span>
-                            </div>
-                            <div class="frame-img" data-img="3">
-                                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500&h=700&fit=crop"
-                                    alt="2021">
-                                <div class="frame-img-overlay"></div>
-                                <span class="frame-img-label">2021</span>
-                            </div>
-                            <div class="frame-img" data-img="4">
-                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=700&fit=crop"
-                                    alt="2024">
-                                <div class="frame-img-overlay"></div>
-                                <span class="frame-img-label">2024</span>
-                            </div>
-                        </div>
-                        <div class="frame-bottom-bar">
-                            <div class="frame-indicator"></div>
-                        </div>
-                    </div>
-                    <div class="frame-step-dots">
-                        <div class="frame-step-dot active" data-dot="0"></div>
-                        <div class="frame-step-dot" data-dot="1"></div>
-                        <div class="frame-step-dot" data-dot="2"></div>
-                        <div class="frame-step-dot" data-dot="3"></div>
-                        <div class="frame-step-dot" data-dot="4"></div>
-                    </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-node">
+                <div class="node-ring">
+                    <div class="node-inner">01</div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="end-section">
-        <div class="end-line"></div>
-        <p class="end-text">The story continues. <span>Write it with us.</span></p>
-    </section>
+        <!-- Step 2 -->
+        <div class="timeline-item">
+            <div class="timeline-card">
+                <div class="card-content">
+                    <div class="card-icon">⚙️</div>
+                    <span class="card-year">Step 02 — Foundation</span>
+                    <h3 class="card-title">Building the Core</h3>
+                    <p class="card-description">Laying down the architectural pillars with precision engineering. Every line of code, every design element — meticulously crafted.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Engineering</span>
+                        <span class="card-tag">Architecture</span>
+                        <span class="card-tag">Systems</span>
+                    </div>
+                    <div class="card-status">
+                        <div class="status-dot completed"></div>
+                        <span class="status-text">Completed</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-node">
+                <div class="node-ring">
+                    <div class="node-inner">02</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="timeline-item">
+            <div class="timeline-card">
+                <div class="card-content">
+                    <div class="card-icon">🎨</div>
+                    <span class="card-year">Step 03 — Refinement</span>
+                    <h3 class="card-title">Design Perfection</h3>
+                    <p class="card-description">Polishing every surface until it gleams. The intersection of form and function, where beauty meets engineering excellence.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">UI/UX</span>
+                        <span class="card-tag">Design</span>
+                        <span class="card-tag">Polish</span>
+                    </div>
+                    <div class="card-status">
+                        <div class="status-dot completed"></div>
+                        <span class="status-text">Completed</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-node">
+                <div class="node-ring">
+                    <div class="node-inner">03</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="timeline-item">
+            <div class="timeline-card">
+                <div class="card-content">
+                    <div class="card-icon">🚀</div>
+                    <span class="card-year">Step 04 — Ascension</span>
+                    <h3 class="card-title">Launch & Scale</h3>
+                    <p class="card-description">Releasing into the world with thunderous impact. Scaling across horizons, reaching audiences that were once beyond imagination.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Launch</span>
+                        <span class="card-tag">Growth</span>
+                        <span class="card-tag">Scale</span>
+                    </div>
+                    <div class="card-status">
+                        <div class="status-dot in-progress"></div>
+                        <span class="status-text">In Progress</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="68"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-node">
+                <div class="node-ring">
+                    <div class="node-inner">04</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="timeline-item">
+            <div class="timeline-card">
+                <div class="card-content">
+                    <div class="card-icon">👑</div>
+                    <span class="card-year">Step 05 — Legacy</span>
+                    <h3 class="card-title">The Crown Achievement</h3>
+                    <p class="card-description">Where legends are forged. Total market dominance, industry-defining moments, and a legacy that echoes through generations.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Legacy</span>
+                        <span class="card-tag">Impact</span>
+                        <span class="card-tag">Future</span>
+                    </div>
+                    <div class="card-status">
+                        <div class="status-dot upcoming"></div>
+                        <span class="status-text">Upcoming</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="15"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-node">
+                <div class="node-ring">
+                    <div class="node-inner">05</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Marker -->
+        <div class="timeline-end">
+            <div class="end-diamond"></div>
+            <div class="end-text">The Journey Continues</div>
+        </div>
+    </div>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        const panels = document.querySelectorAll('.panel');
-        const frameImgs = document.querySelectorAll('.frame-img');
-        const deviceFrame = document.getElementById('deviceFrame');
-        const progressFill = document.getElementById('progressFill');
-        const dots = document.querySelectorAll('.frame-step-dot');
-        const contentRail = document.querySelector('.content-rail');
-
-        let currentActive = 0;
-
-        // ── Set initial image states: first visible, rest hidden ──
-        frameImgs.forEach((img, i) => {
-            gsap.set(img, { opacity: i === 0 ? 1 : 0 });
-        });
-
-        // ── Create flip transitions between panels ──
-        panels.forEach((panel, i) => {
-
-            // When scrolling INTO a panel
-            ScrollTrigger.create({
-                trigger: panel,
-                start: 'top center',
-                end: 'bottom center',
-                onEnter: () => activateStep(i),
-                onEnterBack: () => activateStep(i)
-            });
-
-            // 180° per step, cumulative — drop straight down first, then tilt
-            if (i < panels.length - 1) {
-
-                // Phase split: first DROP% of progress = pure Y drop, rest = rotateY flip
-                const DROP = 0.35;
-                const DROP_PX = 80;
-
-                ScrollTrigger.create({
-                    trigger: panels[i + 1],
-                    start: 'top bottom',
-                    end: 'top top',
-                    scrub: 1.5,
-                    onUpdate: (self) => {
-                        const p = self.progress;
-
-                        let y, rotateY, tiltT;
-
-                        if (p <= DROP) {
-                            // Phase 1: slide straight down, no rotation
-                            tiltT = 0;
-                            y = (p / DROP) * DROP_PX;
-                            rotateY = i * 180;
-                        } else {
-                            // Phase 2: tilt + rise back up
-                            tiltT = (p - DROP) / (1 - DROP);
-                            y = (1 - tiltT) * DROP_PX;
-                            rotateY = i * 180 + tiltT * 180;
-                        }
-
-                        gsap.set(deviceFrame, {
-                            y,
-                            rotateY,
-                            scale: 1 - (Math.sin(tiltT * Math.PI) * 0.04)
-                        });
-
-                        // Front face: 0–90° and 270–360° (mod 360)
-                        // Back face:  90–270° (mod 360) — needs scaleX(-1) to cancel mirror
-                        const norm = rotateY % 360;
-                        const frontFace = norm < 90 || norm >= 270;
-
-                        // Image swap at the 90° edge-on point of the tilt phase
-                        if (tiltT < 0.5) {
-                            gsap.set(frameImgs[i], { opacity: 1, scaleX: frontFace ? 1 : -1 });
-                            gsap.set(frameImgs[i + 1], { opacity: 0, scaleX: 1 });
-                        } else {
-                            gsap.set(frameImgs[i], { opacity: 0 });
-                            gsap.set(frameImgs[i + 1], { opacity: 1, scaleX: frontFace ? 1 : -1 });
-                        }
-
-                        deviceFrame.classList.toggle('flipping', tiltT > 0.05 && tiltT < 0.95);
-                    },
-                    onLeave: () => {
-                        const endAngle = (i + 1) * 180;
-                        const norm = endAngle % 360;
-                        const frontFace = norm < 90 || norm >= 270;
-                        gsap.set(deviceFrame, { rotateY: endAngle, y: 0, scale: 1 });
-                        deviceFrame.classList.remove('flipping');
-                        frameImgs.forEach((img, idx) => {
-                            const active = idx === i + 1;
-                            gsap.set(img, { opacity: active ? 1 : 0, scaleX: active && !frontFace ? -1 : 1 });
-                        });
-                    },
-                    onLeaveBack: () => {
-                        const startAngle = i * 180;
-                        const norm = startAngle % 360;
-                        const frontFace = norm < 90 || norm >= 270;
-                        gsap.set(deviceFrame, { rotateY: startAngle, y: 0, scale: 1 });
-                        deviceFrame.classList.remove('flipping');
-                        frameImgs.forEach((img, idx) => {
-                            const active = idx === i;
-                            gsap.set(img, { opacity: active ? 1 : 0, scaleX: active && !frontFace ? -1 : 1 });
-                        });
-                    }
-                });
-            }
-        });
-
-        function activateStep(index) {
-            if (currentActive === index) return;
-            currentActive = index;
-
-            // Panel active states
-            panels.forEach((p, i) => {
-                p.classList.toggle('active', i === index);
-            });
-
-            // Dots
-            dots.forEach((d, i) => {
-                d.classList.toggle('active', i === index);
-            });
+        // Generate floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            particle.style.animationDelay = (Math.random() * 10) + 's';
+            particle.style.width = (Math.random() * 3 + 1) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
         }
 
-        // ── Progress bar fill ──
-        ScrollTrigger.create({
-            trigger: contentRail,
-            start: 'top center',
-            end: 'bottom center',
-            scrub: 0.3,
-            onUpdate: (self) => {
-                progressFill.style.height = (self.progress * 100) + '%';
-            }
-        });
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
 
-        // ── Content reveal per panel ──
-        panels.forEach((panel) => {
-            const els = panel.querySelectorAll('.panel-step, .panel-year, .panel-title, .panel-desc, .panel-metrics');
-
-            gsap.from(els, {
-                y: 25,
-                opacity: 0,
-                stagger: 0.08,
-                duration: 0.7,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: panel,
-                    start: 'top 60%',
-                    toggleActions: 'play none none reverse'
+                    // Animate progress bars
+                    const progressFill = entry.target.querySelector('.progress-fill');
+                    if (progressFill) {
+                        const width = progressFill.getAttribute('data-width');
+                        setTimeout(() => {
+                            progressFill.style.width = width + '%';
+                        }, 500);
+                    }
                 }
             });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
         });
 
-        // ── Intro ──
-        gsap.from('.intro-eyebrow', { y: 10, opacity: 0, duration: 0.7, delay: 0.15 });
-        gsap.from('.intro-title', { y: 10, opacity: 0, duration: 0.7, delay: 0.3 });
-        gsap.from('.intro-desc', { y: 10, opacity: 0, duration: 0.7, delay: 0.45 });
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
 
-        // Activate first step
-        panels[0].classList.add('active');
+        // Initialize progress bars at 0
+        document.querySelectorAll('.progress-fill').forEach(fill => {
+            fill.style.width = '0%';
+        });
+
+        // Add subtle parallax to particles on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 10;
+            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+            particlesContainer.style.transform = `translate(${x}px, ${y}px)`;
+        });
     </script>
-
 </body>
-
 </html>
-
-<!-- demonstrates a timeline of a company's journey with interactive scroll-based animations using GSAP. The left side contains content panels for each milestone, while the right side features a sticky image frame that flips to reveal new images as the user scrolls through the panels. A progress bar fills as the user scrolls, and various elements animate into view for an engaging storytelling experience. -->
