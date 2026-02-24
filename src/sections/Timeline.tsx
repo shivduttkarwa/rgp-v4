@@ -255,8 +255,8 @@ export default function Timeline() {
   return (
     <div className="rg-root">
       <section className="rg-intro" ref={introRef}>
-        <p className="rg-intro-eyebrow">Our Journey</p>
-        <h1 className="rg-intro-title">Fifteen Years of Building Trust</h1>
+        <span className="rg-intro-eyebrow">Our Journey</span>
+        <h2 className="rg-intro-title">Fifteen Years of Building Trust</h2>
         <p className="rg-intro-desc">Every milestone shaped who we are. Scroll to walk through our story.</p>
       </section>
 

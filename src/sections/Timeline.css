@@ -25,41 +25,38 @@
 
 /* ═══ INTRO ═══ */
 .rg-intro {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 2rem;
-  position: relative;
+  max-width: 44rem;
+  margin: 0 auto clamp(3rem, 6vw, 4.5rem);
+  padding: 6rem 2rem 0;
 }
 
 .rg-intro-eyebrow {
-  font-size: 0.68rem;
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: rgba(0, 2, 32, 0.55);
-  margin-bottom: 1.25rem;
+  letter-spacing: 0.1em;
+  color: var(--rg-dark);
+  margin-bottom: 1rem;
 }
 
 .rg-intro-title {
   font-family: var(--font-title);
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
-  font-weight: 700;
-  line-height: 1.2;
-  max-width: 580px;
-  margin-bottom: 1rem;
-  color: var(--rg-navy);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 400;
+  color: var(--rg-dark);
+  margin: 0 0 1.25rem;
+  line-height: 1.15;
 }
 
 .rg-intro-desc {
-  font-size: 0.92rem;
-  font-weight: 300;
-  color: rgba(0, 2, 32, 0.62);
-  max-width: 400px;
-  line-height: 1.75;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: rgba(0, 2, 32, 0.75);
+  margin: 0;
+  line-height: 1.7;
 }
 
 /* ═══ TIMELINE CONTAINER ═══ */
