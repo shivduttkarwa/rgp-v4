@@ -188,18 +188,6 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
         <section className="split-green">
           <div className="container">
             <div className="wrap">
-              <div
-                className="img-card"
-                data-gsap="clip-smooth-down"
-                data-gsap-start="top 90%"
-                data-gsap-delay="0.05"
-                data-gsap-mobile="clip-smooth-down"
-                data-gsap-mobile-cards-start="top 90%"
-              >
-                <div className="split-img-clip">
-                  <img alt="Buyer guidance" src={img("ps1 (6).jpg")} />
-                </div>
-              </div>
               <div className="stack">
                 <h3
                   className="h-serif"
@@ -230,7 +218,24 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
                   details so you can focus on the decision that matters.
                 </p>
                 <div className="split-cta">
-                  <BtnSecondary label="Explore Our Homes" />
+                  <BtnSecondary
+                    data-gsap="btn-clip-reveal"
+                    data-gsap-delay="0.2"
+                    label="Explore Our Homes"
+                  />
+                </div>
+              </div>
+              <div className="img-card">
+                <div className="split-img-clip">
+                  <img
+                    data-gsap="clip-smooth-down"
+                    data-gsap-start="top 90%"
+                    data-gsap-delay="0.05"
+                    data-gsap-mobile="clip-smooth-down"
+                    data-gsap-mobile-cards-start="top 90%"
+                    alt="Buyer guidance"
+                    src={img("ps1 (6).jpg")}
+                  />
                 </div>
               </div>
             </div>
@@ -249,8 +254,8 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
               Clear Strategy
             </h3>
             <p>
-              Pricing, positioning, staging, and marketing — engineered to
-              drive competition and protect your final result.
+              Pricing, positioning, staging, and marketing — engineered to drive
+              competition and protect your final result.
             </p>
             <div className="overlay-cta">
               <BtnSecondary label="Request a Valuation" />
