@@ -21,77 +21,78 @@ const STEPS: Step[] = [
   {
     index: 0,
     step: "01",
-    year: "2009",
-    title: "The Foundation",
-    desc: "Three people. One conviction. We opened in Sydney knowing that genuine luxury is built on trust — earned slowly, never shortcut.",
+    year: "2016",
+    title: "Humble Beginnings",
+    desc: "In 2016 we opened our doors with one promise: every client gets our full attention and clear, honest advice.",
     metrics: [
-      { val: "3", label: "Founders" },
-      { val: "12", label: "Properties" },
+      { val: "2", label: "People" },
+      { val: "1", label: "Office" },
     ],
-    tags: ["Sydney", "Boutique", "Founded"],
+    tags: ["Boutique", "Founded", "Local"],
     imgSrc:
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=700&fit=crop",
-    imgAlt: "2009",
+    imgAlt: "2016",
   },
   {
     index: 1,
     step: "02",
-    year: "2013",
-    title: "Breaking Through",
-    desc: "Clients stopped finding us through advertising. At 78% referral rate, they were sending everyone they loved. Trust became our only growth engine.",
+    year: "2018",
+    title: "Trust Earned",
+    desc: "Referrals became our engine as clients recommended us to the people who mattered most.",
     metrics: [
-      { val: "$100M+", label: "Annual Sales" },
-      { val: "78%", label: "Referrals" },
+      { val: "70%", label: "Referral Share" },
+      { val: "4.9", label: "Client Rating" },
     ],
-    tags: ["Milestone", "Growth", "Trust"],
+    tags: ["Referrals", "Trust", "Growth"],
     imgSrc:
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=700&fit=crop",
-    imgAlt: "2013",
+    imgAlt: "2018",
   },
   {
     index: 2,
     step: "03",
-    year: "2017",
-    title: "Going Global",
-    desc: "Our clients invested across borders, so we followed. Dubai. London. Same rigorous standards — now on a global stage.",
+    year: "2020",
+    title: "Local, Relentless",
+    desc: "We doubled down on local expertise, tight communication, and a repeatable standard of care.",
     metrics: [
-      { val: "3", label: "Offices" },
-      { val: "6", label: "Countries" },
+      { val: "1", label: "Market" },
+      { val: "12", label: "Team" },
     ],
-    tags: ["Dubai", "London", "International"],
+    tags: ["Local", "Consistent", "Reliable"],
     imgSrc:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&h=700&fit=crop",
-    imgAlt: "2017",
+    imgAlt: "2020",
   },
   {
     index: 3,
     step: "04",
-    year: "2021",
-    title: "Redefining Luxury",
-    desc: "Luxury and responsibility are not opposites. Our first net-zero Sustainable Estates development proved it — and sold out in 90 days.",
+    year: "2023",
+    title: "Sharper Execution",
+    desc: "We refined our process, lifted standards, and made performance predictable.",
     metrics: [
-      { val: "90", label: "Days to Sell Out" },
-      { val: "Net-Zero", label: "Certified" },
+      { val: "98%", label: "On-Time Follow Up" },
+      { val: "4.9", label: "Review Score" },
     ],
-    tags: ["Sustainable", "Net-Zero", "Award"],
+    tags: ["Process", "Consistency", "Service"],
     imgSrc:
       "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500&h=700&fit=crop",
-    imgAlt: "2021",
+    imgAlt: "2023",
   },
   {
     index: 4,
     step: "05",
-    year: "2024",
-    title: "The Next Chapter",
-    desc: "$2.4 billion. 850 families. Zero unresolved disputes. Every promise made in 2009 has been kept. The next chapter starts now.",
+    year: "2026",
+    title: "Performance Snapshot",
+    desc: "Performance in the last 12 months on realestate.com.au.",
     metrics: [
-      { val: "$2.4B", label: "Portfolio" },
-      { val: "850+", label: "Families" },
+      { val: "$885k", label: "Median Sold Price" },
+      { val: "21", label: "Median Days Advertised" },
+      { val: "14", label: "Properties Sold (Lead Agent)" },
     ],
-    tags: ["Global", "15 Years", "Legacy"],
+    tags: ["2026", "Snapshot", "These Are Our Numbers"],
     imgSrc:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=700&fit=crop",
-    imgAlt: "2024",
+    imgAlt: "2026",
   },
 ];
 
@@ -288,9 +289,9 @@ export default function Timeline() {
     <div className="rg-root">
       <section className="rg-intro" ref={introRef}>
         <span className="rg-intro-eyebrow">Our Journey</span>
-        <h2 className="rg-intro-title">Fifteen Years of Building Trust</h2>
+        <h2 className="rg-intro-title">Boutique by Choice Since 2016</h2>
         <p className="rg-intro-desc">
-          Every milestone shaped who we are. Scroll to walk through our story.
+          We stay focused, we stay accountable, and we let the results speak.
         </p>
       </section>
 
@@ -375,7 +376,7 @@ export default function Timeline() {
       <section className="rg-end-section">
         <div className="rg-end-line" />
         <p className="rg-end-text">
-          The story continues. <span>Write it with us.</span>
+          These are our numbers. <span>Let’s build the next chapter.</span>
         </p>
       </section>
     </div>
