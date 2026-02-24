@@ -105,6 +105,28 @@
   justify-content: center;
   padding-right: 4rem;
   position: relative;
+  isolation: isolate;
+}
+
+/* Watermark step number */
+.rg-panel-watermark {
+  position: absolute;
+  font-family: var(--font-title);
+  font-size: clamp(10rem, 22vw, 18rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(249, 195, 7, 0.03);
+  bottom: 8%;
+  left: -1.5rem;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+  transition: color 0.8s ease;
+}
+
+.rg-panel.rg-active .rg-panel-watermark {
+  color: rgba(249, 195, 7, 0.07);
 }
 
 /* Dot on progress line */
@@ -190,38 +212,6 @@
     transform: scale(5);
     opacity: 0;
   }
-}
-
-/* ── Kicker: — 01 / 05 ── */
-.rg-panel-kicker {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(249, 195, 7, 0.3);
-  margin: 0 0 1.75rem;
-  transition: color 0.5s ease;
-}
-
-.rg-panel-kicker-line {
-  display: block;
-  width: 2rem;
-  height: 0.0625rem;
-  background: rgba(249, 195, 7, 0.25);
-  flex-shrink: 0;
-  transition: width 0.6s ease, background 0.5s ease;
-}
-
-.rg-panel.rg-active .rg-panel-kicker {
-  color: rgba(249, 195, 7, 0.8);
-}
-
-.rg-panel.rg-active .rg-panel-kicker-line {
-  width: 3.5rem;
-  background: rgba(249, 195, 7, 0.6);
 }
 
 /* ── Year — hero typographic element ── */
