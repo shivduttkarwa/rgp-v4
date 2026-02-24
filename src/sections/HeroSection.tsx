@@ -95,14 +95,13 @@ export default function HeroSection({
     const revealSub = revealSubRef.current;
     const revealCta = revealCtaRef.current;
 
-    if (!bg || !vignette || !titleOne || !titleTwo || !revealSub || !revealCta)
-      return;
+    if (!bg || !vignette || !titleOne || !titleTwo || !revealSub) return;
 
     gsap.set(bg, { opacity: 1, scale: 1 });
     gsap.set(vignette, { opacity: 0.5 });
     gsap.set([titleOne, titleTwo], { y: 50, opacity: 0 });
     gsap.set([revealSub, revealCta], { x: -60, opacity: 0 });
-    gsap.set(revealCta, { scale: 0.9 });
+    if (revealCta) gsap.set(revealCta, { scale: 0.9 });
   }, []);
 
   // Animate titles + subtitle + CTA after ready
@@ -114,7 +113,7 @@ export default function HeroSection({
     const revealSub = revealSubRef.current;
     const revealCta = revealCtaRef.current;
 
-    if (!titleOne || !titleTwo || !revealSub || !revealCta) return;
+    if (!titleOne || !titleTwo || !revealSub) return;
 
     const splitToChars = (el: HTMLElement) => {
       if (el.dataset.charSplit === "true") {
@@ -196,11 +195,13 @@ export default function HeroSection({
       { x: 0, opacity: 1, duration: 0.9, ease: "power4.out" },
       0.9,
     );
-    tl.to(
-      revealCta,
-      { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power4.out" },
-      1,
-    );
+    if (revealCta) {
+      tl.to(
+        revealCta,
+        { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power4.out" },
+        1,
+      );
+    }
 
     return () => {
       tl.kill();

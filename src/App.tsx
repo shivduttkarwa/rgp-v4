@@ -26,7 +26,7 @@ function App() {
         <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<HomePage ready={loaded} />} />
-            <Route path="/about" element={<AboutPage />} />
+            <Route path="/about" element={<AboutPage ready={loaded} />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/contact" element={<ContactPage />} />

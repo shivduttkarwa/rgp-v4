@@ -14,7 +14,7 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 
 const img = (name: string) => `${base}images/${name}`;
 
-export default function AboutPage() {
+export default function AboutPage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLHeadingElement | null>(null);
   const introMaxProgressRef = useRef(0);
@@ -154,6 +154,7 @@ export default function AboutPage() {
   return (
     <>
       <HeroSection
+        ready={ready}
         showVideo={false}
         showCta={false}
         bgImage="images/hero1.jpg"
