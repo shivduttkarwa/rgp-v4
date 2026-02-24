@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BtnSecondary from "../components/BtnSecondary";
 import "./Timeline.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,7 +23,7 @@ const ALL_STEPS: Step[] = [
     index: 0,
     step: "01",
     year: "2016",
-    title: "Humble Beginnings",
+    title: "Boutique by Choice",
     desc: "In 2016 we opened our doors with one promise: every client gets our full attention and clear, honest advice.",
     metrics: [
       { val: "2", label: "People" },
@@ -37,7 +38,7 @@ const ALL_STEPS: Step[] = [
     index: 1,
     step: "02",
     year: "2018",
-    title: "Trust Earned",
+    title: "Referred, Not Rented",
     desc: "Referrals became our engine as clients recommended us to the people who mattered most.",
     metrics: [
       { val: "70%", label: "Referral Share" },
@@ -52,7 +53,7 @@ const ALL_STEPS: Step[] = [
     index: 2,
     step: "03",
     year: "2020",
-    title: "Local, Relentless",
+    title: "Local, Precise",
     desc: "We doubled down on local expertise, tight communication, and a repeatable standard of care.",
     metrics: [
       { val: "1", label: "Market" },
@@ -67,7 +68,7 @@ const ALL_STEPS: Step[] = [
     index: 3,
     step: "04",
     year: "2023",
-    title: "Sharper Execution",
+    title: "Process Refined",
     desc: "We refined our process, lifted standards, and made performance predictable.",
     metrics: [
       { val: "98%", label: "On-Time Follow Up" },
@@ -82,7 +83,7 @@ const ALL_STEPS: Step[] = [
     index: 4,
     step: "05",
     year: "2026",
-    title: "Performance Snapshot",
+    title: "Performance, Proven",
     desc: "Performance in the last 12 months on realestate.com.au.",
     metrics: [
       { val: "$885k", label: "Median Sold Price" },
@@ -148,9 +149,12 @@ export default function Timeline() {
         const img = panel.querySelector<HTMLElement>(".rg-panel-media");
         const contentEls = Array.from(
           panel.querySelectorAll<HTMLElement>(
-            ".rg-panel-year, .rg-panel-desc, .rg-panel-stats",
+            ".rg-panel-year, .rg-panel-title, .rg-panel-sep, .rg-panel-desc, .rg-panel-stats, .rg-panel-tags",
           ),
         );
+
+        // Ensure all text elements are visible after any desktop animations.
+        gsap.set(contentEls, { x: 0, opacity: 1 });
 
         const imgFrom = i % 2 === 0 ? -150 : 150;
         const contentFrom = -imgFrom;
@@ -371,7 +375,9 @@ export default function Timeline() {
     <div className="rg-root">
       <section className="rg-intro" ref={introRef}>
         <span className="rg-intro-eyebrow">Our Journey</span>
-        <h2 className="rg-intro-title">Boutique by Choice Since 2016</h2>
+        <h2 className="rg-intro-title">
+          Precision, Discretion, <span className="rg-intro-highlight">Results</span>
+        </h2>
         <p className="rg-intro-desc">
           We stay focused, we stay accountable, and we let the results speak.
         </p>
@@ -462,10 +468,12 @@ export default function Timeline() {
       </section>
 
       <section className="rg-end-section">
-        <div className="rg-end-line" />
         <p className="rg-end-text">
-          These are our numbers. <span>Let’s build the next chapter.</span>
+          Measured performance. <span>Clear outcomes.</span>
         </p>
+        <div className="rg-end-cta">
+          <BtnSecondary label="Explore Our Homes" />
+        </div>
       </section>
     </div>
   );

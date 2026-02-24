@@ -46,9 +46,13 @@
   font-family: var(--font-title);
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 400;
-  color: #f9c307;
+  color: rgba(255, 255, 255, 0.92);
   margin: 0 0 1.25rem;
   line-height: 1.15;
+}
+
+.rg-intro-highlight {
+  color: #f9c307;
 }
 
 .rg-intro-desc {
@@ -415,22 +419,20 @@
   padding: 2rem;
 }
 
-.rg-end-line {
-  width: 0.0625rem;
-  height: 3.125rem;
-  background: linear-gradient(to bottom, #f9c307, transparent);
-  margin-bottom: 1.25rem;
-  opacity: 0.4;
-}
 
 .rg-end-text {
   font-family: var(--font-title);
   font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 1rem;
 }
 
 .rg-end-text span {
   color: #f9c307;
+}
+
+.rg-end-cta {
+  margin-top: 0.5rem;
 }
 
 /* ═══ RESPONSIVE ═══ */
@@ -488,10 +490,6 @@
     display: none;
   }
 
-  .rg-progress-track {
-    display: none;
-  }
-
   .rg-frame-container {
     max-height: 13.75rem;
   }
@@ -503,7 +501,7 @@
 
   .rg-panel-year {
     font-size: 2.6rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   .rg-content-rail {
@@ -533,7 +531,7 @@
 
   .rg-panel-desc {
     max-width: 100%;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.7);
   }
   .rg-panel-stats {
