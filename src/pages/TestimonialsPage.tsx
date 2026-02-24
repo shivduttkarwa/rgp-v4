@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import HeroSection from "../sections/HeroSection";
 import RGPSplitSlider from "../components/reusable/SplitSlider";
+import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import "./TestimonialPage.css";
 
 interface Testimonial {
@@ -761,7 +762,29 @@ const FinalCTA: React.FC = () => (
 /* ─────────────────────────────────────────────────────────────────────────────
    MAIN PAGE
 ───────────────────────────────────────────────────────────────────────────── */
-const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => (
+const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const guards = [
+      "clipRevealInit", "clipRevealRtlInit", "clipRevealTopInit",
+      "clipRevealLeftInit", "clipRevealRightInit", "wordRevealInit",
+      "wordWriteInit", "clipSmoothInit", "clipSmoothDownInit", "charRevealInit",
+    ];
+    guards.forEach((key) => {
+      pageRef.current
+        ?.querySelectorAll<HTMLElement>(
+          `[data-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}]`,
+        )
+        .forEach((el) => delete el.dataset[key]);
+    });
+
+    const cleanup = initGsapSwitchAnimations(pageRef.current);
+    return cleanup;
+  }, []);
+
+  return (
+  <div ref={pageRef}>
   <main className="testimonial-page">
     <HeroSection
       ready={ready}
@@ -801,15 +824,35 @@ const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => (
       }
     />
     <div className="t-section-heading">
-      <p className="t-section-heading__kicker">Client Voices</p>
-      <h2 className="t-section-heading__title">What Our Clients Say</h2>
+      <header className="t-section-heading__header">
+        <span className="t-section-heading__eyebrow" data-gsap="fade-up">
+          Client Voices
+        </span>
+        <h2
+          className="t-section-heading__title"
+          data-gsap="char-reveal"
+          data-gsap-start="top 85%"
+        >
+          What Our Clients <em>Say</em>
+        </h2>
+        <p
+          className="t-section-heading__subtitle"
+          data-gsap="fade-up"
+          data-gsap-delay="0.2"
+        >
+          Real experiences from real clients — every word earned, never
+          scripted.
+        </p>
+      </header>
     </div>
     <RGPSplitSlider />
     <VoiceMosaic />
     <TickerWall />
-    <RGPSplitSlider />
+
     <FinalCTA />
   </main>
-);
+  </div>
+  );
+};
 
 export default TestimonialPage;
