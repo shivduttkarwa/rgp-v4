@@ -7,6 +7,14 @@ import "./AboutPage.css";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Building,
+  CalendarCheck,
+  Home,
+  Key,
+  Search,
+  TrendingUp,
+} from "lucide-react";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -242,7 +250,78 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
           </div>
         </section>
 
-        <ServiceSelection />
+        <ServiceSelection
+          header={{
+            eyebrow: "Our Services",
+            title: "Buy, Sell &",
+            titleEm: "Rent",
+            subtitle:
+              "One team, three core services — handled with clarity, speed, and market‑ready execution.",
+          }}
+          services={[
+            {
+              id: "buy",
+              icon: Search,
+              secondaryIcon: Key,
+              headline: "Buy",
+              title: "Buyer",
+              subtitle: "Representation",
+              description:
+                "Search, shortlist, and negotiate with confidence. We secure access, run the numbers, and protect your position.",
+              features: [
+                "Off‑market access and shortlists",
+                "Pricing guidance and negotiation",
+                "Contract support and due diligence",
+              ],
+              cta: "Start Buying",
+              theme: "buy",
+            },
+            {
+              id: "sell",
+              icon: TrendingUp,
+              secondaryIcon: Home,
+              headline: "Sell",
+              title: "Sales",
+              subtitle: "Strategy",
+              description:
+                "Positioned pricing, premium presentation, and targeted marketing to create competition and lift results.",
+              features: [
+                "Pricing strategy and campaign plan",
+                "Styling, media, and buyer targeting",
+                "Auction or private treaty management",
+              ],
+              cta: "Plan My Sale",
+              theme: "sell",
+            },
+            {
+              id: "rent",
+              icon: CalendarCheck,
+              secondaryIcon: Building,
+              headline: "Rent",
+              title: "Leasing",
+              subtitle: "Management",
+              description:
+                "End‑to‑end leasing with reliable tenants, clear reporting, and proactive maintenance care.",
+              features: [
+                "Tenant screening and onboarding",
+                "Rent collection and inspections",
+                "Ongoing management and renewals",
+              ],
+              cta: "Lease My Property",
+              theme: "rent",
+            },
+          ]}
+          cta={{
+            eyebrow: "Ready to Move?",
+            title: "Get a",
+            titleEm: "Tailored Plan",
+            text: "Tell us your goal and timeline — we’ll map the smartest path and execute with precision.",
+            primaryLabel: "Book a Consultation",
+            primaryHref: "/contact",
+            secondaryLabel: "0450 009 291",
+            secondaryHref: "tel:+61450009291",
+          }}
+        />
 
         {/* 4) TURN-KEY */}
         <section className="img-overlay">
