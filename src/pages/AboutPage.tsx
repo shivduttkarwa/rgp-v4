@@ -186,9 +186,7 @@ export default function AboutPage() {
         <section className="split-green">
           <div className="container">
             <div className="wrap">
-              <div
-                className="img-card"
-              >
+              <div className="img-card">
                 <div
                   className="split-img-clip"
                   data-gsap="clip-smooth-down"
@@ -258,9 +256,9 @@ export default function AboutPage() {
               Meticulously prepared homes, curated down to the smallest detail —
               ready for immediate move-in.
             </p>
-            <a className="cta" href="/properties">
-              LEARN MORE
-            </a>
+            <div className="overlay-cta">
+              <BtnSecondary label="Learn More" />
+            </div>
           </div>
         </section>
 
@@ -285,9 +283,13 @@ export default function AboutPage() {
                 Explore a curated selection of private estates, penthouses, and
                 new releases across our portfolio.
               </p>
-              <a className="link-underline" href="/properties">
-                VIEW AVAILABLE PROPERTIES
-              </a>
+              <div className="avail-cta">
+                <BtnSecondary
+                  label="View Available Properties"
+                  color="#00032e"
+                  className="avail-cta__btn"
+                />
+              </div>
             </div>
           </div>
         </section>
