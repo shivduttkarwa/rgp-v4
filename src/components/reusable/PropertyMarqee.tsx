@@ -80,7 +80,9 @@ const PropertyCardMarquee = ({ property }: { property: PropertyCard }) => {
               {property.badge}
             </span>
           )}
-          {property.isNew && <span className="badge badge-new">New Listing</span>}
+          {property.isNew && (
+            <span className="badge badge-new">New Listing</span>
+          )}
           {isSold && (
             <span className="badge badge-sold">
               <CheckCircle size={12} />
@@ -156,7 +158,10 @@ const PropertyCardMarquee = ({ property }: { property: PropertyCard }) => {
           ))}
         </div>
 
-        <Link to={`/properties/${property.slug}`} className="card-btn btn-primary">
+        <Link
+          to={`/properties/${property.slug}`}
+          className="card-btn btn-primary"
+        >
           <span>View Property</span>
           <ArrowRight size={16} />
         </Link>
@@ -334,7 +339,9 @@ export default function PropertyMarquee() {
 
     const getClient = (e: PointerEvent | TouchEvent) => {
       const t = (e as TouchEvent).touches && (e as TouchEvent).touches[0];
-      return t ? { x: t.clientX, y: t.clientY } : { x: (e as PointerEvent).clientX, y: (e as PointerEvent).clientY };
+      return t
+        ? { x: t.clientX, y: t.clientY }
+        : { x: (e as PointerEvent).clientX, y: (e as PointerEvent).clientY };
     };
 
     const onDown = (e: PointerEvent | TouchEvent) => {
@@ -537,15 +544,27 @@ export default function PropertyMarquee() {
     <section className="rgMarquee property-section">
       <div className="wrap">
         <header className="section-header">
-          <div className="section-badge">
-            <span data-gsap="fade-up">Featured Portfolio</span>
+          <div
+            data-gsap="fade-up"
+            data-gsap-start="top 95%"
+            className="section-badge"
+          >
+            <span>Featured Portfolio</span>
           </div>
-          <h2 className="section-title" data-gsap="char-reveal" data-gsap-start="top 85%">
+          <h2
+            className="section-title"
+            data-gsap="char-reveal"
+            data-gsap-start="top 85%"
+          >
             Explore <em>Signature Homes</em>
           </h2>
-          <p className="section-subtitle" data-gsap="fade-up" data-gsap-delay="0.15">
-            A curated selection of standout residences from across our
-            portfolio — updated regularly.
+          <p
+            className="section-subtitle"
+            data-gsap="fade-up"
+            data-gsap-delay="0.15"
+          >
+            A curated selection of standout residences from across our portfolio
+            — updated regularly.
           </p>
         </header>
       </div>
@@ -573,7 +592,6 @@ export default function PropertyMarquee() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

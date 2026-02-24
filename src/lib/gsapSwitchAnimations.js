@@ -3454,22 +3454,24 @@ class GSAPAnimations {
 
     // TIMING KNOBS - Adjust these values directly
     const T = {
-      fillDuration: 0.6,        // Button fill animation duration (smoother, consistent speed)
-      textDuration: 0.9,         // Text reveal animation duration
-      textDelay: 0.65,              // Delay before text reveal starts (after fill begins) - reduced gap
-      ease: 'power1.out',        // Easing function (smoother than power2.out)
+      fillDuration: 0.45,        // Faster fill to avoid slow start
+      textDuration: 0.55,        // Match fill speed for smoother feel
+      textDelay: 0.15,           // Reduce delay to avoid late snap
+      ease: 'power2.out',        // Slightly stronger ease, smoother finish
       start: config.start || 'top 80%' // ScrollTrigger start position
     };
 
     const btn = el.tagName === 'A' || el.tagName === 'BUTTON' ? el : el.querySelector('a, button');
     if (!btn) return;
+    const prevBtnTransition = btn.style.transition;
 
     // Set initial state for button fill (hidden from right)
     gsap.set(btn, {
       autoAlpha: 1, // Keep visible for clip-path to work
       clipPath: 'inset(0 100% 0 0)', // Start with all clipped from right (no fill visible)
       webkitClipPath: 'inset(0 100% 0 0)', // Safari support
-      willChange: 'clip-path' // Optimize for animation
+      willChange: 'clip-path', // Optimize for animation
+      transition: 'none' // Prevent CSS transitions from fighting GSAP
     });
 
     // Wrap text in span if it doesn't exist for clip reveal animation
@@ -3479,6 +3481,7 @@ class GSAPAnimations {
       btn.innerHTML = `<span>${text}</span>`;
       btnText = btn.querySelector('span');
     }
+    const prevTextTransition = btnText ? btnText.style.transition : '';
 
     // Set initial clip reveal state for text only (hidden from right, reveals left to right)
     if (btnText) {
@@ -3486,7 +3489,8 @@ class GSAPAnimations {
         clipPath: 'inset(0 100% 0 0)', // Hidden from right (reveals left to right)
         webkitClipPath: 'inset(0 100% 0 0)', // Safari support
         display: 'inline-block',
-        willChange: 'clip-path'
+        willChange: 'clip-path',
+        transition: 'none'
       });
     }
 
@@ -3521,6 +3525,13 @@ class GSAPAnimations {
         autoRound: false // Prevent sub-pixel rounding jitter
       }, T.textDelay); // Start text reveal T.textDelay seconds after fill begins
     }
+
+    tl.eventCallback('onComplete', () => {
+      btn.style.transition = prevBtnTransition;
+      if (btnText) btnText.style.transition = prevTextTransition;
+      gsap.set(btn, { clearProps: 'will-change,clip-path' });
+      if (btnText) gsap.set(btnText, { clearProps: 'will-change,clip-path' });
+    });
   }
 
   // Button clip reveal from bottom to top (same technique as writingText)

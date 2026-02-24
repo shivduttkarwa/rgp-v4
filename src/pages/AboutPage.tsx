@@ -257,7 +257,11 @@ export default function AboutPage() {
               ready for immediate move-in.
             </p>
             <div className="overlay-cta">
-              <BtnSecondary label="Learn More" />
+              <BtnSecondary
+                label="Learn More"
+                data-gsap="btn-clip-reveal"
+                data-gsap-delay="0.2"
+              />
             </div>
           </div>
         </section>
@@ -288,6 +292,8 @@ export default function AboutPage() {
                   label="View Available Properties"
                   color="#00032e"
                   className="avail-cta__btn"
+                  data-gsap="btn-clip-reveal"
+                  data-gsap-delay="0.2"
                 />
               </div>
             </div>
