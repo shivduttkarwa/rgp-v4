@@ -287,7 +287,6 @@ export default function PropertyMarquee() {
     const viewport = viewportRef.current;
     const track = trackRef.current;
     if (!viewport || !track) return;
-    const cursor = cursorRef.current;
 
     // ----- Helpers -----
     const getGap = () => {
