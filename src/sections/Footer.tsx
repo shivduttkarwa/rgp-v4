@@ -99,22 +99,22 @@ const Footer = ({ ready = false }: FooterProps) => {
           <h4>Properties</h4>
           <ul className="rg-footer__links">
             <li>
-              <a href="/properties/villas">Luxury Villas</a>
+              <Link to="/contact">Luxury Villas</Link>
             </li>
             <li>
-              <a href="/properties/apartments">Apartments</a>
+              <Link to="/contact">Apartments</Link>
             </li>
             <li>
-              <a href="/properties/penthouses">Penthouses</a>
+              <Link to="/contact">Penthouses</Link>
             </li>
             <li>
-              <a href="/properties/commercial">Commercial</a>
+              <Link to="/contact">Commercial</Link>
             </li>
             <li>
-              <a href="/properties/off-plan">Off-Plan</a>
+              <Link to="/contact">Off-Plan</Link>
             </li>
             <li>
-              <a href="/properties/townhouses">Townhouses</a>
+              <Link to="/contact">Townhouses</Link>
             </li>
           </ul>
         </nav>
@@ -124,22 +124,19 @@ const Footer = ({ ready = false }: FooterProps) => {
           <h4>Company</h4>
           <ul className="rg-footer__links">
             <li>
-              <a href="/about">About Us</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/team">Our Team</a>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <a href="/careers">Careers</a>
+              <Link to="/properties">Properties</Link>
             </li>
             <li>
-              <a href="/blog">Blog</a>
+              <Link to="/testimonials">Testimonials</Link>
             </li>
             <li>
-              <a href="/press">Press</a>
-            </li>
-            <li>
-              <a href="/contact">Contact</a>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </nav>
@@ -149,22 +146,22 @@ const Footer = ({ ready = false }: FooterProps) => {
           <h4>Services</h4>
           <ul className="rg-footer__links">
             <li>
-              <a href="/buy">Buy Property</a>
+              <Link to="/contact">Buy Property</Link>
             </li>
             <li>
-              <a href="/sell">Sell Property</a>
+              <Link to="/contact">Sell Property</Link>
             </li>
             <li>
-              <a href="/management">Property Management</a>
+              <Link to="/contact">Property Management</Link>
             </li>
             <li>
-              <a href="/investment">Investment Advisory</a>
+              <Link to="/contact">Investment Advisory</Link>
             </li>
             <li>
-              <a href="/mortgage">Mortgage Help</a>
+              <Link to="/contact">Mortgage Help</Link>
             </li>
             <li>
-              <a href="/valuation">Valuation</a>
+              <Link to="/contact">Valuation</Link>
             </li>
           </ul>
         </nav>
@@ -289,7 +286,7 @@ const Footer = ({ ready = false }: FooterProps) => {
       {/* Bottom Bar */}
       <div className="rg-footer__bottom">
         <p className="rg-footer__copyright">
-          © 2025 Real Gold Properties. All rights reserved.
+          © 2026 Real Gold Properties. All rights reserved.
         </p>
 
         <ul className="rg-footer__legal">

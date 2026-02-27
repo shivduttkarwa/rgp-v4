@@ -1,5 +1,6 @@
 // HomeTestimonials (Philosophy.tsx)
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -201,12 +202,12 @@ export default function PhilosophyPillars() {
 
         {/* CTA */}
         <div className="rg-philo__cta-row">
-          <a href="/testimonials" className="rg-philo__cta-btn">
+          <Link to="/testimonials" className="rg-philo__cta-btn">
             <span>Read All Reviews</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
