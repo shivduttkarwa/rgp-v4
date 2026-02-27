@@ -1,10 +1,12 @@
 import { useLayoutEffect, useRef, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import gsap from "gsap";
-import { Tag, CheckCircle, Key, ChevronDown, X, ArrowRight } from "lucide-react";
+import { Tag, CheckCircle, Key, ChevronDown, X, ArrowRight, MessageCircle, Phone } from "lucide-react";
 import { PropertyCard, type Property, type Category } from "../components/reusable/PropertyCard";
 import { allProperties } from "../data/listingProperties";
 import "./PropertiesPage.css";
+import "../sections/ServiceSelection.css";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const INITIAL_COUNT = 6;
@@ -27,6 +29,17 @@ const categoryTabs = [
   { id: "sold", label: "Sold", icon: CheckCircle },
   { id: "for-rent", label: "For Rent", icon: Key },
 ];
+
+const PAGE_CTA = {
+  eyebrow: "Need Help Choosing?",
+  title: "Let’s Find Your",
+  titleEm: "Perfect Property",
+  text: "Tell us what you’re looking for and we’ll shortlist the best options, arrange inspections, and guide you through every step.",
+  primaryLabel: "Talk to an Expert",
+  primaryHref: "/contact",
+  secondaryLabel: "0450 009 291",
+  secondaryHref: "tel:+61450009291",
+};
 
 const applyFilters = (items: Property[], f: Filters) =>
   items.filter(p => {
@@ -282,6 +295,65 @@ export default function PropertiesPage() {
               </div>
             </>
           )}
+        </div>
+      </div>
+
+      {/* ── CTA ───────────────────────────────────────────────────────── */}
+      <div className="svc-cta">
+        <div className="svc-cta__container">
+          <div className="svc-cta__decor svc-cta__decor--left" />
+          <div className="svc-cta__decor svc-cta__decor--right" />
+
+          <div className="svc-cta__content">
+            <span className="svc-cta__eyebrow" data-gsap="fade-up">
+              {PAGE_CTA.eyebrow}
+            </span>
+            <h3 className="svc-cta__title" data-gsap="char-reveal" data-gsap-start="top 85%">
+              {PAGE_CTA.title} <em>{PAGE_CTA.titleEm}</em>
+            </h3>
+            <p className="svc-cta__text" data-gsap="fade-up" data-gsap-delay="0.15">
+              {PAGE_CTA.text}
+            </p>
+
+            <div className="svc-cta__actions">
+              <Link
+                to={PAGE_CTA.primaryHref}
+                className="svc-cta__btn svc-cta__btn--primary"
+                data-gsap="btn-clip-reveal"
+                data-gsap-delay="0.2"
+              >
+                <MessageCircle size={20} />
+                <span>{PAGE_CTA.primaryLabel}</span>
+                <ArrowRight size={18} />
+              </Link>
+              <a
+                data-gsap="btn-clip-reveal"
+                data-gsap-delay="0.2"
+                href={PAGE_CTA.secondaryHref}
+                className="svc-cta__btn svc-cta__btn--secondary"
+              >
+                <Phone size={18} />
+                <span>{PAGE_CTA.secondaryLabel}</span>
+              </a>
+            </div>
+
+            <div data-gsap="zoom-in" data-gsap-stagger="0.3 " className="svc-cta__trust">
+              <div className="svc-cta__trust-item">
+                <span className="svc-cta__trust-value">150+</span>
+                <span className="svc-cta__trust-label">Local Deals Closed</span>
+              </div>
+              <div className="svc-cta__trust-divider" />
+              <div className="svc-cta__trust-item">
+                <span className="svc-cta__trust-value">24/7</span>
+                <span className="svc-cta__trust-label">Buyer Support</span>
+              </div>
+              <div className="svc-cta__trust-divider" />
+              <div className="svc-cta__trust-item">
+                <span className="svc-cta__trust-value">98%</span>
+                <span className="svc-cta__trust-label">Client Satisfaction</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

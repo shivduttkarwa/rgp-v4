@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 
 import "./AboutPage.css";
@@ -312,14 +312,14 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
                   </li>
                 </ul>
                 <div className="split-cta">
-                  <a
-                    href="/contact"
+                  <Link
+                    to="/contact"
                     className="btn-secondary"
                     data-gsap="btn-clip-reveal"
                     data-gsap-delay="0.2"
                   >
                     <span className="bs-text">Book Your Appraisal</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -377,14 +377,14 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
                 a clear price range, honest advice, and a next-step plan.
               </p>
               <div className="avail-cta">
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact"
                   className="btn-secondary avail-cta__btn"
                   data-gsap="btn-clip-reveal"
                   data-gsap-delay="0.2"
                 >
                   <span className="bs-text">Book Your Appraisal</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
