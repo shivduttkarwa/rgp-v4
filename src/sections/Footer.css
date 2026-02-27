@@ -376,6 +376,33 @@ a.rg-footer__contact-item:hover svg {
   user-select: none;
 }
 
+@media (max-width: 1440px) {
+  .rg-footer__watermark-text {
+    font-size: clamp(2.75rem, 11vw, 10rem);
+  }
+}
+
+/* Small laptops */
+@media (max-width: 1366px) {
+  .rg-footer__watermark-text {
+    font-size: clamp(2.5rem, 10vw, 9rem);
+  }
+}
+
+/* iPad Pro/Air landscape */
+@media (max-width: 1180px) {
+  .rg-footer__watermark-text {
+    font-size: clamp(2.4rem, 9.5vw, 8.5rem);
+  }
+}
+
+/* iPad portrait */
+@media (max-width: 834px) {
+  .rg-footer__watermark-text {
+    font-size: clamp(2.3rem, 12vw, 7rem);
+  }
+}
+
 /* Letters — GSAP controls entrance (yPercent + opacity via inline style) */
 .rg-footer__watermark .rg-footer__watermark-letter {
   display: inline-block;
