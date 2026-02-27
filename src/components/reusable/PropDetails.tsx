@@ -687,30 +687,42 @@ const VideoTour: React.FC<{
   videoUrl?: string;
   thumbnail?: string;
 }> = ({ videoUrl, thumbnail }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
   const canPlay = Boolean(videoUrl);
+  const resolveVideoUrl = (url?: string) => {
+    if (!url) return undefined;
+    const ytMatch =
+      url.match(/youtu\.be\/([A-Za-z0-9_-]+)/) ||
+      url.match(/youtube\.com\/watch\?v=([A-Za-z0-9_-]+)/) ||
+      url.match(/youtube\.com\/embed\/([A-Za-z0-9_-]+)/);
+    if (ytMatch?.[1]) {
+      const id = ytMatch[1];
+      return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}`;
+    }
+    const sep = url.includes("?") ? "&" : "?";
+    return `${url}${sep}autoplay=1&loop=1&muted=1`;
+  };
+  const resolvedUrl = resolveVideoUrl(videoUrl);
 
   const defaultThumbnail =
     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
 
   return (
     <div className="pd-video__player">
-      {!isPlaying ? (
+      {!canPlay ? (
         <div
           className="pd-video__placeholder"
           style={{ backgroundImage: `url(${thumbnail || defaultThumbnail})` }}
-          onClick={() => canPlay && setIsPlaying(true)}
         >
           <div className="pd-video__play">
             <Icons.play />
           </div>
           <span className="pd-video__text">
-            {canPlay ? "Play Virtual Tour" : "Virtual Tour Coming Soon"}
+            Virtual Tour Coming Soon
           </span>
         </div>
       ) : (
         <iframe
-          src={videoUrl}
+          src={resolvedUrl}
           title="Virtual Tour"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

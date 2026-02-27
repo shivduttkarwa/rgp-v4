@@ -17,13 +17,14 @@ export const allProperties: Property[] = [
     badge: "For Sale", isNew: true, views: 87,
   },
   {
-    id: 102, slug: "46-belhaven-ave-yarrabilba", category: "for-sale",
+    id: 102, slug: "46-belhaven-ave-yarrabilba", category: "sold",
     title: "46 Belhaven Ave", location: "Yarrabilba, QLD",
     price: 0,
     image: "https://i2.au.reastatic.net/500x300/7b4d86b5af69ac84d16ee4940806551e518f727089b72069f985c1ddea7a0512/image.jpg",
-    beds: 0, baths: 0, sqft: 0, garage: 0,
-    features: ["Residential Land", "Yarrabilba Estate", "Contact Agent"],
-    badge: "For Sale", views: 54,
+    beds: 0, baths: 0, sqft: 455, garage: 0,
+    features: ["Residential Land", "455sqm Corner Block", "Yarrabilba"],
+    soldDate: "02 Feb 2026",
+    badge: "Sold", views: 54,
   },
   {
     id: 103, slug: "greenbank-house-land-890k", category: "for-sale",
