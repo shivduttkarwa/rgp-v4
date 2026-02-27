@@ -7,17 +7,14 @@
   background: var(--rg-beige-light);
 }
 
-/* ─── Filter Bar ──────────────────────────────────────────────────────────── */
-.ap-filters {
+/* ─── Filter Slab (matches PropertyListingSection) ───────────────────────── */
+.ap-filter-slab {
   background: #fff;
   border-bottom: 2px solid var(--rg-beige-darker);
-  position: sticky;
-  top: 0;
-  z-index: 50;
   box-shadow: 0 4px 24px rgba(15, 24, 112, 0.08);
 }
 
-.ap-filters__inner {
+.ap-filter-slab__inner {
   max-width: var(--rg-max);
   margin: 0 auto;
   padding: 1.35rem var(--rg-pad);
@@ -25,59 +22,85 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
+  justify-content: space-between;
 }
 
-/* ── Category Pills ─────────────────────────────────────────────────────── */
-.ap-filter-group--pills {
+.ap-filter-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  background: var(--rg-beige-light);
-  border: 1.5px solid var(--rg-beige-darker);
-  border-radius: 3rem;
-  padding: 0.3rem;
-}
-
-.ap-pill {
-  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1.3rem;
-  border-radius: 2rem;
-  border: none;
-  background: transparent;
-  color: var(--rg-text-medium);
+  gap: 1rem;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.ap-filter-wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+.ap-filter-tabs {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #fdf4e3;
+  padding: 0.5rem;
+  border-radius: var(--rg-radius);
+  border: 1px solid var(--rg-beige-dark);
+}
+
+.ap-filter-pill {
+  position: absolute;
+  top: 0.5rem;
+  height: calc(100% - 1rem);
+  background-color: var(--rg-gold);
+  border-radius: calc(var(--rg-radius) - 4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ap-filter-tab {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: calc(var(--rg-radius) - 4px);
   font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  border: none;
   cursor: pointer;
-  transition: all 0.22s ease;
-  white-space: nowrap;
+  transition: color 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: transparent;
+  color: var(--rg-text-medium);
 }
 
-.ap-pill:hover {
+.ap-filter-tab:hover {
   color: var(--rg-text-dark);
-  background: var(--rg-beige-dark);
+  background-color: var(--rg-beige-dark);
 }
 
-.ap-pill.active {
-  background: var(--rg-navy);
-  color: #fff;
-  box-shadow: 0 2px 12px rgba(15, 24, 112, 0.25);
+.ap-filter-tab.active {
+  background-color: transparent;
+  color: var(--rg-navy);
 }
 
-.ap-pill.active svg {
-  color: var(--rg-gold);
+.ap-filter-tab svg {
+  flex-shrink: 0;
 }
 
-/* ── Dropdown Filters ───────────────────────────────────────────────────── */
+/* ── Dropdown Filters (restored) ───────────────────────────────────────── */
 .ap-filter-group--dropdowns {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.65rem;
-  margin-left: auto;
+  margin-left: 1rem;
 }
 
 .ap-select-wrap {
@@ -120,7 +143,21 @@
   color: var(--rg-text-light);
 }
 
-/* ── Clear Button ───────────────────────────────────────────────────────── */
+/* ── Result Count ───────────────────────────────────────────────────────── */
+.ap-result-count {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--rg-text-light);
+  white-space: nowrap;
+  padding: 0.4rem 0.9rem;
+  background: var(--rg-beige-light);
+  border: 1.5px solid var(--rg-beige-darker);
+  border-radius: 2rem;
+  margin-left: auto;
+}
+
+/* ── Clear Button (empty state) ─────────────────────────────────────────── */
 .ap-clear-btn {
   display: inline-flex;
   align-items: center;
@@ -141,19 +178,6 @@
   background: var(--rg-gold);
   border-color: var(--rg-gold);
   color: var(--rg-navy);
-}
-
-/* ── Result Count ───────────────────────────────────────────────────────── */
-.ap-result-count {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--rg-text-light);
-  white-space: nowrap;
-  padding: 0.4rem 0.9rem;
-  background: var(--rg-beige-light);
-  border: 1.5px solid var(--rg-beige-darker);
-  border-radius: 2rem;
 }
 
 /* ─── Grid Section ────────────────────────────────────────────────────────── */
@@ -286,34 +310,83 @@
 }
 
 @media (max-width: 768px) {
-  .ap-filters__inner {
+  .ap-filter-slab {
+    box-shadow: none;
+  }
+
+  .ap-filter-slab__inner {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem var(--rg-pad);
+    gap: 0.75rem;
+  }
+
+  .ap-filter-row {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .ap-filter-group--pills {
+  .ap-filter-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     justify-content: flex-start;
+    padding-bottom: 0.25rem;
+  }
+
+  .ap-filter-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ap-filter-tabs {
+    width: max-content;
+    flex-wrap: nowrap;
+  }
+
+  .ap-filter-tab {
+    flex-shrink: 0;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
   }
 
   .ap-filter-group--dropdowns {
     margin-left: 0;
-    justify-content: flex-start;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .ap-select-wrap {
+    width: 100%;
   }
 
   .ap-select {
-    min-width: 100px;
-    font-size: 0.78rem;
+    min-width: 0;
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .ap-clear-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .ap-result-count {
-    text-align: right;
+    text-align: center;
+    align-self: center;
+    margin-left: 0;
   }
 }
 
 @media (max-width: 640px) {
+  .ap-grid {
+    margin: 0;
+  }
+
   .ap-card-wrap {
     width: 100%;
-    padding: 0 0 1.25rem;
+    padding: 0 0.75rem 1.25rem;
   }
 
   .ap-grid-section {

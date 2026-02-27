@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState, useMemo } from "react";
 import HeroSection from "../sections/HeroSection";
+import gsap from "gsap";
 import { Tag, CheckCircle, Key, ChevronDown, X, ArrowRight } from "lucide-react";
 import { PropertyCard, type Property, type Category } from "../components/reusable/PropertyCard";
 import { allProperties } from "../data/listingProperties";
@@ -19,6 +20,13 @@ type Filters = {
 const DEFAULT_FILTERS: Filters = {
   cat: "all", price: "all", beds: "any", baths: "any", showAll: false,
 };
+
+const categoryTabs = [
+  { id: "all", label: "All" },
+  { id: "for-sale", label: "For Sale", icon: Tag },
+  { id: "sold", label: "Sold", icon: CheckCircle },
+  { id: "for-rent", label: "For Rent", icon: Key },
+];
 
 const applyFilters = (items: Property[], f: Filters) =>
   items.filter(p => {
@@ -50,6 +58,30 @@ export default function PropertiesPage() {
   const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const isoRef = useRef<any>(null);
+  const filterTabsRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
+  const pillInitialized = useRef(false);
+
+  useLayoutEffect(() => {
+    const container = filterTabsRef.current;
+    const pill = pillRef.current;
+    if (!container || !pill) return;
+    const activeBtn = container.querySelector<HTMLElement>(".ap-filter-tab.active");
+    if (!activeBtn) return;
+
+    if (!pillInitialized.current) {
+      gsap.set(pill, { left: activeBtn.offsetLeft, width: activeBtn.offsetWidth });
+      pillInitialized.current = true;
+    } else {
+      gsap.to(pill, {
+        left: activeBtn.offsetLeft,
+        width: activeBtn.offsetWidth,
+        duration: 0.38,
+        ease: "expo.out",
+        overwrite: "auto",
+      });
+    }
+  }, [activeFilters.cat]);
 
   // ── Filter Change Handler ────────────────────────────────────────────────
   const changeFilters = (patch: Partial<Filters>) => {
@@ -84,10 +116,6 @@ export default function PropertiesPage() {
   const displayed = displayedFilters.showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
   const hasMore = !displayedFilters.showAll && filtered.length > INITIAL_COUNT;
 
-  const hasActiveFilters =
-    activeFilters.cat !== "all" || activeFilters.price !== "all" ||
-    activeFilters.beds !== "any" || activeFilters.baths !== "any";
-
   // isoKey drives Isotope reinit — changes only after animation completes
   const isoKey = `${displayedFilters.cat}-${displayedFilters.price}-${displayedFilters.beds}-${displayedFilters.baths}-${displayedFilters.showAll}`;
 
@@ -116,6 +144,10 @@ export default function PropertiesPage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isoKey]);
 
+  const hasActiveFilters =
+    activeFilters.cat !== "all" || activeFilters.price !== "all" ||
+    activeFilters.beds !== "any" || activeFilters.baths !== "any";
+
   return (
     <div className="ap-page">
       <HeroSection
@@ -128,90 +160,83 @@ export default function PropertiesPage() {
         showCta={false}
       />
 
-      {/* ── Filter Bar ─────────────────────────────────────────────────── */}
-      <div className="ap-filters">
-        <div className="ap-filters__inner">
+      {/* ── Filter Slab ───────────────────────────────────────────────── */}
+      <div className="ap-filter-slab">
+        <div className="ap-filter-slab__inner">
+          <div className="ap-filter-row">
+            <div className="ap-filter-wrapper">
+              <div ref={filterTabsRef} className="ap-filter-tabs">
+                <div ref={pillRef} className="ap-filter-pill" />
+                {categoryTabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => changeFilters({ cat: tab.id as "all" | Category, showAll: false })}
+                    className={`ap-filter-tab ${activeFilters.cat === tab.id ? "active" : ""}`}
+                  >
+                    {tab.icon ? <tab.icon size={16} /> : null}
+                    <span>{tab.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          {/* Category pills */}
-          <div className="ap-filter-group ap-filter-group--pills">
-            {[
-              { val: "all", label: "All Properties" },
-              { val: "for-sale", label: "For Sale", icon: <Tag size={14} /> },
-              { val: "sold", label: "Sold", icon: <CheckCircle size={14} /> },
-              { val: "for-rent", label: "For Rent", icon: <Key size={14} /> },
-            ].map(({ val, label, icon }) => (
-              <button
-                key={val}
-                className={`ap-pill${activeFilters.cat === val ? " active" : ""}`}
-                onClick={() => changeFilters({ cat: val as "all" | Category, showAll: false })}
-              >
-                {icon}{label}
-              </button>
-            ))}
+            <div className="ap-filter-group ap-filter-group--dropdowns">
+              <div className="ap-select-wrap">
+                <select
+                  className="ap-select"
+                  value={activeFilters.price}
+                  onChange={e => changeFilters({ price: e.target.value, showAll: false })}
+                >
+                  <option value="all">Any Price</option>
+                  <option value="contact">Contact Agent</option>
+                  <option value="under500">Under $500k</option>
+                  <option value="500-800">$500k – $800k</option>
+                  <option value="800-1200">$800k – $1.2M</option>
+                  <option value="over1200">Over $1.2M</option>
+                </select>
+                <ChevronDown size={14} className="ap-select-icon" />
+              </div>
+
+              <div className="ap-select-wrap">
+                <select
+                  className="ap-select"
+                  value={activeFilters.beds}
+                  onChange={e => changeFilters({ beds: e.target.value, showAll: false })}
+                >
+                  <option value="any">Any Beds</option>
+                  <option value="land">Land / No Bedrooms</option>
+                  <option value="3">3+ Bedrooms</option>
+                  <option value="4">4+ Bedrooms</option>
+                  <option value="5">5+ Bedrooms</option>
+                </select>
+                <ChevronDown size={14} className="ap-select-icon" />
+              </div>
+
+              <div className="ap-select-wrap">
+                <select
+                  className="ap-select"
+                  value={activeFilters.baths}
+                  onChange={e => changeFilters({ baths: e.target.value, showAll: false })}
+                >
+                  <option value="any">Any Baths</option>
+                  <option value="1">1+ Bathrooms</option>
+                  <option value="2">2+ Bathrooms</option>
+                  <option value="3">3+ Bathrooms</option>
+                </select>
+                <ChevronDown size={14} className="ap-select-icon" />
+              </div>
+
+              {hasActiveFilters && (
+                <button className="ap-clear-btn" onClick={clearFilters}>
+                  <X size={14} />Clear
+                </button>
+              )}
+            </div>
+
+            <p className="ap-result-count">
+              {activeFiltered.length} {activeFiltered.length === 1 ? "property" : "properties"} found
+            </p>
           </div>
-
-          {/* Dropdowns row */}
-          <div className="ap-filter-group ap-filter-group--dropdowns">
-            {/* Price */}
-            <div className="ap-select-wrap">
-              <select
-                className="ap-select"
-                value={activeFilters.price}
-                onChange={e => changeFilters({ price: e.target.value, showAll: false })}
-              >
-                <option value="all">Any Price</option>
-                <option value="contact">Contact Agent</option>
-                <option value="under500">Under $500k</option>
-                <option value="500-800">$500k – $800k</option>
-                <option value="800-1200">$800k – $1.2M</option>
-                <option value="over1200">Over $1.2M</option>
-              </select>
-              <ChevronDown size={14} className="ap-select-icon" />
-            </div>
-
-            {/* Bedrooms */}
-            <div className="ap-select-wrap">
-              <select
-                className="ap-select"
-                value={activeFilters.beds}
-                onChange={e => changeFilters({ beds: e.target.value, showAll: false })}
-              >
-                <option value="any">Any Beds</option>
-                <option value="land">Land / No Bedrooms</option>
-                <option value="3">3+ Bedrooms</option>
-                <option value="4">4+ Bedrooms</option>
-                <option value="5">5+ Bedrooms</option>
-              </select>
-              <ChevronDown size={14} className="ap-select-icon" />
-            </div>
-
-            {/* Bathrooms */}
-            <div className="ap-select-wrap">
-              <select
-                className="ap-select"
-                value={activeFilters.baths}
-                onChange={e => changeFilters({ baths: e.target.value, showAll: false })}
-              >
-                <option value="any">Any Baths</option>
-                <option value="1">1+ Bathrooms</option>
-                <option value="2">2+ Bathrooms</option>
-                <option value="3">3+ Bathrooms</option>
-              </select>
-              <ChevronDown size={14} className="ap-select-icon" />
-            </div>
-
-            {/* Clear */}
-            {hasActiveFilters && (
-              <button className="ap-clear-btn" onClick={clearFilters}>
-                <X size={14} />Clear
-              </button>
-            )}
-          </div>
-
-          {/* Result count */}
-          <p className="ap-result-count">
-            {activeFiltered.length} {activeFiltered.length === 1 ? "property" : "properties"} found
-          </p>
         </div>
       </div>
 
