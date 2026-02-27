@@ -9,8 +9,6 @@ import ServiceSelection from "@/sections/ServiceSelection";
 import PhilosophyPillars from "@/sections/Philosophy";
 
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
-import properties from "../data/properties";
-
 export default function HomePage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
