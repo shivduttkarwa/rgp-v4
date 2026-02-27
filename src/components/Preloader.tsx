@@ -116,10 +116,6 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           />
         </svg>
       </div>
-      <div className="loader-text">
-        <h2 className="loader-title">Real Gold</h2>
-        <p className="loader-subtitle">Properties</p>
-      </div>
     </div>
   );
 }
