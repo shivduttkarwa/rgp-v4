@@ -305,6 +305,27 @@
 
 /* Touch: always show overlay + desc */
 @media (hover: none) and (pointer: coarse) {
+  .rg-philo__card,
+  .rg-philo__media,
+  .rg-philo__img,
+  .rg-philo__overlay,
+  .rg-philo__pill,
+  .rg-philo__play-btn {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .rg-philo__card {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .rg-philo__img,
+  .rg-philo__overlay,
+  .rg-philo__pill::before,
+  .rg-philo__play-btn {
+    transition: none;
+  }
+
   .rg-philo__overlay {
     opacity: 1;
   }
