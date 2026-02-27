@@ -7,16 +7,19 @@
   background-color: #ffffff;
   border-radius: var(--rg-radius);
   overflow: hidden;
-  border: 1px solid rgba(15, 24, 112, 0.08);
-  box-shadow: 0 4px 20px rgba(15, 24, 112, 0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  border: 1px solid rgba(15, 24, 112, 0.16);
+  box-shadow: 0 2px 14px rgba(15, 24, 112, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, outline-color 0.4s ease;
   transform: translateZ(0);
+  outline: 1px solid rgba(15, 24, 112, 0.06);
+  outline-offset: -1px;
 }
 
 .property-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 40px rgba(15, 24, 112, 0.12);
   border-color: var(--rg-gold);
+  outline-color: rgba(249, 195, 7, 0.35);
 }
 
 /* ── Image ──────────────────────────────────────────────────────────────── */
