@@ -1,0 +1,287 @@
+/* ════════════════════════════════════════════════════════
+   ALL PROPERTIES PAGE
+   ════════════════════════════════════════════════════════ */
+
+.ap-page {
+  min-height: 100vh;
+  background: var(--rg-beige-light);
+}
+
+/* ─── Filter Bar ──────────────────────────────────────────────────────────── */
+.ap-filters {
+  background: #fff;
+  border-bottom: 1px solid var(--rg-beige-darker);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 12px rgba(15, 24, 112, 0.06);
+}
+
+.ap-filters__inner {
+  max-width: var(--rg-max);
+  margin: 0 auto;
+  padding: 1rem var(--rg-pad);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ── Category Pills ─────────────────────────────────────────────────────── */
+.ap-filter-group--pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ap-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 1rem;
+  border-radius: 2rem;
+  border: 1.5px solid var(--rg-beige-darker);
+  background: var(--rg-beige-light);
+  color: var(--rg-text-medium);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ap-pill:hover {
+  border-color: var(--rg-gold);
+  color: var(--rg-text-dark);
+  background: var(--rg-warm-100);
+}
+
+.ap-pill.active {
+  background: var(--rg-navy);
+  border-color: var(--rg-navy);
+  color: #fff;
+}
+
+.ap-pill.active svg {
+  color: var(--rg-gold);
+}
+
+/* ── Dropdown Filters ───────────────────────────────────────────────────── */
+.ap-filter-group--dropdowns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.ap-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ap-select {
+  appearance: none;
+  background: var(--rg-beige-light);
+  border: 1.5px solid var(--rg-beige-darker);
+  border-radius: 0.5rem;
+  padding: 0.45rem 2.2rem 0.45rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--rg-text-dark);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  min-width: 130px;
+}
+
+.ap-select:focus {
+  outline: none;
+  border-color: var(--rg-gold);
+}
+
+.ap-select:hover {
+  border-color: var(--rg-gold);
+}
+
+.ap-select-icon {
+  position: absolute;
+  right: 0.65rem;
+  pointer-events: none;
+  color: var(--rg-text-light);
+}
+
+/* ── Clear Button ───────────────────────────────────────────────────────── */
+.ap-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid rgba(249, 195, 7, 0.5);
+  background: var(--rg-warm-100);
+  color: var(--rg-text-dark);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ap-clear-btn:hover {
+  background: var(--rg-gold);
+  border-color: var(--rg-gold);
+  color: var(--rg-navy);
+}
+
+/* ── Result Count ───────────────────────────────────────────────────────── */
+.ap-result-count {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--rg-text-light);
+  white-space: nowrap;
+}
+
+/* ─── Grid Section ────────────────────────────────────────────────────────── */
+.ap-grid-section {
+  padding: clamp(2.5rem, 5vw, 4rem) var(--rg-pad);
+}
+
+.ap-grid-container {
+  max-width: var(--rg-max);
+  margin: 0 auto;
+}
+
+/* Isotope requires position:relative — it positions items absolutely */
+.ap-grid {
+  position: relative;
+  margin: 0 -0.75rem; /* compensates for item padding to keep edge alignment */
+}
+
+/* Each card slot — padding creates gutters; Isotope reads the outerWidth */
+.ap-card-wrap {
+  width: 33.333%;
+  padding: 0 0.75rem 1.5rem;
+}
+
+/* ─── Empty State ─────────────────────────────────────────────────────────── */
+.ap-empty {
+  text-align: center;
+  padding: 5rem 1rem;
+  color: var(--rg-text-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.ap-empty p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+}
+
+/* ─── View All ────────────────────────────────────────────────────────────── */
+.ap-view-all {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.ap-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.25rem;
+  background: var(--rg-navy);
+  color: #fff;
+  border: 2px solid var(--rg-navy);
+  border-radius: 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ap-view-btn:hover {
+  background: transparent;
+  color: var(--rg-navy);
+}
+
+.ap-view-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.ap-view-btn:hover svg {
+  transform: translateX(4px);
+}
+
+.ap-view-btn--ghost {
+  background: transparent;
+  color: var(--rg-text-medium);
+  border-color: var(--rg-beige-darker);
+}
+
+.ap-view-btn--ghost:hover {
+  border-color: var(--rg-navy);
+  color: var(--rg-navy);
+  background: transparent;
+}
+
+/* Card styles live in PropertyCard.css — imported via the component */
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ap-card-wrap {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ap-filters__inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ap-filter-group--pills {
+    justify-content: flex-start;
+  }
+
+  .ap-filter-group--dropdowns {
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .ap-select {
+    min-width: 100px;
+    font-size: 0.78rem;
+  }
+
+  .ap-result-count {
+    text-align: right;
+  }
+}
+
+@media (max-width: 640px) {
+  .ap-card-wrap {
+    width: 100%;
+    padding: 0 0 1.25rem;
+  }
+
+  .ap-grid-section {
+    padding: 2rem 1rem;
+  }
+
+  .ap-card__price-val {
+    font-size: 1.1rem;
+  }
+
+  .ap-view-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}

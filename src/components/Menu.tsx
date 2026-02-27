@@ -19,6 +19,7 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
     () => [
       { label: "Home", to: "/" },
       { label: "About", to: "/about" },
+      { label: "Properties", to: "/properties" },
       { label: "Testimonials", to: "/testimonials" },
       { label: "Contact", to: "/contact" },
     ],

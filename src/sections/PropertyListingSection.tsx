@@ -8,389 +8,302 @@ import { Navigation, Pagination } from "swiper/modules";
 import {
   Home,
   MapPin,
-  Bed,
-  Bath,
-  Square,
-  Heart,
   ArrowRight,
   ArrowLeft,
-  Car,
   CheckCircle,
   Tag,
-  Clock,
-  Eye,
   Key,
   Building2,
 } from "lucide-react";
+import { PropertyCard, type Category } from "../components/reusable/PropertyCard";
 import "./PropertyListingsection.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-type Category = "for-sale" | "sold" | "for-rent";
-
 const propertiesData = [
   {
     id: 1,
-    slug: "modern-luxury-villa",
-    category: "for-sale" as Category,
-    title: "Modern Luxury Villa",
-    location: "Brisbane, QLD",
-    price: 2450000,
-    image:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+    slug: "73-mount-moogerah-drive-algester",
+    category: "sold" as Category,
+    title: "73 Mount Moogerah Drive",
+    location: "Algester, QLD",
+    price: 1500000,
+    soldPrice: 1500000,
+    image: "https://i2.au.reastatic.net/800x600/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg",
     beds: 5,
-    baths: 4,
-    sqft: 4200,
-    garage: 2,
-    features: ["Pool", "Smart Home", "Garden"],
-    badge: "Featured",
-    isNew: true,
-    views: 234,
+    baths: 3,
+    sqft: 4500,
+    garage: 6,
+    features: ["12 Car Spaces", "Large Block", "Premium Home"],
+    soldDate: "5 weeks ago",
+    daysOnMarket: 28,
   },
   {
     id: 2,
-    slug: "contemporary-penthouse",
-    category: "for-sale" as Category,
-    title: "Contemporary Penthouse",
-    location: "Gold Coast, QLD",
-    price: 3890000,
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+    slug: "26-jacana-close-springfield",
+    category: "sold" as Category,
+    title: "26 Jacana Close",
+    location: "Springfield, QLD",
+    price: 1137000,
+    soldPrice: 1137000,
+    image: "https://i2.au.reastatic.net/800x600/28a77f3d11097e6e7254f26797c3a50a5dbd8084abed79665d857465a175c8d2/image.jpg",
     beds: 4,
-    baths: 3,
-    sqft: 3100,
-    garage: 1,
-    features: ["City View", "Terrace", "Gym"],
-    badge: "Premium",
-    views: 189,
+    baths: 2,
+    sqft: 3200,
+    garage: 2,
+    features: ["Family Home", "Great Location", "Modern Finishes"],
+    soldDate: "3 months ago",
+    daysOnMarket: 22,
   },
   {
     id: 3,
-    slug: "oceanfront-estate",
-    category: "for-sale" as Category,
-    title: "Oceanfront Estate",
-    location: "Sunshine Coast, QLD",
-    price: 8500000,
-    image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
-    beds: 6,
-    baths: 7,
-    sqft: 7800,
-    garage: 4,
-    features: ["Beach Access", "Wine Cellar", "Theater"],
-    badge: "Exclusive",
-    isNew: true,
-    views: 456,
+    slug: "51-dobbie-crescent-ripley",
+    category: "sold" as Category,
+    title: "51 Dobbie Crescent",
+    location: "Ripley, QLD",
+    price: 970000,
+    soldPrice: 970000,
+    image: "https://i2.au.reastatic.net/800x600/7e3a9d18a2cd7cc29cda98993de0c6791efd652c0f80549f38ed742aeab03c39/image.jpg",
+    beds: 4,
+    baths: 2,
+    sqft: 2800,
+    garage: 2,
+    features: ["Family Home", "Double Garage", "Quality Build"],
+    soldDate: "6 months ago",
+    daysOnMarket: 19,
   },
   {
-    id: 7,
-    slug: "riverside-mansion",
+    id: 4,
+    slug: "85-bayliss-road-south-ripley",
     category: "sold" as Category,
-    title: "Riverside Mansion",
-    location: "Hamilton, QLD",
-    price: 3200000,
-    soldPrice: 3150000,
-    image:
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
-    beds: 5,
-    baths: 4,
-    sqft: 4800,
-    garage: 3,
-    features: ["River View", "Dock", "Guest House"],
-    soldDate: "2 weeks ago",
+    title: "85 Bayliss Road",
+    location: "South Ripley, QLD",
+    price: 1100000,
+    soldPrice: 1100000,
+    image: "https://i2.au.reastatic.net/800x600/2b7286a31eca5ee4b452d8d15ee9cfca0ef70c543bbf149d3d1737bb46f1cd91/image.jpg",
+    beds: 4,
+    baths: 2,
+    sqft: 3500,
+    garage: 2,
+    features: ["Large Land", "Private Setting", "Quality Build"],
+    soldDate: "9 months ago",
+    daysOnMarket: 31,
+  },
+  {
+    id: 5,
+    slug: "26-hepburn-street-greenbank",
+    category: "sold" as Category,
+    title: "26 Hepburn Street",
+    location: "Greenbank, QLD",
+    price: 890000,
+    soldPrice: 890000,
+    image: "https://i2.au.reastatic.net/800x600/d744995f1cbc8af65653e6d4aa19cb9e7ecf1c6d72fe8d0bdf95a18d169e6b5b/image.jpg",
+    beds: 4,
+    baths: 2,
+    sqft: 2900,
+    garage: 2,
+    features: ["Spacious Yard", "Quiet Street", "Family Friendly"],
+    soldDate: "9 months ago",
+    daysOnMarket: 14,
+  },
+  {
+    id: 6,
+    slug: "32-highbury-court-greenbank",
+    category: "sold" as Category,
+    title: "32 Highbury Court",
+    location: "Greenbank, QLD",
+    price: 880000,
+    soldPrice: 880000,
+    image: "https://i2.au.reastatic.net/800x600/1030bd2599d6aa18e29d450d345df4c33777979576e283b9256c0e877683d823/image.jpg",
+    beds: 4,
+    baths: 2,
+    sqft: 2800,
+    garage: 2,
+    features: ["Cul-de-Sac", "Modern Kitchen", "Family Home"],
+    soldDate: "10 months ago",
     daysOnMarket: 18,
   },
   {
-    id: 8,
-    slug: "downtown-condo",
+    id: 7,
+    slug: "66-greenhaven-circuit-narangba",
     category: "sold" as Category,
-    title: "Downtown Condo",
-    location: "South Brisbane, QLD",
-    price: 890000,
-    soldPrice: 875000,
-    image:
-      "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=800&q=80",
-    beds: 2,
+    title: "66 Greenhaven Circuit",
+    location: "Narangba, QLD",
+    price: 770000,
+    soldPrice: 770000,
+    image: "https://i2.au.reastatic.net/800x600/0b984c985a3e5b0ef241e068254ab5e4a4808f68a41783687b3fee05e70c3aa0/image.jpg",
+    beds: 3,
     baths: 2,
-    sqft: 1600,
-    garage: 1,
-    features: ["Doorman", "Balcony", "Storage"],
-    soldDate: "1 week ago",
-    daysOnMarket: 12,
+    sqft: 2100,
+    garage: 2,
+    features: ["Modern Home", "Low Maintenance", "Great Suburb"],
+    soldDate: "11 months ago",
+    daysOnMarket: 25,
+  },
+  {
+    id: 8,
+    slug: "60-pinnacle-circuit-heathwood",
+    category: "sold" as Category,
+    title: "60 Pinnacle Circuit",
+    location: "Heathwood, QLD",
+    price: 1040000,
+    soldPrice: 1040000,
+    image: "https://i2.au.reastatic.net/800x600/48baee38f613ec6cb38fc75249b7bbf866cc276446fd318df6965a4a7dc25905/image.png",
+    beds: 4,
+    baths: 2,
+    sqft: 3400,
+    garage: 4,
+    features: ["4 Car Garage", "Premium Suburb", "Spacious Home"],
+    soldDate: "12 months ago",
+    daysOnMarket: 16,
   },
   {
     id: 9,
-    slug: "golf-course-villa",
+    slug: "10-redcomb-drive-park-ridge",
     category: "sold" as Category,
-    title: "Golf Course Villa",
-    location: "Hope Island, QLD",
-    price: 1750000,
-    soldPrice: 1720000,
-    image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
+    title: "10 Redcomb Drive",
+    location: "Park Ridge, QLD",
+    price: 600000,
+    soldPrice: 600000,
+    image: "https://i2.au.reastatic.net/800x600/4fb818eeb10863afd6ca1917e70ff45bd9d582197413fb5e2808dd86c4019fe4/image.jpg",
+    beds: 0,
+    baths: 0,
+    sqft: 10764,
+    garage: 0,
+    features: ["Residential Land", "Development Opportunity", "Park Ridge"],
+    soldDate: "6 weeks ago",
+    daysOnMarket: 35,
+  },
+  {
+    id: 10,
+    slug: "lot-834-south-maclean",
+    category: "sold" as Category,
+    title: "Lot 834, 95 Endeavour Cct",
+    location: "South Maclean, QLD",
+    price: 400000,
+    soldPrice: 400000,
+    image: "https://i2.au.reastatic.net/800x600/ba08c62e76942997fbdd47bfd377286a87bf0a8badd2980dded2059e9d568532/image.jpg",
+    beds: 0,
+    baths: 0,
+    sqft: 8073,
+    garage: 0,
+    features: ["Residential Land", "New Estate", "Build Your Dream Home"],
+    soldDate: "6 months ago",
+    daysOnMarket: 28,
+  },
+
+  // ── For Sale ──────────────────────────────────────────────────────────────
+  {
+    id: 11,
+    slug: "14-lakeview-crescent-forest-lake",
+    category: "for-sale" as Category,
+    title: "14 Lakeview Crescent",
+    location: "Forest Lake, QLD",
+    price: 875000,
+    image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
     beds: 4,
-    baths: 3,
-    sqft: 3400,
+    baths: 2,
+    sqft: 2950,
     garage: 2,
-    features: ["Golf View", "Infinity Pool", "Outdoor Kitchen"],
-    soldDate: "3 days ago",
-    daysOnMarket: 8,
+    features: ["Lake Views", "Solar Panels", "Alfresco"],
+    badge: "For Sale",
+    isNew: true,
+    views: 142,
+  },
+  {
+    id: 12,
+    slug: "8-harmony-place-ripley",
+    category: "for-sale" as Category,
+    title: "8 Harmony Place",
+    location: "Ripley, QLD",
+    price: 749000,
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
+    beds: 4,
+    baths: 2,
+    sqft: 2600,
+    garage: 2,
+    features: ["New Build", "Modern Kitchen", "Large Backyard"],
+    badge: "New Listing",
+    isNew: true,
+    views: 98,
   },
   {
     id: 13,
-    slug: "luxury-high-rise-apt",
-    category: "for-rent" as Category,
-    title: "Luxury High-Rise Apt",
-    location: "Surfers Paradise, QLD",
-    price: 8500,
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
-    beds: 3,
-    baths: 2,
-    sqft: 2200,
+    slug: "22-settlers-drive-springfield-lakes",
+    category: "for-sale" as Category,
+    title: "22 Settlers Drive",
+    location: "Springfield Lakes, QLD",
+    price: 1050000,
+    image: "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&q=80",
+    beds: 5,
+    baths: 3,
+    sqft: 3800,
     garage: 2,
-    features: ["Ocean View", "Concierge", "Gym"],
-    badge: "Available Now",
-    deposit: 17000,
-    minLease: "12 months",
+    features: ["Pool", "Theatre Room", "Triple Garage"],
+    badge: "Premium",
+    views: 211,
   },
+
+  // ── For Rent ──────────────────────────────────────────────────────────────
   {
     id: 14,
-    slug: "furnished-studio-loft",
+    slug: "5-parkside-close-greenbank-rent",
     category: "for-rent" as Category,
-    title: "Furnished Studio Loft",
-    location: "Fortitude Valley, QLD",
-    price: 3200,
-    image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80",
-    beds: 1,
-    baths: 1,
-    sqft: 850,
-    garage: 1,
-    features: ["Furnished", "Utilities Incl", "Pet Friendly"],
-    badge: "Utilities Included",
-    deposit: 6400,
-    minLease: "6 months",
+    title: "5 Parkside Close",
+    location: "Greenbank, QLD",
+    price: 2600,
+    image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
+    beds: 4,
+    baths: 2,
+    sqft: 2750,
+    garage: 2,
+    features: ["Air Conditioning", "Large Yard", "Pets Considered"],
+    badge: "Available Now",
+    deposit: 5200,
+    minLease: "12 months",
   },
   {
     id: 15,
-    slug: "family-townhouse",
+    slug: "3-sunridge-court-ripley-rent",
     category: "for-rent" as Category,
-    title: "Family Townhouse",
-    location: "Springfield, QLD",
-    price: 4800,
-    image:
-      "https://images.unsplash.com/photo-1600047509782-20d39509f26d?w=800&q=80",
-    beds: 4,
-    baths: 3,
-    sqft: 2800,
+    title: "3 Sunridge Court",
+    location: "Ripley, QLD",
+    price: 2200,
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+    beds: 3,
+    baths: 2,
+    sqft: 2100,
     garage: 2,
-    features: ["Backyard", "Near Schools", "Updated"],
-    badge: "Pet Friendly",
-    deposit: 9600,
+    features: ["Modern Finishes", "NBN Ready", "Close to Schools"],
+    badge: "Available Now",
+    deposit: 4400,
     minLease: "12 months",
+  },
+  {
+    id: 16,
+    slug: "12-ironbark-street-narangba-rent",
+    category: "for-rent" as Category,
+    title: "12 Ironbark Street",
+    location: "Narangba, QLD",
+    price: 1950,
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+    beds: 3,
+    baths: 1,
+    sqft: 1800,
+    garage: 1,
+    features: ["Fully Fenced", "Garden Shed", "Quiet Street"],
+    badge: "Utilities Included",
+    deposit: 3900,
+    minLease: "6 months",
   },
 ];
 
 const filterTabs = [
   { id: "for-sale", label: "For Sale", icon: Tag, count: 3 },
-  { id: "sold", label: "Sold", icon: CheckCircle, count: 3 },
+  { id: "sold", label: "Sold", icon: CheckCircle, count: 10 },
   { id: "for-rent", label: "For Rent", icon: Key, count: 3 },
 ];
-
-const formatPrice = (price: number, isRent: boolean = false) => {
-  if (price >= 1000000) {
-    return `$${(price / 1000000).toFixed(1)}M`;
-  }
-  return `$${price.toLocaleString()}${isRent ? "/mo" : ""}`;
-};
-
-const badgeClass = (badge?: string) => {
-  if (!badge) return "";
-  const key = badge.toLowerCase();
-  if (key.includes("new")) return "badge-new";
-  if (key.includes("available")) return "badge";
-  if (key.includes("utilities")) return "badge";
-  if (key.includes("pet")) return "badge";
-  if (key.includes("corporate")) return "badge";
-  if (key.includes("short")) return "badge";
-  if (key.includes("creative")) return "badge";
-  return "badge";
-};
-
-const PropertyCard = ({
-  property,
-  cardIndex = 0,
-}: {
-  property: (typeof propertiesData)[0];
-  cardIndex?: number;
-}) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const isSold = property.category === "sold";
-  const isRent = property.category === "for-rent";
-  const displayPrice = isSold
-    ? (property.soldPrice ?? property.price)
-    : property.price;
-
-  return (
-    <div
-      className={`property-card ${property.category}`}
-      style={{ animationDelay: `${cardIndex * 55}ms` }}
-    >
-      <div className="card-image-wrapper">
-        <img
-          src={property.image}
-          alt={property.title}
-          className={`card-image ${isSold ? "sold" : ""}`}
-        />
-        <div className="card-overlay" />
-
-        <div className="card-badges">
-          {property.badge && (
-            <span className={`badge ${badgeClass(property.badge)}`}>
-              <Tag size={12} />
-              {property.badge}
-            </span>
-          )}
-          {property.isNew && (
-            <span className="badge badge-new">New Listing</span>
-          )}
-          {isSold && (
-            <span className="badge badge-sold">
-              <CheckCircle size={12} />
-              Sold
-            </span>
-          )}
-        </div>
-
-        <button
-          className={`like-btn ${isLiked ? "liked" : ""}`}
-          onClick={() => setIsLiked((prev) => !prev)}
-        >
-          <Heart size={16} />
-        </button>
-
-        <div className="card-price-wrapper">
-          <div className="price-info">
-            {isSold && property.soldPrice && (
-              <span className="price-original">
-                {formatPrice(property.price)}
-              </span>
-            )}
-            <span className="price-current">
-              {formatPrice(displayPrice, isRent)}
-            </span>
-          </div>
-          {property.views && (
-            <span className="card-views">
-              <Eye size={14} />
-              {property.views}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <div className="card-body">
-        <div className="card-header">
-          <h3 className="card-title">{property.title}</h3>
-          <div className="card-location">
-            <MapPin size={14} />
-            <span>{property.location}</span>
-          </div>
-        </div>
-
-        <div className="card-stats">
-          <div className="stat">
-            <div className="stat-icon">
-              <Bed size={14} />
-            </div>
-            <div className="stat-content">
-              <span className="stat-value">{property.beds}</span>
-              <span className="stat-label">Beds</span>
-            </div>
-          </div>
-          <div className="stat">
-            <div className="stat-icon">
-              <Bath size={14} />
-            </div>
-            <div className="stat-content">
-              <span className="stat-value">{property.baths}</span>
-              <span className="stat-label">Baths</span>
-            </div>
-          </div>
-          <div className="stat">
-            <div className="stat-icon">
-              <Square size={14} />
-            </div>
-            <div className="stat-content">
-              <span className="stat-value">
-                {(property.sqft / 1000).toFixed(1)}k
-              </span>
-              <span className="stat-label">Sq Ft</span>
-            </div>
-          </div>
-          <div className="stat">
-            <div className="stat-icon">
-              <Car size={14} />
-            </div>
-            <div className="stat-content">
-              <span className="stat-value">{property.garage}</span>
-              <span className="stat-label">Garage</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="card-features">
-          {property.features.map((feature, idx) => (
-            <span key={idx} className="feature-tag">
-              {feature}
-            </span>
-          ))}
-        </div>
-
-        {isSold && (
-          <div className="card-meta">
-            <div className="meta-item">
-              <Clock size={14} />
-              <span>Sold {property.soldDate}</span>
-            </div>
-            <div className="meta-item meta-highlight">
-              <span>{property.daysOnMarket} days on market</span>
-            </div>
-          </div>
-        )}
-
-        {isRent && property.deposit && (
-          <div className="card-meta">
-            <div className="meta-item">
-              <span className="meta-label">Deposit:</span>
-              <span>${property.deposit.toLocaleString()}</span>
-            </div>
-            <div className="meta-item">
-              <span className="meta-label">Min:</span>
-              <span>{property.minLease}</span>
-            </div>
-          </div>
-        )}
-
-        <Link
-          to={`/properties/${property.slug}`}
-          className="card-btn btn-primary"
-        >
-          <span>
-            {isSold
-              ? "View Details"
-              : isRent
-                ? "Schedule Tour"
-                : "View Property"}
-          </span>
-          <ArrowRight size={16} />
-        </Link>
-      </div>
-    </div>
-  );
-};
 
 const PropertyListingSection = () => {
   const [activeFilter, setActiveFilter] = useState<Category | "*">("for-sale");
@@ -584,10 +497,10 @@ const PropertyListingSection = () => {
         </div>
 
         <div className="view-all-wrapper">
-          <button className="view-all-btn" data-gsap="btn-clip-reveal">
+          <Link to="/properties" className="view-all-btn" data-gsap="btn-clip-reveal">
             <span>View All Properties</span>
             <ArrowRight size={18} />
-          </button>
+          </Link>
         </div>
 
         <div className="stats-bar" data-gsap="fade-up">

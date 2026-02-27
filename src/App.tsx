@@ -10,6 +10,7 @@ const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const TestimonialsPage = lazy(() => import("./pages/TestimonialsPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PropertyPage = lazy(() => import("./pages/PropertyPage"));
+const PropertiesPage = lazy(() => import("./pages/PropertiesPage"));
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,6 +34,7 @@ function App() {
               element={<TestimonialsPage ready={loaded} />}
             />
             <Route path="/contact" element={<ContactPage ready={loaded} />} />
+            <Route path="/properties" element={<PropertiesPage />} />
             <Route path="/properties/:id" element={<PropertyPage />} />
           </Routes>
         </Suspense>
