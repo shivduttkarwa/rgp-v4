@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--rg-beige-light);
+  background: #152371;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,16 +14,12 @@
   z-index: 99999;
 }
 
-
 /* Subtle radial glow bg */
 .preloader::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(249, 195, 7, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 50%, rgba(15, 24, 112, 0.08) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 50%, rgba(249, 195, 7, 0.12) 0%, transparent 70%);
+  background: transparent;
   pointer-events: none;
 }
 
@@ -51,10 +47,13 @@
   filter: drop-shadow(0 0 8px rgba(249, 195, 7, 0.3));
 }
 
-
 @keyframes plRotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Inner ring — counter-rotate */
@@ -70,8 +69,12 @@
 }
 
 @keyframes plRotateReverse {
-  from { transform: rotate(360deg); }
-  to   { transform: rotate(0deg); }
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
 
 /* Dashed ring */
@@ -105,7 +108,9 @@
   stroke-linejoin: round;
   stroke-dasharray: 300;
   stroke-dashoffset: 300;
-  animation: plDraw 2.5s ease-in-out forwards, plGlowPulse 2s ease-in-out infinite 2.5s;
+  animation:
+    plDraw 2.5s ease-in-out forwards,
+    plGlowPulse 2s ease-in-out infinite 2.5s;
 }
 
 .preloader-house-icon svg .house-fill {
@@ -124,21 +129,35 @@
 }
 
 @keyframes plDraw {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes plFadeInFill {
-  to { opacity: 0.15; }
+  to {
+    opacity: 0.15;
+  }
 }
 
 @keyframes plIconPulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.03); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
 }
 
 @keyframes plGlowPulse {
-  0%, 100% { filter: drop-shadow(0 0 8px rgba(249, 195, 7, 0.3)); }
-  50%      { filter: drop-shadow(0 0 20px rgba(249, 195, 7, 0.6)); }
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(249, 195, 7, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(249, 195, 7, 0.6));
+  }
 }
 
 /* progress removed */
@@ -154,35 +173,112 @@
 
 .preloader-corner::before,
 .preloader-corner::after {
-  content: '';
+  content: "";
   position: absolute;
 }
 
-.preloader-corner-tl { top: 28px; left: 28px; }
-.preloader-corner-tl::before { top: 0; left: 0; width: 36px; height: 1px; background: linear-gradient(90deg,  #f9c307, transparent); }
-.preloader-corner-tl::after  { top: 0; left: 0; width: 1px;  height: 36px; background: linear-gradient(180deg, #f9c307, transparent); }
+.preloader-corner-tl {
+  top: 28px;
+  left: 28px;
+}
+.preloader-corner-tl::before {
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, #f9c307, transparent);
+}
+.preloader-corner-tl::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(180deg, #f9c307, transparent);
+}
 
-.preloader-corner-tr { top: 28px; right: 28px; }
-.preloader-corner-tr::before { top: 0; right: 0; width: 36px; height: 1px; background: linear-gradient(270deg, #f9c307, transparent); }
-.preloader-corner-tr::after  { top: 0; right: 0; width: 1px;  height: 36px; background: linear-gradient(180deg, #f9c307, transparent); }
+.preloader-corner-tr {
+  top: 28px;
+  right: 28px;
+}
+.preloader-corner-tr::before {
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(270deg, #f9c307, transparent);
+}
+.preloader-corner-tr::after {
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(180deg, #f9c307, transparent);
+}
 
-.preloader-corner-bl { bottom: 28px; left: 28px; }
-.preloader-corner-bl::before { bottom: 0; left: 0; width: 36px; height: 1px; background: linear-gradient(90deg,  #f9c307, transparent); }
-.preloader-corner-bl::after  { bottom: 0; left: 0; width: 1px;  height: 36px; background: linear-gradient(0deg,   #f9c307, transparent); }
+.preloader-corner-bl {
+  bottom: 28px;
+  left: 28px;
+}
+.preloader-corner-bl::before {
+  bottom: 0;
+  left: 0;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, #f9c307, transparent);
+}
+.preloader-corner-bl::after {
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(0deg, #f9c307, transparent);
+}
 
-.preloader-corner-br { bottom: 28px; right: 28px; }
-.preloader-corner-br::before { bottom: 0; right: 0; width: 36px; height: 1px; background: linear-gradient(270deg, #f9c307, transparent); }
-.preloader-corner-br::after  { bottom: 0; right: 0; width: 1px;  height: 36px; background: linear-gradient(0deg,   #f9c307, transparent); }
+.preloader-corner-br {
+  bottom: 28px;
+  right: 28px;
+}
+.preloader-corner-br::before {
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(270deg, #f9c307, transparent);
+}
+.preloader-corner-br::after {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(0deg, #f9c307, transparent);
+}
 
 @keyframes plCornerFade {
-  to { opacity: 0.4; }
+  to {
+    opacity: 0.4;
+  }
 }
 
 /* ── Responsive ── */
 @media (max-width: 480px) {
-  .preloader-logo-container { width: 180px; height: 180px; }
-  .preloader-outer-ring     { width: 180px; height: 180px; }
-  .preloader-inner-ring     { width: 155px; height: 155px; }
-  .preloader-dashed-ring    { width: 138px; height: 138px; }
-  .preloader-house-icon svg { width: 60px;  height: 60px;  }
+  .preloader-logo-container {
+    width: 180px;
+    height: 180px;
+  }
+  .preloader-outer-ring {
+    width: 180px;
+    height: 180px;
+  }
+  .preloader-inner-ring {
+    width: 155px;
+    height: 155px;
+  }
+  .preloader-dashed-ring {
+    width: 138px;
+    height: 138px;
+  }
+  .preloader-house-icon svg {
+    width: 60px;
+    height: 60px;
+  }
 }
