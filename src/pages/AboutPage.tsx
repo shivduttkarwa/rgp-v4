@@ -1,12 +1,12 @@
-import { useEffect, useRef } from "react";
-import BtnSecondary from "../components/BtnSecondary";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
-import PropertyMarqee from "../components/reusable/PropertyMarqee";
-import Timeline from "../sections/Timeline";
+
 import "./AboutPage.css";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import PropertyMarquee from "@/components/reusable/PropertyMarqee";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -18,6 +18,39 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLHeadingElement | null>(null);
   const introMaxProgressRef = useRef(0);
+  const navigate = useNavigate();
+  const splitVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [splitFullPlay, setSplitFullPlay] = useState(false);
+
+  useEffect(() => {
+    const video = splitVideoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("autoplay", "");
+    video.setAttribute("loop", "");
+    const tryPlay = async () => {
+      try {
+        await video.play();
+      } catch {
+        // Autoplay can be blocked on some devices.
+      }
+    };
+    void tryPlay();
+  }, []);
+
+  const handleSplitPlayClick = () => {
+    const video = splitVideoRef.current;
+    if (!video) return;
+    video.currentTime = 0;
+    video.muted = false;
+    setSplitFullPlay(true);
+    video.play().catch(() => {});
+  };
 
   useEffect(() => {
     // Clear one-time init guards so StrictMode's double-invoke doesn't skip animations
@@ -156,29 +189,33 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
       <HeroSection
         ready={ready}
         showVideo={false}
-        showCta={false}
-        bgImage="images/hero1.jpg"
+        showCta
+        ctaLabel="Book a Free Appraisal"
+        ctaOnClick={() => navigate("/contact")}
+        bgImage="images/h.jpg"
         titleLine1={
           <>
-            Crafted For <span className="rg-gold">Life</span>
+            Meet <span className="rg-gold">Rahul</span> Singh
           </>
         }
         titleLine2={
           <>
-            Designed To <span className="rg-amber">Endure</span>
+            Appraisal-First <span className="rg-amber">Agent</span>
           </>
         }
-        subtitle="Real Gold Properties curates refined residences across Australia — quiet luxury, timeless materials, and spaces that grow with the people who live in them."
+        subtitle="Brisbane’s calm, data-backed appraisal specialist. Clear pricing, honest advice, and a plan that helps your property stand out."
       />
       <main className="about-page" ref={pageRef}>
         {/* 2) STATEMENT */}
         <section className="section section-spacious">
           <div className="container center stack">
             <h2 className="intro-statement lead" ref={introRef}>
-              Within Australia’s most <span className="gold-word">admired</span>{" "}
-              enclaves, Real Gold Properties curates a{" "}
-              <span className="gold-word">refined</span> portfolio of bespoke
-              residences and <span className="gold-word">private estates</span>.
+              Rahul Singh is the appraisal-first agent behind Real Gold
+              Properties — bringing{" "}
+              <span className="gold-word">local clarity</span>,{" "}
+              <span className="gold-word">data-backed pricing</span>, and{" "}
+              <span className="gold-word">calm negotiation</span> to every
+              homeowner.
             </h2>
           </div>
         </section>
@@ -189,14 +226,42 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
             <div className="wrap">
               <div className="img-card">
                 <div
-                  className="split-img-clip"
+                  className={`split-img-clip ${splitFullPlay ? "is-playing" : ""}`}
                   data-gsap="clip-smooth-down"
                   data-gsap-start="top 90%"
                   data-gsap-delay="0.05"
                   data-gsap-mobile="clip-smooth-down"
                   data-gsap-mobile-cards-start="top 90%"
                 >
-                  <img alt="Coastal residence" src={img("ps1 (6).jpg")} />
+                  <video
+                    ref={splitVideoRef}
+                    className="split-video"
+                    src={`${base}vids/prop1.mp4`}
+                    muted
+                    playsInline
+                    loop={!splitFullPlay}
+                    preload="metadata"
+                    controls={splitFullPlay}
+                  />
+                  {!splitFullPlay && (
+                    <button
+                      type="button"
+                      className="split-play-btn"
+                      onClick={handleSplitPlayClick}
+                      aria-label="Play property video"
+                    >
+                      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                        <circle
+                          cx="24"
+                          cy="24"
+                          r="23"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                        <path d="M19 16l14 8-14 8V16z" fill="currentColor" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="stack">
@@ -205,9 +270,9 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
                   data-gsap="char-reveal"
                   data-gsap-start="top 90%"
                 >
-                  More Beautiful Than
+                  Why Sellers
                   <br />
-                  You Expect
+                  Choose Rahul
                 </h3>
                 <p
                   className="split-desc"
@@ -215,10 +280,9 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
                   data-gsap-start="top 90%"
                   data-gsap-delay="0.15"
                 >
-                  We craft homes that become the center of life — places where
-                  family, friends, and community gather year after year. Each
-                  residence is designed to feel timeless, effortless, and deeply
-                  personal.
+                  He translates market noise into a clear, confident price
+                  position — with a strategy that attracts buyers and protects
+                  your upside.
                 </p>
                 <p
                   className="split-desc"
@@ -226,16 +290,36 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
                   data-gsap-start="top 90%"
                   data-gsap-delay="0.25"
                 >
-                  From curated coastal enclaves to private city retreats, every
-                  detail is considered: light, scale, flow, and the quiet
-                  luxuries that make a home feel truly yours.
+                  You get straight answers, a staged plan, and weekly feedback
+                  so the appraisal never sits still.
                 </p>
+                <ul
+                  className="rahul-points"
+                  data-gsap="fade-up"
+                  data-gsap-delay="0.32"
+                >
+                  <li>
+                    <strong>Street-level pricing:</strong> recent sales, buyer
+                    demand, and suburb momentum.
+                  </li>
+                  <li>
+                    <strong>Launch strategy:</strong> presentation, timing, and
+                    campaign plan that drives competition.
+                  </li>
+                  <li>
+                    <strong>Calm guidance:</strong> no pressure, just clarity
+                    and next steps.
+                  </li>
+                </ul>
                 <div className="split-cta">
-                  <BtnSecondary
-                    label="Explore Our Homes"
+                  <a
+                    href="/contact"
+                    className="btn-secondary"
                     data-gsap="btn-clip-reveal"
                     data-gsap-delay="0.2"
-                  />
+                  >
+                    <span className="bs-text">Book Your Appraisal</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -244,24 +328,30 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
 
         {/* 4) TURN-KEY */}
         <section className="img-overlay">
-          <img alt="Turn-key residences" src={img("ps1 (5).jpg")} />
+          <img alt="Property walkthrough" src={img("hero2.jpg")} />
           <div className="overlay-card" data-gsap="clip-reveal-left">
             <h3 className="h-serif">
-              Turn-Key
+              The Appraisal
               <br />
-              Residences
+              Strategy
             </h3>
             <p>
-              Meticulously prepared homes, curated down to the smallest detail —
-              ready for immediate move-in.
+              Rahul’s appraisals are more than a number. Each one is built to
+              attract the right buyers and set a confident path to sale.
             </p>
-            <div className="overlay-cta">
-              <BtnSecondary
-                label="Learn More"
-                data-gsap="btn-clip-reveal"
-                data-gsap-delay="0.2"
-              />
-            </div>
+            <ul className="overlay-list">
+              <li>
+                <span className="step">01</span> On-site walk-through + market
+                scan
+              </li>
+              <li>
+                <span className="step">02</span> Pricing range + demand
+                positioning
+              </li>
+              <li>
+                <span className="step">03</span> Launch plan + feedback loop
+              </li>
+            </ul>
           </div>
         </section>
 
@@ -269,38 +359,38 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
         <section className="avail">
           <div className="grid">
             <div className="photo">
-              <img alt="Availability" src={img("ps1 (1).jpg")} />
+              <img alt="Rahul Singh" src={img("rahul-singh.jpg")} />
             </div>
             <div className="panel">
-              <div className="eyebrow">AVAILABILITY</div>
+              <div className="eyebrow">APPRAISAL</div>
               <h3
                 className="h-serif"
                 data-gsap="char-reveal"
                 data-gsap-start="top 85%"
               >
-                Own Your Piece
+                Ready For Your
                 <br />
-                Of The Coast
+                Appraisal?
               </h3>
               <p data-gsap="fade-up" data-gsap-delay="0.15">
-                Explore a curated selection of private estates, penthouses, and
-                new releases across our portfolio.
+                Book a free, no-pressure appraisal with Rahul Singh. You’ll get
+                a clear price range, honest advice, and a next-step plan.
               </p>
               <div className="avail-cta">
-                <BtnSecondary
-                  label="View Available Properties"
-                  color="#00032e"
-                  className="avail-cta__btn"
+                <a
+                  href="/contact"
+                  className="btn-secondary avail-cta__btn"
                   data-gsap="btn-clip-reveal"
                   data-gsap-delay="0.2"
-                />
+                >
+                  <span className="bs-text">Book Your Appraisal</span>
+                </a>
               </div>
             </div>
           </div>
         </section>
-
-        <PropertyMarqee />
       </main>
+      <PropertyMarquee />
     </>
   );
 }

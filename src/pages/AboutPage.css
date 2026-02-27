@@ -98,7 +98,7 @@
 }
 
 .about-page .section.section-spacious {
-  background: var(--rg-blue-200);
+  background: #fdfdff;
 }
 
 .about-page .split-green {
@@ -110,7 +110,7 @@
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: clamp(1.125rem, 3vw, 2.5rem);
-  align-items: center;
+  align-items: stretch;
   padding: clamp(1.625rem, 3.8vw, 3.375rem);
 }
 
@@ -121,13 +121,71 @@
   box-shadow:
     0 0.75rem 1.75rem rgba(0, 2, 32, 0.35),
     0 0 0 0.0625rem rgba(249, 195, 7, 0.25);
+  height: 100%;
+  display: flex;
 }
 
 .about-page .split-green .split-img-clip {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
+  min-height: clamp(22rem, 34vw, 32rem);
+  aspect-ratio: auto;
   overflow: hidden;
+  background: #0b0f3b;
+}
+
+.about-page .split-green .split-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  object-fit: cover;
+}
+
+.about-page .split-green .split-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  z-index: 2;
+  width: 64px;
+  height: 64px;
+  border: 0;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(12, 12, 12, 0.45);
+  color: rgba(255, 255, 255, 0.95);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 220ms ease, transform 220ms ease, background 220ms ease;
+  backdrop-filter: blur(4px);
+}
+
+.about-page .split-green .split-play-btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+.about-page .split-green .img-card:hover .split-play-btn,
+.about-page .split-green .img-card:focus-within .split-play-btn {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.about-page .split-green .split-img-clip.is-playing .split-play-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .about-page .split-green .split-play-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .about-page .split-green img {
@@ -152,6 +210,44 @@
 
 .about-page .split-green .split-cta {
   margin-top: 0.75rem;
+}
+
+.about-page .split-green .btn-secondary {
+  --btn-secondary-color: var(--rg-text-dark);
+  --btn-secondary-dark: #ffffff;
+}
+
+.about-page .rahul-points {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--rg-text-medium);
+}
+
+.about-page .rahul-points li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.about-page .rahul-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--rg-gold);
+  box-shadow: 0 0 0 3px rgba(249, 195, 7, 0.15);
+}
+
+.about-page .rahul-points strong {
+  color: var(--rg-text-dark);
+  font-weight: 700;
 }
 
 .about-page .two-col {
@@ -318,6 +414,7 @@
 }
 
 .about-page .avail-cta .btn-secondary {
+  --btn-secondary-color: #00032e;
   --btn-secondary-dark: #f9c307;
 }
 
@@ -346,9 +443,12 @@
   top: 50%;
   transform: translateY(-50%);
   width: min(32.5rem, 44vw);
-  background: rgba(5, 9, 74, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   padding: clamp(1.625rem, 3vw, 2.75rem);
   color: var(--rg-text-dark);
+  box-shadow:
+    0 18px 40px rgba(15, 24, 112, 0.18),
+    inset 0 0 0 1px rgba(15, 24, 112, 0.06);
 }
 
 .about-page .overlay-card h3 {
@@ -361,6 +461,36 @@
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--rg-text-medium);
+}
+
+.about-page .overlay-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: var(--rg-text-medium);
+}
+
+.about-page .overlay-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.about-page .overlay-list .step {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rg-gold);
+  color: #00032e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .about-page .overlay-card .cta {
@@ -400,7 +530,6 @@
   .about-page .img-overlay img {
     filter: brightness(0.92);
   }
-
 }
 
 @media (max-width: 35rem) {
