@@ -4,871 +4,1391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact — Real Gold Properties</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500&display=swap"
-        rel="stylesheet">
-    <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --ivory: #faf8f3;
-            --ink: #1c1814;
-            --ink2: rgba(28, 24, 20, 0.52);
-            --ink3: rgba(28, 24, 20, 0.28);
-            --rule: rgba(28, 24, 20, 0.1);
-            --gold: #c9a84c;
-            --gold2: #a8722a;
-            --fs: "Cormorant Garamond", Georgia, serif;
-            --fb: "Bricolage Grotesque", sans-serif;
-        }
-
-        html,
-        body {
-            height: 100%;
-        }
-
-        body {
-            font-family: var(--fb);
-            background: var(--ivory);
-            color: var(--ink);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ── GOLD TOP RULE ── */
-        .top-rule {
-            height: 2px;
-            background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 60%, transparent 100%);
-        }
-
-        /* ── PAGE ── */
-        .page {
-            display: grid;
-            grid-template-columns: 42% 58%;
-            min-height: 100vh;
-        }
-
-        /* ════════════════════════════
-   LEFT PANEL
-════════════════════════════ */
-        .left {
-            border-right: 1px solid var(--rule);
-            padding: clamp(4rem, 7vw, 8rem) clamp(3rem, 5vw, 6rem);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            opacity: 0;
-            animation: rise .8s .05s ease forwards;
-        }
-
-        .hero-title {
-            font-family: var(--fs);
-            font-weight: 300;
-            font-size: clamp(5.5rem, 10vw, 11rem);
-            line-height: .88;
-            letter-spacing: -.03em;
-            color: var(--ink);
-        }
-
-        .hero-title em {
-            font-style: italic;
-            color: var(--gold);
-            display: block;
-        }
-
-        .tagline {
-            margin-top: 2.5rem;
-            font-size: 1.05rem;
-            font-weight: 300;
-            line-height: 1.85;
-            color: var(--ink2);
-            max-width: 28rem;
-        }
-
-        /* contact links */
-        .c-list {
-            margin-top: 4rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .c-item {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            padding: 1.4rem 0;
-            border-top: 1px solid var(--rule);
-            text-decoration: none;
-            color: inherit;
-            gap: 1rem;
-            position: relative;
-            transition: padding-left .28s ease;
-        }
-
-        .c-item:last-child {
-            border-bottom: 1px solid var(--rule);
-        }
-
-        .c-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--gold);
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: transform .28s ease;
-        }
-
-        .c-item:hover::before {
-            transform: scaleY(1);
-        }
-
-        .c-item:hover {
-            padding-left: 1rem;
-        }
-
-        .c-key {
-            font-size: .72rem;
-            font-weight: 400;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            color: var(--ink3);
-            margin-bottom: .3rem;
-        }
-
-        .c-val {
-            font-family: var(--fs);
-            font-size: 1.2rem;
-            color: var(--ink);
-            line-height: 1.4;
-            transition: color .2s;
-        }
-
-        .c-item:hover .c-val {
-            color: var(--gold2);
-        }
-
-        .c-arr {
-            color: var(--ink3);
-            margin-top: .25rem;
-            flex-shrink: 0;
-            transition: transform .28s ease, color .2s;
-        }
-
-        .c-item:hover .c-arr {
-            transform: translate(3px, -3px);
-            color: var(--gold);
-        }
-
-        /* hours */
-        .hours {
-            margin-top: 3rem;
-        }
-
-        .h-label {
-            font-size: .7rem;
-            font-weight: 400;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: .7rem;
-        }
-
-        .h-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--rule);
-        }
-
-        .h-row {
-            display: flex;
-            justify-content: space-between;
-            padding: .55rem 0;
-            border-bottom: 1px solid var(--rule);
-        }
-
-        .h-row:first-of-type {
-            border-top: 1px solid var(--rule);
-        }
-
-        .h-day {
-            font-size: .92rem;
-            color: var(--ink2);
-            font-weight: 300;
-        }
-
-        .h-time {
-            font-family: var(--fs);
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--ink);
-        }
-
-        /* quote */
-        .quote {
-            margin-top: 3rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--rule);
-        }
-
-        .quote blockquote {
-            font-family: var(--fs);
-            font-style: italic;
-            font-size: 1.15rem;
-            line-height: 1.75;
-            color: var(--ink2);
-            font-weight: 300;
-        }
-
-        .quote cite {
-            display: block;
-            margin-top: .8rem;
-            font-size: .68rem;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            color: var(--ink3);
-            font-style: normal;
-        }
-
-        /* ════════════════════════════
-   RIGHT PANEL
-════════════════════════════ */
-        .right {
-            padding: clamp(4rem, 7vw, 8rem) clamp(3rem, 5vw, 6rem);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            opacity: 0;
-            animation: rise .8s .18s ease forwards;
-        }
-
-        .form-eyebrow {
-            font-size: .7rem;
-            font-weight: 400;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: var(--ink3);
-            margin-bottom: 1rem;
-        }
-
-        .form-heading {
-            font-family: var(--fs);
-            font-size: clamp(2rem, 3.5vw, 3rem);
-            font-weight: 300;
-            letter-spacing: -.02em;
-            color: var(--ink);
-            line-height: 1.1;
-            margin-bottom: .6rem;
-        }
-
-        .form-heading em {
-            font-style: italic;
-            color: var(--gold2);
-        }
-
-        .form-sub {
-            font-size: .95rem;
-            font-weight: 300;
-            color: var(--ink2);
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
-        }
-
-        /* intents */
-        .intents {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .5rem;
-            margin-bottom: 2.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px solid var(--rule);
-        }
-
-        .ip {
-            padding: .45rem 1.1rem;
-            border: 1px solid var(--rule);
-            background: transparent;
-            font-family: var(--fb);
-            font-size: .78rem;
-            font-weight: 400;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: var(--ink2);
-            cursor: pointer;
-            transition: all .2s;
-            border-radius: 0;
-        }
-
-        .ip:hover {
-            border-color: var(--ink2);
-            color: var(--ink);
-        }
-
-        .ip.on {
-            background: var(--ink);
-            border-color: var(--ink);
-            color: var(--ivory);
-        }
-
-        /* form grid */
-        .fgrid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.8rem 3rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .fg {
-            display: flex;
-            flex-direction: column;
-            gap: .45rem;
-            position: relative;
-        }
-
-        .fg.full {
-            grid-column: 1 / -1;
-        }
-
-        .fg label {
-            font-size: .66rem;
-            font-weight: 400;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            color: var(--ink3);
-            transition: color .2s;
-        }
-
-        .fg:focus-within label {
-            color: var(--gold2);
-        }
-
-        .fg input,
-        .fg select,
-        .fg textarea {
-            font-family: var(--fs);
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--ink);
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--rule);
-            padding: .5rem 0;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-            transition: border-color .2s;
-            width: 100%;
-            border-radius: 0;
-        }
-
-        .fg input::placeholder,
-        .fg textarea::placeholder {
-            color: var(--ink3);
-            font-style: italic;
-        }
-
-        .fg input:focus,
-        .fg select:focus,
-        .fg textarea:focus {
-            border-color: var(--gold);
-        }
-
-        .fg textarea {
-            resize: none;
-            height: 6rem;
-            line-height: 1.7;
-        }
-
-        .fg select option {
-            font-family: sans-serif;
-            background: var(--ivory);
-        }
-
-        /* animated gold underline */
-        .fg::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width .35s ease;
-        }
-
-        .fg:focus-within::after {
-            width: 100%;
-        }
-
-        /* budget */
-        .budget {
-            margin-bottom: 1.8rem;
-        }
-
-        .b-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: .7rem;
-        }
-
-        .b-lbl {
-            font-size: .66rem;
-            font-weight: 400;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            color: var(--ink3);
-            transition: color .2s;
-        }
-
-        .budget:focus-within .b-lbl {
-            color: var(--gold2);
-        }
-
-        .b-val {
-            font-family: var(--fs);
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--ink);
-            letter-spacing: -.01em;
-            transition: color .2s;
-        }
-
-        .budget:focus-within .b-val {
-            color: var(--gold2);
-        }
-
-        .b-track {
-            position: relative;
-            height: 1px;
-            background: var(--rule);
-        }
-
-        .b-fill {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            background: var(--gold);
-        }
-
-        .b-knob {
-            position: absolute;
-            top: 50%;
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: var(--ivory);
-            border: 1.5px solid var(--gold2);
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-
-        .b-input {
-            position: absolute;
-            inset: -12px 0;
-            height: 24px;
-            width: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .b-ends {
-            display: flex;
-            justify-content: space-between;
-            margin-top: .45rem;
-        }
-
-        .b-ends span {
-            font-size: .65rem;
-            color: var(--ink3);
-            letter-spacing: .08em;
-        }
-
-        /* submit */
-        .srow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--rule);
-            margin-top: .5rem;
-        }
-
-        .btn {
-            font-family: var(--fb);
-            font-size: .8rem;
-            font-weight: 400;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            color: var(--ivory);
-            background: var(--ink);
-            border: none;
-            padding: 1.1rem 3rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: background .25s;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--gold);
-        }
-
-        .btn:hover {
-            background: var(--gold2);
-        }
-
-        .s-note {
-            font-family: var(--fs);
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--ink3);
-            text-align: right;
-            line-height: 1.7;
-        }
-
-        /* ════════════════════════════
-   SUCCESS
-════════════════════════════ */
-        .succ {
-            position: fixed;
-            inset: 0;
-            z-index: 999;
-            background: var(--ivory);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .5s ease;
-        }
-
-        .succ.show {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .sc {
-            text-align: center;
-            max-width: 28rem;
-            padding: 3rem 2rem;
-        }
-
-        .sc-orn {
-            font-family: var(--fs);
-            font-style: italic;
-            font-size: 3.5rem;
-            color: var(--gold);
-            display: block;
-            margin-bottom: 2rem;
-            line-height: 1;
-        }
-
-        .sc h2 {
-            font-family: var(--fs);
-            font-size: 3.2rem;
-            font-weight: 300;
-            letter-spacing: -.02em;
-            line-height: 1;
-            margin-bottom: .75rem;
-        }
-
-        .sc h2 em {
-            font-style: italic;
-            color: var(--gold2);
-        }
-
-        .sc-rule {
-            width: 36px;
-            height: 1px;
-            background: var(--gold);
-            margin: 1.4rem auto;
-        }
-
-        .sc p {
-            font-size: .95rem;
-            font-weight: 300;
-            color: var(--ink2);
-            line-height: 1.9;
-            margin-bottom: 2.5rem;
-        }
-
-        .sc-btn {
-            font-family: var(--fb);
-            font-size: .72rem;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            color: var(--ink2);
-            background: transparent;
-            border: 1px solid var(--rule);
-            padding: .8rem 2.2rem;
-            cursor: pointer;
-            transition: all .22s;
-        }
-
-        .sc-btn:hover {
-            border-color: var(--ink);
-            color: var(--ink);
-        }
-
-        /* ════════════════════════════
-   ANIMATION
-════════════════════════════ */
-        @keyframes rise {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ════════════════════════════
-   RESPONSIVE
-════════════════════════════ */
-        @media (max-width: 860px) {
-            .page {
-                grid-template-columns: 1fr;
-            }
-
-            .left {
-                border-right: none;
-                border-bottom: 1px solid var(--rule);
-            }
-
-            .fgrid {
-                grid-template-columns: 1fr;
-                gap: 1.4rem;
-            }
-
-            .fg.full {
-                grid-column: 1;
-            }
-
-            .srow {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .s-note {
-                text-align: left;
-            }
-        }
-
-        @media (max-width: 480px) {
-
-            .left,
-            .right {
-                padding: 3rem 1.5rem;
-            }
-        }
-    </style>
+    <title>Document</title>
 </head>
 
 <body>
-
-    <div class="top-rule"></div>
-
-    <div class="page">
-
-        <!-- ── LEFT ── -->
-        <div class="left">
-            <div>
-                <h1 class="hero-title">
-                    Get in
-                    <em>Touch.</em>
-                </h1>
-                <p class="tagline">Whether you're buying, selling, or investing — our advisors are ready to guide you
-                    through every step.</p>
-            </div>
-
-            <div>
-                <nav class="c-list">
-                    <a href="tel:+97141234567" class="c-item">
-                        <div>
-                            <p class="c-key">Phone</p>
-                            <p class="c-val">+971 4 123 4567</p>
-                        </div>
-                        <svg class="c-arr" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                    </a>
-                    <a href="mailto:hello@realgold.ae" class="c-item">
-                        <div>
-                            <p class="c-key">Email</p>
-                            <p class="c-val">hello@realgold.ae</p>
-                        </div>
-                        <svg class="c-arr" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                    </a>
-                    <a href="#" class="c-item">
-                        <div>
-                            <p class="c-key">Visit</p>
-                            <p class="c-val">Gold Tower, Business Bay, Dubai</p>
-                        </div>
-                        <svg class="c-arr" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                    </a>
-                </nav>
-
-                <div class="hours">
-                    <p class="h-label">Office Hours</p>
-                    <div class="h-row"><span class="h-day">Mon – Thu</span><span class="h-time">9:00 – 18:00</span>
+    <div class="Stack__StackContainer-sc-agfvon-0 dSGAjU">
+        <div data-testid="custom-filter-group">
+            <div class="Inline__InlineContainer-sc-1ppy24s-0 bETeUN styles__StyledFilterWrapper-sc-19zmsvg-0 cCSRjR">
+                <button class="styles__Pill-sc-19c5809-0 bPmEki"><span
+                        class="styles__LabelWithMargin-sc-19c5809-1 hmsTBI">Sold</span></button><button
+                    class="styles__Pill-sc-19c5809-0 jSSRt"><span
+                        class="styles__LabelWithMargin-sc-19c5809-1 hmsTBI">For sale</span></button><button
+                    class="styles__Pill-sc-19c5809-0 jSSRt"><span
+                        class="styles__LabelWithMargin-sc-19c5809-1 hmsTBI">Leased</span></button><button
+                    class="styles__Pill-sc-19c5809-0 jSSRt"><span
+                        class="styles__LabelWithMargin-sc-19c5809-1 hmsTBI">For rent</span></button><span
+                    class="ElementPopover__Trigger-sc-1fr9a6p-0 btjerD CK__ElementPopover__Root styles__StyledPillSelect-sc-4kix7p-5 evKmRQ"><button
+                        class="styles__Pill-sc-19c5809-0 bPmEki"><span
+                            class="styles__LabelWithMargin-sc-19c5809-1 eQGPtZ">
+                            <p class="Text__Typography-sc-1103tao-0 gfxXhG sc-fbu406-0 iFeXzF">12 months</p>
+                        </span><svg class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M1.146 4.646a.5.5 0 0 0 0 .708l6.5 6.5a.5.5 0 0 0 .708 0l6.5-6.5a.5.5 0 0 0-.708-.708L8 10.793 1.854 4.646a.5.5 0 0 0-.708 0Z"
+                                fill="currentColor"></path>
+                        </svg></button></span></div>
+        </div>
+        <div class="sc-ph30z-0 YKFrM">
+            <div class="sc-gvudex-0 ksrEes" style="overflow: hidden;">
+                <div
+                    style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
+                    <div><button draggable="false" aria-label="Keyboard shortcuts" title="Keyboard shortcuts"
+                            type="button"
+                            style="background: none transparent; display: block; border: none; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; z-index: 1000002; outline-offset: 3px; right: 0px; bottom: 0px; transform: translateX(100%);"></button>
                     </div>
-                    <div class="h-row"><span class="h-day">Friday</span><span class="h-time">9:00 – 13:00</span></div>
-                    <div class="h-row"><span class="h-day">Saturday</span><span class="h-time">10:00 – 16:00</span>
+                    <div tabindex="0" aria-label="Map" aria-roledescription="map" role="region"
+                        aria-describedby="C898E032-BC5C-4E32-A4F7-3C086DF2B69F"
+                        style="position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px;">
+                        <div id="C898E032-BC5C-4E32-A4F7-3C086DF2B69F" style="display: none;">
+                            <div class="LGLeeN-keyboard-shortcuts-view">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><kbd aria-label="Left arrow">←</kbd></td>
+                                            <td aria-label="Move left.">Move left</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd aria-label="Right arrow">→</kbd></td>
+                                            <td aria-label="Move right.">Move right</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd aria-label="Up arrow">↑</kbd></td>
+                                            <td aria-label="Move up.">Move up</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd aria-label="Down arrow">↓</kbd></td>
+                                            <td aria-label="Move down.">Move down</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>+</kbd></td>
+                                            <td aria-label="Zoom in.">Zoom in</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>-</kbd></td>
+                                            <td aria-label="Zoom out.">Zoom out</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Home</kbd></td>
+                                            <td aria-label="Jump left by 75%.">Jump left by 75%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>End</kbd></td>
+                                            <td aria-label="Jump right by 75%.">Jump right by 75%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Page Up</kbd></td>
+                                            <td aria-label="Jump up by 75%.">Jump up by 75%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Page Down</kbd></td>
+                                            <td aria-label="Jump down by 75%.">Jump down by 75%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="h-row"><span class="h-day">Sunday</span><span class="h-time">By appointment</span></div>
-                </div>
-
-                <div class="quote">
-                    <blockquote>"Real estate is not just a transaction — it is the beginning of a life lived better."
-                    </blockquote>
-                    <cite>— Our Promise</cite>
+                    <div class="gm-style"
+                        style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
+                        <div
+                            style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: none;">
+                            <div
+                                style="z-index: 1; position: absolute; left: 50%; top: 50%; width: 100%; will-change: transform; transform: translate(0px, 0px);">
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;">
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                        <div
+                                            style="position: absolute; z-index: 989; transform: matrix(1, 0, 0, 1, -229, -207);">
+                                            <div
+                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; left: 256px; top: 0px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; left: 256px; top: 256px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; left: 0px; top: 256px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; left: 512px; top: 0px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; left: 512px; top: 256px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; left: -256px; top: 256px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; left: -256px; top: 0px; width: 256px; height: 256px;">
+                                                <div style="width: 256px; height: 256px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div>
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div>
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div>
+                                <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                    <div
+                                        style="position: absolute; z-index: 989; transform: matrix(1, 0, 0, 1, -229, -207);">
+                                        <div
+                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1893!3i1187!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=114337"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; left: 256px; top: 0px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1894!3i1187!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=13914"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; left: 0px; top: 256px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1893!3i1188!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=84715"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; left: -256px; top: 256px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1892!3i1188!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=54067"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; left: 512px; top: 256px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1895!3i1188!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=14940"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; left: 256px; top: 256px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1894!3i1188!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=115363"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; left: -256px; top: 0px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1892!3i1187!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=83689"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; left: 512px; top: 0px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i11!2i1895!3i1187!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=44562"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="position: absolute; z-index: 988; transform: matrix(0.5, 0, 0, 0.5, -101, -79);">
+                                        <div
+                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; transition: opacity 200ms linear;">
+                                            <img draggable="false" alt="" role="presentation"
+                                                src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i12!2i3787!3i2375!4i256!2m3!1e0!2sm!3i768532286!3m18!2sen-US!3sUS!5e18!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjJ8cy5lOmx8cC52Om9mZixzLnQ6MzV8cy5lOmx8cC52Om9u!4e0!5m2!1e3!5f2!23i46991212!23i47054750!23i47083502&amp;key=AIzaSyDN8ONEDKJs0jNrtw-TXA6pwMrjcnLxGQY&amp;token=44825"
+                                                style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;">
+                                <div
+                                    style="z-index: 4; position: absolute; left: 50%; top: 50%; width: 100%; will-change: transform; transform: translate(0px, 0px);">
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;">
+                                    </div>
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;">
+                                    </div>
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;">
+                                        <slot></slot><span id="9064083A-C5BA-4B29-8DD9-9336A1B58677" aria-live="polite"
+                                            style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap; border: 0px;"></span>
+                                        <div id="147207524-container"
+                                            style="position: absolute; touch-action: pan-x pan-y; left: 98.6873px; top: -44.9887px;">
+                                            <button class="sc-uy4c8x-1 gcvFHu">
+                                                <div class="sc-uy4c8x-3 cvZlqC"></div>
+                                            </button></div>
+                                        <div id="147784324-container"
+                                            style="position: absolute; touch-action: pan-x pan-y; left: 171.838px; top: 79.5415px;">
+                                            <button class="sc-uy4c8x-1 gcvFHu">
+                                                <div class="sc-uy4c8x-3 cvZlqC"></div>
+                                            </button></div>
+                                        <div id="148136240-container"
+                                            style="position: absolute; touch-action: pan-x pan-y; left: 155.945px; top: 80.5464px;">
+                                            <button class="sc-uy4c8x-1 gcvFHu">
+                                                <div class="sc-uy4c8x-3 cvZlqC"></div>
+                                            </button></div>
+                                        <div id="148290596-container"
+                                            style="position: absolute; touch-action: pan-x pan-y; left: 172.241px; top: 80.332px;">
+                                            <button class="sc-uy4c8x-1 gcvFHu">
+                                                <div class="sc-uy4c8x-3 cvZlqC"></div>
+                                            </button></div>
+                                        <div id="148830968-container"
+                                            style="position: absolute; touch-action: pan-x pan-y; left: -189.613px; top: -2.50465px;">
+                                            <button class="sc-uy4c8x-1 gcvFHu">
+                                                <div class="sc-uy4c8x-3 cvZlqC"></div>
+                                            </button></div>
+                                        <div id="149348360-container"
+                                            style="position: absolute; touch-action: pan-x pan-y; left: -8.2152px; top: -6.93039px;">
+                                            <button class="sc-uy4c8x-1 gcvFHu">
+                                                <div class="sc-uy4c8x-3 cvZlqC"></div>
+                                            </button></div>
+                                        <div id="149528504-container"
+                                            style="position: absolute; touch-action: pan-x pan-y; left: 170.466px; top: -98.1489px;">
+                                            <button class="sc-uy4c8x-1 gcvFHu">
+                                                <div class="sc-uy4c8x-3 cvZlqC"></div>
+                                            </button></div>
+                                    </div>
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gm-style-moc"
+                                style="z-index: 4; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; transition-property: opacity, display; transition-behavior: allow-discrete; opacity: 0; display: none; transition-duration: 0.2s;">
+                                <p class="gm-style-mot"></p>
+                            </div>
+                        </div><iframe aria-hidden="true" frameborder="0" tabindex="-1"
+                            style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none; opacity: 0;"></iframe>
+                        <div
+                            style="pointer-events: none; width: 100%; height: 100%; box-sizing: border-box; position: absolute; z-index: 1000002; opacity: 0; border: 2px solid rgb(26, 115, 232);">
+                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div><button draggable="false" aria-label="Toggle fullscreen view"
+                                title="Toggle fullscreen view" type="button" aria-pressed="false"
+                                class="gm-control-active gm-fullscreen-control"
+                                style="background: none rgb(255, 255, 255); border: 0px; margin: 10px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; border-radius: 2px; height: 40px; width: 40px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; overflow: hidden; display: none; top: 0px; right: 0px;"><img
+                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%200v6h2V2h4V0H0zm16%200h-4v2h4v4h2V0h-2zm0%2016h-4v2h6v-6h-2v4zM2%2012H0v6h6v-2H2v-4z%22/%3E%3C/svg%3E"
+                                    alt="" style="height: 18px; width: 18px;"><img
+                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M0%200v6h2V2h4V0H0zm16%200h-4v2h4v4h2V0h-2zm0%2016h-4v2h6v-6h-2v4zM2%2012H0v6h6v-2H2v-4z%22/%3E%3C/svg%3E"
+                                    alt="" style="height: 18px; width: 18px;"><img
+                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%200v6h2V2h4V0H0zm16%200h-4v2h4v4h2V0h-2zm0%2016h-4v2h6v-6h-2v4zM2%2012H0v6h6v-2H2v-4z%22/%3E%3C/svg%3E"
+                                    alt="" style="height: 18px; width: 18px;"></button>
+                            <div class="gmnoprint gm-bundled-control" draggable="false" data-control-width="40"
+                                data-control-height="81"
+                                style="margin: 10px; user-select: none; position: absolute; top: 0px; right: 40px;">
+                                <div class="gmnoprint" data-control-width="40" data-control-height="81"
+                                    style="position: absolute; left: 0px; top: 0px;">
+                                    <div draggable="false"
+                                        style="user-select: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(255, 255, 255); width: 40px; height: 81px;">
+                                        <button draggable="false" aria-label="Zoom in" title="Zoom in" type="button"
+                                            class="gm-control-active"
+                                            style="background: none rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; overflow: hidden; width: 40px; height: 40px; top: 0px; left: 0px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23666%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23333%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23111%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23d1d1d1%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"></button>
+                                        <div
+                                            style="position: relative; overflow: hidden; width: 30px; height: 1px; margin: 0px 5px; background-color: rgb(230, 230, 230); top: 0px;">
+                                        </div><button draggable="false" aria-label="Zoom out" title="Zoom out"
+                                            type="button" class="gm-control-active"
+                                            style="background: none rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; overflow: hidden; width: 40px; height: 40px; top: 0px; left: 0px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23666%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23333%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23111%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"><img
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23d1d1d1%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                alt="" style="height: 28px; width: 28px;"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div>
+                            <div class="gmnoprint gm-style-mtc-bbw" role="menubar"
+                                style="margin: 10px; z-index: 0; position: absolute; cursor: pointer; bottom: 74px; right: 0px;">
+                                <div class="gm-style-mtc" style="float: left; position: relative;"><button
+                                        draggable="false" aria-label="Show street map" title="Show street map"
+                                        type="button" role="menuitemradio" aria-checked="true" aria-haspopup="true"
+                                        style="background: none padding-box rgb(255, 255, 255); display: table-cell; border: 0px; margin: 0px; padding: 0px 17px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; overflow: hidden; text-align: center; height: 40px; vertical-align: middle; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; font-size: 18px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; min-width: 36px; font-weight: 500;"
+                                        id="A92DBC01-7F70-4185-AB57-0778734FF1DE">Map</button>
+                                    <ul role="menu" aria-labelledby="A92DBC01-7F70-4185-AB57-0778734FF1DE"
+                                        style="background-color: rgb(255, 255, 255); list-style: none; padding: 2px; margin: 0px; z-index: -1; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; position: absolute; left: 0px; top: 40px; text-align: left; display: none;">
+                                        <li tabindex="-1" role="menuitemcheckbox" aria-label="Terrain" draggable="false"
+                                            title="Show street map with terrain" aria-checked="false"
+                                            class="ssQIHO-checkbox-menu-item"
+                                            style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 18px; background-color: rgb(255, 255, 255); padding: 5px 8px 5px 5px; direction: ltr; text-align: left; white-space: nowrap;">
+                                            <span><span
+                                                    style="mask-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0z%22/%3E%3Cpath%20d%3D%22M19%203H5c-1.11%200-2%20.9-2%202v14c0%201.1.89%202%202%202h14c1.11%200%202-.9%202-2V5c0-1.1-.89-2-2-2zm-9%2014-5-5%201.41-1.41L10%2014.17l7.59-7.59L19%208l-9%209z%22/%3E%3C/svg%3E&quot;); height: 1em; width: 1em; transform: translateY(0.15em); display: none;"></span><span
+                                                    style="mask-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M19%205v14H5V5h14m0-2H5c-1.1%200-2%20.9-2%202v14c0%201.1.9%202%202%202h14c1.1%200%202-.9%202-2V5c0-1.1-.9-2-2-2z%22/%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0z%22/%3E%3C/svg%3E&quot;); height: 1em; width: 1em; transform: translateY(0.15em);"></span></span><label
+                                                style="cursor: inherit;">Terrain</label></li>
+                                    </ul>
+                                </div>
+                                <div class="gm-style-mtc" style="float: left; position: relative;"><button
+                                        draggable="false" aria-label="Show satellite imagery"
+                                        title="Show satellite imagery" type="button" role="menuitemradio"
+                                        aria-checked="false" aria-haspopup="true"
+                                        style="background: none padding-box rgb(255, 255, 255); display: table-cell; border: 0px; margin: 0px; padding: 0px 17px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; overflow: hidden; text-align: center; height: 40px; vertical-align: middle; color: rgb(86, 86, 86); font-family: Roboto, Arial, sans-serif; font-size: 18px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; min-width: 66px;"
+                                        id="7996C5CE-6F3B-4ED9-9AA8-572F3B5A989D">Satellite</button>
+                                    <ul role="menu" aria-labelledby="7996C5CE-6F3B-4ED9-9AA8-572F3B5A989D"
+                                        style="background-color: rgb(255, 255, 255); list-style: none; padding: 2px; margin: 0px; z-index: -1; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; position: absolute; right: 0px; top: 40px; text-align: left; display: none;">
+                                        <li tabindex="-1" role="menuitemcheckbox" aria-label="Labels" draggable="false"
+                                            title="Show imagery with street names" aria-checked="true"
+                                            class="ssQIHO-checkbox-menu-item"
+                                            style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 18px; background-color: rgb(255, 255, 255); padding: 5px 8px 5px 5px; direction: ltr; text-align: left; white-space: nowrap;">
+                                            <span><span
+                                                    style="mask-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0z%22/%3E%3Cpath%20d%3D%22M19%203H5c-1.11%200-2%20.9-2%202v14c0%201.1.89%202%202%202h14c1.11%200%202-.9%202-2V5c0-1.1-.89-2-2-2zm-9%2014-5-5%201.41-1.41L10%2014.17l7.59-7.59L19%208l-9%209z%22/%3E%3C/svg%3E&quot;); height: 1em; width: 1em; transform: translateY(0.15em);"></span><span
+                                                    style="mask-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M19%205v14H5V5h14m0-2H5c-1.1%200-2%20.9-2%202v14c0%201.1.9%202%202%202h14c1.1%200%202-.9%202-2V5c0-1.1-.9-2-2-2z%22/%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0z%22/%3E%3C/svg%3E&quot;); height: 1em; width: 1em; transform: translateY(0.15em); display: none;"></span></span><label
+                                                style="cursor: inherit;">Labels</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false"
+                                data-control-width="40" data-control-height="40"
+                                style="margin: 10px; user-select: none; position: absolute; bottom: 54px; right: 40px;">
+                                <div class="gmnoprint" data-control-width="40" data-control-height="40"
+                                    style="display: none; position: absolute;">
+                                    <div
+                                        style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; width: 40px; height: 40px;">
+                                        <button draggable="false" aria-label="Rotate map clockwise"
+                                            title="Rotate map clockwise" type="button" class="gm-control-active"
+                                            style="background: none; display: none; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; left: 0px; top: 0px; overflow: hidden; width: 40px; height: 40px;"><img
+                                                alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0V0z%22/%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59%201.41%201.41zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18H21zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32zm4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18z%22/%3E%3C/svg%3E"
+                                                style="width: 20px; height: 20px;"><img alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0V0z%22/%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59%201.41%201.41zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18H21zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32zm4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18z%22/%3E%3C/svg%3E"
+                                                style="width: 20px; height: 20px;"><img alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0V0z%22/%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59%201.41%201.41zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18H21zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32zm4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18z%22/%3E%3C/svg%3E"
+                                                style="width: 20px; height: 20px;"></button>
+                                        <div
+                                            style="position: relative; overflow: hidden; width: 30px; height: 1px; margin: 0px 5px; background-color: rgb(230, 230, 230); display: none;">
+                                        </div><button draggable="false" aria-label="Rotate map counterclockwise"
+                                            title="Rotate map counterclockwise" type="button" class="gm-control-active"
+                                            style="background: none; display: none; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; left: 0px; top: 0px; overflow: hidden; width: 40px; height: 40px; transform: scaleX(-1);"><img
+                                                alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0V0z%22/%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59%201.41%201.41zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18H21zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32zm4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18z%22/%3E%3C/svg%3E"
+                                                style="width: 20px; height: 20px;"><img alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0V0z%22/%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59%201.41%201.41zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18H21zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32zm4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18z%22/%3E%3C/svg%3E"
+                                                style="width: 20px; height: 20px;"><img alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0V0z%22/%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59%201.41%201.41zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18H21zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32zm4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18z%22/%3E%3C/svg%3E"
+                                                style="width: 20px; height: 20px;"></button>
+                                        <div
+                                            style="position: relative; overflow: hidden; width: 30px; height: 1px; margin: 0px 5px; background-color: rgb(230, 230, 230); display: none;">
+                                        </div><button draggable="false" aria-label="Tilt map" title="Tilt map"
+                                            type="button" class="gm-tilt gm-control-active"
+                                            style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; top: 0px; left: 0px; overflow: hidden; width: 40px; height: 40px;"><img
+                                                alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2016%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%2016h8V9H0v7zm10%200h8V9h-8v7zM0%207h8V0H0v7zm10-7v7h8V0h-8z%22/%3E%3C/svg%3E"
+                                                style="width: 18px;"><img alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2016%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M0%2016h8V9H0v7zm10%200h8V9h-8v7zM0%207h8V0H0v7zm10-7v7h8V0h-8z%22/%3E%3C/svg%3E"
+                                                style="width: 18px;"><img alt=""
+                                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2016%22%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%2016h8V9H0v7zm10%200h8V9h-8v7zM0%207h8V0H0v7zm10-7v7h8V0h-8z%22/%3E%3C/svg%3E"
+                                                style="width: 18px;"></button>
+                                    </div>
+                                </div><gmp-internal-camera-control data-control-width="40" data-control-height="40"
+                                    draggable="false" class="gmnoprint"
+                                    style="position: absolute; cursor: pointer; user-select: none; left: 0px; top: 0px;"><button
+                                        draggable="false" aria-label="Map camera controls" title="Map camera controls"
+                                        type="button" class="gm-control-active" aria-expanded="false"
+                                        aria-controls="E80ED526-1C60-42EF-BB86-A3FF09401390"
+                                        style="background: none 6px center / 28px no-repeat rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;"><img
+                                            src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2019.175%202.125-2.125%201.425%201.4L12%2022l-3.55-3.55%201.425-1.4L12%2019.175zM4.825%2012l2.125%202.125-1.4%201.425L2%2012l3.55-3.55%201.4%201.425L4.825%2012zm14.35%200L17.05%209.875l1.4-1.425L22%2012l-3.55%203.55-1.4-1.425L19.175%2012zM12%204.825%209.875%206.95%208.45%205.55%2012%202l3.55%203.55-1.425%201.4L12%204.825z%22/%3E%3C/svg%3E"
+                                            alt="" style="height: 28px; width: 28px;"><img
+                                            src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2019.175%202.125-2.125%201.425%201.4L12%2022l-3.55-3.55%201.425-1.4L12%2019.175zM4.825%2012l2.125%202.125-1.4%201.425L2%2012l3.55-3.55%201.4%201.425L4.825%2012zm14.35%200L17.05%209.875l1.4-1.425L22%2012l-3.55%203.55-1.4-1.425L19.175%2012zM12%204.825%209.875%206.95%208.45%205.55%2012%202l3.55%203.55-1.425%201.4L12%204.825z%22/%3E%3C/svg%3E"
+                                            alt="" style="height: 28px; width: 28px;"><img
+                                            src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%231A73E8%22%20d%3D%22m12%2019.175%202.125-2.125L15.55%2018.45%2012%2022%208.45%2018.45%209.875%2017.05%2012%2019.175ZM4.825%2012l2.125%202.125L5.55%2015.55%202%2012%205.55%208.45%206.95%209.875%204.825%2012ZM19.175%2012%2017.05%209.875%2018.45%208.45%2022%2012%2018.45%2015.55%2017.05%2014.125%2019.175%2012ZM12%204.825%209.875%206.95%208.45%205.55%2012%202%2015.55%205.55%2014.125%206.95%2012%204.825Z%22/%3E%3C/svg%3E"
+                                            alt="" style="height: 28px; width: 28px;"><img
+                                            src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23D1D1D1%22%20d%3D%22m12%2019.175%202.125-2.125L15.55%2018.45%2012%2022%208.45%2018.45%209.875%2017.05%2012%2019.175ZM4.825%2012l2.125%202.125L5.55%2015.55%202%2012%205.55%208.45%206.95%209.875%204.825%2012ZM19.175%2012%2017.05%209.875%2018.45%208.45%2022%2012%2018.45%2015.55%2017.05%2014.125%2019.175%2012ZM12%204.825%209.875%206.95%208.45%205.55%2012%202%2015.55%205.55%2014.125%206.95%2012%204.825Z%22/%3E%3C/svg%3E"
+                                            alt="" style="height: 28px; width: 28px;"></button>
+                                    <menu id="E80ED526-1C60-42EF-BB86-A3FF09401390"
+                                        style="list-style: none; padding: 0px; display: none; position: absolute; z-index: 999999; margin: 10px; width: 140px; height: 140px; right: 100%; bottom: -10px;">
+                                        <li><button draggable="false" aria-label="Move up" title="Move up" type="button"
+                                                class="gm-control-active"
+                                                style="background: none 6px center / 28px no-repeat rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; top: 0px; left: 50%; transform: translateX(-50%);"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2010.8-4.6%204.6L6%2014l6-6%206%206-1.4%201.4-4.6-4.6z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m12%2010.8-4.6%204.6L6%2014l6-6%206%206L16.6%2015.4%2012%2010.8Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2010.8-4.6%204.6L6%2014l6-6%206%206-1.4%201.4-4.6-4.6z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23D1D1D1%22%20d%3D%22m12%2010.8-4.6%204.6L6%2014l6-6%206%206L16.6%2015.4%2012%2010.8Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"></button></li>
+                                        <li><button draggable="false" aria-label="Move left" title="Move left"
+                                                type="button" class="gm-control-active"
+                                                style="background: none 6px center / 28px no-repeat rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; bottom: 50%; left: 0px; transform: translateY(50%);"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m14%2018-6-6%206-6%201.4%201.4-4.6%204.6%204.6%204.6L14%2018z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m14%2018-6-6%206-6L15.4%207.4%2010.8%2012%2015.4%2016.6%2014%2018Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m14%2018-6-6%206-6%201.4%201.4-4.6%204.6%204.6%204.6L14%2018z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23D1D1D1%22%20d%3D%22m14%2018-6-6%206-6L15.4%207.4%2010.8%2012%2015.4%2016.6%2014%2018Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"></button></li>
+                                        <li><button draggable="false" aria-label="Move right" title="Move right"
+                                                type="button" class="gm-control-active"
+                                                style="background: none 6px center / 28px no-repeat rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; bottom: 50%; right: 0px; transform: translateY(50%);"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M12.6%2012%208%207.4%209.4%206l6%206-6%206L8%2016.6l4.6-4.6z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M12.6%2012%208%207.4%209.4%206l6%206-6%206L8%2016.6%2012.6%2012Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M12.6%2012%208%207.4%209.4%206l6%206-6%206L8%2016.6l4.6-4.6z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23D1D1D1%22%20d%3D%22M12.6%2012%208%207.4%209.4%206l6%206-6%206L8%2016.6%2012.6%2012Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"></button></li>
+                                        <li><button draggable="false" aria-label="Move down" title="Move down"
+                                                type="button" class="gm-control-active"
+                                                style="background: none 6px center / 28px no-repeat rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; bottom: 0px; left: 50%; transform: translateX(-50%);"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2015.4-6-6L7.4%208l4.6%204.6L16.6%208%2018%209.4l-6%206z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m12%2015.4-6-6L7.4%208l4.6%204.6L16.6%208%2018%209.4l-6%206Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2015.4-6-6L7.4%208l4.6%204.6L16.6%208%2018%209.4l-6%206Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2015.4-6-6L7.4%208l4.6%204.6L16.6%208%2018%209.4l-6%206z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"></button></li>
+                                        <li><button draggable="false" aria-label="Zoom in" title="Zoom in" type="button"
+                                                class="gm-control-active"
+                                                style="background: none 6px center / 28px no-repeat rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; overflow: hidden; width: 40px; height: 40px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; top: 0px; right: 0px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23666%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23333%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23111%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23d1d1d1%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"></button></li>
+                                        <li><button draggable="false" aria-label="Zoom out" title="Zoom out"
+                                                type="button" class="gm-control-active"
+                                                style="background: none 6px center / 28px no-repeat rgb(255, 255, 255); display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; overflow: hidden; width: 40px; height: 40px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; bottom: 0px; right: 0px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23666%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23333%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23111%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"><img
+                                                    src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23d1d1d1%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80H200Z%22/%3E%3C/svg%3E"
+                                                    alt="" style="height: 28px; width: 28px;"></button></li>
+                                    </menu>
+                                </gmp-internal-camera-control>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="margin: 0px 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;">
+                                <a target="_blank" rel="noopener"
+                                    title="Open this area in Google Maps (opens a new window)"
+                                    aria-label="Open this area in Google Maps (opens a new window)"
+                                    href="https://maps.google.com/maps?ll=-27.653862,152.911373&amp;z=11&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3"
+                                    style="display: inline;">
+                                    <div style="width: 66px; height: 26px;"><img alt="Google"
+                                            src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2069%2029%22%3E%3Cg%20fill%3D%22%23474747%22%20stroke%3D%22%23474747%22%20stroke-width%3D%221.5%22%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22M17.4706%207.33616%2018.0118%206.79504%2017.4599%206.26493C16.0963%204.95519%2014.2582%203.94522%2011.7008%203.94522c-4.613699999999999%200-8.50262%203.75517-8.50262%208.395779999999998C3.19818%2016.9817%207.0871%2020.7368%2011.7008%2020.7368%2014.1712%2020.7368%2016.0773%2019.918%2017.574%2018.3689%2019.1435%2016.796%2019.5956%2014.6326%2019.5956%2012.957%2019.5956%2012.4338%2019.5516%2011.9316%2019.4661%2011.5041L19.3455%2010.9012H10.9508V14.4954H15.7809C15.6085%2015.092%2015.3488%2015.524%2015.0318%2015.8415%2014.403%2016.4629%2013.4495%2017.1509%2011.7008%2017.1509%209.04835%2017.1509%206.96482%2015.0197%206.96482%2012.341%206.96482%209.66239%209.04835%207.53119%2011.7008%207.53119%2013.137%207.53119%2014.176%208.09189%2014.9578%208.82348L15.4876%209.31922%2016.0006%208.80619%2017.4706%207.33616Z%22/%3E%3Cpath%20d%3D%22M24.8656%2020.7286C27.9546%2020.7286%2030.4692%2018.3094%2030.4692%2015.0594%2030.4692%2011.7913%2027.953%209.39009%2024.8656%209.39009%2021.7783%209.39009%2019.2621%2011.7913%2019.2621%2015.0594c0%203.25%202.514499999999998%205.6692%205.6035%205.6692ZM24.8656%2012.8282C25.8796%2012.8282%2026.8422%2013.6652%2026.8422%2015.0594%2026.8422%2016.4399%2025.8769%2017.2905%2024.8656%2017.2905%2023.8557%2017.2905%2022.8891%2016.4331%2022.8891%2015.0594%2022.8891%2013.672%2023.853%2012.8282%2024.8656%2012.8282Z%22/%3E%3Cpath%20d%3D%22M35.7511%2017.2905H35.7469C34.737%2017.2905%2033.7703%2016.4331%2033.7703%2015.0594%2033.7703%2013.672%2034.7343%2012.8282%2035.7469%2012.8282%2036.7608%2012.8282%2037.7234%2013.6652%2037.7234%2015.0594%2037.7234%2016.4439%2036.7554%2017.2961%2035.7511%2017.2905ZM35.7387%2020.7286C38.8277%2020.7286%2041.3422%2018.3094%2041.3422%2015.0594%2041.3422%2011.7913%2038.826%209.39009%2035.7387%209.39009%2032.6513%209.39009%2030.1351%2011.7913%2030.1351%2015.0594%2030.1351%2018.3102%2032.6587%2020.7286%2035.7387%2020.7286Z%22/%3E%3Cpath%20d%3D%22M51.953%2010.4357V9.68573H48.3999V9.80826C47.8499%209.54648%2047.1977%209.38187%2046.4808%209.38187%2043.5971%209.38187%2041.0168%2011.8998%2041.0168%2015.0758%2041.0168%2017.2027%2042.1808%2019.0237%2043.8201%2019.9895L43.7543%2020.0168%2041.8737%2020.797%2041.1808%2021.0844%2041.4684%2021.7772C42.0912%2023.2776%2043.746%2025.1469%2046.5219%2025.1469%2047.9324%2025.1469%2049.3089%2024.7324%2050.3359%2023.7376%2051.3691%2022.7367%2051.953%2021.2411%2051.953%2019.2723v-8.8366Zm-7.2194%209.9844L44.7334%2020.4196C45.2886%2020.6201%2045.878%2020.7286%2046.4808%2020.7286%2047.1616%2020.7286%2047.7866%2020.5819%2048.3218%2020.3395%2048.2342%2020.7286%2048.0801%2021.0105%2047.8966%2021.2077%2047.6154%2021.5099%2047.1764%2021.7088%2046.5219%2021.7088%2045.61%2021.7088%2045.0018%2021.0612%2044.7336%2020.4201ZM46.6697%2012.8282C47.6419%2012.8282%2048.5477%2013.6765%2048.5477%2015.084%2048.5477%2016.4636%2047.6521%2017.2987%2046.6697%2017.2987%2045.6269%2017.2987%2044.6767%2016.4249%2044.6767%2015.084%2044.6767%2013.7086%2045.6362%2012.8282%2046.6697%2012.8282ZM55.7387%205.22081v-.75H52.0788V20.4412H55.7387V5.22081Z%22/%3E%3Cpath%20d%3D%22M63.9128%2016.0614%2063.2945%2015.6492%2062.8766%2016.2637C62.4204%2016.9346%2061.8664%2017.3069%2061.0741%2017.3069%2060.6435%2017.3069%2060.3146%2017.2088%2060.0544%2017.0447%2059.9844%2017.0006%2059.9161%2016.9496%2059.8498%2016.8911L65.5497%2014.5286%2066.2322%2014.2456%2065.9596%2013.5589%2065.7406%2013.0075C65.2878%2011.8%2063.8507%209.39832%2060.8278%209.39832%2057.8445%209.39832%2055.5034%2011.7619%2055.5034%2015.0676%2055.5034%2018.2151%2057.8256%2020.7369%2061.0659%2020.7369%2063.6702%2020.7369%2065.177%2019.1378%2065.7942%2018.2213L66.2152%2017.5963%2065.5882%2017.1783%2063.9128%2016.0614ZM61.3461%2012.8511%2059.4108%2013.6526C59.7903%2013.0783%2060.4215%2012.7954%2060.9017%2012.7954%2061.067%2012.7954%2061.2153%2012.8161%2061.3461%2012.8511Z%22/%3E%3C/g%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M11.7008%2019.9868C7.48776%2019.9868%203.94818%2016.554%203.94818%2012.341%203.94818%208.12803%207.48776%204.69522%2011.7008%204.69522%2014.0331%204.69522%2015.692%205.60681%2016.9403%206.80583L15.4703%208.27586C14.5751%207.43819%2013.3597%206.78119%2011.7008%206.78119%208.62108%206.78119%206.21482%209.26135%206.21482%2012.341%206.21482%2015.4207%208.62108%2017.9009%2011.7008%2017.9009%2013.6964%2017.9009%2014.8297%2017.0961%2015.5606%2016.3734%2016.1601%2015.7738%2016.5461%2014.9197%2016.6939%2013.7454h-4.9931V11.6512h7.0298C18.8045%2012.0207%2018.8456%2012.4724%2018.8456%2012.957%2018.8456%2014.5255%2018.4186%2016.4637%2017.0389%2017.8434%2015.692%2019.2395%2013.9838%2019.9868%2011.7008%2019.9868ZM29.7192%2015.0594C29.7192%2017.8927%2027.5429%2019.9786%2024.8656%2019.9786%2022.1884%2019.9786%2020.0121%2017.8927%2020.0121%2015.0594%2020.0121%2012.2096%2022.1884%2010.1401%2024.8656%2010.1401%2027.5429%2010.1401%2029.7192%2012.2096%2029.7192%2015.0594ZM27.5922%2015.0594C27.5922%2013.2855%2026.3274%2012.0782%2024.8656%2012.0782S22.1391%2013.2937%2022.1391%2015.0594C22.1391%2016.8086%2023.4038%2018.0405%2024.8656%2018.0405S27.5922%2016.8168%2027.5922%2015.0594Zm13%200C40.5922%2017.8927%2038.4159%2019.9786%2035.7387%2019.9786%2033.0696%2019.9786%2030.8851%2017.8927%2030.8851%2015.0594%2030.8851%2012.2096%2033.0614%2010.1401%2035.7387%2010.1401%2038.4159%2010.1401%2040.5922%2012.2096%2040.5922%2015.0594ZM38.4734%2015.0594C38.4734%2013.2855%2037.2087%2012.0782%2035.7469%2012.0782%2034.2851%2012.0782%2033.0203%2013.2937%2033.0203%2015.0594%2033.0203%2016.8086%2034.2851%2018.0405%2035.7469%2018.0405%2037.2087%2018.0487%2038.4734%2016.8168%2038.4734%2015.0594ZM51.203%2010.4357v8.8366C51.203%2022.9105%2049.0595%2024.3969%2046.5219%2024.3969%2044.132%2024.3969%2042.7031%2022.7955%2042.161%2021.4897L44.0417%2020.7095C44.3784%2021.5143%2045.1997%2022.4588%2046.5219%2022.4588%2048.1479%2022.4588%2049.1499%2021.4487%2049.1499%2019.568V18.8617H49.0759C48.5914%2019.4612%2047.6552%2019.9786%2046.4808%2019.9786%2044.0171%2019.9786%2041.7668%2017.8352%2041.7668%2015.0758%2041.7668%2012.3%2044.0253%2010.1319%2046.4808%2010.1319%2047.6552%2010.1319%2048.5914%2010.6575%2049.0759%2011.2323H49.1499V10.4357H51.203ZM49.2977%2015.084C49.2977%2013.3512%2048.1397%2012.0782%2046.6697%2012.0782%2045.175%2012.0782%2043.9267%2013.3429%2043.9267%2015.084%2043.9267%2016.8004%2045.175%2018.0487%2046.6697%2018.0487%2048.1397%2018.0487%2049.2977%2016.8004%2049.2977%2015.084ZM54.9887%205.22081V19.6912H52.8288V5.22081H54.9887ZM63.4968%2016.6854%2065.1722%2017.8023C64.6301%2018.6072%2063.3244%2019.9869%2061.0659%2019.9869%2058.2655%2019.9869%2056.2534%2017.827%2056.2534%2015.0676%2056.2534%2012.1439%2058.2901%2010.1483%2060.8278%2010.1483%2063.3818%2010.1483%2064.6301%2012.1768%2065.0408%2013.2773L65.2625%2013.8357%2058.6843%2016.5623C59.1853%2017.5478%2059.9737%2018.0569%2061.0741%2018.0569%2062.1746%2018.0569%2062.9384%2017.5067%2063.4968%2016.6854ZM58.3312%2014.9115%2062.7331%2013.0884C62.4867%2012.4724%2061.764%2012.0454%2060.9017%2012.0454%2059.8012%2012.0454%2058.2737%2013.0145%2058.3312%2014.9115Z%22/%3E%3C/svg%3E"
+                                            draggable="false"
+                                            style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                    </div>
+                                </a></div>
+                        </div>
+                        <div></div>
+                        <div>
+                            <div style="display: inline-flex; position: absolute; right: 0px; bottom: 0px;">
+                                <div class="gmnoprint" style="z-index: 1000001;">
+                                    <div draggable="false" class="gm-style-cc"
+                                        style="user-select: none; position: relative; height: 14px; line-height: 14px;">
+                                        <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                            <div style="width: 1px;"></div>
+                                            <div
+                                                style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="position: relative; padding-right: 6px; padding-left: 6px; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(0, 0, 0); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">
+                                            <button draggable="false" aria-label="Keyboard shortcuts"
+                                                title="Keyboard shortcuts" type="button"
+                                                style="background: none; display: inline-block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; color: rgb(0, 0, 0); font-family: inherit; line-height: inherit;">Keyboard
+                                                shortcuts</button></div>
+                                    </div>
+                                </div>
+                                <div class="gmnoprint" style="z-index: 1000001;">
+                                    <div draggable="false" class="gm-style-cc"
+                                        style="user-select: none; position: relative; height: 14px; line-height: 14px;">
+                                        <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                            <div style="width: 1px;"></div>
+                                            <div
+                                                style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="position: relative; padding-right: 6px; padding-left: 6px; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(0, 0, 0); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">
+                                            <button draggable="false" aria-label="Map Data" title="Map Data"
+                                                type="button"
+                                                style="background: none; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; color: rgb(0, 0, 0); font-family: inherit; line-height: inherit; display: none;">Map
+                                                Data</button><span style="">Map data ©2026 Google</span></div>
+                                    </div>
+                                </div>
+                                <div class="gmnoscreen">
+                                    <div
+                                        style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(0, 0, 0); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">
+                                        Map data ©2026 Google</div>
+                                </div><button draggable="false" aria-label="Map Scale: 5 km per 74 pixels"
+                                    title="Map Scale: 5 km per 74 pixels" type="button" class="gm-style-cc"
+                                    aria-describedby="DBF49D5B-1F79-4098-B73D-280032778C3E"
+                                    style="background: none; display: none; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: relative; cursor: pointer; user-select: none; height: 14px; line-height: 14px;">
+                                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                        <div style="width: 1px;"></div>
+                                        <div
+                                            style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="position: relative; padding-right: 6px; padding-left: 6px; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(0, 0, 0); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">
+                                        <span style="color: rgb(0, 0, 0);">5 km&nbsp;</span>
+                                        <div
+                                            style="position: relative; display: inline-block; height: 8px; bottom: -1px; width: 78px;">
+                                            <div
+                                                style="width: 100%; height: 4px; position: absolute; left: 0px; top: 0px;">
+                                            </div>
+                                            <div style="width: 4px; height: 8px; left: 0px; top: 0px;"></div>
+                                            <div
+                                                style="width: 4px; height: 8px; position: absolute; right: 0px; bottom: 0px;">
+                                            </div>
+                                            <div
+                                                style="position: absolute; background-color: rgb(0, 0, 0); height: 2px; left: 1px; bottom: 1px; right: 1px;">
+                                            </div>
+                                            <div
+                                                style="position: absolute; width: 2px; height: 6px; left: 1px; top: 1px; background-color: rgb(0, 0, 0);">
+                                            </div>
+                                            <div
+                                                style="width: 2px; height: 6px; position: absolute; background-color: rgb(0, 0, 0); bottom: 1px; right: 1px;">
+                                            </div>
+                                        </div>
+                                    </div><span id="DBF49D5B-1F79-4098-B73D-280032778C3E" style="display: none;">Click
+                                        to toggle between metric and imperial units</span>
+                                </button>
+                                <div class="gmnoprint gm-style-cc" draggable="false"
+                                    style="z-index: 1000001; user-select: none; position: relative; height: 14px; line-height: 14px;">
+                                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                        <div style="width: 1px;"></div>
+                                        <div
+                                            style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="position: relative; padding-right: 6px; padding-left: 6px; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(0, 0, 0); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">
+                                        <a aria-label="Terms (opens in new tab)"
+                                            href="https://www.google.com/intl/en-US_US/help/terms_maps.html"
+                                            target="_blank" rel="noopener"
+                                            style="text-decoration: none; cursor: pointer; color: rgb(0, 0, 0);">Terms</a>
+                                    </div>
+                                </div>
+                                <div draggable="false" class="gm-style-cc"
+                                    style="user-select: none; position: relative; height: 14px; line-height: 14px;">
+                                    <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                        <div style="width: 1px;"></div>
+                                        <div
+                                            style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;">
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="position: relative; padding-right: 6px; padding-left: 6px; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(0, 0, 0); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">
+                                        <a target="_blank" rel="noopener"
+                                            title="Report errors in the road map or imagery to Google" dir="ltr"
+                                            href="https://www.google.com/maps/@-27.6538624,152.9113734,11z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3"
+                                            style="font-family: Roboto, Arial, sans-serif; font-size: 10px; text-decoration: none; position: relative; color: rgb(0, 0, 0);">Report
+                                            a map error</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- ── RIGHT ── -->
-        <div class="right">
-            <p class="form-eyebrow">Begin your enquiry</p>
-            <h2 class="form-heading">Tell us what you're<br><em>looking for.</em></h2>
-            <p class="form-sub">Fill in the details and a specialist will respond within one business day.</p>
-
-            <div class="intents">
-                <button class="ip on" onclick="pick(this)">Buy</button>
-                <button class="ip" onclick="pick(this)">Sell</button>
-                <button class="ip" onclick="pick(this)">Rent</button>
-                <button class="ip" onclick="pick(this)">Invest</button>
-                <button class="ip" onclick="pick(this)">Off-Plan</button>
-                <button class="ip" onclick="pick(this)">Valuation</button>
-            </div>
-
-            <form onsubmit="go(event)">
-                <div class="fgrid">
-                    <div class="fg">
-                        <label for="fn">First Name</label>
-                        <input id="fn" type="text" placeholder="James" required>
-                    </div>
-                    <div class="fg">
-                        <label for="ln">Last Name</label>
-                        <input id="ln" type="text" placeholder="Crawford" required>
-                    </div>
-                    <div class="fg">
-                        <label for="em">Email</label>
-                        <input id="em" type="email" placeholder="james@example.com" required>
-                    </div>
-                    <div class="fg">
-                        <label for="ph">Phone</label>
-                        <input id="ph" type="tel" placeholder="+971 50 000 0000">
-                    </div>
-                    <div class="fg full">
-                        <label for="pt">Property Type</label>
-                        <select id="pt">
-                            <option value="">Any type</option>
-                            <option>Apartment</option>
-                            <option>Villa / Townhouse</option>
-                            <option>Penthouse</option>
-                            <option>Commercial</option>
-                            <option>Plot / Land</option>
-                        </select>
+        <p class="Text__Typography-sc-1103tao-0 xYFng sc-15gsdsg-0 bPKNst">Showing 14 of 14 properties sold on
+            realestate.com.au in the last 12 months</p>
+        <div class="Stack__StackContainer-sc-agfvon-0 dhAEMo"><a
+                href="https://www.realestate.com.au/sold/property-house-qld-algester-149528504"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="73 MOUNT MOOGERAH DRIVE Algester, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$1,500,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">73 MOUNT
+                                        MOOGERAH DRIVE Algester, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">5</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">3</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">12</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 21 Jan
+                                    2026</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="budget">
-                    <div class="b-head">
-                        <span class="b-lbl">Budget</span>
-                        <span class="b-val" id="bv">AED 5,000,000</span>
+            </a><a href="https://www.realestate.com.au/sold/property-residential+land-qld-park+ridge-204332528"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="10 REDCOMB DRIVE Park Ridge, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/4fb818eeb10863afd6ca1917e70ff45bd9d582197413fb5e2808dd86c4019fe4/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$600,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">10 REDCOMB DRIVE
+                                        Park Ridge, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG"><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">Residential
+                                        Land</small></div><small
+                                    class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 15 Jan
+                                    2026</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
                     </div>
-                    <div class="b-track">
-                        <div class="b-fill" id="bf" style="width:23.7%"></div>
-                        <div class="b-knob" id="bk" style="left:23.7%"></div>
-                        <input class="b-input" type="range" min="500000" max="20000000" step="500000" value="5000000"
-                            oninput="bud(this)">
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-residential+land-qld-park+ridge-204393624"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="19 Darling Court Park Ridge, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/80dd58ab66785f2f8f3b92b80b9b5fb35444f8229c8aa55b77b7686c85171027/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">Contact agent
+                                    </h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">19 Darling Court
+                                        Park Ridge, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG"><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">Residential
+                                        Land</small></div><small
+                                    class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 15 Dec
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
                     </div>
-                    <div class="b-ends"><span>AED 500K</span><span>AED 20M+</span></div>
                 </div>
-
-                <div class="fgrid" style="margin-bottom:0">
-                    <div class="fg full">
-                        <label for="msg">Message</label>
-                        <textarea id="msg" placeholder="Preferred location, size, lifestyle needs…"></textarea>
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-springfield-149348360"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="26 Jacana Close Springfield, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/28a77f3d11097e6e7254f26797c3a50a5dbd8084abed79665d857465a175c8d2/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$1,137,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">26 Jacana Close
+                                        Springfield, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 14 Nov
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="srow">
-                    <button type="submit" class="btn">Send Enquiry</button>
-                    <p class="s-note">We respond within<br>one business day.</p>
+            </a><a href="https://www.realestate.com.au/sold/property-residential+land-qld-white+rock-204316336"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="Lot 1514, 60 JIMNA CCT White Rock, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/b7526540420f0faa90b92259af0b06787d66eb47ff158bce4968711bbecc1318/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">Contact agent
+                                    </h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">Lot 1514, 60
+                                        JIMNA CCT White Rock, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG"><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">Residential
+                                        Land</small></div><small
+                                    class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 29 Oct
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-ripley-148830968"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="51 Dobbie Cres Ripley, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/7e3a9d18a2cd7cc29cda98993de0c6791efd652c0f80549f38ed742aeab03c39/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$970,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">51 Dobbie Cres
+                                        Ripley, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 01 Sep
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-residential+land-qld-south+maclean-204273800"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="Lot 834, 95 Endeavour cct South Maclean, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/ba08c62e76942997fbdd47bfd377286a87bf0a8badd2980dded2059e9d568532/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$400,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">Lot 834, 95
+                                        Endeavour cct South Maclean, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG"><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">Residential
+                                        Land</small></div><small
+                                    class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 20 Aug
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-residential+land-qld-white+rock-204275156"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="Lot 1341, Rungulla Street White Rock, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/1b0b020539ecae093696ac7ee00dbe0e3841a166c2cfe021bdc5bc2beb951857/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">Contact agent
+                                    </h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">Lot 1341,
+                                        Rungulla Street White Rock, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG"><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">Residential
+                                        Land</small></div><small
+                                    class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 12 Aug
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-south+ripley-148590624"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="85  Bayliss road South Ripley, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/2b7286a31eca5ee4b452d8d15ee9cfca0ef70c543bbf149d3d1737bb46f1cd91/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$1,100,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">85 Bayliss road
+                                        South Ripley, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 25 Jul
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-greenbank-148290596"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="31 Highbury Court Greenbank, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/26605bf0199c8764b501348f69e662dfb1d33d5b96ad569e44d3bcc22fc0a5ad/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$900,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">31 Highbury
+                                        Court Greenbank, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 30 May
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-greenbank-148136240"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="26 Hepburn Street Greenbank, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/d744995f1cbc8af65653e6d4aa19cb9e7ecf1c6d72fe8d0bdf95a18d169e6b5b/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$890,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">26 Hepburn
+                                        Street Greenbank, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 15 May
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-greenbank-147784324"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="32 Highbury Court Greenbank, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/1030bd2599d6aa18e29d450d345df4c33777979576e283b9256c0e877683d823/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$880,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">32 Highbury
+                                        Court Greenbank, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 06 May
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-narangba-147399140"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="66 Greenhaven Circuit Narangba, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/0b984c985a3e5b0ef241e068254ab5e4a4808f68a41783687b3fee05e70c3aa0/image.jpg">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$770,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">66 Greenhaven
+                                        Circuit Narangba, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">3</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 25 Mar
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><a href="https://www.realestate.com.au/sold/property-house-qld-heathwood-147207524"
+                class="sc-131sbu0-0 jqzXgI">
+                <div class="sc-131sbu0-1 cbHfYS">
+                    <div class="Stack__StackContainer-sc-agfvon-0 euxENn sc-131sbu0-7 bWBYsA">
+                        <aside class="sc-131sbu0-2 hILdfa"><img alt="60 Pinnacle Circuit Heathwood, Qld"
+                                class="sc-131sbu0-4 eJdnyj"
+                                src="https://i2.au.reastatic.net/400x300/48baee38f613ec6cb38fc75249b7bbf866cc276446fd318df6965a4a7dc25905/image.png">
+                            <div class="styles__Container-sc-1cced9e-0 jFfZaf sc-131sbu0-6 gYPibo"><span
+                                    class="styles__Dot-sc-1cced9e-3 dFopSm"></span><span
+                                    class="styles__Content-sc-1cced9e-1 fqRKnu">Sold</span></div>
+                        </aside>
+                        <div class="Inline__InlineContainer-sc-1ppy24s-0 jujMtl sc-131sbu0-3 iQEMEQ">
+                            <div class="Stack__StackContainer-sc-agfvon-0 jALWsN sc-5lz0gl-0 gYIfkM">
+                                <div class="Stack__StackContainer-sc-agfvon-0 jALYng">
+                                    <h3 class="Text__Typography-sc-1103tao-0 eehkNv sc-5lz0gl-1 jlDcf">$1,040,000</h3>
+                                    <h4 class="Text__Typography-sc-1103tao-0 kBMYLd sc-5lz0gl-2 hteyid">60 Pinnacle
+                                        Circuit Heathwood, Qld</h4>
+                                </div>
+                                <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                    <div class="Inline__InlineContainer-sc-1ppy24s-0 lfJGsG">
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 2a.5.5 0 0 0-.5.5V5h1.102l.024-.563A1.5 1.5 0 0 1 6.624 3h2.754a1.5 1.5 0 0 1 1.5 1.437L10.9 5H12V2.5a.5.5 0 0 0-.5-.5h-7Zm5.921 4H3.924l-.834 5h9.82l-.834-5h-1.655ZM9.9 5l-.022-.521a.5.5 0 0 0-.5-.479H6.625a.5.5 0 0 0-.5.479L6.103 5H9.9Zm3.1 7H3v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V12ZM3 5.459V2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v2.959l.993 5.959A.504.504 0 0 1 14 11.5v1a1.5 1.5 0 0 1-1.5 1.5h-.498v.5a.5.5 0 0 1-1 0V14h-6v.5a.5.5 0 0 1-1 0V14H3.5A1.5 1.5 0 0 1 2 12.5v-1c0-.027.002-.055.007-.082L3 5.458Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13 9V3.5a2.5 2.5 0 0 0-5 0V4l.001.039c-.364.059-.674.184-.935.357-.369.247-.609.571-.763.88A2.957 2.957 0 0 0 6 6.461v.025L6 6.495v.004l.5.001H6a.5.5 0 0 0 .5.5v-.5.5H10.5a.5.5 0 0 0 .5-.5h-.5.5V6.46l-.005-.083a2.956 2.956 0 0 0-.298-1.102 2.254 2.254 0 0 0-.763-.88 2.344 2.344 0 0 0-.935-.357A.507.507 0 0 0 9 4v-.5a1.5 1.5 0 1 1 3 0V9H2a.5.5 0 0 0-.5.5H2h-.5v.024a1.763 1.763 0 0 0 .015.201c.013.13.04.309.094.521.106.425.318.99.741 1.554.457.61 1.138 1.19 2.14 1.601l-.437.875a.5.5 0 0 0 .894.448l.5-1 .005-.01c.717.18 1.56.286 2.548.286.989 0 1.831-.105 2.548-.285a.372.372 0 0 0 .005.009l.5 1a.5.5 0 1 0 .894-.448l-.437-.875c1.002-.411 1.683-.992 2.14-1.601a4.357 4.357 0 0 0 .741-1.554 3.847 3.847 0 0 0 .107-.676l.002-.046V9.5L14 9.5h.5A.5.5 0 0 0 14 9h-1ZM9.912 6a1.794 1.794 0 0 0-.11-.276 1.256 1.256 0 0 0-.423-.495C9.189 5.102 8.913 5 8.5 5s-.689.102-.879.229a1.256 1.256 0 0 0-.424.495 1.794 1.794 0 0 0-.11.276H9.913Zm-7.334 4v.004c.082.325.245.76.572 1.196.636.848 1.972 1.8 4.85 1.8 2.878 0 4.214-.952 4.85-1.8.327-.436.49-.871.571-1.196l.001-.004H2.578Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">2</small>
+                                        </div>
+                                        <div class="Inline__InlineContainer-sc-1ppy24s-0 knLAQW sc-1jxpid-1 eCJoMc"><svg
+                                                class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.96 1a3.5 3.5 0 0 0-3.433 2.814l-.473 2.368C1.43 6.482 1 7.12 1 7.857V10.5c0 1.21.857 2.22 2 2.45v.55A1.5 1.5 0 0 0 4.5 15h1A1.5 1.5 0 0 0 7 13.5V13h2v.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.55c1.143-.23 2-1.24 2-2.45V7.857c0-.738-.43-1.375-1.054-1.675l-.473-2.368A3.5 3.5 0 0 0 10.04 1H5.959Zm7.606 6.111a3.246 3.246 0 0 1-.783.363C11.961 7.748 10.526 8 8 8c-2.526 0-3.961-.252-4.783-.526a3.247 3.247 0 0 1-.783-.363.857.857 0 0 0-.434.746V10.5c0 .83.669 1.5 1.496 1.5h9.007c.828 0 1.497-.67 1.497-1.5V7.857a.857.857 0 0 0-.434-.746ZM12 13h-2v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13Zm-6 0H4v.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V13ZM3.533 6.526a2.557 2.557 0 0 1-.486-.21l.461-2.306A2.5 2.5 0 0 1 5.959 2h4.082a2.5 2.5 0 0 1 2.451 2.01l.461 2.306c-.095.056-.248.13-.486.21C11.789 6.752 10.474 7 8 7c-2.474 0-3.789-.248-4.467-.474ZM6 10a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                                    fill="currentColor"></path>
+                                            </svg><small
+                                                class="Text__Typography-sc-1103tao-0 xYFng sc-1jxpid-0 cDxmDd">4</small>
+                                        </div>
+                                    </div><span class="sc-5lz0gl-5 iWzNwI">|</span><small
+                                        class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-3 dFamyI">House</small>
+                                </div><small class="Text__Typography-sc-1103tao-0 xYFng sc-5lz0gl-4 fYbWQS">Sold 03 Mar
+                                    2025</small>
+                            </div>
+                            <div class="Stack__StackContainer-sc-agfvon-0 drJqCQ sc-131sbu0-8 boMSiS"><svg
+                                    class="CK__Icon--medium" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.646 1.146a.5.5 0 0 1 .708 0l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708-.708L10.793 8 4.646 1.854a.5.5 0 0 1 0-.708Z"
+                                        fill="currentColor"></path>
+                                </svg><img loading="lazy" alt="Rahul Singh"
+                                    class="Avatar__StyledImage-sc-1vvicio-0 hHVmAX sc-131sbu0-5 bMTOr"
+                                    src="https://i2.au.reastatic.net/24x24,gravity=north/6f51d26186c90f21f2da8561b28d2cec9ff4444c4d955b73d0071694e9d68f7c/main.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a><button name="Show fewer properties" class="ButtonBase-sc-1lobkej-0 kmswvZ">Show fewer
+                properties</button></div>
     </div>
-
-    <!-- SUCCESS -->
-    <div class="succ" id="succ">
-        <div class="sc">
-            <span class="sc-orn">✦</span>
-            <h2>Enquiry <em>Received.</em></h2>
-            <div class="sc-rule"></div>
-            <p>Thank you for reaching out. One of our advisors will be in touch with you within one business day.</p>
-            <button class="sc-btn" onclick="cls()">Return to page</button>
-        </div>
-    </div>
-
-    <script>
-        function pick(el) {
-            document.querySelectorAll('.ip').forEach(b => b.classList.remove('on'));
-            el.classList.add('on');
-        }
-        function bud(el) {
-            const p = ((+el.value - +el.min) / (+el.max - +el.min)) * 100;
-            document.getElementById('bf').style.width = p + '%';
-            document.getElementById('bk').style.left = p + '%';
-            const v = +el.value;
-            const t = v >= 20000000 ? 'AED 20M+' : v >= 1000000
-                ? 'AED ' + (v / 1e6).toFixed(1).replace(/\.0$/, '') + 'M'
-                : 'AED ' + (v / 1000) + 'K';
-            document.getElementById('bv').textContent = t;
-        }
-        function go(e) { e.preventDefault(); document.getElementById('succ').classList.add('show'); }
-        function cls() { document.getElementById('succ').classList.remove('show'); }
-    </script>
 </body>
 
 </html>

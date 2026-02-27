@@ -9,7 +9,7 @@ const img = (name: string) => `${base}images/${name}`;
 const rahul = {
   name: "Rahul Singh",
   title: "Senior Property Consultant",
-  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300",
+  image: img("rahul-singh.jpg"),
   phone: "+61412345679",
   email: "rahul@realgoldproperties.com.au",
   rating: 5,

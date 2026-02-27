@@ -7,10 +7,10 @@
    LOCAL VARIABLES (Component Specific)
    ════════════════════════════════════════════════════════ */
 .pd-wrapper {
-  --pd-card-bg: #060e5c;
-  --pd-card-border: rgba(249, 195, 7, 0.15);
-  --pd-card-shadow: 0 4px 24px rgba(0, 3, 46, 0.4);
-  --pd-card-shadow-hover: 0 12px 40px rgba(0, 3, 46, 0.6);
+  --pd-card-bg: #ffffff;
+  --pd-card-border: rgba(0, 3, 46, 0.1);
+  --pd-card-shadow: 0 4px 24px rgba(0, 3, 46, 0.08);
+  --pd-card-shadow-hover: 0 12px 40px rgba(0, 3, 46, 0.15);
   --pd-input-bg: var(--rg-beige);
   --pd-input-border: var(--rg-beige-dark);
   --pd-radius: 1.25rem;
@@ -406,8 +406,8 @@
    ════════════════════════════════════════════════════════ */
 .pd-stats {
   background: var(--pd-card-bg);
+  border-top: 1px solid var(--pd-card-border);
   border-bottom: 1px solid var(--pd-card-border);
-  box-shadow: 0 4px 30px rgba(0, 3, 46, 0.4);
   position: relative;
   z-index: 20;
 }
@@ -446,7 +446,7 @@
 }
 
 .pd-stat:hover {
-  background: var(--rg-beige);
+  background: rgba(249, 195, 7, 0.08);
 }
 
 .pd-stat__icon {
@@ -658,12 +658,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.15rem 1.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--pd-card-border);
   transition: background var(--pd-transition-fast);
 }
 
 .pd-detail-row:nth-child(odd) {
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid var(--pd-card-border);
 }
 
 .pd-detail-row:hover {
@@ -884,7 +884,7 @@
   gap: 1.25rem;
   margin-bottom: 2rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--pd-card-border);
 }
 
 .pd-contact__avatar {
@@ -892,7 +892,7 @@
   height: 75px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.15);
+  border: 3px solid var(--pd-card-border);
   transition: border-color var(--pd-transition);
 }
 
@@ -931,7 +931,7 @@
 .pd-contact__star {
   width: 12px;
   height: 12px;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(0, 3, 46, 0.15);
 }
 
 .pd-contact__star.active {
@@ -1050,7 +1050,7 @@
   flex-direction: column;
   gap: 0.75rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--pd-card-border);
 }
 
 .pd-contact-method {
@@ -1417,7 +1417,7 @@
   }
 
   .pd-detail-row:nth-last-child(-n + 2) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--pd-card-border);
   }
 
   .pd-detail-row:last-child {

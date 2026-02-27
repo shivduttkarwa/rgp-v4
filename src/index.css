@@ -4,10 +4,10 @@
 
 :root {
   /* ── Light Theme ── */
-  --rg-beige-light: #f7f8fc; /* main page background */
-  --rg-beige: #eef1fa; /* secondary background */
-  --rg-beige-dark: #dde4f6; /* cards / panels */
-  --rg-beige-darker: #b8c4e0; /* borders / subtle lines */
+  --rg-beige-light: #fffdf6; /* main page background */
+  --rg-beige: #fef9ec; /* secondary background / form fields */
+  --rg-beige-dark: #faefc8; /* cards / panels */
+  --rg-beige-darker: #e8d48a; /* borders / subtle lines */
 
   /* ── Blue scale (brand deep navy → vivid) ── */
   --rg-blue-50: #f0f3ff;
@@ -37,7 +37,7 @@
   /* Legacy aliases (re-mapped for light theme) */
   --rg-navy: #0f1870; /* deep brand navy — used for dark text, outlines */
   --rg-dark: #0f1870;
-  --rg-darker: #f7f8fc; /* maps to page bg (used as section bg in Philosophy) */
+  --rg-darker: #fffdf6; /* maps to page bg (used as section bg in Philosophy) */
   --rg-ink: #0f1870;
   --rg-ink-2: rgba(15, 24, 112, 0.68);
 
