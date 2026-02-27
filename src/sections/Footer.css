@@ -378,28 +378,28 @@ a.rg-footer__contact-item:hover svg {
 
 @media (max-width: 1440px) {
   .rg-footer__watermark-text {
-    font-size: clamp(2.75rem, 11vw, 10rem);
+    font-size: clamp(3.48rem, 15vw, 13.8rem);
   }
 }
 
 /* Small laptops */
 @media (max-width: 1366px) {
   .rg-footer__watermark-text {
-    font-size: clamp(2.5rem, 10vw, 9rem);
+    font-size: clamp(3.36rem, 14.4vw, 12.6rem);
   }
 }
 
 /* iPad Pro/Air landscape */
 @media (max-width: 1180px) {
   .rg-footer__watermark-text {
-    font-size: clamp(2.4rem, 9.5vw, 8.5rem);
+    font-size: clamp(3.12rem, 13.8vw, 11.4rem);
   }
 }
 
 /* iPad portrait */
 @media (max-width: 834px) {
   .rg-footer__watermark-text {
-    font-size: clamp(2.3rem, 12vw, 7rem);
+    font-size: clamp(3rem, 15.6vw, 9.6rem);
   }
 }
 
@@ -535,7 +535,7 @@ a.rg-footer__contact-item:hover svg {
   }
 
   .rg-footer__watermark-text {
-    font-size: clamp(2.5rem, 13vw, 8rem);
+    font-size: clamp(3.12rem, 16.8vw, 10.2rem);
   }
 
   .rg-footer__watermark-letter {
@@ -611,6 +611,6 @@ a.rg-footer__contact-item:hover svg {
   }
 
   .rg-footer__watermark-text {
-    font-size: clamp(2rem, 13vw, 5rem);
+    font-size: clamp(2.64rem, 16.8vw, 6.72rem);
   }
 }
