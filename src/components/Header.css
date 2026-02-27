@@ -119,10 +119,9 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.7rem 1.5rem;
-  /* outlined gold */
-  background: transparent;
-  color: var(--rg-gold);
-  border: 1.5px solid rgba(249, 195, 7, 0.6);
+  background: linear-gradient(135deg, #f9c307, #d4a200);
+  color: #03071e;
+  border: 1.5px solid rgba(249, 195, 7, 0.95);
   border-radius: 8px;
   font-family: var(--font-title);
   font-size: 0.875rem;
@@ -130,9 +129,10 @@
   letter-spacing: 0.08em;
   text-decoration: none;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
   transition:
     background 0.28s ease,
-    color 0.28s ease,
     border-color 0.28s ease,
     box-shadow 0.28s ease,
     transform 0.2s ease;
@@ -143,9 +143,25 @@
   transition: transform 0.28s ease;
 }
 
+.rg-header__cta::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -120%;
+  width: 70%;
+  height: 140%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
 .rg-header__cta:hover {
-  background: var(--rg-gold);
-  color: #03071e;
   border-color: var(--rg-gold);
   box-shadow: 0 6px 24px rgba(249, 195, 7, 0.35);
   transform: translateY(-1px);
@@ -153,6 +169,20 @@
 
 .rg-header__cta:hover svg {
   transform: translate(2px, -2px);
+}
+
+.rg-header__cta:hover::after {
+  opacity: 1;
+  animation: rgCtaShine 0.85s ease forwards;
+}
+
+@keyframes rgCtaShine {
+  from {
+    left: -120%;
+  }
+  to {
+    left: 140%;
+  }
 }
 
 /* ══════════════════════════════════════
