@@ -1,4 +1,4 @@
-/* Simple header: logo left, hamburger right */
+/* ─── Header shell ─── */
 .rg-header {
   position: fixed;
   top: 0;
@@ -9,48 +9,285 @@
   transition: none;
 }
 
+/* ─── Background blur layer ─── */
+.rg-header__bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 13, 60, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  z-index: 0;
+  border-bottom: 1px solid rgba(249, 195, 7, 0.18);
+}
+
+/* ─── Inner row ─── */
 .rg-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
-  height: 88px;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem);
+  height: 86px;
   position: relative;
   z-index: 1;
 }
 
-.rg-header__bg {
-  position: absolute;
-  inset: 0;
-  background: rgba(4, 12, 88, 0.82);
-  backdrop-filter: blur(10px);
-  opacity: 0;
-  z-index: 0;
-  transform-origin: top;
-}
-
-.rg-header .hamburger {
-  position: static;
-  top: auto;
-  right: auto;
-  z-index: 650;
-}
-
-
+/* ─── Logo ─── */
 .rg-header__logo {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .rg-header__logo img {
-  width: clamp(80px, 9vw, 130px);
-  margin-top: 4px;
+  width: clamp(76px, 8vw, 118px);
   height: auto;
   display: block;
+  margin-top: 3px;
 }
 
-@media (max-width: 768px) {
-  .rg-header__logo img {
-    width: 96px;
+/* ══════════════════════════════════════
+   DESKTOP NAV
+══════════════════════════════════════ */
+.rg-header__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 3.5vw, 3.25rem);
+  /* exact horizontal centering between logo and CTA */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.rg-header__nav-link {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.68);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Sliding gold underline */
+.rg-header__nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--rg-gold);
+  border-radius: 2px;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rg-header__nav-link:hover {
+  color: #ffffff;
+}
+
+.rg-header__nav-link:hover::after {
+  width: 100%;
+}
+
+/* Active state — full gold */
+.rg-header__nav-link.is-active {
+  color: var(--rg-gold);
+}
+
+.rg-header__nav-link.is-active::after {
+  width: 100%;
+  background: var(--rg-gold);
+}
+
+/* ══════════════════════════════════════
+   RIGHT-SIDE ACTIONS
+══════════════════════════════════════ */
+.rg-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-shrink: 0;
+}
+
+/* ── CTA button ── */
+.rg-header__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  /* outlined gold */
+  background: transparent;
+  color: var(--rg-gold);
+  border: 1.5px solid rgba(249, 195, 7, 0.6);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.28s ease,
+    color 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    transform 0.2s ease;
+}
+
+.rg-header__cta svg {
+  flex-shrink: 0;
+  transition: transform 0.28s ease;
+}
+
+.rg-header__cta:hover {
+  background: var(--rg-gold);
+  color: #03071e;
+  border-color: var(--rg-gold);
+  box-shadow: 0 6px 24px rgba(249, 195, 7, 0.35);
+  transform: translateY(-1px);
+}
+
+.rg-header__cta:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* ══════════════════════════════════════
+   MOBILE HAMBURGER  (hidden on desktop)
+══════════════════════════════════════ */
+.rg-hamburger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.rg-hamburger:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(249, 195, 7, 0.5);
+}
+
+.rg-hamburger.active {
+  border-color: rgba(249, 195, 7, 0.55);
+  background: rgba(249, 195, 7, 0.08);
+}
+
+.rg-hamburger__line {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: all 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+  transform-origin: center;
+}
+
+.rg-hamburger.active .rg-hamburger__line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.rg-hamburger.active .rg-hamburger__line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.rg-hamburger.active .rg-hamburger__line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ══════════════════════════════════════
+   MOBILE NAV PANEL
+══════════════════════════════════════ */
+.rg-header__mobile-nav {
+  display: none;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  padding: 0.5rem clamp(1.25rem, 3vw, 2.5rem) 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(5, 8, 28, 0.98);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.rg-header__mobile-link {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.68);
+  text-decoration: none;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  letter-spacing: 0.04em;
+  transition: color 0.22s ease, padding-left 0.22s ease;
+}
+
+.rg-header__mobile-link:hover,
+.rg-header__mobile-link.is-active {
+  color: var(--rg-gold);
+  padding-left: 0.6rem;
+}
+
+.rg-header__mobile-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.9rem 1.75rem;
+  background: transparent;
+  color: var(--rg-gold);
+  border: 1.5px solid rgba(249, 195, 7, 0.6);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  width: fit-content;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.rg-header__mobile-cta:hover {
+  background: var(--rg-gold);
+  color: #03071e;
+  border-color: var(--rg-gold);
+}
+
+/* ══════════════════════════════════════
+   BREAKPOINTS
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .rg-header__nav {
+    display: none;
+  }
+
+  .rg-header__cta {
+    display: none;
+  }
+
+  .rg-hamburger {
+    display: flex;
+  }
+
+  .rg-header__mobile-nav.is-open {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .rg-header__inner {
+    height: 72px;
   }
 }

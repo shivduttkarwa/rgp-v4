@@ -10,8 +10,8 @@ body.menu-open {
 .hamburger {
   width: 56px;
   height: 56px;
-  background: transparent;
-  border: 1px solid rgba(240, 234, 214, 0.15);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 24, 112, 0.14);
   border-radius: 50%;
   cursor: pointer;
   position: fixed;
@@ -22,16 +22,17 @@ body.menu-open {
   align-items: center;
   justify-content: center;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(6px);
 }
 
 .hamburger:hover {
   border-color: var(--rg-gold);
-  background: rgba(249, 195, 7, 0.05);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .hamburger.active {
-  border-color: var(--rg-text-dark);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(249, 195, 7, 0.5);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .hamburger-box {
@@ -45,7 +46,7 @@ body.menu-open {
   left: 0;
   width: 100%;
   height: 1.5px;
-  background: #f0ead6;
+  background: var(--rg-navy);
   border-radius: 2px;
   transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
   transform-origin: center;
@@ -79,7 +80,7 @@ body.menu-open {
 
 /* Hamburger Active State */
 .hamburger.active .hamburger-line {
-  background: var(--rg-text-dark);
+  background: var(--rg-navy);
 }
 
 .hamburger.active .hamburger-line:nth-child(1) {
@@ -101,7 +102,13 @@ body.menu-open {
 
 /* ========== OVERLAY MENU ========== */
 .overlay-menu {
+  /* Dark menu — override global light theme variables locally */
   --rg-gold: #f9c307;
+  --rg-text-dark: #ffffff;
+  --rg-text-medium: rgba(255, 255, 255, 0.62);
+  --rg-text-light: rgba(255, 255, 255, 0.36);
+  --menu-border: rgba(255, 255, 255, 0.09);
+
   position: fixed;
   inset: 0;
   z-index: 500;
@@ -126,7 +133,7 @@ body.menu-open {
 
 .menu-bg-panel {
   flex: 1;
-  background: var(--rg-dark);
+  background: linear-gradient(160deg, #080d2a 0%, #040714 100%);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
@@ -138,21 +145,10 @@ body.menu-open {
 }
 
 /* Opening: panels come from top */
-.menu-bg-panel:nth-child(1) {
-  transition-delay: 0s;
-}
-
-.menu-bg-panel:nth-child(2) {
-  transition-delay: 0.05s;
-}
-
-.menu-bg-panel:nth-child(3) {
-  transition-delay: 0.1s;
-}
-
-.menu-bg-panel:nth-child(4) {
-  transition-delay: 0.15s;
-}
+.menu-bg-panel:nth-child(1) { transition-delay: 0s; }
+.menu-bg-panel:nth-child(2) { transition-delay: 0.05s; }
+.menu-bg-panel:nth-child(3) { transition-delay: 0.1s; }
+.menu-bg-panel:nth-child(4) { transition-delay: 0.15s; }
 
 .overlay-menu.active .menu-bg-panel {
   transform: scaleY(1);
@@ -163,21 +159,10 @@ body.menu-open {
   transform-origin: top;
 }
 
-.overlay-menu:not(.active) .menu-bg-panel:nth-child(1) {
-  transition-delay: 0.6s;
-}
-
-.overlay-menu:not(.active) .menu-bg-panel:nth-child(2) {
-  transition-delay: 0.55s;
-}
-
-.overlay-menu:not(.active) .menu-bg-panel:nth-child(3) {
-  transition-delay: 0.5s;
-}
-
-.overlay-menu:not(.active) .menu-bg-panel:nth-child(4) {
-  transition-delay: 0.45s;
-}
+.overlay-menu:not(.active) .menu-bg-panel:nth-child(1) { transition-delay: 0.6s; }
+.overlay-menu:not(.active) .menu-bg-panel:nth-child(2) { transition-delay: 0.55s; }
+.overlay-menu:not(.active) .menu-bg-panel:nth-child(3) { transition-delay: 0.5s; }
+.overlay-menu:not(.active) .menu-bg-panel:nth-child(4) { transition-delay: 0.45s; }
 
 /* Menu Content */
 .menu-content {
@@ -204,12 +189,12 @@ body.menu-open {
 
 .menu-item {
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  border-bottom: 1px solid transparent;
   transition: border-color 0.4s ease;
 }
 
 .menu-item:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0);
+  border-top: 1px solid transparent;
 }
 
 .menu-link {
@@ -223,8 +208,8 @@ body.menu-open {
 }
 
 .menu-item--empty {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid var(--menu-border);
+  border-bottom: 1px solid var(--menu-border);
 }
 
 .menu-empty {
@@ -234,84 +219,37 @@ body.menu-open {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--rg-text-light);
 }
 
 /* Opening: stagger from first to last */
-.overlay-menu.active .menu-item:nth-child(1) .menu-link {
-  transform: translateX(0);
-  transition-delay: 0.3s;
-}
-
-.overlay-menu.active .menu-item:nth-child(2) .menu-link {
-  transform: translateX(0);
-  transition-delay: 0.4s;
-}
-
-.overlay-menu.active .menu-item:nth-child(3) .menu-link {
-  transform: translateX(0);
-  transition-delay: 0.5s;
-}
-
-.overlay-menu.active .menu-item:nth-child(4) .menu-link {
-  transform: translateX(0);
-  transition-delay: 0.6s;
-}
-
-.overlay-menu.active .menu-item:nth-child(5) .menu-link {
-  transform: translateX(0);
-  transition-delay: 0.7s;
-}
+.overlay-menu.active .menu-item:nth-child(1) .menu-link { transform: translateX(0); transition-delay: 0.3s; }
+.overlay-menu.active .menu-item:nth-child(2) .menu-link { transform: translateX(0); transition-delay: 0.4s; }
+.overlay-menu.active .menu-item:nth-child(3) .menu-link { transform: translateX(0); transition-delay: 0.5s; }
+.overlay-menu.active .menu-item:nth-child(4) .menu-link { transform: translateX(0); transition-delay: 0.6s; }
+.overlay-menu.active .menu-item:nth-child(5) .menu-link { transform: translateX(0); transition-delay: 0.7s; }
 
 .overlay-menu.active .menu-item {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--menu-border);
 }
 
-.overlay-menu.active .menu-item:nth-child(1) {
-  transition-delay: 0.3s;
-}
-
-.overlay-menu.active .menu-item:nth-child(2) {
-  transition-delay: 0.4s;
-}
-
-.overlay-menu.active .menu-item:nth-child(3) {
-  transition-delay: 0.5s;
-}
-
-.overlay-menu.active .menu-item:nth-child(4) {
-  transition-delay: 0.6s;
-}
-
-.overlay-menu.active .menu-item:nth-child(5) {
-  transition-delay: 0.7s;
-}
+.overlay-menu.active .menu-item:nth-child(1) { transition-delay: 0.3s; }
+.overlay-menu.active .menu-item:nth-child(2) { transition-delay: 0.4s; }
+.overlay-menu.active .menu-item:nth-child(3) { transition-delay: 0.5s; }
+.overlay-menu.active .menu-item:nth-child(4) { transition-delay: 0.6s; }
+.overlay-menu.active .menu-item:nth-child(5) { transition-delay: 0.7s; }
 
 .overlay-menu:not(.active) .menu-item {
-  border-color: rgba(255, 255, 255, 0);
+  border-color: transparent;
   transition-delay: 0s;
 }
 
 /* Closing: stagger from last to first */
-.overlay-menu:not(.active) .menu-item:nth-child(1) .menu-link {
-  transition-delay: 0.4s;
-}
-
-.overlay-menu:not(.active) .menu-item:nth-child(2) .menu-link {
-  transition-delay: 0.3s;
-}
-
-.overlay-menu:not(.active) .menu-item:nth-child(3) .menu-link {
-  transition-delay: 0.2s;
-}
-
-.overlay-menu:not(.active) .menu-item:nth-child(4) .menu-link {
-  transition-delay: 0.1s;
-}
-
-.overlay-menu:not(.active) .menu-item:nth-child(5) .menu-link {
-  transition-delay: 0s;
-}
+.overlay-menu:not(.active) .menu-item:nth-child(1) .menu-link { transition-delay: 0.4s; }
+.overlay-menu:not(.active) .menu-item:nth-child(2) .menu-link { transition-delay: 0.3s; }
+.overlay-menu:not(.active) .menu-item:nth-child(3) .menu-link { transition-delay: 0.2s; }
+.overlay-menu:not(.active) .menu-item:nth-child(4) .menu-link { transition-delay: 0.1s; }
+.overlay-menu:not(.active) .menu-item:nth-child(5) .menu-link { transition-delay: 0s; }
 
 .menu-text {
   font-family: var(--font-title);
@@ -360,7 +298,7 @@ body.menu-open {
   flex-direction: column;
   justify-content: flex-start;
   padding: 2.5rem 0 2rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 1px solid var(--menu-border);
   padding-left: 4rem;
   opacity: 0;
   transform: translateY(30px);
@@ -380,15 +318,15 @@ body.menu-open {
   font-size: 0.68rem;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--rg-text-light);
 }
 
 .menu-search-input {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   padding: 0.9rem 1.1rem;
   transition:
@@ -399,14 +337,14 @@ body.menu-open {
 
 .menu-search-input:focus-within {
   border-color: var(--rg-gold);
-  box-shadow: 0 0 0 4px rgba(249, 195, 7, 0.15);
-  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 0 4px rgba(249, 195, 7, 0.12);
+  background: rgba(249, 195, 7, 0.04);
 }
 
 .menu-search-icon {
   width: 18px;
   height: 18px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--rg-text-light);
   flex-shrink: 0;
 }
 
@@ -414,14 +352,14 @@ body.menu-open {
   background: transparent;
   border: none;
   outline: none;
-  color: #fff;
+  color: #ffffff;
   font-family: var(--font-body);
   font-size: 1rem;
   width: 100%;
 }
 
 .menu-search-input input::placeholder {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--rg-text-light);
 }
 
 .menu-search-suggestions {
@@ -449,9 +387,9 @@ body.menu-open {
 }
 
 .menu-search-chip {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--rg-text-medium);
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
   font-family: var(--font-body);
@@ -468,15 +406,15 @@ body.menu-open {
 
 .menu-search-chip:hover {
   border-color: var(--rg-gold);
-  color: #fff;
-  background: rgba(249, 195, 7, 0.12);
+  color: #ffffff;
+  background: rgba(249, 195, 7, 0.14);
   transform: translateY(-1px);
 }
 
 .menu-search-item {
   background: transparent;
   border: 1px solid transparent;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--rg-text-medium);
   text-align: left;
   padding: 0.5rem 0.75rem;
   border-radius: 10px;
@@ -493,12 +431,12 @@ body.menu-open {
 
 .menu-search-item:disabled {
   cursor: default;
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .menu-search-item:not(:disabled):hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
   background: rgba(255, 255, 255, 0.06);
 }
 
@@ -668,7 +606,7 @@ body.menu-open {
 }
 
 .menu-ctaSecondary {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.06);
 }
@@ -676,8 +614,10 @@ body.menu-open {
 .menu-ctaSecondary:hover {
   border-color: var(--rg-gold);
   color: var(--rg-gold);
+  background: rgba(249, 195, 7, 0.08);
   transform: translateY(-2px);
 }
+
 /* Decorative Element */
 .menu-deco {
   position: absolute;
@@ -703,7 +643,7 @@ body.menu-open {
 .menu-deco-line {
   width: 80px;
   height: 1px;
-  background: var(--rg-text-dark);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .menu-deco-dot {
@@ -729,7 +669,6 @@ body.menu-open {
     grid-template-rows: auto auto;
     align-content: start;
     overflow: hidden;
-    /* push content below the fixed header (88px) */
     padding-top: calc(var(--rg-pad) + 64px);
     gap: 2.5rem;
   }
@@ -762,8 +701,8 @@ body.menu-open {
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    border: 1px solid rgba(249, 195, 7, 0.2);
-    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(249, 195, 7, 0.22);
+    background: rgba(255, 255, 255, 0.07);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -789,13 +728,14 @@ body.menu-open {
   .menu-social a:hover {
     border-color: var(--rg-gold);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(249, 195, 7, 0.25);
+    box-shadow: 0 8px 20px rgba(249, 195, 7, 0.3);
     background: var(--rg-gold);
   }
 
   .menu-social a:hover::before {
     transform: translateY(0);
   }
+
   .menu-social a:active::before {
     transform: translateY(0);
   }
@@ -803,17 +743,15 @@ body.menu-open {
   .menu-social a svg {
     width: 18px;
     height: 18px;
-    color: #fff;
+    color: #ffffff;
     position: relative;
     z-index: 1;
     transition: color 0.35s ease;
   }
 
-  .menu-social a:hover svg {
-    color: var(--rg-dark);
-  }
+  .menu-social a:hover svg,
   .menu-social a:active svg {
-    color: var(--rg-dark);
+    color: #03071e;
   }
 
   .menu-info-block {
@@ -822,7 +760,6 @@ body.menu-open {
 
   .menu-main {
     padding-left: 0.75rem;
-    /* center nav vertically so Home never hides behind the header */
     justify-content: flex-start;
     padding-bottom: 0;
   }

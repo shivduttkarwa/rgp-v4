@@ -6,8 +6,8 @@
   padding: 6rem 2rem;
   max-width: 1600px;
   margin: 0 auto;
-  background: var(--rg-gold);
-  color: var(--rg-dark);
+  background: #f7f8fc;
+  color: var(--rg-navy);
 }
 
 .team__header {
@@ -23,7 +23,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--rg-dark);
+  color: var(--rg-gold);
   margin-bottom: 1rem;
 }
 
@@ -31,20 +31,20 @@
   font-family: var(--font-title);
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 400;
-  color: var(--rg-dark);
+  color: var(--rg-navy);
   margin: 0 0 1.25rem;
   line-height: 1.15;
 }
 
 .team__title em {
   font-style: normal;
-  color: var(--rg-dark);
+  color: var(--rg-gold);
 }
 
 .team__subtitle {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.125rem);
-  color: rgba(0, 2, 32, 0.75);
+  color: var(--rg-text-medium);
   margin: 0;
   line-height: 1.7;
 }
@@ -72,16 +72,16 @@
   border-radius: 24px;
   overflow: hidden;
   cursor: pointer;
-  background: #000220;
+  background: #dde4f6;
   isolation: isolate;
 }
 
 .exp-card.active {
   flex-grow: 5;
   box-shadow:
-    0 0 0 1px rgba(249, 195, 7, 0.2),
-    0 8px 32px rgba(0, 2, 32, 0.6),
-    0 0 60px rgba(249, 195, 7, 0.08);
+    0 0 0 1px rgba(249, 195, 7, 0.35),
+    0 8px 32px rgba(15, 24, 112, 0.18),
+    0 0 60px rgba(249, 195, 7, 0.1);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -118,12 +118,12 @@
   width: 100%;
   background: linear-gradient(
     90deg,
-    rgba(10, 18, 96, 0.75) 0%,
-    rgba(10, 18, 96, 0.5) 45%,
-    rgba(249, 195, 7, 0.18) 65%,
-    rgba(0, 2, 32, 0) 100%
+    rgba(15, 24, 112, 0.65) 0%,
+    rgba(15, 24, 112, 0.4) 45%,
+    rgba(249, 195, 7, 0.14) 65%,
+    rgba(15, 24, 112, 0) 100%
   );
-  mix-blend-mode: overlay;
+  mix-blend-mode: multiply;
   opacity: 0;
   pointer-events: none;
   z-index: 2;
@@ -143,8 +143,8 @@
   inset: 30% 0 0 0;
   background: linear-gradient(
     to top,
-    rgba(0, 2, 32, 0.85) 0%,
-    rgba(0, 2, 32, 0.4) 40%,
+    rgba(15, 24, 112, 0.82) 0%,
+    rgba(15, 24, 112, 0.35) 40%,
     transparent 100%
   );
   z-index: 3;
@@ -197,8 +197,8 @@
   z-index: 4;
   opacity: 0;
   pointer-events: none;
-  background: rgba(0, 2, 32, 0.22);
-  backdrop-filter: blur(3px);
+  background: rgba(247, 248, 252, 0.88);
+  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -226,9 +226,9 @@
   inset: 0;
   background: linear-gradient(
     to right,
-    #000220 0%,
-    rgba(0, 2, 32, 0.7) 30%,
-    rgba(0, 2, 32, 0.1) 65%,
+    #f7f8fc 0%,
+    rgba(247, 248, 252, 0.7) 30%,
+    rgba(247, 248, 252, 0.1) 65%,
     transparent 100%
   );
   z-index: 1;
@@ -244,7 +244,7 @@
 .exp-card .member-name {
   font-family: var(--font-title);
   font-size: 2.2rem;
-  color: var(--rg-text-dark);
+  color: var(--rg-navy);
   line-height: 1.1;
   margin-bottom: 0.3rem;
 }
@@ -272,7 +272,7 @@
   font-size: 0.88rem;
   color: var(--rg-text-medium);
   line-height: 1.6;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 1.5rem;
   max-width: 450px;
 }
@@ -292,7 +292,7 @@
 .exp-card .stat-value {
   font-family: var(--font-title);
   font-size: 1.6rem;
-  color: var(--rg-text-dark);
+  color: var(--rg-navy);
   line-height: 1;
 }
 
@@ -314,8 +314,8 @@
 
 .tag {
   padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 24, 112, 0.06);
+  border: 1px solid rgba(15, 24, 112, 0.12);
   border-radius: 100px;
   font-size: 0.72rem;
   color: var(--rg-text-medium);
@@ -327,9 +327,9 @@
 }
 
 .tag:hover {
-  background: rgba(249, 195, 7, 0.1);
-  border-color: rgba(249, 195, 7, 0.3);
-  color: var(--rg-gold);
+  background: rgba(249, 195, 7, 0.12);
+  border-color: rgba(249, 195, 7, 0.4);
+  color: var(--rg-navy);
 }
 
 /* Actions Row */
@@ -383,30 +383,30 @@
 
 /* LinkedIn */
 .action-btn--linkedin {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 24, 112, 0.06);
   color: var(--rg-text-medium);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(15, 24, 112, 0.14);
 }
 
 .action-btn--linkedin:hover {
-  background: rgba(10, 102, 194, 0.2);
-  border-color: rgba(10, 102, 194, 0.5);
-  color: #6daee8;
+  background: rgba(10, 102, 194, 0.1);
+  border-color: rgba(10, 102, 194, 0.4);
+  color: #1a5fa8;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(10, 102, 194, 0.18);
+  box-shadow: 0 8px 24px rgba(10, 102, 194, 0.12);
 }
 
 /* Email */
 .action-btn--email {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 24, 112, 0.06);
   color: var(--rg-text-medium);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(15, 24, 112, 0.14);
 }
 
 .action-btn--email:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--rg-text-dark);
+  background: rgba(15, 24, 112, 0.1);
+  border-color: rgba(15, 24, 112, 0.25);
+  color: var(--rg-navy);
   transform: translateY(-2px);
 }
 
@@ -433,7 +433,7 @@
 
 .exp-card .member-quote p {
   font-size: 0.9rem;
-  color: var(--rg-text-medium);
+  color: var(--rg-navy);
   font-style: italic;
   line-height: 1.5;
 }
@@ -570,10 +570,10 @@
     height: 100%;
     border-radius: 20px;
     overflow: hidden;
-    background: #000220;
+    background: #ffffff;
     box-shadow:
-      0 0 0 1px rgba(249, 195, 7, 0.15),
-      0 12px 40px rgba(0, 2, 32, 0.55);
+      0 0 0 1px rgba(15, 24, 112, 0.1),
+      0 12px 40px rgba(15, 24, 112, 0.1);
   }
 
   /* Image — top */
@@ -583,7 +583,7 @@
     height: 280px;
     overflow: hidden;
     flex-shrink: 0;
-    background: #000220;
+    background: #dde4f6;
   }
 
   .swiper-card-image img {
@@ -600,8 +600,8 @@
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(0, 2, 32, 0.5) 55%,
-      #000220 100%
+      rgba(247, 248, 252, 0.5) 55%,
+      #ffffff 100%
     );
     pointer-events: none;
   }
@@ -617,7 +617,7 @@
   .swiper-card-body .member-name {
     font-family: var(--font-title);
     font-size: 1.55rem;
-    color: var(--rg-text-dark);
+    color: var(--rg-navy);
     line-height: 1.1;
     margin-bottom: 0.2rem;
   }
@@ -657,7 +657,7 @@
 
   .swiper-card-body .member-quote p {
     font-size: 0.85rem;
-    color: var(--rg-text-medium);
+    color: var(--rg-navy);
     font-style: italic;
     line-height: 1.5;
   }
@@ -666,7 +666,7 @@
     font-size: 0.83rem;
     color: var(--rg-text-medium);
     line-height: 1.65;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 1.1rem;
   }
 
@@ -685,7 +685,7 @@
   .swiper-card-body .stat-value {
     font-family: var(--font-title);
     font-size: 1.4rem;
-    color: var(--rg-text-dark);
+    color: var(--rg-navy);
     line-height: 1;
   }
 

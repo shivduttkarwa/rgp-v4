@@ -64,7 +64,7 @@ section.project-feature .block-text .block-text-col {
 
 section.project-feature .tilt-text-heading {
   word-spacing: 0.12em !important;
-  color: #ffffff !important;
+  color: var(--rg-navy) !important;
   font-family: var(--font-title) !important;
   font-weight: 400 !important;
   font-size: clamp(2.25rem, 5vw, 3.5rem) !important;
@@ -173,9 +173,9 @@ section.project-feature .projects-wrapper .project .content .sticky {
   flex-direction: column;
   border-radius: 18px;
   overflow: clip;
-  background: #060e5c;
-  border: 1px solid rgba(249, 195, 7, 0.2);
-  box-shadow: 0 16px 48px rgba(0, 3, 46, 0.4);
+  background: #ffffff;
+  border: 1px solid rgba(15, 24, 112, 0.1);
+  box-shadow: 0 16px 48px rgba(15, 24, 112, 0.1);
 }
 
 /* ── Top bar: index + status ── */
@@ -184,13 +184,13 @@ section.project-feature .projects-wrapper .project .content .sticky {
   align-items: center;
   justify-content: space-between;
   padding: 0.85rem 1.25rem;
-  background: rgba(0, 3, 46, 0.5);
+  background: rgba(15, 24, 112, 0.04);
 }
 
 .pc-card .pc-index {
   font-family: var(--font-title);
   font-size: 0.78rem;
-  color: rgba(240, 234, 214, 0.5);
+  color: var(--rg-text-light);
   letter-spacing: 0.14em;
 }
 
@@ -229,11 +229,11 @@ section.project-feature .projects-wrapper .project .content .sticky {
   font-size: clamp(1rem, 1.8vw, 1.4rem);
   font-weight: 400;
   color: #fff;
-  background: rgba(0, 3, 46, 0.72);
+  background: rgba(15, 24, 112, 0.78);
   backdrop-filter: blur(6px);
   padding: 0.3rem 0.85rem;
   border-radius: 8px;
-  border: 1px solid rgba(249, 195, 7, 0.3);
+  border: 1px solid rgba(249, 195, 7, 0.4);
   letter-spacing: 0.02em;
 }
 
@@ -252,7 +252,7 @@ section.project-feature .projects-wrapper .project .content .sticky {
   gap: 0.3rem;
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--rg-text-light);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -267,7 +267,7 @@ section.project-feature .projects-wrapper .project .content .sticky {
 .pc-card .pc-title {
   font-family: var(--font-title);
   font-weight: 400;
-  color: #ffffff;
+  color: var(--rg-navy);
   font-size: clamp(1.4rem, 2.2vw, 2.2rem);
   line-height: 1.1;
   letter-spacing: 0.01em;
@@ -291,9 +291,9 @@ section.project-feature .projects-wrapper .project .content .sticky {
   gap: 0.2rem;
   flex: 1;
   padding: 0.6rem 0.5rem;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(15, 24, 112, 0.05);
   border-radius: 10px;
-  border: 1px solid rgba(249, 195, 7, 0.15);
+  border: 1px solid rgba(15, 24, 112, 0.1);
 }
 
 .pc-card .pc-feat svg {
@@ -305,7 +305,7 @@ section.project-feature .projects-wrapper .project .content .sticky {
 .pc-card .pc-feat-val {
   font-family: var(--font-title);
   font-size: 1rem;
-  color: #ffffff;
+  color: var(--rg-navy);
   font-weight: 400;
   line-height: 1;
 }
@@ -313,7 +313,7 @@ section.project-feature .projects-wrapper .project .content .sticky {
 .pc-card .pc-feat-label {
   font-family: var(--font-body);
   font-size: 0.62rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--rg-text-light);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }

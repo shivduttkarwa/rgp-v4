@@ -108,16 +108,16 @@
 
 /* ===== Card Themes ===== */
 
-/* Buy Card - Darkest Navy Shade (First Card) */
+/* Buy Card */
 .svc-card--buy {
-  background-color: #060e5c;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #ffffff;
+  color: var(--rg-navy);
+  border: 1px solid rgba(15, 24, 112, 0.1);
 }
 
 .svc-card--buy .svc-card__icon-wrap {
   background-color: var(--rg-gold);
-  color: #00032e;
+  color: #0f1870;
 }
 
 .svc-card--buy .svc-card__headline {
@@ -125,19 +125,19 @@
 }
 
 .svc-card--buy .svc-card__title {
-  color: #ffffff;
+  color: var(--rg-navy);
 }
 
 .svc-card--buy .svc-card__title-sub {
-  color: var(--rg-gold);
+  color: var(--rg-navy);
 }
 
 .svc-card--buy .svc-card__desc {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--rg-text-medium);
 }
 
 .svc-card--buy .svc-card__feature {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--rg-text-medium);
 }
 
 .svc-card--buy .svc-card__feature-dot {
@@ -146,7 +146,7 @@
 
 .svc-card--buy .svc-card__btn {
   background-color: var(--rg-gold);
-  color: #00032e;
+  color: #0f1870;
 }
 
 .svc-card--buy .svc-card__btn:hover {
@@ -154,19 +154,20 @@
 }
 
 .svc-card--buy .svc-card__bg-icon {
-  color: rgba(255, 255, 255, 0.04);
+  color: rgba(15, 24, 112, 0.05);
   opacity: 1;
 }
 
-/* Sell Card - Mid Navy Shade (Second Card) */
+/* Sell Card */
 .svc-card--sell {
-  background-color: #060e5c;
+  background-color: #0f1870;
   color: #ffffff;
+  border: 1px solid rgba(15, 24, 112, 0.0);
 }
 
 .svc-card--sell .svc-card__icon-wrap {
   background-color: var(--rg-gold);
-  color: #00032e;
+  color: #0f1870;
 }
 
 .svc-card--sell .svc-card__headline {
@@ -182,11 +183,11 @@
 }
 
 .svc-card--sell .svc-card__desc {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .svc-card--sell .svc-card__feature {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .svc-card--sell .svc-card__feature-dot {
@@ -195,7 +196,7 @@
 
 .svc-card--sell .svc-card__btn {
   background-color: var(--rg-gold);
-  color: #00032e;
+  color: #0f1870;
 }
 
 .svc-card--sell .svc-card__btn:hover {
@@ -203,18 +204,19 @@
 }
 
 .svc-card--sell .svc-card__bg-icon {
-  color: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.06);
 }
 
-/* Rent Card - Lightest Navy Shade (Third Card) */
+/* Rent Card */
 .svc-card--rent {
-  background-color: #060e5c;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: var(--rg-navy);
+  border: 1px solid rgba(15, 24, 112, 0.1);
 }
 
 .svc-card--rent .svc-card__icon-wrap {
   background-color: var(--rg-gold);
-  color: #00032e;
+  color: #0f1870;
 }
 
 .svc-card--rent .svc-card__headline {
@@ -222,19 +224,19 @@
 }
 
 .svc-card--rent .svc-card__title {
-  color: #ffffff;
+  color: var(--rg-navy);
 }
 
 .svc-card--rent .svc-card__title-sub {
-  color: var(--rg-gold);
+  color: var(--rg-navy);
 }
 
 .svc-card--rent .svc-card__desc {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--rg-text-medium);
 }
 
 .svc-card--rent .svc-card__feature {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--rg-text-medium);
 }
 
 .svc-card--rent .svc-card__feature-dot {
@@ -243,7 +245,7 @@
 
 .svc-card--rent .svc-card__btn {
   background-color: var(--rg-gold);
-  color: #00032e;
+  color: #0f1870;
 }
 
 .svc-card--rent .svc-card__btn:hover {
@@ -251,7 +253,7 @@
 }
 
 .svc-card--rent .svc-card__bg-icon {
-  color: rgba(255, 255, 255, 0.04);
+  color: rgba(15, 24, 112, 0.05);
   opacity: 1;
 }
 

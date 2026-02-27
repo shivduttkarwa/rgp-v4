@@ -59,7 +59,7 @@
 .rg-philo__divider {
   height: 1px;
   width: 100%;
-  background: rgba(44, 24, 16, 0.22);
+  background: rgba(15, 24, 112, 0.12);
   margin: clamp(1.4rem, 2.8vw, 2.2rem) 0 clamp(1.6rem, 3vw, 2.6rem);
 }
 
