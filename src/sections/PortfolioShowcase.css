@@ -25,7 +25,7 @@ section.project-feature {
   padding-bottom: 0;
   position: relative;
   font-family: var(--font-body);
-  background: var(--rg-beige-light, #FFF8F0);
+  background: #fff6db;
   --grid-column-count: 12;
   overflow: visible !important;
   contain: none !important;

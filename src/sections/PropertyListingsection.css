@@ -6,7 +6,7 @@
 /* ===== Section Base ===== */
 .property-section {
   padding: clamp(3rem, 8vw, 6rem) 0;
-  background-color: #f7f8fc;
+  background-color: #fff3d4;
   overflow: hidden;
 }
 
@@ -26,7 +26,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: var(--rg-beige-dark);
+  background-color: #ffffff;
   color: var(--rg-text-medium);
   padding: 0.5rem 1rem;
   border-radius: var(--rg-radius);
@@ -76,7 +76,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  background-color: var(--rg-beige);
+  background-color: #ffffff;
   padding: 0.5rem;
   border-radius: var(--rg-radius);
   border: 1px solid var(--rg-beige-dark);

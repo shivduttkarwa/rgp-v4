@@ -1,7 +1,7 @@
 /* Philosophy.css — Testimonials (same card design, video swap) */
 
 .rg-philo {
-  background: var(--rg-darker);
+  background: #fff0cf;
   color: var(--rg-text-dark);
   font-family: var(--font-body);
 }

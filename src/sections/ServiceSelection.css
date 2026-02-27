@@ -6,7 +6,7 @@
 /* ===== Section Base ===== */
 .svc {
   position: relative;
-  background-color: var(--rg-beige);
+  background-color: #fff8e8;
 }
 
 .svc__container {
