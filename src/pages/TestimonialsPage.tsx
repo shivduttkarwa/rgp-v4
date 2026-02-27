@@ -612,6 +612,7 @@ const VoiceMosaic: React.FC = () => (
           style={{ "--mc": MOSAIC_COLORS[i] } as React.CSSProperties}
         >
           <div className="tp-mosaic__card-glow" />
+          <div className="tp-mosaic__corner" aria-hidden="true" />
           <div className="tp-mosaic__card-header">
             <img src={item.avatar} alt={item.name} />
             <div>
@@ -705,42 +706,35 @@ const TickerWall: React.FC = () => (
 ───────────────────────────────────────────────────────────────────────────── */
 const FinalCTA: React.FC = () => (
   <section className="tp-cta">
-    <div className="tp-cta__blobs" aria-hidden="true">
-      <div className="tp-cta__blob tp-cta__blob--1" />
-      <div className="tp-cta__blob tp-cta__blob--2" />
-      <div className="tp-cta__blob tp-cta__blob--3" />
-    </div>
-
     <div className="tp-cta__inner">
-      <div className="tp-cta__visual">
-        <span className="tp-cta__bigq">"</span>
-        <div className="tp-cta__avatar-fan">
-          {testimonials.slice(0, 7).map((t, i) => (
-            <img
-              key={t.id}
-              src={t.avatar}
-              alt={t.name}
-              style={{ "--fi": i } as React.CSSProperties}
-            />
-          ))}
-        </div>
-        <p className="tp-cta__total">{testimonials.length}+ verified reviews</p>
-      </div>
-
-      <div className="tp-cta__text">
-        <span className="tp-cta__kicker">Join the Legacy</span>
+      <div className="tp-cta__panel">
+        <span className="tp-cta__kicker">Next Step</span>
         <h2 className="tp-cta__heading">
-          Write Your
+          Book a Free
           <br />
-          <em>Success Story</em>
+          <em>Appraisal</em>
         </h2>
         <p className="tp-cta__body">
-          Join hundreds of satisfied clients who transformed their vision into
-          extraordinary reality.
+          Get a clear price range, honest advice, and a plan that positions your
+          property for a confident sale.
         </p>
+        <div className="tp-cta__meta">
+          <div className="tp-cta__meta-item">
+            <span className="tp-cta__meta-value">4.9</span>
+            <span className="tp-cta__meta-label">Avg Rating</span>
+          </div>
+          <div className="tp-cta__meta-item">
+            <span className="tp-cta__meta-value">{testimonials.length}+</span>
+            <span className="tp-cta__meta-label">Reviews</span>
+          </div>
+          <div className="tp-cta__meta-item">
+            <span className="tp-cta__meta-value">100%</span>
+            <span className="tp-cta__meta-label">Client Care</span>
+          </div>
+        </div>
         <div className="tp-cta__actions">
-          <a href="#" className="tp-cta__btn tp-cta__btn--solid">
-            Start Your Journey
+          <a href="/contact" className="tp-cta__btn tp-cta__btn--solid">
+            Book Your Appraisal
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -750,10 +744,25 @@ const FinalCTA: React.FC = () => (
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="#" className="tp-cta__btn tp-cta__btn--ghost">
-            Contact Us
+          <a href="/contact" className="tp-cta__btn tp-cta__btn--ghost">
+            Talk to Rahul
           </a>
         </div>
+      </div>
+
+      <div className="tp-cta__visual">
+        <div className="tp-cta__medallion">
+          <span className="tp-cta__medallion-num">
+            {testimonials.length}+
+          </span>
+          <span className="tp-cta__medallion-label">Verified Reviews</span>
+        </div>
+        <div className="tp-cta__avatar-fan">
+          {testimonials.slice(0, 8).map((t) => (
+            <img key={t.id} src={t.avatar} alt={t.name} />
+          ))}
+        </div>
+        <p className="tp-cta__total">Trusted by homeowners across Brisbane.</p>
       </div>
     </div>
   </section>
