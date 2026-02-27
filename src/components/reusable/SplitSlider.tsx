@@ -13,7 +13,17 @@ export interface SlideContent {
   linkText: string;
   linkUrl?: string; // omit for review/author attribution (no link rendered)
   image: string;
-  theme: "theme-1" | "theme-2" | "theme-3";
+  theme:
+    | "theme-1"
+    | "theme-2"
+    | "theme-3"
+    | "theme-4"
+    | "theme-5"
+    | "theme-6"
+    | "theme-7"
+    | "theme-8"
+    | "theme-9"
+    | "theme-10";
 }
 
 interface SplitSliderProps {
@@ -57,7 +67,7 @@ const defaultSlides: SlideContent[] = [
       "Our penthouse purchase was handled flawlessly from the very first call to the day we received the keys. Truly premium, truly personal service.",
     linkText: "— David & Claire Morrison",
     image: "images/ps1 (4).jpg",
-    theme: "theme-1",
+    theme: "theme-4",
   },
   {
     kicker: "★★★★★",
@@ -66,7 +76,7 @@ const defaultSlides: SlideContent[] = [
       "The team's discretion and professionalism set them apart from every other agency we've worked with. Quiet confidence and exceptional results.",
     linkText: "— Private Investor, Sydney",
     image: "images/ps1 (5).jpg",
-    theme: "theme-2",
+    theme: "theme-5",
   },
   {
     kicker: "★★★★★",
@@ -75,7 +85,7 @@ const defaultSlides: SlideContent[] = [
       "We have purchased three properties through Real Gold Properties. Each transaction has been handled with the same impeccable standard of care.",
     linkText: "— Benjamin Park, Singapore",
     image: "images/ps1 (6).jpg",
-    theme: "theme-3",
+    theme: "theme-6",
   },
   {
     kicker: "★★★★★",
@@ -84,7 +94,7 @@ const defaultSlides: SlideContent[] = [
       "As interstate buyers, we relied on them completely. They managed inspections, negotiations and legal coordination — all without a single misstep.",
     linkText: "— The Nguyen Family, Brisbane",
     image: "images/ps1 (1).jpg",
-    theme: "theme-1",
+    theme: "theme-7",
   },
   {
     kicker: "★★★★★",
@@ -93,7 +103,7 @@ const defaultSlides: SlideContent[] = [
       "The off-market listing they sourced for us was beyond anything we'd seen publicly. Their network access is genuinely unparalleled in this market.",
     linkText: "— Rachel & Tom Ashford",
     image: "images/ps1 (2).jpg",
-    theme: "theme-2",
+    theme: "theme-8",
   },
   {
     kicker: "★★★★★",
@@ -102,7 +112,7 @@ const defaultSlides: SlideContent[] = [
       "Our property sold above reserve within days. Their staging strategy, marketing reach and negotiation delivered an outcome we couldn't have imagined.",
     linkText: "— Grace Hamilton, Vendor",
     image: "images/ps1 (3).jpg",
-    theme: "theme-3",
+    theme: "theme-9",
   },
   {
     kicker: "★★★★★",
@@ -111,7 +121,7 @@ const defaultSlides: SlideContent[] = [
       "From our first luxury villa to managing a full investment portfolio — Real Gold Properties has guided us with expertise, integrity and genuine care.",
     linkText: "— Marcus & Elena Wright",
     image: "images/ps1 (4).jpg",
-    theme: "theme-1",
+    theme: "theme-10",
   },
 ];
 
