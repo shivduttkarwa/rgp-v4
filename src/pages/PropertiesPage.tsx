@@ -5,60 +5,94 @@ import { PropertyCard, type Property, type Category } from "../components/reusab
 import { allProperties } from "../data/listingProperties";
 import "./PropertiesPage.css";
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Constants ────────────────────────────────────────────────────────────────
 const INITIAL_COUNT = 6;
 
-export default function PropertiesPage() {
-  const [catFilter, setCatFilter] = useState<"all" | Category>("all");
-  const [priceFilter, setPriceFilter] = useState("all");
-  const [bedsFilter, setBedsFilter] = useState("any");
-  const [bathsFilter, setBathsFilter] = useState("any");
-  const [showAll, setShowAll] = useState(false);
+type Filters = {
+  cat: "all" | Category;
+  price: string;
+  beds: string;
+  baths: string;
+  showAll: boolean;
+};
 
+const DEFAULT_FILTERS: Filters = {
+  cat: "all", price: "all", beds: "any", baths: "any", showAll: false,
+};
+
+const applyFilters = (items: Property[], f: Filters) =>
+  items.filter(p => {
+    if (f.cat !== "all" && p.category !== f.cat) return false;
+    if (f.price === "contact" && p.price !== 0) return false;
+    if (f.price === "under500" && (p.price === 0 || p.price >= 500000)) return false;
+    if (f.price === "500-800" && (p.price === 0 || p.price < 500000 || p.price > 800000)) return false;
+    if (f.price === "800-1200" && (p.price === 0 || p.price < 800000 || p.price > 1200000)) return false;
+    if (f.price === "over1200" && (p.price === 0 || p.price <= 1200000)) return false;
+    if (f.beds === "land" && p.beds !== 0) return false;
+    if (f.beds === "3" && p.beds < 3) return false;
+    if (f.beds === "4" && p.beds < 4) return false;
+    if (f.beds === "5" && p.beds < 5) return false;
+    if (f.baths === "1" && p.baths < 1) return false;
+    if (f.baths === "2" && p.baths < 2) return false;
+    if (f.baths === "3" && p.baths < 3) return false;
+    return true;
+  });
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+export default function PropertiesPage() {
+  // activeFilters drives UI controls (immediate feedback)
+  // displayedFilters drives the grid (lags 280ms behind for exit animation)
+  const [activeFilters, setActiveFilters] = useState<Filters>(DEFAULT_FILTERS);
+  const [displayedFilters, setDisplayedFilters] = useState<Filters>(DEFAULT_FILTERS);
+  const [isExiting, setIsExiting] = useState(false);
+
+  const pendingRef = useRef<Filters>(DEFAULT_FILTERS);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const isoRef = useRef<any>(null);
-  const isoKey = `${catFilter}-${priceFilter}-${bedsFilter}-${bathsFilter}-${showAll}`;
 
-  // ── Filter Logic ────────────────────────────────────────────────────────
-  const filtered = useMemo(() => {
-    return allProperties.filter(p => {
-      if (catFilter !== "all" && p.category !== catFilter) return false;
-
-      if (priceFilter === "contact" && p.price !== 0) return false;
-      if (priceFilter === "under500" && (p.price === 0 || p.price >= 500000)) return false;
-      if (priceFilter === "500-800" && (p.price === 0 || p.price < 500000 || p.price > 800000)) return false;
-      if (priceFilter === "800-1200" && (p.price === 0 || p.price < 800000 || p.price > 1200000)) return false;
-      if (priceFilter === "over1200" && (p.price === 0 || p.price <= 1200000)) return false;
-
-      if (bedsFilter === "land" && p.beds !== 0) return false;
-      if (bedsFilter === "3" && p.beds < 3) return false;
-      if (bedsFilter === "4" && p.beds < 4) return false;
-      if (bedsFilter === "5" && p.beds < 5) return false;
-
-      if (bathsFilter === "1" && p.baths < 1) return false;
-      if (bathsFilter === "2" && p.baths < 2) return false;
-      if (bathsFilter === "3" && p.baths < 3) return false;
-
-      return true;
-    });
-  }, [catFilter, priceFilter, bedsFilter, bathsFilter]);
-
-  const displayed = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
-  const hasMore = !showAll && filtered.length > INITIAL_COUNT;
-
-  const hasActiveFilters =
-    catFilter !== "all" || priceFilter !== "all" ||
-    bedsFilter !== "any" || bathsFilter !== "any";
-
-  const clearFilters = () => {
-    setCatFilter("all");
-    setPriceFilter("all");
-    setBedsFilter("any");
-    setBathsFilter("any");
-    setShowAll(false);
+  // ── Filter Change Handler ────────────────────────────────────────────────
+  const changeFilters = (patch: Partial<Filters>) => {
+    const next = { ...pendingRef.current, ...patch };
+    pendingRef.current = next;
+    setActiveFilters({ ...next });
+    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+    setIsExiting(true);
+    exitTimerRef.current = setTimeout(() => {
+      setDisplayedFilters({ ...next });
+      setIsExiting(false);
+    }, 280);
   };
 
+  const clearFilters = () => {
+    pendingRef.current = { ...DEFAULT_FILTERS };
+    setActiveFilters({ ...DEFAULT_FILTERS });
+    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+    setIsExiting(true);
+    exitTimerRef.current = setTimeout(() => {
+      setDisplayedFilters({ ...DEFAULT_FILTERS });
+      setIsExiting(false);
+    }, 280);
+  };
+
+  // ── Data ─────────────────────────────────────────────────────────────────
+  // filtered/displayed are from displayedFilters (what the grid actually shows)
+  const filtered = useMemo(() => applyFilters(allProperties, displayedFilters), [displayedFilters]);
+  // activeFiltered is for the result count badge (updates immediately)
+  const activeFiltered = useMemo(() => applyFilters(allProperties, activeFilters), [activeFilters]);
+
+  const displayed = displayedFilters.showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
+  const hasMore = !displayedFilters.showAll && filtered.length > INITIAL_COUNT;
+
+  const hasActiveFilters =
+    activeFilters.cat !== "all" || activeFilters.price !== "all" ||
+    activeFilters.beds !== "any" || activeFilters.baths !== "any";
+
+  // isoKey drives Isotope reinit — changes only after animation completes
+  const isoKey = `${displayedFilters.cat}-${displayedFilters.price}-${displayedFilters.beds}-${displayedFilters.baths}-${displayedFilters.showAll}`;
+
   // ── Isotope ──────────────────────────────────────────────────────────────
+  // transitionDuration:0 — CSS animations handle all visual transitions
   useLayoutEffect(() => {
     if (!gridRef.current || displayed.length === 0) return;
     let iso: any = null;
@@ -69,7 +103,7 @@ export default function PropertiesPage() {
         iso = new Isotope(gridRef.current, {
           itemSelector: ".ap-card-wrap",
           layoutMode: "fitRows",
-          transitionDuration: "0.35s",
+          transitionDuration: 0,
         });
         isoRef.current = iso;
       });
@@ -108,8 +142,8 @@ export default function PropertiesPage() {
             ].map(({ val, label, icon }) => (
               <button
                 key={val}
-                className={`ap-pill${catFilter === val ? " active" : ""}`}
-                onClick={() => { setCatFilter(val as "all" | Category); setShowAll(false); }}
+                className={`ap-pill${activeFilters.cat === val ? " active" : ""}`}
+                onClick={() => changeFilters({ cat: val as "all" | Category, showAll: false })}
               >
                 {icon}{label}
               </button>
@@ -122,8 +156,8 @@ export default function PropertiesPage() {
             <div className="ap-select-wrap">
               <select
                 className="ap-select"
-                value={priceFilter}
-                onChange={e => { setPriceFilter(e.target.value); setShowAll(false); }}
+                value={activeFilters.price}
+                onChange={e => changeFilters({ price: e.target.value, showAll: false })}
               >
                 <option value="all">Any Price</option>
                 <option value="contact">Contact Agent</option>
@@ -139,8 +173,8 @@ export default function PropertiesPage() {
             <div className="ap-select-wrap">
               <select
                 className="ap-select"
-                value={bedsFilter}
-                onChange={e => { setBedsFilter(e.target.value); setShowAll(false); }}
+                value={activeFilters.beds}
+                onChange={e => changeFilters({ beds: e.target.value, showAll: false })}
               >
                 <option value="any">Any Beds</option>
                 <option value="land">Land / No Bedrooms</option>
@@ -155,8 +189,8 @@ export default function PropertiesPage() {
             <div className="ap-select-wrap">
               <select
                 className="ap-select"
-                value={bathsFilter}
-                onChange={e => { setBathsFilter(e.target.value); setShowAll(false); }}
+                value={activeFilters.baths}
+                onChange={e => changeFilters({ baths: e.target.value, showAll: false })}
               >
                 <option value="any">Any Baths</option>
                 <option value="1">1+ Bathrooms</option>
@@ -176,7 +210,7 @@ export default function PropertiesPage() {
 
           {/* Result count */}
           <p className="ap-result-count">
-            {filtered.length} {filtered.length === 1 ? "property" : "properties"} found
+            {activeFiltered.length} {activeFiltered.length === 1 ? "property" : "properties"} found
           </p>
         </div>
       </div>
@@ -191,9 +225,17 @@ export default function PropertiesPage() {
             </div>
           ) : (
             <>
-              <div key={isoKey} ref={gridRef} className="ap-grid">
+              <div
+                key={isoKey}
+                ref={gridRef}
+                className={`ap-grid ${isExiting ? "grid-exiting" : "grid-entering"}`}
+              >
                 {displayed.map((p, i) => (
-                  <div key={p.id} className="ap-card-wrap">
+                  <div
+                    key={p.id}
+                    className="ap-card-wrap"
+                    style={{ "--ap-delay": `${i * 0.06}s` } as React.CSSProperties}
+                  >
                     <PropertyCard property={p} cardIndex={i} />
                   </div>
                 ))}
@@ -202,13 +244,13 @@ export default function PropertiesPage() {
               {/* View All / Show Less */}
               <div className="ap-view-all">
                 {hasMore && (
-                  <button className="ap-view-btn" onClick={() => setShowAll(true)}>
+                  <button className="ap-view-btn" onClick={() => changeFilters({ showAll: true })}>
                     <span>View All {filtered.length} Properties</span>
                     <ArrowRight size={16} />
                   </button>
                 )}
-                {showAll && filtered.length > INITIAL_COUNT && (
-                  <button className="ap-view-btn ap-view-btn--ghost" onClick={() => setShowAll(false)}>
+                {displayedFilters.showAll && filtered.length > INITIAL_COUNT && (
+                  <button className="ap-view-btn ap-view-btn--ghost" onClick={() => changeFilters({ showAll: false })}>
                     Show Less
                   </button>
                 )}

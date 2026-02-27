@@ -364,8 +364,12 @@ const PropertyListingSection = () => {
 
   const displayed =
     displayedFilter === "*"
-      ? propertiesData
-      : propertiesData.filter((p) => p.category === displayedFilter);
+      ? propertiesData.reduce<typeof propertiesData>((acc, p) => {
+          const count = acc.filter((item) => item.category === p.category).length;
+          if (count < 3) acc.push(p);
+          return acc;
+        }, [])
+      : propertiesData.filter((p) => p.category === displayedFilter).slice(0, 3);
 
   const handleFilterChange = (filter: Category | "*") => {
     if (filter === activeFilter || isExiting) return;
