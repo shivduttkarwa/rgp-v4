@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./PropDetails.css";
 
 // ============================================
@@ -1124,6 +1125,21 @@ const PropDetail: React.FC<PropDetailProps> = ({
           </aside>
         </div>
       </main>
+
+      <section className="pd-cta">
+        <div className="pd-cta__inner">
+          <div className="pd-cta__copy">
+            <span className="rg-eyebrow">Explore More</span>
+            <h2 className="pd-cta__title">Discover More Properties</h2>
+            <p className="pd-cta__text">
+              Browse all listings to compare locations, pricing, and features.
+            </p>
+          </div>
+          <Link to="/properties" className="pd-cta__btn">
+            View All Properties
+          </Link>
+        </div>
+      </section>
     </div>
   );
 };
