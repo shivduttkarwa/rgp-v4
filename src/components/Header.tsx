@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Menu from "./Menu";
 import gsap from "gsap";
 import "./Header.css";
 
@@ -22,12 +23,6 @@ export default function Header({ ready = false }: { ready?: boolean }) {
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
-
-  // Lock body scroll when mobile nav is open
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
 
   // Scroll-hide / scroll-reveal behaviour
   useEffect(() => {
@@ -80,76 +75,54 @@ export default function Header({ ready = false }: { ready?: boolean }) {
   }, [ready, location.pathname, publicUrl]);
 
   return (
-    <header ref={headerRef} className="rg-header" aria-label="Site header">
-      <div ref={headerBgRef} className="rg-header__bg" />
+    <>
+      <header ref={headerRef} className="rg-header" aria-label="Site header">
+        <div ref={headerBgRef} className="rg-header__bg" />
 
-      <div className="rg-header__inner">
-        {/* Logo */}
-        <Link to="/" className="rg-header__logo" aria-label="Real Gold Properties">
-          <img src={logoSrc} alt="Real Gold Properties" />
-        </Link>
+        <div className="rg-header__inner">
+          {/* Logo */}
+          <Link to="/" className="rg-header__logo" aria-label="Real Gold Properties">
+            <img src={logoSrc} alt="Real Gold Properties" />
+          </Link>
 
-        {/* Desktop nav */}
-        <nav className="rg-header__nav" aria-label="Main navigation">
-          {NAV_ITEMS.map(({ label, to }) => (
-            <Link
-              key={to}
-              to={to}
-              className={`rg-header__nav-link${location.pathname === to ? " is-active" : ""}`}
-            >
-              {label}
+          {/* Desktop nav */}
+          <nav className="rg-header__nav" aria-label="Main navigation">
+            {NAV_ITEMS.map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                className={`rg-header__nav-link${location.pathname === to ? " is-active" : ""}`}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right: CTA + mobile hamburger */}
+          <div className="rg-header__actions">
+            <Link to="/contact" className="rg-header__cta">
+              <span>Book a Consultation</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
             </Link>
-          ))}
-        </nav>
 
-        {/* Right: CTA + mobile hamburger */}
-        <div className="rg-header__actions">
-          <Link to="/contact" className="rg-header__cta">
-            <span>Book a Consultation</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M7 17L17 7M17 7H7M17 7V17" />
-            </svg>
-          </Link>
-
-          <button
-            className={`rg-hamburger${mobileOpen ? " active" : ""}`}
-            aria-label="Toggle mobile menu"
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((p) => !p)}
-          >
-            <span className="rg-hamburger__line" />
-            <span className="rg-hamburger__line" />
-            <span className="rg-hamburger__line" />
-          </button>
+            <button
+              className={`rg-hamburger${mobileOpen ? " active" : ""}`}
+              aria-label="Toggle mobile menu"
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen((p) => !p)}
+            >
+              <span className="rg-hamburger__line" />
+              <span className="rg-hamburger__line" />
+              <span className="rg-hamburger__line" />
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile nav panel */}
-      <div
-        className={`rg-header__mobile-nav${mobileOpen ? " is-open" : ""}`}
-        aria-hidden={!mobileOpen}
-      >
-        {NAV_ITEMS.map(({ label, to }) => (
-          <Link
-            key={to}
-            to={to}
-            className={`rg-header__mobile-link${location.pathname === to ? " is-active" : ""}`}
-            onClick={() => setMobileOpen(false)}
-          >
-            {label}
-          </Link>
-        ))}
-        <Link
-          to="/contact"
-          className="rg-header__mobile-cta"
-          onClick={() => setMobileOpen(false)}
-        >
-          <span>Book a Consultation</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </Link>
-      </div>
-    </header>
+      {/* Mobile overlay menu */}
+      <Menu isOpen={mobileOpen} onOpenChange={setMobileOpen} showButton={false} />
+    </>
   );
 }
