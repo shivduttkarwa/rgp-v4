@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import Intro from "../sections/Intro";
 
@@ -8,9 +9,11 @@ import ServiceSelection from "@/sections/ServiceSelection";
 import PhilosophyPillars from "@/sections/Philosophy";
 
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
+import properties from "../data/properties";
 
 export default function HomePage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Clear one-time init guards so StrictMode's double-invoke doesn't skip animations
@@ -40,7 +43,10 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
 
   return (
     <div ref={pageRef}>
-      <HeroSection ready={ready} />
+      <HeroSection
+        ready={ready}
+        ctaOnClick={() => navigate("/properties")}
+      />
 
       <Intro />
 

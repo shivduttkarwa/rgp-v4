@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Intro.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -25,15 +26,15 @@ const Intro = () => {
         </p>
 
         <div className="intro-cta-group">
-          <a href="/contact" className="intro-cta intro-cta--primary">
+          <Link to="/contact" className="intro-cta intro-cta--primary">
             <span>Book a Free Appraisal</span>
             <svg viewBox="0 0 24 24">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
-          </a>
-          <a href="/about" className="intro-cta intro-cta--ghost">
+          </Link>
+          <Link to="/about" className="intro-cta intro-cta--ghost">
             <span>Meet Rahul</span>
-          </a>
+          </Link>
         </div>
 
       </div>
