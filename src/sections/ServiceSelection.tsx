@@ -157,46 +157,21 @@ const ServiceSelection = ({
           data-gsap-mobile="clip-smooth-down"
           data-gsap-mobile-cards-start="top 90%"
         >
-          {services.map((service) => (
+          {services.map((service, i) => (
             <article
               key={service.id}
               className={`svc-card svc-card--${service.theme}`}
             >
-              {/* Card Header */}
-              <div className="svc-card__header">
-                <div className="svc-card__icon-wrap">
-                  <service.icon className="svc-card__icon" />
-                </div>
-                <span className="svc-card__headline">{service.headline}</span>
-              </div>
-
-              {/* Card Content */}
-              <div className="svc-card__content">
-                <h3 className="svc-card__title">{service.title}</h3>
-                <p className="svc-card__title-sub">{service.subtitle}</p>
-                <p className="svc-card__desc">{service.description}</p>
-
-                {/* Features */}
-                <ul className="svc-card__features">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="svc-card__feature">
-                      <span className="svc-card__feature-dot" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Card Footer */}
+              <h3 className="svc-card__word">
+                {service.id.charAt(0).toUpperCase() + service.id.slice(1)}
+              </h3>
+              <p className="svc-card__desc">{service.description}</p>
               <div className="svc-card__footer">
                 <button className="svc-card__btn">
                   <span>{service.cta}</span>
-                  <ArrowRight size={18} />
+                  <ArrowRight size={16} />
                 </button>
               </div>
-
-              {/* Background Icon */}
-              <service.secondaryIcon className="svc-card__bg-icon" />
             </article>
           ))}
         </div>

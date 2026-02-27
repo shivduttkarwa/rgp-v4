@@ -50,8 +50,11 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
       <HeroSection ready={ready} />
 
       {/* RAHUL INTRO */}
-      <div className="about-page">
-        <section className="split-green">
+      <div className="about-page" style={{ background: "var(--rg-warm-200)" }}>
+        <section
+          className="split-green"
+          style={{ background: "var(--rg-warm-100)" }}
+        >
           <div className="container">
             <div className="wrap">
               <div className="img-card">
@@ -63,7 +66,10 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
                   data-gsap-mobile="clip-smooth-down"
                   data-gsap-mobile-cards-start="top 90%"
                 >
-                  <img alt="Rahul Singh — Real Gold Properties" src={img("rahul-singh.jpg")} />
+                  <img
+                    alt="Rahul Singh — Real Gold Properties"
+                    src={img("rahul-singh.jpg")}
+                  />
                 </div>
               </div>
               <div className="stack">
@@ -81,11 +87,11 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
                   data-gsap-start="top 90%"
                   data-gsap-delay="0.15"
                 >
-                  Brisbane-based and client-first — Rahul brings honesty,
-                  deep local knowledge, and a genuine commitment to your
-                  best outcome. Whether you're buying, selling, or just
-                  want to know what your property is worth, he makes the
-                  process simple and stress-free.
+                  Brisbane-based and client-first — Rahul brings honesty, deep
+                  local knowledge, and a genuine commitment to your best
+                  outcome. Whether you're buying, selling, or just want to know
+                  what your property is worth, he makes the process simple and
+                  stress-free.
                 </p>
                 <p
                   className="split-desc"
@@ -93,9 +99,9 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
                   data-gsap-start="top 90%"
                   data-gsap-delay="0.25"
                 >
-                  With over a decade of experience across Brisbane's
-                  property market, Rahul has built his reputation on one
-                  principle: doing right by his clients.
+                  With over a decade of experience across Brisbane's property
+                  market, Rahul has built his reputation on one principle: doing
+                  right by his clients.
                 </p>
                 <div className="split-cta">
                   <a
@@ -115,7 +121,7 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
       </div>
 
       <PropertyListingSection />
-      <About />
+
       <Team />
 
       <ServiceSelection />
