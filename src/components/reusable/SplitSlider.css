@@ -1,11 +1,11 @@
 /* ===== CSS Variables ===== */
 .rgp-slider {
-  --rgp-theme-1-bg: #f9c307;
-  --rgp-theme-1-text: #00032e;
-  --rgp-theme-2-bg: #05094a;
-  --rgp-theme-2-text: #ffffff;
-  --rgp-theme-3-bg: #00032e;
-  --rgp-theme-3-text: #ffffff;
+  --rgp-theme-1-bg: #fff4cc;
+  --rgp-theme-1-text: #0f1870;
+  --rgp-theme-2-bg: #e7efff;
+  --rgp-theme-2-text: #0f1870;
+  --rgp-theme-3-bg: #f5e7ff;
+  --rgp-theme-3-text: #2b185f;
   --rgp-slide-height: 626px;
   --rgp-transition-duration: 0.9s;
   --rgp-transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -238,14 +238,14 @@
   justify-content: center;
   gap: 24px;
   padding: 32px 40px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.05);
+  border-top: 0;
+  background: transparent;
   backdrop-filter: blur(10px);
 }
 
 .rgp-slider--theme-2 .rgp-slider__nav,
 .rgp-slider--theme-3 .rgp-slider__nav {
-  border-top-color: rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(15, 24, 112, 0.12);
 }
 
 /* Navigation Buttons */
@@ -267,12 +267,12 @@
 }
 
 .rgp-slider__btn:hover:not(.is-disabled) {
-  background-color: currentColor;
-  transform: scale(1.08);
+  background-color: transparent;
+  transform: scale(1.04);
 }
 
 .rgp-slider__btn:hover:not(.is-disabled) .rgp-slider__btn-icon {
-  color: var(--rgp-theme-1-text);
+  color: currentColor;
 }
 
 .rgp-slider--theme-2
@@ -281,7 +281,7 @@
 .rgp-slider--theme-3
   .rgp-slider__btn:hover:not(.is-disabled)
   .rgp-slider__btn-icon {
-  color: var(--rgp-theme-2-bg);
+  color: currentColor;
 }
 
 .rgp-slider__btn:active:not(.is-disabled) {
