@@ -157,7 +157,7 @@ const ServiceSelection = ({
           data-gsap-mobile="clip-smooth-down"
           data-gsap-mobile-cards-start="top 90%"
         >
-          {services.map((service, i) => (
+          {services.map((service) => (
             <article
               key={service.id}
               className={`svc-card svc-card--${service.theme}`}

@@ -1,5 +1,5 @@
 .about-page {
-  --bg: var(--rg-beige-light);
+  --bg: #ffffff;
   --ink: var(--rg-text-dark);
   --green: var(--rg-text-dark);
   --green-2: var(--rg-text-medium);
@@ -98,11 +98,11 @@
 }
 
 .about-page .section.section-spacious {
-  background: #fdfdff;
+  background: #ffffff;
 }
 
 .about-page .split-green {
-  background: var(--rg-warm-100);
+  background: #ffffff;
   color: var(--rg-text-dark);
 }
 

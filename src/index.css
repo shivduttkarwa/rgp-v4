@@ -5,17 +5,17 @@
 :root {
   /* ── Light Theme ── */
   --rg-beige-light: #f7f8fc; /* main page background */
-  --rg-beige: #eef1fa;       /* secondary background */
-  --rg-beige-dark: #dde4f6;  /* cards / panels */
+  --rg-beige: #eef1fa; /* secondary background */
+  --rg-beige-dark: #dde4f6; /* cards / panels */
   --rg-beige-darker: #b8c4e0; /* borders / subtle lines */
 
   /* ── Blue scale (brand deep navy → vivid) ── */
-  --rg-blue-50:  #f0f3ff;
+  --rg-blue-50: #f0f3ff;
   --rg-blue-100: #e0e7ff;
   --rg-blue-200: #c7d2fe;
   --rg-blue-300: #a5b4fc;
-  --rg-blue-400: #162496;   /* vivid brand blue */
-  --rg-blue-500: #0f1870;   /* deep brand navy */
+  --rg-blue-400: #162496; /* vivid brand blue */
+  --rg-blue-500: #0f1870; /* deep brand navy */
 
   /* ── Gold-warm tones ── */
   --rg-warm-100: #fffbea;
@@ -30,12 +30,12 @@
   --rg-text-light: rgba(15, 24, 112, 0.45);
 
   /* Accent Colors — gold & blue kept */
-  --rg-gold: #f9c307;
+  --rg-gold: #f9c206;
   --rg-amber: #f9c307;
   --rg-crimson: #f9c307;
 
   /* Legacy aliases (re-mapped for light theme) */
-  --rg-navy: #0f1870;   /* deep brand navy — used for dark text, outlines */
+  --rg-navy: #0f1870; /* deep brand navy — used for dark text, outlines */
   --rg-dark: #0f1870;
   --rg-darker: #f7f8fc; /* maps to page bg (used as section bg in Philosophy) */
   --rg-ink: #0f1870;

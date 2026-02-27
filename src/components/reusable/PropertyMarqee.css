@@ -1,6 +1,6 @@
 .rgMarquee {
   padding: clamp(48px, 6vw, 88px) 0;
-  background: var(--rg-warm-100);
+  background: #ffffff;
   border-top: 1px solid rgba(15, 24, 112, 0.12);
   border-bottom: 1px solid rgba(15, 24, 112, 0.12);
   overflow: hidden;
@@ -57,8 +57,8 @@
   left: 0;
   background: linear-gradient(
     90deg,
-    var(--rg-warm-100) 0%,
-    rgba(243, 238, 228, 0) 100%
+    #ffffff 0%,
+    rgba(255, 255, 255, 0) 100%
   );
 }
 
@@ -66,8 +66,8 @@
   right: 0;
   background: linear-gradient(
     270deg,
-    var(--rg-warm-100) 0%,
-    rgba(243, 238, 228, 0) 100%
+    #ffffff 0%,
+    rgba(255, 255, 255, 0) 100%
   );
 }
 

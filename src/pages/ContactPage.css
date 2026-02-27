@@ -1,14 +1,14 @@
 /* ContactPage.css — review layout with site typography/colors */
 
 .contact-page {
-  background: var(--rg-warm-100);
+  background: #ffffff;
   color: var(--rg-text-dark);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
 .contact-shell {
-  background: var(--rg-warm-100);
+  background: #ffffff;
 }
 
 .top-rule {

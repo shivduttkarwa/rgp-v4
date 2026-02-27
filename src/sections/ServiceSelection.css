@@ -6,7 +6,7 @@
 /* ===== Section Base ===== */
 .svc {
   position: relative;
-  background-color: #fff8e8;
+  background-color: #ffffff;
 }
 
 .svc__container {
@@ -136,7 +136,7 @@
 
 /* Rent Card */
 .svc-card--rent {
-  background-color: #ffffff;
+  background-color: #fdf4e3;
   border: 1px solid rgba(15, 24, 112, 0.12);
 }
 .svc-card--rent .svc-card__word { color: #0f1870; }
