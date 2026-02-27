@@ -1,19 +1,24 @@
 /* ContactPage.css — review layout with site typography/colors */
 
 .contact-page {
-  background: var(--rg-beige-light);
+  background: var(--rg-warm-100);
   color: var(--rg-text-dark);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
 .contact-shell {
-  background: var(--rg-beige-light);
+  background: var(--rg-warm-100);
 }
 
 .top-rule {
   height: 2px;
-  background: linear-gradient(90deg, var(--rg-gold) 0%, var(--rg-warm-500) 60%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    var(--rg-gold) 0%,
+    var(--rg-warm-500) 60%,
+    transparent 100%
+  );
 }
 
 .page {
@@ -125,7 +130,9 @@
   color: var(--rg-text-light);
   margin-top: 0.25rem;
   flex-shrink: 0;
-  transition: transform 0.28s ease, color 0.2s;
+  transition:
+    transform 0.28s ease,
+    color 0.2s;
 }
 
 .c-item:hover .c-arr {
@@ -480,7 +487,10 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease,
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
     box-shadow 0.25s ease;
 }
 
@@ -504,7 +514,7 @@
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: var(--rg-beige-light);
+  background: var(--rg-warm-100);
   display: flex;
   align-items: center;
   justify-content: center;
