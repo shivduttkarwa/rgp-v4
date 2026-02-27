@@ -1,116 +1,177 @@
 /* Preloader.css */
 
+/* =================================
+   CONTROL KNOBS - ADJUST HERE
+   ================================= */
 .preloader {
+  /* COLORS */
+  --gold: var(--rg-gold);
+  --bg-dark: #0a1234;
+  --bg-gradient-center: #0a1234;
+  --text-muted: #666;
+
+  /* LOGO SIZE */
+  --logo-width: 250px;
+  --logo-height: 175px;
+
+  /* BORDER ANIMATION */
+  --border-duration: 3s;
+  --border-width: 3px;
+  --border-glow: 6px;
+  --path-length: 1500;
+
+  /* FILL ANIMATION */
+  --fill-delay: 2s;
+  --fill-duration: 1.6s;
+
+  /* GLOW */
+  --glow-delay: 3s;
+  --glow-duration: 0.6s;
+  --glow-blur: 15px;
+  --glow-opacity: 0.3;
+
+  /* TEXT */
+  --title-delay: 2.4s;
+  --subtitle-delay: 2.6s;
+  --text-duration: 0.5s;
+
+  /* LOADER */
+  --loader-hide-delay: 5000;
+  --loader-fade-duration: 1s;
+  --loader-exit-duration: 1s;
+
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  background: #1a2460;
+  background: var(--bg-dark);
+  transform: translateY(0);
+  will-change: transform;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   gap: 3.125rem;
   z-index: 99999;
+  transition:
+    transform var(--loader-exit-duration) ease,
+    opacity var(--loader-fade-duration) ease,
+    visibility var(--loader-fade-duration) ease;
 }
 
-.preloader::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  pointer-events: none;
+.preloader.is-exiting {
+  transform: translateY(-100%);
 }
 
-/* Skyline */
-.preloader-skyline {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 0.5rem;
-  height: 10rem;
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
-.preloader-building {
-  width: 1.875rem;
-  height: var(--height);
-  background: linear-gradient(180deg, #f9c307 0%, #d4a200 100%);
-  border-radius: 0.125rem 0.125rem 0 0;
-  box-shadow:
-    0 0 1.875rem rgba(249, 195, 7, 0.3),
-    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.2);
-  transform-origin: bottom;
-  transform: scaleY(0);
-  will-change: transform;
-  animation: preloaderRise 3s ease-in-out infinite;
+.logo-container {
+  position: relative;
+  width: var(--logo-width);
+  height: var(--logo-height);
 }
 
-.preloader-building::before {
-  content: "";
-  display: block;
+.logo-svg {
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 0.5rem,
-    rgba(0, 0, 0, 0.15) 0.5rem,
-    rgba(0, 0, 0, 0.15) 0.625rem
-  );
-  border-radius: 0.125rem 0.125rem 0 0;
+  overflow: visible;
 }
 
-.preloader-building:nth-child(1) {
-  --height: 5rem;
-  animation-delay: 0s;
+.logo-stroke {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: var(--border-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+  animation: preloaderDrawBorder var(--border-duration) ease-out forwards;
+  filter: drop-shadow(0 0 var(--border-glow) rgba(249, 194, 6, 0.5));
 }
 
-.preloader-building:nth-child(2) {
-  --height: 7.5rem;
-  animation-delay: 0.2s;
+.logo-fill {
+  fill: var(--gold);
+  clip-path: inset(0 100% 0 0);
+  animation: preloaderFillLeftToRight var(--fill-duration) ease-out forwards;
+  animation-delay: var(--fill-delay);
 }
 
-.preloader-building:nth-child(3) {
-  --height: 8.75rem;
-  animation-delay: 0.4s;
+.logo-glow {
+  fill: var(--gold);
+  opacity: 0;
+  filter: blur(var(--glow-blur));
+  animation: preloaderGlowIn var(--glow-duration) ease-out forwards;
+  animation-delay: var(--glow-delay);
 }
 
-.preloader-building:nth-child(4) {
-  --height: 6.25rem;
-  animation-delay: 0.6s;
-}
-
-.preloader-building:nth-child(5) {
-  --height: 5.625rem;
-  animation-delay: 0.8s;
-}
-
-@keyframes preloaderRise {
-  0%,
-  10% {
-    transform: scaleY(0);
-  }
-  40%,
-  90% {
-    transform: scaleY(1);
+@keyframes preloaderDrawBorder {
+  0% {
+    stroke-dashoffset: var(--path-length);
   }
   100% {
-    transform: scaleY(0);
+    stroke-dashoffset: 0;
   }
 }
 
-/* Text */
-.preloader-text {
+@keyframes preloaderFillLeftToRight {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes preloaderGlowIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.loader-text {
   text-align: center;
 }
 
-.preloader-title {
+.loader-title {
   font-family: var(--font-title);
-  font-size: 1.25rem;
+  font-size: 1.5625rem;
   font-weight: 300;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.625rem;
   text-transform: uppercase;
-  color: var(--rg-gold);
+  color: #fff;
+  opacity: 0;
+  animation: preloaderFadeInText var(--text-duration) ease-out forwards;
+  animation-delay: var(--title-delay);
+}
+
+.loader-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  letter-spacing: 0.3125rem;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 300;
+  margin-top: 1.1875rem;
+  opacity: 0;
+  animation: preloaderFadeInText var(--text-duration) ease-out forwards;
+  animation-delay: var(--subtitle-delay);
+}
+
+@keyframes preloaderFadeInText {
+  0% {
+    opacity: 0;
+    transform: translateY(0.625rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 480px) {
@@ -118,17 +179,13 @@
     gap: 2.5rem;
   }
 
-  .preloader-skyline {
-    height: 8rem;
-    gap: 0.375rem;
+  .logo-container {
+    width: 205px;
+    height: 143px;
   }
 
-  .preloader-building {
-    width: 1.5rem;
-  }
-
-  .preloader-title {
-    font-size: 1.0625rem;
-    letter-spacing: 0.4rem;
+  .loader-title {
+    font-size: 1.3125rem;
+    letter-spacing: 0.5rem;
   }
 }
