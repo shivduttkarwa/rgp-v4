@@ -2,8 +2,21 @@ import { useLayoutEffect, useRef, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import gsap from "gsap";
-import { Tag, CheckCircle, Key, ChevronDown, X, ArrowRight, MessageCircle, Phone } from "lucide-react";
-import { PropertyCard, type Property, type Category } from "../components/reusable/PropertyCard";
+import {
+  Tag,
+  CheckCircle,
+  Key,
+  ChevronDown,
+  X,
+  ArrowRight,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
+import {
+  PropertyCard,
+  type Property,
+  type Category,
+} from "../components/reusable/PropertyCard";
 import { allProperties } from "../data/listingProperties";
 import "./PropertiesPage.css";
 import "../sections/ServiceSelection.css";
@@ -20,7 +33,11 @@ type Filters = {
 };
 
 const DEFAULT_FILTERS: Filters = {
-  cat: "all", price: "all", beds: "any", baths: "any", showAll: false,
+  cat: "all",
+  price: "all",
+  beds: "any",
+  baths: "any",
+  showAll: false,
 };
 
 const categoryTabs = [
@@ -42,13 +59,23 @@ const PAGE_CTA = {
 };
 
 const applyFilters = (items: Property[], f: Filters) =>
-  items.filter(p => {
+  items.filter((p) => {
     if (f.cat !== "all" && p.category !== f.cat) return false;
     if (f.price === "contact" && p.price !== 0) return false;
-    if (f.price === "under500" && (p.price === 0 || p.price >= 500000)) return false;
-    if (f.price === "500-800" && (p.price === 0 || p.price < 500000 || p.price > 800000)) return false;
-    if (f.price === "800-1200" && (p.price === 0 || p.price < 800000 || p.price > 1200000)) return false;
-    if (f.price === "over1200" && (p.price === 0 || p.price <= 1200000)) return false;
+    if (f.price === "under500" && (p.price === 0 || p.price >= 500000))
+      return false;
+    if (
+      f.price === "500-800" &&
+      (p.price === 0 || p.price < 500000 || p.price > 800000)
+    )
+      return false;
+    if (
+      f.price === "800-1200" &&
+      (p.price === 0 || p.price < 800000 || p.price > 1200000)
+    )
+      return false;
+    if (f.price === "over1200" && (p.price === 0 || p.price <= 1200000))
+      return false;
     if (f.beds === "land" && p.beds !== 0) return false;
     if (f.beds === "3" && p.beds < 3) return false;
     if (f.beds === "4" && p.beds < 4) return false;
@@ -64,7 +91,8 @@ export default function PropertiesPage() {
   // activeFilters drives UI controls (immediate feedback)
   // displayedFilters drives the grid (lags 280ms behind for exit animation)
   const [activeFilters, setActiveFilters] = useState<Filters>(DEFAULT_FILTERS);
-  const [displayedFilters, setDisplayedFilters] = useState<Filters>(DEFAULT_FILTERS);
+  const [displayedFilters, setDisplayedFilters] =
+    useState<Filters>(DEFAULT_FILTERS);
   const [isExiting, setIsExiting] = useState(false);
 
   const pendingRef = useRef<Filters>(DEFAULT_FILTERS);
@@ -79,11 +107,16 @@ export default function PropertiesPage() {
     const container = filterTabsRef.current;
     const pill = pillRef.current;
     if (!container || !pill) return;
-    const activeBtn = container.querySelector<HTMLElement>(".ap-filter-tab.active");
+    const activeBtn = container.querySelector<HTMLElement>(
+      ".ap-filter-tab.active",
+    );
     if (!activeBtn) return;
 
     if (!pillInitialized.current) {
-      gsap.set(pill, { left: activeBtn.offsetLeft, width: activeBtn.offsetWidth });
+      gsap.set(pill, {
+        left: activeBtn.offsetLeft,
+        width: activeBtn.offsetWidth,
+      });
       pillInitialized.current = true;
     } else {
       gsap.to(pill, {
@@ -122,11 +155,19 @@ export default function PropertiesPage() {
 
   // ── Data ─────────────────────────────────────────────────────────────────
   // filtered/displayed are from displayedFilters (what the grid actually shows)
-  const filtered = useMemo(() => applyFilters(allProperties, displayedFilters), [displayedFilters]);
+  const filtered = useMemo(
+    () => applyFilters(allProperties, displayedFilters),
+    [displayedFilters],
+  );
   // activeFiltered is for the result count badge (updates immediately)
-  const activeFiltered = useMemo(() => applyFilters(allProperties, activeFilters), [activeFilters]);
+  const activeFiltered = useMemo(
+    () => applyFilters(allProperties, activeFilters),
+    [activeFilters],
+  );
 
-  const displayed = displayedFilters.showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
+  const displayed = displayedFilters.showAll
+    ? filtered
+    : filtered.slice(0, INITIAL_COUNT);
   const hasMore = !displayedFilters.showAll && filtered.length > INITIAL_COUNT;
 
   // isoKey drives Isotope reinit — changes only after animation completes
@@ -154,12 +195,14 @@ export default function PropertiesPage() {
       clearTimeout(timer);
       iso?.destroy();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isoKey]);
 
   const hasActiveFilters =
-    activeFilters.cat !== "all" || activeFilters.price !== "all" ||
-    activeFilters.beds !== "any" || activeFilters.baths !== "any";
+    activeFilters.cat !== "all" ||
+    activeFilters.price !== "all" ||
+    activeFilters.beds !== "any" ||
+    activeFilters.baths !== "any";
 
   return (
     <div className="ap-page">
@@ -167,8 +210,16 @@ export default function PropertiesPage() {
         ready={true}
         showVideo={false}
         bgImage="images/hero-rpg-brisbane.jpg"
-        titleLine1={<>Our <span className="rg-gold">Premium</span></>}
-        titleLine2={<><span className="rg-amber">Properties</span></>}
+        titleLine1={
+          <>
+            Our <span className="rg-gold">Premium</span>
+          </>
+        }
+        titleLine2={
+          <>
+            <span className="rg-amber">Properties</span>
+          </>
+        }
         subtitle="Browse our curated portfolio of for-sale, sold and rental properties across South-East Queensland."
         showCta={false}
       />
@@ -183,7 +234,12 @@ export default function PropertiesPage() {
                 {categoryTabs.map((tab) => (
                   <button
                     key={tab.id}
-                    onClick={() => changeFilters({ cat: tab.id as "all" | Category, showAll: false })}
+                    onClick={() =>
+                      changeFilters({
+                        cat: tab.id as "all" | Category,
+                        showAll: false,
+                      })
+                    }
                     className={`ap-filter-tab ${activeFilters.cat === tab.id ? "active" : ""}`}
                   >
                     {tab.icon ? <tab.icon size={16} /> : null}
@@ -198,7 +254,9 @@ export default function PropertiesPage() {
                 <select
                   className="ap-select"
                   value={activeFilters.price}
-                  onChange={e => changeFilters({ price: e.target.value, showAll: false })}
+                  onChange={(e) =>
+                    changeFilters({ price: e.target.value, showAll: false })
+                  }
                 >
                   <option value="all">Any Price</option>
                   <option value="contact">Contact Agent</option>
@@ -214,7 +272,9 @@ export default function PropertiesPage() {
                 <select
                   className="ap-select"
                   value={activeFilters.beds}
-                  onChange={e => changeFilters({ beds: e.target.value, showAll: false })}
+                  onChange={(e) =>
+                    changeFilters({ beds: e.target.value, showAll: false })
+                  }
                 >
                   <option value="any">Any Beds</option>
                   <option value="land">Land / No Bedrooms</option>
@@ -229,7 +289,9 @@ export default function PropertiesPage() {
                 <select
                   className="ap-select"
                   value={activeFilters.baths}
-                  onChange={e => changeFilters({ baths: e.target.value, showAll: false })}
+                  onChange={(e) =>
+                    changeFilters({ baths: e.target.value, showAll: false })
+                  }
                 >
                   <option value="any">Any Baths</option>
                   <option value="1">1+ Bathrooms</option>
@@ -241,13 +303,15 @@ export default function PropertiesPage() {
 
               {hasActiveFilters && (
                 <button className="ap-clear-btn" onClick={clearFilters}>
-                  <X size={14} />Clear
+                  <X size={14} />
+                  Clear
                 </button>
               )}
             </div>
 
             <p className="ap-result-count">
-              {activeFiltered.length} {activeFiltered.length === 1 ? "property" : "properties"} found
+              {activeFiltered.length}{" "}
+              {activeFiltered.length === 1 ? "property" : "properties"} found
             </p>
           </div>
         </div>
@@ -259,7 +323,9 @@ export default function PropertiesPage() {
           {filtered.length === 0 ? (
             <div className="ap-empty">
               <p>No properties match your filters.</p>
-              <button className="ap-clear-btn" onClick={clearFilters}>Clear Filters</button>
+              <button className="ap-clear-btn" onClick={clearFilters}>
+                Clear Filters
+              </button>
             </div>
           ) : (
             <>
@@ -272,7 +338,9 @@ export default function PropertiesPage() {
                   <div
                     key={p.id}
                     className="ap-card-wrap"
-                    style={{ "--ap-delay": `${i * 0.06}s` } as React.CSSProperties}
+                    style={
+                      { "--ap-delay": `${i * 0.06}s` } as React.CSSProperties
+                    }
                   >
                     <PropertyCard property={p} cardIndex={i} />
                   </div>
@@ -282,16 +350,23 @@ export default function PropertiesPage() {
               {/* View All / Show Less */}
               <div className="ap-view-all">
                 {hasMore && (
-                  <button className="ap-view-btn" onClick={() => changeFilters({ showAll: true })}>
+                  <button
+                    className="ap-view-btn"
+                    onClick={() => changeFilters({ showAll: true })}
+                  >
                     <span>View All {filtered.length} Properties</span>
                     <ArrowRight size={16} />
                   </button>
                 )}
-                {displayedFilters.showAll && filtered.length > INITIAL_COUNT && (
-                  <button className="ap-view-btn ap-view-btn--ghost" onClick={() => changeFilters({ showAll: false })}>
-                    Show Less
-                  </button>
-                )}
+                {displayedFilters.showAll &&
+                  filtered.length > INITIAL_COUNT && (
+                    <button
+                      className="ap-view-btn ap-view-btn--ghost"
+                      onClick={() => changeFilters({ showAll: false })}
+                    >
+                      Show Less
+                    </button>
+                  )}
               </div>
             </>
           )}
@@ -308,10 +383,18 @@ export default function PropertiesPage() {
             <span className="svc-cta__eyebrow" data-gsap="fade-up">
               {PAGE_CTA.eyebrow}
             </span>
-            <h3 className="svc-cta__title" data-gsap="char-reveal" data-gsap-start="top 85%">
+            <h3
+              className="svc-cta__title"
+              data-gsap="char-reveal"
+              data-gsap-start="top 85%"
+            >
               {PAGE_CTA.title} <em>{PAGE_CTA.titleEm}</em>
             </h3>
-            <p className="svc-cta__text" data-gsap="fade-up" data-gsap-delay="0.15">
+            <p
+              className="svc-cta__text"
+              data-gsap="fade-up"
+              data-gsap-delay="0.15"
+            >
               {PAGE_CTA.text}
             </p>
 
@@ -337,7 +420,11 @@ export default function PropertiesPage() {
               </a>
             </div>
 
-            <div data-gsap="zoom-in" data-gsap-stagger="0.3 " className="svc-cta__trust">
+            <div
+              data-gsap="zoom-in"
+              data-gsap-stagger="0.3 "
+              className="svc-cta__trust"
+            >
               <div className="svc-cta__trust-item">
                 <span className="svc-cta__trust-value">150+</span>
                 <span className="svc-cta__trust-label">Local Deals Closed</span>
@@ -349,8 +436,10 @@ export default function PropertiesPage() {
               </div>
               <div className="svc-cta__trust-divider" />
               <div className="svc-cta__trust-item">
-                <span className="svc-cta__trust-value">98%</span>
-                <span className="svc-cta__trust-label">Client Satisfaction</span>
+                <span className="svc-cta__trust-value">100%</span>
+                <span className="svc-cta__trust-label">
+                  Client Satisfaction
+                </span>
               </div>
             </div>
           </div>

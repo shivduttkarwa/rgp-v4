@@ -15,7 +15,10 @@ import {
   Key,
   Building2,
 } from "lucide-react";
-import { PropertyCard, type Category } from "../components/reusable/PropertyCard";
+import {
+  PropertyCard,
+  type Category,
+} from "../components/reusable/PropertyCard";
 import "./PropertyListingsection.css";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -30,7 +33,8 @@ const propertiesData = [
     location: "Algester, QLD",
     price: 1500000,
     soldPrice: 1500000,
-    image: "https://i2.au.reastatic.net/800x600/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg",
     beds: 5,
     baths: 3,
     sqft: 4500,
@@ -47,7 +51,8 @@ const propertiesData = [
     location: "Springfield, QLD",
     price: 1137000,
     soldPrice: 1137000,
-    image: "https://i2.au.reastatic.net/800x600/28a77f3d11097e6e7254f26797c3a50a5dbd8084abed79665d857465a175c8d2/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/28a77f3d11097e6e7254f26797c3a50a5dbd8084abed79665d857465a175c8d2/image.jpg",
     beds: 4,
     baths: 2,
     sqft: 3200,
@@ -64,7 +69,8 @@ const propertiesData = [
     location: "Ripley, QLD",
     price: 970000,
     soldPrice: 970000,
-    image: "https://i2.au.reastatic.net/800x600/7e3a9d18a2cd7cc29cda98993de0c6791efd652c0f80549f38ed742aeab03c39/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/7e3a9d18a2cd7cc29cda98993de0c6791efd652c0f80549f38ed742aeab03c39/image.jpg",
     beds: 4,
     baths: 2,
     sqft: 2800,
@@ -81,7 +87,8 @@ const propertiesData = [
     location: "South Ripley, QLD",
     price: 1100000,
     soldPrice: 1100000,
-    image: "https://i2.au.reastatic.net/800x600/2b7286a31eca5ee4b452d8d15ee9cfca0ef70c543bbf149d3d1737bb46f1cd91/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/2b7286a31eca5ee4b452d8d15ee9cfca0ef70c543bbf149d3d1737bb46f1cd91/image.jpg",
     beds: 4,
     baths: 2,
     sqft: 3500,
@@ -98,7 +105,8 @@ const propertiesData = [
     location: "Greenbank, QLD",
     price: 890000,
     soldPrice: 890000,
-    image: "https://i2.au.reastatic.net/800x600/d744995f1cbc8af65653e6d4aa19cb9e7ecf1c6d72fe8d0bdf95a18d169e6b5b/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/d744995f1cbc8af65653e6d4aa19cb9e7ecf1c6d72fe8d0bdf95a18d169e6b5b/image.jpg",
     beds: 4,
     baths: 2,
     sqft: 2900,
@@ -115,7 +123,8 @@ const propertiesData = [
     location: "Greenbank, QLD",
     price: 880000,
     soldPrice: 880000,
-    image: "https://i2.au.reastatic.net/800x600/1030bd2599d6aa18e29d450d345df4c33777979576e283b9256c0e877683d823/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/1030bd2599d6aa18e29d450d345df4c33777979576e283b9256c0e877683d823/image.jpg",
     beds: 4,
     baths: 2,
     sqft: 2800,
@@ -132,7 +141,8 @@ const propertiesData = [
     location: "Narangba, QLD",
     price: 770000,
     soldPrice: 770000,
-    image: "https://i2.au.reastatic.net/800x600/0b984c985a3e5b0ef241e068254ab5e4a4808f68a41783687b3fee05e70c3aa0/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/0b984c985a3e5b0ef241e068254ab5e4a4808f68a41783687b3fee05e70c3aa0/image.jpg",
     beds: 3,
     baths: 2,
     sqft: 2100,
@@ -149,7 +159,8 @@ const propertiesData = [
     location: "Heathwood, QLD",
     price: 1040000,
     soldPrice: 1040000,
-    image: "https://i2.au.reastatic.net/800x600/48baee38f613ec6cb38fc75249b7bbf866cc276446fd318df6965a4a7dc25905/image.png",
+    image:
+      "https://i2.au.reastatic.net/800x600/48baee38f613ec6cb38fc75249b7bbf866cc276446fd318df6965a4a7dc25905/image.png",
     beds: 4,
     baths: 2,
     sqft: 3400,
@@ -166,7 +177,8 @@ const propertiesData = [
     location: "Park Ridge, QLD",
     price: 600000,
     soldPrice: 600000,
-    image: "https://i2.au.reastatic.net/800x600/4fb818eeb10863afd6ca1917e70ff45bd9d582197413fb5e2808dd86c4019fe4/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/4fb818eeb10863afd6ca1917e70ff45bd9d582197413fb5e2808dd86c4019fe4/image.jpg",
     beds: 0,
     baths: 0,
     sqft: 10764,
@@ -183,7 +195,8 @@ const propertiesData = [
     location: "South Maclean, QLD",
     price: 400000,
     soldPrice: 400000,
-    image: "https://i2.au.reastatic.net/800x600/ba08c62e76942997fbdd47bfd377286a87bf0a8badd2980dded2059e9d568532/image.jpg",
+    image:
+      "https://i2.au.reastatic.net/800x600/ba08c62e76942997fbdd47bfd377286a87bf0a8badd2980dded2059e9d568532/image.jpg",
     beds: 0,
     baths: 0,
     sqft: 8073,
@@ -201,7 +214,8 @@ const propertiesData = [
     title: "14 Lakeview Crescent",
     location: "Forest Lake, QLD",
     price: 875000,
-    image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
     beds: 4,
     baths: 2,
     sqft: 2950,
@@ -218,7 +232,8 @@ const propertiesData = [
     title: "8 Harmony Place",
     location: "Ripley, QLD",
     price: 749000,
-    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
     beds: 4,
     baths: 2,
     sqft: 2600,
@@ -235,7 +250,8 @@ const propertiesData = [
     title: "22 Settlers Drive",
     location: "Springfield Lakes, QLD",
     price: 1050000,
-    image: "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&q=80",
     beds: 5,
     baths: 3,
     sqft: 3800,
@@ -253,7 +269,8 @@ const propertiesData = [
     title: "5 Parkside Close",
     location: "Greenbank, QLD",
     price: 2600,
-    image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
     beds: 4,
     baths: 2,
     sqft: 2750,
@@ -270,7 +287,8 @@ const propertiesData = [
     title: "3 Sunridge Court",
     location: "Ripley, QLD",
     price: 2200,
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
     beds: 3,
     baths: 2,
     sqft: 2100,
@@ -287,7 +305,8 @@ const propertiesData = [
     title: "12 Ironbark Street",
     location: "Narangba, QLD",
     price: 1950,
-    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
     beds: 3,
     baths: 1,
     sqft: 1800,
@@ -320,11 +339,15 @@ const PropertyListingSection = () => {
     const container = filterTabsRef.current;
     const pill = pillRef.current;
     if (!container || !pill) return;
-    const activeBtn = container.querySelector<HTMLElement>(".filter-tab.active");
+    const activeBtn =
+      container.querySelector<HTMLElement>(".filter-tab.active");
     if (!activeBtn) return;
 
     if (!pillInitialized.current) {
-      gsap.set(pill, { left: activeBtn.offsetLeft, width: activeBtn.offsetWidth });
+      gsap.set(pill, {
+        left: activeBtn.offsetLeft,
+        width: activeBtn.offsetWidth,
+      });
       pillInitialized.current = true;
     } else {
       gsap.to(pill, {
@@ -365,11 +388,15 @@ const PropertyListingSection = () => {
   const displayed =
     displayedFilter === "*"
       ? propertiesData.reduce<typeof propertiesData>((acc, p) => {
-          const count = acc.filter((item) => item.category === p.category).length;
+          const count = acc.filter(
+            (item) => item.category === p.category,
+          ).length;
           if (count < 3) acc.push(p);
           return acc;
         }, [])
-      : propertiesData.filter((p) => p.category === displayedFilter).slice(0, 3);
+      : propertiesData
+          .filter((p) => p.category === displayedFilter)
+          .slice(0, 3);
 
   const handleFilterChange = (filter: Category | "*") => {
     if (filter === activeFilter || isExiting) return;
@@ -501,7 +528,11 @@ const PropertyListingSection = () => {
         </div>
 
         <div className="view-all-wrapper">
-          <Link to="/properties" className="view-all-btn" data-gsap="btn-clip-reveal">
+          <Link
+            to="/properties"
+            className="view-all-btn"
+            data-gsap="btn-clip-reveal"
+          >
             <span>View All Properties</span>
             <ArrowRight size={18} />
           </Link>
@@ -519,7 +550,7 @@ const PropertyListingSection = () => {
                 <Home size={24} />
               </div>
               <div className="stat-card-content">
-                <span className="stat-card-value">2,500+</span>
+                <span className="stat-card-value">150+</span>
                 <span className="stat-card-label">Properties Listed</span>
               </div>
             </div>
@@ -528,7 +559,7 @@ const PropertyListingSection = () => {
                 <CheckCircle size={24} />
               </div>
               <div className="stat-card-content">
-                <span className="stat-card-value">1,800+</span>
+                <span className="stat-card-value">200+</span>
                 <span className="stat-card-label">Happy Clients</span>
               </div>
             </div>
@@ -537,7 +568,7 @@ const PropertyListingSection = () => {
                 <MapPin size={24} />
               </div>
               <div className="stat-card-content">
-                <span className="stat-card-value">150+</span>
+                <span className="stat-card-value">5+</span>
                 <span className="stat-card-label">Cities Covered</span>
               </div>
             </div>
@@ -546,7 +577,7 @@ const PropertyListingSection = () => {
                 <Building2 size={24} />
               </div>
               <div className="stat-card-content">
-                <span className="stat-card-value">15+</span>
+                <span className="stat-card-value">10+</span>
                 <span className="stat-card-label">Years Experience</span>
               </div>
             </div>
