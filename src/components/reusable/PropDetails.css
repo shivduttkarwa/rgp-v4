@@ -71,9 +71,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 3, 46, 0.2) 0%,
-    rgba(0, 3, 46, 0) 30%,
-    rgba(0, 3, 46, 0) 50%,
+    rgba(0, 3, 46, 0.65) 0%,
+    rgba(0, 3, 46, 0.35) 28%,
+    rgba(0, 3, 46, 0.18) 50%,
     rgba(0, 3, 46, 0.7) 80%,
     rgba(0, 3, 46, 0.9) 100%
   );
@@ -129,9 +129,9 @@
   bottom: 12%;
   left: 0;
   right: 0;
-  padding: 0 5rem;
+  padding: 1.75rem 2.5rem;
   z-index: 10;
-  max-width: 1400px;
+  max-width: 900px;
   margin: 0 auto;
 }
 

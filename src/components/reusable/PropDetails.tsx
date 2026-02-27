@@ -538,13 +538,6 @@ const HeroSlider: React.FC<{
         </div>
       </div>
 
-      <div className="pd-hero__scroll">
-        <span className="pd-hero__scroll-text">Scroll to Explore</span>
-        <div className="pd-hero__scroll-indicator">
-          <Icons.chevronDown />
-        </div>
-      </div>
-
       {images.length > 1 && (
         <div className="pd-hero__thumbnails">
           {thumbnails.map((image, index) => (
