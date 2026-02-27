@@ -90,6 +90,7 @@
 
 .rgMarquee__track {
   display: flex;
+  align-items: flex-start;
   gap: 18px;
   will-change: transform;
   padding: 12px var(--rg-pad);
@@ -102,7 +103,6 @@
 
 .rgMarquee .property-card {
   width: 100%;
-  height: 100%;
 }
 
 @media (max-width: 640px) {
