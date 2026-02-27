@@ -1,6 +1,5 @@
-/* Philosophy.css */
+/* Philosophy.css — Testimonials (same card design, video swap) */
 
-/* Clean section wrapper */
 .rg-philo {
   background: var(--rg-darker);
   color: var(--rg-text-dark);
@@ -74,13 +73,13 @@
 .rg-philo__card {
   position: relative;
   overflow: hidden;
-  border-radius: 0; /* keep crisp like your references */
+  border-radius: 0;
   background: var(--rg-beige);
   box-shadow: 0 18px 40px rgba(44, 24, 16, 0.08);
-  isolation: isolate; /* ensures blend modes behave */
+  isolation: isolate;
 }
 
-/* Image */
+/* Video (same sizing as img was) */
 .rg-philo__media {
   width: 100%;
   aspect-ratio: 4 / 4.2;
@@ -100,15 +99,34 @@
   transform: scale(1.04);
 }
 
-/* Tint per card using ONLY your vars */
-.rg-philo__card[data-tint="gold"] {
-  --tint: var(--rg-gold);
+/* Tint per card */
+.rg-philo__card[data-tint="gold"]    { --tint: var(--rg-gold); }
+.rg-philo__card[data-tint="amber"]   { --tint: var(--rg-amber); }
+.rg-philo__card[data-tint="crimson"] { --tint: var(--rg-crimson); }
+
+/* Play icon — visible at rest, fades on hover */
+.rg-philo__play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  color: rgba(255, 255, 255, 0.85);
+  width: 56px;
+  height: 56px;
+  transition: opacity 300ms ease, transform 300ms ease;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
 }
-.rg-philo__card[data-tint="amber"] {
-  --tint: var(--rg-amber);
+
+.rg-philo__play-icon svg {
+  width: 100%;
+  height: 100%;
 }
-.rg-philo__card[data-tint="crimson"] {
-  --tint: var(--rg-crimson);
+
+.rg-philo__card:hover .rg-philo__play-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
 }
 
 /* Bottom pillar strip (always visible) */
@@ -122,7 +140,6 @@
   pointer-events: none;
 }
 
-/* subtle tint wash behind text (keeps it readable) */
 .rg-philo__pill::before {
   content: "";
   position: absolute;
@@ -136,7 +153,6 @@
   z-index: -1;
 }
 
-/* Kicker */
 .rg-philo__pillKicker {
   font-size: 0.78rem;
   letter-spacing: 0.18em;
@@ -145,7 +161,6 @@
   color: rgba(255, 248, 240, 0.92);
 }
 
-/* BIG blend title */
 .rg-philo__pillTitle {
   margin-top: 0.25rem;
   font-size: clamp(2.25rem, 3.6vw, 3.25rem);
@@ -153,15 +168,13 @@
   letter-spacing: -0.02em;
   line-height: 0.95;
   text-transform: uppercase;
-
-  /* blend + tint */
   color: var(--tint);
-  mix-blend-mode: screen; /* looks premium on photos */
+  mix-blend-mode: screen;
   opacity: 0.95;
   text-shadow: 0 10px 30px rgba(44, 24, 16, 0.35);
 }
 
-/* Hover reveal (slides up to cover image) */
+/* Hover reveal */
 .rg-philo__reveal {
   position: absolute;
   inset: 0;
@@ -181,18 +194,13 @@
   transform: translateY(0%);
 }
 
-/* When reveal is open, hide the bottom strip gently */
 .rg-philo__card:hover .rg-philo__pill {
   opacity: 0;
   transform: translateY(8px);
-  transition:
-    opacity 220ms ease,
-    transform 220ms ease;
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 .rg-philo__pill {
-  transition:
-    opacity 220ms ease,
-    transform 220ms ease;
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 
 .rg-philo__revealInner {
@@ -217,7 +225,6 @@
   letter-spacing: -0.02em;
   line-height: 0.95;
   text-transform: uppercase;
-
   color: var(--tint);
   mix-blend-mode: screen;
   opacity: 0.98;
@@ -232,10 +239,46 @@
   max-width: 44ch;
 }
 
-/* Nice focus (keyboard) */
 .rg-philo__card:focus-within {
   outline: 2px solid rgba(212, 160, 86, 0.55);
   outline-offset: 4px;
+}
+
+/* CTA row */
+.rg-philo__cta-row {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: flex;
+  justify-content: center;
+}
+
+.rg-philo__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 8px;
+  background: var(--rg-blue-500, #0f1870);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.rg-philo__cta-btn:hover {
+  background: #162496;
+  transform: translateY(-2px);
+}
+
+.rg-philo__cta-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s ease;
+}
+
+.rg-philo__cta-btn:hover svg {
+  transform: translateX(4px);
 }
 
 /* Mobile swiper — hidden on desktop */
@@ -268,7 +311,7 @@
   }
 }
 
-/* Touch devices: exact same as desktop hover — always revealed */
+/* Touch: reveal always shown */
 @media (hover: none) and (pointer: coarse) {
   .rg-philo__media {
     aspect-ratio: 4 / 4.2;
@@ -280,5 +323,9 @@
 
   .rg-philo__pill {
     display: none;
+  }
+
+  .rg-philo__play-icon {
+    opacity: 0;
   }
 }

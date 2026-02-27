@@ -1,16 +1,13 @@
 import { useEffect, useRef } from "react";
 import HeroSection from "../sections/HeroSection";
 import Intro from "../sections/Intro";
-import About from "../sections/About";
-import Team from "../sections/Team";
 
 import PortfolioShowcase from "../sections/PortfolioShowcase";
 import PropertyListingSection from "@/sections/PropertyListingSection";
 import ServiceSelection from "@/sections/ServiceSelection";
 import PhilosophyPillars from "@/sections/Philosophy";
-import WhyUs from "@/sections/WhyUs";
-import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 
+import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 
 export default function HomePage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -49,11 +46,9 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
 
       <PropertyListingSection />
 
-      <Team />
-
       <ServiceSelection />
       <PhilosophyPillars />
-      <WhyUs />
+
       <PortfolioShowcase />
     </div>
   );

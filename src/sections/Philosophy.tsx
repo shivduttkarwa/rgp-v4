@@ -1,64 +1,146 @@
-// Philosophy.tsx
+// HomeTestimonials (Philosophy.tsx) — same card design, videos instead of images
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./Philosophy.css";
 
-type Pillar = {
-  title: string; // BIG overlay title (bottom, blend-mode)
-  kicker: string; // small line above title (optional feeling)
-  desc: string; // hover reveal text
-  img: string; // image url
-  tintVar: "gold" | "amber" | "crimson"; // uses your vars only
+type Testimonial = {
+  kicker: string;
+  title: string;
+  desc: string;
+  video: string;
+  poster: string;
+  tintVar: "gold" | "amber" | "crimson";
 };
 
-const PILLARS: Pillar[] = [
+const TESTIMONIALS: Testimonial[] = [
   {
-    title: "SERVICE",
-    kicker: "OUR COMMITMENT",
-    desc: "Exceptional service, every step. We go above and beyond to deliver a smooth, stress-free experience.",
-    img: "https://files.staging.peachworlds.com/website/dbf16c23-6134-4df6-a509-bd2a6b79ab37/chatgpt-image-3-apr-2025-16-33-58.webp",
+    kicker: "SUNNYBANK · SOLD",
+    title: "SARAH M.",
+    desc: "Rahul made selling our home completely stress-free. His market knowledge and honest advice got us $40k above what we expected. Couldn't recommend him more highly.",
+    video: "https://www.w3schools.com/html/mov_bbb.mp4",
+    poster: "https://files.staging.peachworlds.com/website/dbf16c23-6134-4df6-a509-bd2a6b79ab37/chatgpt-image-3-apr-2025-16-33-58.webp",
     tintVar: "gold",
   },
   {
-    title: "HONESTY",
-    kicker: "HOW WE WORK",
-    desc: "Transparent communication is at the core of every interaction—clear advice, timely updates, and no surprises.",
-    img: "https://files.staging.peachworlds.com/website/d80b404a-7e8e-40ee-a08c-cbab3f8a7ad3/chatgpt-image-3-apr-2025-16-23-38.webp",
+    kicker: "UNDERWOOD · PURCHASED",
+    title: "JAMES & LISA",
+    desc: "As first-home buyers we were nervous, but Rahul guided us through every step with patience and clarity. We found our perfect home within three weeks.",
+    video: "https://www.w3schools.com/html/mov_bbb.mp4",
+    poster: "https://files.staging.peachworlds.com/website/d80b404a-7e8e-40ee-a08c-cbab3f8a7ad3/chatgpt-image-3-apr-2025-16-23-38.webp",
     tintVar: "amber",
   },
   {
-    title: "EXPERTISE",
-    kicker: "WHAT YOU GET",
-    desc: "Market expertise and local insight that drive strong outcomes—accurate pricing, confident negotiation, and real results.",
-    img: "https://files.staging.peachworlds.com/website/504aad69-04e9-4c61-8e60-4bf340ec746f/chatgpt-image-3-apr-2025-16-23-32.webp",
+    kicker: "EIGHT MILE PLAINS · APPRAISAL",
+    title: "DAVID K.",
+    desc: "The free appraisal was insightful and there was zero pressure. Rahul gave us a realistic picture of our property's value backed by solid, comparable data.",
+    video: "https://www.w3schools.com/html/mov_bbb.mp4",
+    poster: "https://files.staging.peachworlds.com/website/504aad69-04e9-4c61-8e60-4bf340ec746f/chatgpt-image-3-apr-2025-16-23-32.webp",
     tintVar: "crimson",
   },
 ];
 
-export default function Philosophy() {
+function TestiCard({ t }: { t: Testimonial }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.play().catch(() => {});
+  };
+
+  const handleMouseLeave = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
+  };
+
+  const handleClick = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    // Unmute + go fullscreen so user gets full controls
+    v.muted = false;
+    if (v.requestFullscreen) {
+      v.requestFullscreen().then(() => v.play().catch(() => {}));
+    } else {
+      v.controls = true;
+      v.muted = false;
+      v.play().catch(() => {});
+    }
+  };
+
   return (
-    <section className="rg-philo" aria-label="Real Gold Properties Philosophy">
+    <article
+      className="rg-philo__card"
+      data-tint={t.tintVar}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
+    >
+      <div className="rg-philo__media">
+        <video
+          ref={videoRef}
+          className="rg-philo__img"
+          src={t.video}
+          poster={t.poster}
+          muted
+          playsInline
+          loop
+          preload="none"
+        />
+      </div>
+
+      {/* Play icon overlay (always visible, fades on hover) */}
+      <div className="rg-philo__play-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="23" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M19 16l14 8-14 8V16z" fill="currentColor" />
+        </svg>
+      </div>
+
+      <div className="rg-philo__pill">
+        <div className="rg-philo__pillKicker">{t.kicker}</div>
+        <div className="rg-philo__pillTitle">{t.title}</div>
+      </div>
+
+      <div className="rg-philo__reveal" aria-hidden="true">
+        <div className="rg-philo__revealInner">
+          <div className="rg-philo__revealKicker">{t.kicker}</div>
+          <div className="rg-philo__revealTitle">{t.title}</div>
+          <p className="rg-philo__revealDesc">{t.desc}</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function PhilosophyPillars() {
+  return (
+    <section className="rg-philo" aria-label="Client Testimonials">
       <div className="rg-philo__wrap">
         <header className="rg-philo__head">
           <p data-gsap="fade-up" className="rg-philo__label">
-            Philosophy
+            Testimonials
           </p>
           <h2
             data-gsap="char-reveal"
             data-gsap-start="top 85%"
             className="rg-philo__title"
           >
-            Our <em>Philosophy</em>
+            What Our <em>Clients</em> Say
           </h2>
           <p
             data-gsap="fade-up"
             data-gsap-delay="0.2"
             className="rg-philo__subtitle"
           >
-            Real estate, made calm and confident—where every move is guided by
-            clarity, care, and results.
+            Real feedback from Brisbane homeowners who trusted Rahul to buy,
+            sell, or appraise their property.
           </p>
         </header>
 
@@ -70,34 +152,10 @@ export default function Philosophy() {
           data-gsap-stagger="0.14"
           data-gsap-delay="0.1"
           className="rg-philo__grid"
-          aria-label="Philosophy pillars"
+          aria-label="Client testimonials"
         >
-          {PILLARS.map((p) => (
-            <article
-              key={p.title}
-              className="rg-philo__card"
-              data-tint={p.tintVar}
-            >
-              <div className="rg-philo__media">
-                <img
-                  className="rg-philo__img"
-                  src={p.img}
-                  alt={p.title}
-                  loading="lazy"
-                />
-              </div>
-              <div className="rg-philo__pill">
-                <div className="rg-philo__pillKicker">{p.kicker}</div>
-                <div className="rg-philo__pillTitle">{p.title}</div>
-              </div>
-              <div className="rg-philo__reveal" aria-hidden="true">
-                <div className="rg-philo__revealInner">
-                  <div className="rg-philo__revealKicker">{p.kicker}</div>
-                  <div className="rg-philo__revealTitle">{p.title}</div>
-                  <p className="rg-philo__revealDesc">{p.desc}</p>
-                </div>
-              </div>
-            </article>
+          {TESTIMONIALS.map((t) => (
+            <TestiCard key={t.title} t={t} />
           ))}
         </div>
 
@@ -112,40 +170,24 @@ export default function Philosophy() {
             pagination={{ clickable: true, dynamicBullets: true }}
             breakpoints={{ 480: { slidesPerView: 1.2, spaceBetween: 20 } }}
           >
-            {PILLARS.map((p) => (
-              <SwiperSlide key={p.title}>
-                <div
-                  className="rg-philo__card-wrap"
-                  data-gsap-mobile="slide-right"
-                  data-gsap-start="top 70%"
-                  data-gsap-duration="0.5"
-                  data-gsap-ease="none"
-                >
-                  <article className="rg-philo__card" data-tint={p.tintVar}>
-                    <div className="rg-philo__media">
-                      <img
-                        className="rg-philo__img"
-                        src={p.img}
-                        alt={p.title}
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="rg-philo__pill">
-                      <div className="rg-philo__pillKicker">{p.kicker}</div>
-                      <div className="rg-philo__pillTitle">{p.title}</div>
-                    </div>
-                    <div className="rg-philo__reveal" aria-hidden="true">
-                      <div className="rg-philo__revealInner">
-                        <div className="rg-philo__revealKicker">{p.kicker}</div>
-                        <div className="rg-philo__revealTitle">{p.title}</div>
-                        <p className="rg-philo__revealDesc">{p.desc}</p>
-                      </div>
-                    </div>
-                  </article>
+            {TESTIMONIALS.map((t) => (
+              <SwiperSlide key={t.title}>
+                <div className="rg-philo__card-wrap">
+                  <TestiCard t={t} />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
+        </div>
+
+        {/* CTA */}
+        <div className="rg-philo__cta-row">
+          <a href="/testimonials" className="rg-philo__cta-btn">
+            <span>Read All Reviews</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
