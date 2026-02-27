@@ -89,53 +89,16 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   return (
     <div className="preloader" ref={preloaderRef} aria-hidden="true">
-      {/* Corner decorations */}
-      <div className="preloader-corner preloader-corner-tl" />
-      <div className="preloader-corner preloader-corner-tr" />
-      <div className="preloader-corner preloader-corner-bl" />
-      <div className="preloader-corner preloader-corner-br" />
-
-      {/* Logo ring + animated house */}
-      <div className="preloader-logo-container">
-        <div className="preloader-outer-ring" />
-        <div className="preloader-inner-ring" />
-        <div className="preloader-dashed-ring" />
-
-        <div className="preloader-house-icon">
-          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stopColor="#fad840" />
-                <stop offset="50%"  stopColor="#f9c307" />
-                <stop offset="100%" stopColor="#d4a200" />
-              </linearGradient>
-              <linearGradient id="goldGradientFill" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stopColor="#fad840" />
-                <stop offset="100%" stopColor="#f9c307" />
-              </linearGradient>
-            </defs>
-
-            <path className="house-fill" d="M40 12 L12 35 L12 68 L68 68 L68 35 Z" />
-
-            <path className="house-path" d="M8 38 L40 10 L72 38"          style={{ animationDelay: "0s" }} />
-            <path className="house-path" d="M56 20 L56 14 L63 14 L63 26"  style={{ animationDelay: "0.3s" }} />
-            <path className="house-path" d="M16 35 L16 68"                 style={{ animationDelay: "0.5s" }} />
-            <path className="house-path" d="M64 35 L64 68"                 style={{ animationDelay: "0.5s" }} />
-            <path className="house-path" d="M16 68 L64 68"                 style={{ animationDelay: "0.7s" }} />
-            <path className="house-path" d="M33 68 L33 46 L47 46 L47 68"  style={{ animationDelay: "1s" }} />
-            <circle className="house-path" cx="44" cy="57" r="1.5"         style={{ animationDelay: "1.3s", fill: "#f9c307" }} />
-            <path className="house-path" d="M20 42 L20 54 L30 54 L30 42 Z" style={{ animationDelay: "1.1s" }} />
-            <path className="house-path" d="M25 42 L25 54"                 style={{ animationDelay: "1.3s" }} />
-            <path className="house-path" d="M20 48 L30 48"                 style={{ animationDelay: "1.3s" }} />
-            <path className="house-path" d="M50 42 L50 54 L60 54 L60 42 Z" style={{ animationDelay: "1.1s" }} />
-            <path className="house-path" d="M55 42 L55 54"                 style={{ animationDelay: "1.3s" }} />
-            <path className="house-path" d="M50 48 L60 48"                 style={{ animationDelay: "1.3s" }} />
-
-            <path className="key-path" d="M37 72 L43 72" />
-          </svg>
-        </div>
+      <div className="preloader-skyline" aria-hidden="true">
+        <div className="preloader-building" />
+        <div className="preloader-building" />
+        <div className="preloader-building" />
+        <div className="preloader-building" />
+        <div className="preloader-building" />
       </div>
-
+      <div className="preloader-text">
+        <h2 className="preloader-title">Loading</h2>
+      </div>
     </div>
   );
 }

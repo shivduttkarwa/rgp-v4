@@ -1,497 +1,204 @@
-<div class="Dialog__DialogBody-sc-1rspdy2-4 cqFcrj max-width-dialog-body">
-    <h2 class="Text__Typography-sc-1103tao-0 iPOkbH styles__MediaOverviewTitle-sc-1749ld5-1 feIXRZ">Tour the property
-    </h2>
-    <div id="media-overview-sticky-header-bar" class="styles__StickyHeaderBar-sc-1749ld5-2 iZCLSq">
-        <div class="styles__TabListWrapper-sc-1f2xifx-0 gEYwfR">
-            <ul role="tablist" class="styles__HorizontalList-sc-1f2xifx-1 hzWbgu">
-                <li role="presentation"><button role="tab" aria-selected="true" tabindex="0"
-                        class="styles__Pill-sc-19c5809-0 ggNkKs styles__PillButtonNoWrap-sc-1f2xifx-2 hmmxzm"><span
-                            class="styles__LabelWithMargin-sc-19c5809-1 hmsTBI">Images</span></button></li>
-                <li role="presentation"><button role="tab" aria-selected="false" tabindex="-1"
-                        class="styles__Pill-sc-19c5809-0 evgiVr styles__PillButtonNoWrap-sc-1f2xifx-2 hmmxzm"><span
-                            class="styles__LabelWithMargin-sc-19c5809-1 hmsTBI">Floorplan</span></button></li>
-                <li role="presentation"><button role="tab" aria-selected="false" tabindex="-1"
-                        class="styles__Pill-sc-19c5809-0 evgiVr styles__PillButtonNoWrap-sc-1f2xifx-2 hmmxzm"><span
-                            class="styles__LabelWithMargin-sc-19c5809-1 hmsTBI">Video</span></button></li>
-            </ul>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Real Estate Loader</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@200;300&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f4d576;
+            --gold-dark: #b8941e;
+            --bg-dark: #0d0d0d;
+            --bg-darker: #050505;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-darker);
+            min-height: 100vh;
+        }
+
+        /* ================================
+           FULL PAGE LOADER
+           ================================ */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--bg-darker) 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 50px;
+            z-index: 99999;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ================================
+           SKYLINE BUILDINGS
+           ================================ */
+        .skyline {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 8px;
+            height: 160px;
+        }
+
+        .building {
+            width: 30px;
+            background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
+            height: 0;
+            border-radius: 2px 2px 0 0;
+            box-shadow:
+                0 0 30px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: rise 3s ease-in-out infinite;
+        }
+
+        /* Window lines on buildings */
+        .building::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(to bottom,
+                    transparent 0px,
+                    transparent 8px,
+                    rgba(0, 0, 0, 0.15) 8px,
+                    rgba(0, 0, 0, 0.15) 10px);
+            border-radius: 2px 2px 0 0;
+        }
+
+        /* Staggered delays and heights */
+        .building:nth-child(1) {
+            --height: 80px;
+            animation-delay: 0.0s;
+        }
+
+        .building:nth-child(2) {
+            --height: 120px;
+            animation-delay: 0.2s;
+        }
+
+        .building:nth-child(3) {
+            --height: 140px;
+            animation-delay: 0.4s;
+        }
+
+        .building:nth-child(4) {
+            --height: 100px;
+            animation-delay: 0.6s;
+        }
+
+        .building:nth-child(5) {
+            --height: 90px;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes rise {
+
+            0%,
+            10% {
+                height: 0;
+            }
+
+            40%,
+            90% {
+                height: var(--height);
+            }
+
+            100% {
+                height: 0;
+            }
+        }
+
+        /* ================================
+           LOADER TEXT
+           ================================ */
+        .loader-text {
+            text-align: center;
+        }
+
+        .loader-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .loader-subtitle {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 300;
+            margin-top: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+        <div class="skyline">
+            <div class="building"></div>
+            <div class="building"></div>
+            <div class="building"></div>
+            <div class="building"></div>
+            <div class="building"></div>
+        </div>
+        <div class="loader-text">
+            <h2 class="loader-title">Loading</h2>
+            <p class="loader-subtitle">Luxury Properties</p>
         </div>
     </div>
-    <div class="styles__Grid-sc-1749ld5-0 jooeeG"><button
-            class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage" data-testid="overview-image-1">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 1"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/c37701121db965e2181e90a0269133fc2d2967643f86bf8c85a2b0f4958d7ba6/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-2">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/bf060dfef6169c0c759f8bd1dfbcfb284cb8d42f02f957d08ba36d2d734e037c/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 2"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/bf060dfef6169c0c759f8bd1dfbcfb284cb8d42f02f957d08ba36d2d734e037c/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-3">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/47eec55379980537fa17fbc299e6b5fd45df38d1e4cb8d43a4b84eec095ae239/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 3"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/47eec55379980537fa17fbc299e6b5fd45df38d1e4cb8d43a4b84eec095ae239/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-4">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 4"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-5">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/47eec55379980537fa17fbc299e6b5fd45df38d1e4cb8d43a4b84eec095ae239/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 5"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/47eec55379980537fa17fbc299e6b5fd45df38d1e4cb8d43a4b84eec095ae239/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-6">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/d72dbb8e6e85f313c6fe5f78dcb2bcbd553ed226e5bee87468e5e37a3d1cf046/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 6"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/d72dbb8e6e85f313c6fe5f78dcb2bcbd553ed226e5bee87468e5e37a3d1cf046/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-7">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/c1fc02b5196f9f5a8c7dcc816f177bdcecdf04f82dad6086fee65edc35e0852a/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/c1fc02b5196f9f5a8c7dcc816f177bdcecdf04f82dad6086fee65edc35e0852a/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/c1fc02b5196f9f5a8c7dcc816f177bdcecdf04f82dad6086fee65edc35e0852a/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 7"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/c1fc02b5196f9f5a8c7dcc816f177bdcecdf04f82dad6086fee65edc35e0852a/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-8">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/e08c2c0c4f3774facddf409d85896a7ab29ea80585af149453f0dcd534971c20/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 8"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/e08c2c0c4f3774facddf409d85896a7ab29ea80585af149453f0dcd534971c20/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-9">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/37bd36d2c3ef892d11e6f9cd0b66824afe9e641585accb00e876fadb8c8d86da/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 9"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/37bd36d2c3ef892d11e6f9cd0b66824afe9e641585accb00e876fadb8c8d86da/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-10">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/55d18103f6e7268e7396b5bbeff4a40dc8ef7cdeaef16db09d2a36010d6a4093/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/55d18103f6e7268e7396b5bbeff4a40dc8ef7cdeaef16db09d2a36010d6a4093/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/55d18103f6e7268e7396b5bbeff4a40dc8ef7cdeaef16db09d2a36010d6a4093/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 10"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/55d18103f6e7268e7396b5bbeff4a40dc8ef7cdeaef16db09d2a36010d6a4093/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-11">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/62acfcf0bd16c22f293a1de432cda2bd7cf265de11f448d013eccd35d03186f1/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 11"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/62acfcf0bd16c22f293a1de432cda2bd7cf265de11f448d013eccd35d03186f1/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-12">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/461178037eee62b84399f28aa21e150285a4d4db912ab455ef0a62ee86318cc0/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 12"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/461178037eee62b84399f28aa21e150285a4d4db912ab455ef0a62ee86318cc0/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-13">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/48cb210d4850e62bdbcfb4ea6a4a11434cd975aa26c4c8f6f795cc195e1a5a31/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/48cb210d4850e62bdbcfb4ea6a4a11434cd975aa26c4c8f6f795cc195e1a5a31/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/48cb210d4850e62bdbcfb4ea6a4a11434cd975aa26c4c8f6f795cc195e1a5a31/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 13"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/48cb210d4850e62bdbcfb4ea6a4a11434cd975aa26c4c8f6f795cc195e1a5a31/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-14">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/b9fd32c887b68307936cff8853041320ee7a774b775ae0b151286007e85f6c9a/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 14"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/b9fd32c887b68307936cff8853041320ee7a774b775ae0b151286007e85f6c9a/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-15">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/ab4a78064d7870c411ce5f311522d07753cdd450a093ee5ff4dfaaf9f0233d25/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 15"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/ab4a78064d7870c411ce5f311522d07753cdd450a093ee5ff4dfaaf9f0233d25/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-16">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/b25efb639cf1cfb86cd9c31d8b45f62c5a8154705e78b94953d0109b8b98a4fe/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/b25efb639cf1cfb86cd9c31d8b45f62c5a8154705e78b94953d0109b8b98a4fe/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/b25efb639cf1cfb86cd9c31d8b45f62c5a8154705e78b94953d0109b8b98a4fe/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 16"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/b25efb639cf1cfb86cd9c31d8b45f62c5a8154705e78b94953d0109b8b98a4fe/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-17">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/b290a3d16aab7781811681191eeb5788a8844bc1512fd268ef9efa0a1eb3ea9c/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 17"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/b290a3d16aab7781811681191eeb5788a8844bc1512fd268ef9efa0a1eb3ea9c/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-18">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/854aedf996d46966c7408abb496275b4bf2b52a2f67c27e4dd92accd5886c6c5/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 18"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/854aedf996d46966c7408abb496275b4bf2b52a2f67c27e4dd92accd5886c6c5/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-19">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/eeb65283d9f2f77450a4ca682ee161d1d5e7bd11f3e6371c61419e45c98b889c/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/eeb65283d9f2f77450a4ca682ee161d1d5e7bd11f3e6371c61419e45c98b889c/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/eeb65283d9f2f77450a4ca682ee161d1d5e7bd11f3e6371c61419e45c98b889c/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 19"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/eeb65283d9f2f77450a4ca682ee161d1d5e7bd11f3e6371c61419e45c98b889c/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-20">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/dbb72d7f6a7128199cb22a3579b4f888c3089c3446670024eae6ca7818b1b290/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 20"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/dbb72d7f6a7128199cb22a3579b4f888c3089c3446670024eae6ca7818b1b290/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-21">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/40fd300a1e6cc11bf8e594268732d2079eed2f0f0fa30487020c5a9990605f6a/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 21"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/40fd300a1e6cc11bf8e594268732d2079eed2f0f0fa30487020c5a9990605f6a/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-22">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/f17248f4da89a51d37b7e5295a80287ac378bd5d199d2fb273af603111ac1d33/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/f17248f4da89a51d37b7e5295a80287ac378bd5d199d2fb273af603111ac1d33/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/f17248f4da89a51d37b7e5295a80287ac378bd5d199d2fb273af603111ac1d33/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 22"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/f17248f4da89a51d37b7e5295a80287ac378bd5d199d2fb273af603111ac1d33/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-23">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/0a809f51cf04d0814935786c57b3cd02e54a6c2ab3ab26be8d70fcec74d5b02d/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 23"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/0a809f51cf04d0814935786c57b3cd02e54a6c2ab3ab26be8d70fcec74d5b02d/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-24">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/8d95ef6ca27a4bd32034278c5ce758fe8ea48634047c8ca3319165e758d2ddbe/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 24"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/8d95ef6ca27a4bd32034278c5ce758fe8ea48634047c8ca3319165e758d2ddbe/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-25">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 25"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/7daf44fa6377f93eb7dcb8d27c818d6db20e088fa4043bf29c2f1be901969864/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-26">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/f7f85682d228636d495edd719c8545caaa9cd85356914f555341f7b015c7dec6/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 26"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/f7f85682d228636d495edd719c8545caaa9cd85356914f555341f7b015c7dec6/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-27">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/39580f026926d3b182b40518618a231a587dd6b08a9f761fb610ef3a30f8b7be/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 27"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/39580f026926d3b182b40518618a231a587dd6b08a9f761fb610ef3a30f8b7be/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-28">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/19457b2bcafa37ece9cb038cbeda4510a16d37e5d8479877e892c06d9360426c/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/19457b2bcafa37ece9cb038cbeda4510a16d37e5d8479877e892c06d9360426c/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/19457b2bcafa37ece9cb038cbeda4510a16d37e5d8479877e892c06d9360426c/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 28"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/19457b2bcafa37ece9cb038cbeda4510a16d37e5d8479877e892c06d9360426c/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-29">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/12d47717ed64edf84243de4ce1d22f3c621b9b5e38cd201cba6ee9696f1423f3/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 29"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/12d47717ed64edf84243de4ce1d22f3c621b9b5e38cd201cba6ee9696f1423f3/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-30">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/7df40051698bcfda8b1e3a6ad37df91a0d9ad859c68a145dbb06df0c8d52affa/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 30"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/7df40051698bcfda8b1e3a6ad37df91a0d9ad859c68a145dbb06df0c8d52affa/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-31">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/7a11a78754a3084423ec35eaa98de84338b826f6a71222bf6778cd095cdfba4c/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/7a11a78754a3084423ec35eaa98de84338b826f6a71222bf6778cd095cdfba4c/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/7a11a78754a3084423ec35eaa98de84338b826f6a71222bf6778cd095cdfba4c/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 31"
-                        class=""
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/7a11a78754a3084423ec35eaa98de84338b826f6a71222bf6778cd095cdfba4c/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-32">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/47884cbf63b1f7a553af1cc94765525b0b987474098f68d3fc3587c9ab9624de/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 32"
-                        class="loading"
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/47884cbf63b1f7a553af1cc94765525b0b987474098f68d3fc3587c9ab9624de/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-33">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/ab561b342de46fa5bfff21d97871ff1a1bb4afa9784dd4eb939863cd560b8e1c/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 33"
-                        class="loading"
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/ab561b342de46fa5bfff21d97871ff1a1bb4afa9784dd4eb939863cd560b8e1c/image.jpg">
-                </picture>
-            </div>
-        </button><button class="MediaImageButton-sc-1b2q092-0 loQPya overview-MediaImage"
-            data-testid="overview-image-34">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1275x850-crop,format=webp/eb9325ca8138ae50f9d4c4207e95b5c5f1abe83558d01678c42d58b68fe184d0/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1650x1100-crop,format=webp/eb9325ca8138ae50f9d4c4207e95b5c5f1abe83558d01678c42d58b68fe184d0/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/768x512-crop,format=webp/eb9325ca8138ae50f9d4c4207e95b5c5f1abe83558d01678c42d58b68fe184d0/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Image 34"
-                        class="loading"
-                        src="https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/eb9325ca8138ae50f9d4c4207e95b5c5f1abe83558d01678c42d58b68fe184d0/image.jpg">
-                </picture>
-            </div>
-        </button></div>
-    <div class="styles__Grid-sc-1749ld5-0 jooeeG"><button
-            class="MediaImageButton-sc-1b2q092-0 eBkbSs overview-MediaFloorplan" data-testid="overview-floorplan">
-            <div>
-                <picture>
-                    <source
-                        srcset="https://i2.au.reastatic.net/1912x1275-resize,format=webp/8bd48557455a1947f7ab32e7eca1435193d01f88deb62cfe3883fa5fad218156/image.jpg"
-                        type="image/webp" media="screen and (min-width: 768px) and (max-width: 1279px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/2475x1650-resize,format=webp/8bd48557455a1947f7ab32e7eca1435193d01f88deb62cfe3883fa5fad218156/image.jpg"
-                        type="image/webp" media="screen and (min-width: 1280px)">
-                    <source
-                        srcset="https://i2.au.reastatic.net/1152x768-resize,format=webp/8bd48557455a1947f7ab32e7eca1435193d01f88deb62cfe3883fa5fad218156/image.jpg"
-                        type="image/webp"><img loading="lazy" height="512" width="768" alt="Media Overview Floorplan 1"
-                        class="loading"
-                        src="https://i2.au.reastatic.net/768x512-resize,format=jpeg,r=255,g=255,b=255/8bd48557455a1947f7ab32e7eca1435193d01f88deb62cfe3883fa5fad218156/image.jpg">
-                </picture>
-            </div>
-        </button></div>
-    <div class="styles__Grid-sc-1749ld5-0 jooeeG"><button
-            class="MediaImageYoutubeButton-sc-11gfgle-0 dqsrCd overview-MediaYouTubeVideo constrain"
-            aria-labelledby="ikNIhMvYnWU-label" data-testid="overview-property-video">
-            <div><img width="480" height="360" loading="lazy" alt="Media Overview Youtube Video Background Image 1"
-                    src="https://img.youtube.com/vi/ikNIhMvYnWU/0.jpg">
-                <div class="IconOverlay__OverlayContainer-sc-153m0tn-1 xGVzk">
-                    <div class="IconOverlay__PlayVideoIcon-sc-153m0tn-2 gwGqfX IconOverlay__Icon-sc-153m0tn-0 cjQZPy">
-                    </div>
-                </div>
-            </div>
-            <p id="ikNIhMvYnWU-label"
-                class="Text__Typography-sc-1103tao-0 gfxXhG styles__ButtonLabel-sc-1749ld5-4 gpzAXz">Property video</p>
-        </button></div>
-</div>
+
+    <script>
+        // Hide loader after page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 3000);
+        });
+    </script>
+
+</body>
+
+</html>
