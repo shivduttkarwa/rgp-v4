@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Phone,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./ServiceSelection.css";
 
 type ServiceItem = {
@@ -91,7 +92,7 @@ const DEFAULT_SERVICES: ServiceItem[] = [
       "Reliable rent collection",
       "Routine inspections & maintenance",
     ],
-    cta: "View Services",
+    cta: "Get In Touch",
     theme: "rent",
   },
 ];
@@ -167,10 +168,10 @@ const ServiceSelection = ({
               </h3>
               <p className="svc-card__desc">{service.description}</p>
               <div className="svc-card__footer">
-                <button className="svc-card__btn">
+                <Link to="/contact" className="svc-card__btn">
                   <span>{service.cta}</span>
                   <ArrowRight size={16} />
-                </button>
+                </Link>
               </div>
             </article>
           ))}
@@ -206,8 +207,8 @@ const ServiceSelection = ({
 
             {/* CTA Buttons */}
             <div className="svc-cta__actions">
-              <a
-                href={cta.primaryHref}
+              <Link
+                to="/contact"
                 className="svc-cta__btn svc-cta__btn--primary"
                 data-gsap="btn-clip-reveal"
                 data-gsap-delay="0.2"
@@ -215,7 +216,7 @@ const ServiceSelection = ({
                 <MessageCircle size={20} />
                 <span>{cta.primaryLabel}</span>
                 <ArrowRight size={18} />
-              </a>
+              </Link>
               <a
                 data-gsap="btn-clip-reveal"
                 data-gsap-delay="0.2"
