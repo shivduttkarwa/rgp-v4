@@ -1,5 +1,6 @@
 // Footer.tsx
 import { useEffect, useLayoutEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Footer.css";
@@ -77,13 +78,13 @@ const Footer = ({ ready = false }: FooterProps) => {
       <div className="rg-footer__main">
         {/* Brand */}
         <div className="rg-footer__brand">
-          <a href={`${import.meta.env.BASE_URL || "/"}`} className="rg-footer__logo">
+          <Link to="/" className="rg-footer__logo">
             <img
-              src={`${import.meta.env.BASE_URL || "/"}images/RGP-logo.png`}
+              src={`${import.meta.env.BASE_URL}images/RGP-logo.png`}
               alt="Real Gold Properties"
               className="rg-footer__logo-img"
             />
-          </a>
+          </Link>
 
           <p className="rg-footer__brand-desc">
             Elevating real estate experiences since 2012. Connecting discerning

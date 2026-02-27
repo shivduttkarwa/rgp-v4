@@ -5,7 +5,7 @@ import { inspectAttr } from 'kimi-plugin-inspect-react'
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/rgp-v3/' : '/',
+  base: command === 'build' ? '/rgp-v4/' : '/',
   plugins: [inspectAttr(), react()],
   resolve: {
     alias: {
