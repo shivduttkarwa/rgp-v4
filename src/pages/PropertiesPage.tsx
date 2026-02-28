@@ -93,13 +93,22 @@ export default function PropertiesPage() {
 
   useEffect(() => {
     const guards = [
-      "clipRevealInit", "clipRevealRtlInit", "clipRevealTopInit",
-      "clipRevealLeftInit", "clipRevealRightInit", "wordRevealInit",
-      "wordWriteInit", "clipSmoothInit", "clipSmoothDownInit", "charRevealInit",
+      "clipRevealInit",
+      "clipRevealRtlInit",
+      "clipRevealTopInit",
+      "clipRevealLeftInit",
+      "clipRevealRightInit",
+      "wordRevealInit",
+      "wordWriteInit",
+      "clipSmoothInit",
+      "clipSmoothDownInit",
+      "charRevealInit",
     ];
     guards.forEach((key) => {
       pageRef.current
-        ?.querySelectorAll<HTMLElement>(`[data-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}]`)
+        ?.querySelectorAll<HTMLElement>(
+          `[data-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}]`,
+        )
         .forEach((el) => delete el.dataset[key]);
     });
     const cleanup = initGsapSwitchAnimations(pageRef.current);
@@ -244,7 +253,11 @@ export default function PropertiesPage() {
 
       {/* ── Filter Slab ───────────────────────────────────────────────── */}
       <div className="ap-filter-slab">
-        <div className="ap-filter-slab__inner" data-gsap="fade-up" data-gsap-start="top 95%">
+        <div
+          className="ap-filter-slab__inner"
+          data-gsap="fade-up"
+          data-gsap-start="top 95%"
+        >
           <div className="ap-filter-row">
             <div className="ap-filter-wrapper">
               <div ref={filterTabsRef} className="ap-filter-tabs">
@@ -359,6 +372,9 @@ export default function PropertiesPage() {
                     style={
                       { "--ap-delay": `${i * 0.06}s` } as React.CSSProperties
                     }
+                    // data-gsap="clip-smooth-down"
+                    // data-gsap-delay={`${i * 0.08}`}
+                    // data-gsap-start="top 90%"
                   >
                     <PropertyCard property={p} cardIndex={i} />
                   </div>
