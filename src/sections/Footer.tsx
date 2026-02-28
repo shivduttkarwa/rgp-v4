@@ -99,22 +99,22 @@ const Footer = ({ ready = false }: FooterProps) => {
           <h4>Properties</h4>
           <ul className="rg-footer__links">
             <li>
-              <Link to="/contact">Luxury Villas</Link>
+              <Link to="/properties">Luxury Villas</Link>
             </li>
             <li>
-              <Link to="/contact">Apartments</Link>
+              <Link to="/properties">Apartments</Link>
             </li>
             <li>
-              <Link to="/contact">Penthouses</Link>
+              <Link to="/properties">Penthouses</Link>
             </li>
             <li>
-              <Link to="/contact">Commercial</Link>
+              <Link to="/properties">Commercial</Link>
             </li>
             <li>
-              <Link to="/contact">Off-Plan</Link>
+              <Link to="/properties">Off-Plan</Link>
             </li>
             <li>
-              <Link to="/contact">Townhouses</Link>
+              <Link to="/properties">Townhouses</Link>
             </li>
           </ul>
         </nav>
