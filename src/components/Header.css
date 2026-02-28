@@ -338,10 +338,10 @@
 
 @media (max-width: 480px) {
   .rg-header__inner {
-    height: 72px;
+    height: 86px;
   }
 
   .rg-header__logo img {
-    width: calc(clamp(76px, 8vw, 118px) * 1.44);
+    width: calc(clamp(76px, 8vw, 118px) * 1.728);
   }
 }
