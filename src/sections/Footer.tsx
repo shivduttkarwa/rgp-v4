@@ -291,16 +291,13 @@ const Footer = ({ ready = false }: FooterProps) => {
 
         <ul className="rg-footer__legal">
           <li>
-            <a href="/privacy">Privacy Policy</a>
+            <Link to="/privacy">Privacy Policy</Link>
           </li>
           <li>
-            <a href="/terms">Terms of Service</a>
+            <Link to="/terms">Terms of Service</Link>
           </li>
           <li>
-            <a href="/cookies">Cookie Preferences</a>
-          </li>
-          <li>
-            <a href="/sitemap">Sitemap</a>
+            <Link to="/cookies">Cookie Preferences</Link>
           </li>
         </ul>
       </div>

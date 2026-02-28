@@ -11,6 +11,9 @@ const TestimonialsPage = lazy(() => import("./pages/TestimonialsPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PropertyPage = lazy(() => import("./pages/PropertyPage"));
 const PropertiesPage = lazy(() => import("./pages/PropertiesPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
+const CookiesPage = lazy(() => import("./pages/CookiesPage"));
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +39,9 @@ function App() {
             <Route path="/contact" element={<ContactPage ready={loaded} />} />
             <Route path="/properties" element={<PropertiesPage />} />
             <Route path="/properties/:id" element={<PropertyPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/cookies" element={<CookiesPage />} />
           </Routes>
         </Suspense>
         <Footer ready={loaded} />
