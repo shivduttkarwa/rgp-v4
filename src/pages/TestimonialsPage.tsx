@@ -840,19 +840,27 @@ const FinalCTA: React.FC = () => (
 ───────────────────────────────────────────────────────────────────────────── */
 const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
   const pageRef = useRef<HTMLDivElement>(null);
+  const slabRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ready || !statsRef.current) return;
+    if (!ready || !slabRef.current || !statsRef.current) return;
+    const slab = slabRef.current;
     const stats = statsRef.current.querySelectorAll<HTMLElement>(".t-hero__stat");
-    gsap.set(stats, { y: 24, opacity: 0 });
+
+    // slab slides up first
+    gsap.set(slab, { y: 32, opacity: 0 });
+    gsap.to(slab, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 2.1 });
+
+    // then stats stagger in
+    gsap.set(stats, { y: 20, opacity: 0 });
     gsap.to(stats, {
       y: 0,
       opacity: 1,
-      duration: 0.7,
+      duration: 0.65,
       stagger: 0.18,
       ease: "power3.out",
-      delay: 2.3,
+      delay: 2.6,
     });
   }, [ready]);
 
@@ -901,7 +909,7 @@ const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
           }
           subtitle={`${testimonials.length} verified experiences — refined, discreet service from start to finish.`}
           footer={
-            <div className="t-hero__stats-slab">
+            <div className="t-hero__stats-slab" ref={slabRef}>
               <div className="t-hero__stats" ref={statsRef}>
                 <div className="t-hero__stat">
                   <span className="t-hero__stat-value">
