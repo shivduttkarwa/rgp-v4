@@ -214,15 +214,16 @@ export default function HeroSection({
      JSX
      ═══════════════════════════════════════════════════ */
   return (
-    <div className="rg-hero-wrap">
-      <section className="rg-hero">
+    <div className="rgp-hero-wrap">
+      <section className="rgp-hero">
+        {/* ── BACKGROUND ── */}
         <div
-          className={`rg-hero__bg ${videoReady ? "rg-hero__bg--ready" : ""}`}
+          className={`rgp-hero__bg ${videoReady ? "rgp-hero__bg--ready" : ""}`}
           ref={bgRef}
           aria-hidden="true"
         >
           <img
-            className="rg-hero__bg-poster"
+            className="rgp-hero__bg-poster"
             src={`${publicUrl}${bgPoster || bgImage}`}
             alt=""
             loading="eager"
@@ -230,7 +231,7 @@ export default function HeroSection({
           />
           {showVideo && (
             <video
-              className="rg-hero__bg-video"
+              className="rgp-hero__bg-video"
               ref={videoRef}
               src={`${publicUrl}${bgVideo}`}
               autoPlay
@@ -253,35 +254,42 @@ export default function HeroSection({
             />
           )}
         </div>
+
+        {/* ── VIGNETTE ── */}
         <div
-          className="rg-hero__vignette"
+          className="rgp-hero__vignette"
           ref={vignetteRef}
           aria-hidden="true"
-        ></div>
-        {/* ── REVEAL ── */}
-        <div className="rg-hero__reveal">
-          <div className="rg-reveal__title">
-            <div className="rg-reveal__line">
-              <div className="rg-reveal__text" ref={titleOneRef}>
+        />
+
+        {/* ── CONTENT ── */}
+        <div className="rgp-hero__content">
+          <div className="rgp-hero__title">
+            <div className="rgp-hero__title-line">
+              <div className="rgp-hero__title-text" ref={titleOneRef}>
                 {titleLine1}
               </div>
             </div>
-            <div className="rg-reveal__line">
-              <div className="rg-reveal__text" ref={titleTwoRef}>
+            <div className="rgp-hero__title-line">
+              <div className="rgp-hero__title-text" ref={titleTwoRef}>
                 {titleLine2}
               </div>
             </div>
           </div>
-          <div className="rg-reveal__sub" ref={revealSubRef}>
+
+          <div className="rgp-hero__subtitle" ref={revealSubRef}>
             {subtitle}
           </div>
+
           {showCta && (
-            <div className="rg-reveal__cta" ref={revealCtaRef}>
+            <div className="rgp-hero__cta" ref={revealCtaRef}>
               <BtnSecondary label={ctaLabel} onClick={ctaOnClick} />
             </div>
           )}
         </div>
-        {footer && <div className="rg-hero__footer">{footer}</div>}
+
+        {/* ── FOOTER ── */}
+        {footer && <div className="rgp-hero__footer">{footer}</div>}
       </section>
     </div>
   );
