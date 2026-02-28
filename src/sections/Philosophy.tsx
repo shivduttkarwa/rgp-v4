@@ -20,21 +20,24 @@ const TESTIMONIALS: Testimonial[] = [
     kicker: "SUNNYBANK · SOLD",
     title: "SARAH M.",
     video: "https://www.w3schools.com/html/mov_bbb.mp4",
-    poster: "https://files.staging.peachworlds.com/website/dbf16c23-6134-4df6-a509-bd2a6b79ab37/chatgpt-image-3-apr-2025-16-33-58.webp",
+    poster:
+      "https://files.staging.peachworlds.com/website/dbf16c23-6134-4df6-a509-bd2a6b79ab37/chatgpt-image-3-apr-2025-16-33-58.webp",
     tintVar: "gold",
   },
   {
     kicker: "UNDERWOOD · PURCHASED",
     title: "JAMES & LISA",
     video: "https://www.w3schools.com/html/mov_bbb.mp4",
-    poster: "https://files.staging.peachworlds.com/website/d80b404a-7e8e-40ee-a08c-cbab3f8a7ad3/chatgpt-image-3-apr-2025-16-23-38.webp",
+    poster:
+      "https://files.staging.peachworlds.com/website/d80b404a-7e8e-40ee-a08c-cbab3f8a7ad3/chatgpt-image-3-apr-2025-16-23-38.webp",
     tintVar: "amber",
   },
   {
     kicker: "EIGHT MILE PLAINS · APPRAISAL",
     title: "DAVID K.",
     video: "https://www.w3schools.com/html/mov_bbb.mp4",
-    poster: "https://files.staging.peachworlds.com/website/504aad69-04e9-4c61-8e60-4bf340ec746f/chatgpt-image-3-apr-2025-16-23-32.webp",
+    poster:
+      "https://files.staging.peachworlds.com/website/504aad69-04e9-4c61-8e60-4bf340ec746f/chatgpt-image-3-apr-2025-16-23-32.webp",
     tintVar: "crimson",
   },
 ];
@@ -53,7 +56,9 @@ function TestiCard({
 
   // Mobile: autoplay muted on mount
   useEffect(() => {
-    const isMobile = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    const isMobile = window.matchMedia(
+      "(hover: none) and (pointer: coarse)",
+    ).matches;
     if (isMobile && videoRef.current) {
       videoRef.current.play().catch(() => {});
     }
@@ -127,7 +132,13 @@ function TestiCard({
             aria-label={`Play ${t.title} testimonial`}
           >
             <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="23" stroke="currentColor" strokeWidth="1.5" />
+              <circle
+                cx="24"
+                cy="24"
+                r="23"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
               <path d="M19 16l14 8-14 8V16z" fill="currentColor" />
             </svg>
           </button>
@@ -186,9 +197,14 @@ export default function PhilosophyPillars() {
             pagination={{ clickable: true, dynamicBullets: true }}
             breakpoints={{ 480: { slidesPerView: 1.2, spaceBetween: 20 } }}
           >
-            {TESTIMONIALS.map((t) => (
+            {TESTIMONIALS.map((t, i) => (
               <SwiperSlide key={t.title}>
-                <div className="rg-philo__card-wrap">
+                <div
+                  className="rg-philo__card-wrap"
+                  data-gsap="clip-reveal-right"
+                  data-gsap-delay={`${i * 0.15}`}
+                  data-gsap-start="top 70%"
+                >
                   <TestiCard
                     t={t}
                     activeId={activeId}
@@ -202,9 +218,19 @@ export default function PhilosophyPillars() {
 
         {/* CTA */}
         <div className="rg-philo__cta-row">
-          <Link to="/testimonials" className="rg-philo__cta-btn">
+          <Link
+            to="/testimonials"
+            className="rg-philo__cta-btn"
+            data-gsap="btn-clip-reveal"
+          >
             <span>Read All Reviews</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </Link>
