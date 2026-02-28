@@ -74,7 +74,8 @@ export default function PropertyMarquee() {
       velocity = 0;
       lastMoveTime = performance.now();
       lastMoveX = clientX;
-      const isMouse = "pointerType" in e && (e as PointerEvent).pointerType === "mouse";
+      const isMouse =
+        "pointerType" in e && (e as PointerEvent).pointerType === "mouse";
       if (isMouse) {
         hasIntent = true;
         isDown = true;
@@ -86,7 +87,8 @@ export default function PropertyMarquee() {
     };
 
     const onMove = (e: PointerEvent | TouchEvent) => {
-      const isMouse = "pointerType" in e && (e as PointerEvent).pointerType === "mouse";
+      const isMouse =
+        "pointerType" in e && (e as PointerEvent).pointerType === "mouse";
       if (isMouse && !(e as PointerEvent).buttons) return;
       const { x: clientX, y: clientY } = getClient(e);
       const dx = clientX - startX;
@@ -191,8 +193,12 @@ export default function PropertyMarquee() {
     const cursor = cursorRef.current;
     if (!viewport || !cursor) return;
 
-    const onEnter = () => { cursor.style.opacity = "1"; };
-    const onLeave = () => { cursor.style.opacity = "0"; };
+    const onEnter = () => {
+      cursor.style.opacity = "1";
+    };
+    const onLeave = () => {
+      cursor.style.opacity = "0";
+    };
     const onOver = (e: PointerEvent) => {
       if ((e.target as HTMLElement | null)?.closest("a, button, .card-btn")) {
         cursor.style.opacity = "0";
@@ -228,14 +234,23 @@ export default function PropertyMarquee() {
     <section className="rgMarquee property-section">
       <div className="wrap">
         <header className="section-header">
-          <div data-gsap="fade-up" data-gsap-start="top 95%" className="section-badge">
+          <div data-gsap="fade-up" className="section-badge">
             <span>Featured Portfolio</span>
           </div>
-          <h2 className="section-title" data-gsap="char-reveal" data-gsap-start="top 85%">
+          <h2
+            className="section-title"
+            data-gsap="char-reveal"
+            data-gsap-start="top 85%"
+          >
             Explore <em>Signature Homes</em>
           </h2>
-          <p className="section-subtitle" data-gsap="fade-up" data-gsap-delay="0.15">
-            A curated selection of standout residences from across our portfolio — updated regularly.
+          <p
+            className="section-subtitle"
+            data-gsap="fade-up"
+            data-gsap-delay="0.2"
+          >
+            A curated selection of standout residences from across our portfolio
+            — updated regularly.
           </p>
         </header>
       </div>
@@ -244,8 +259,14 @@ export default function PropertyMarquee() {
         <div className="rgMarquee__cursor" ref={cursorRef} aria-hidden="true">
           <span className="cursor-text">Drag</span>
         </div>
-        <div className="rgMarquee__fade rgMarquee__fade--l" aria-hidden="true" />
-        <div className="rgMarquee__fade rgMarquee__fade--r" aria-hidden="true" />
+        <div
+          className="rgMarquee__fade rgMarquee__fade--l"
+          aria-hidden="true"
+        />
+        <div
+          className="rgMarquee__fade rgMarquee__fade--r"
+          aria-hidden="true"
+        />
 
         <div className="rgMarquee__viewport" ref={viewportRef}>
           <div className="rgMarquee__track" ref={trackRef}>
@@ -259,7 +280,11 @@ export default function PropertyMarquee() {
       </div>
 
       <div className="rgMarquee__cta">
-        <Link to="/properties" className="rgMarquee__cta-btn" data-gsap="btn-clip-reveal">
+        <Link
+          to="/properties"
+          className="rgMarquee__cta-btn"
+          data-gsap="btn-clip-reveal"
+        >
           <span>View All Properties</span>
         </Link>
       </div>

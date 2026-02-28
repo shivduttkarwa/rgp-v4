@@ -227,11 +227,11 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
               <div className="img-card">
                 <div
                   className={`split-img-clip ${splitFullPlay ? "is-playing" : ""}`}
-                  data-gsap="clip-smooth-down"
-                  data-gsap-start="top 90%"
+                  data-gsap="clip-reveal-left"
+                  data-gsap-start="top 70%"
                   data-gsap-delay="0.05"
                   data-gsap-mobile="clip-smooth-down"
-                  data-gsap-mobile-cards-start="top 90%"
+                  data-gsap-mobile-cards-start="top 70%"
                 >
                   <video
                     ref={splitVideoRef}
@@ -358,7 +358,11 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
         {/* 5) AVAILABILITY */}
         <section className="avail">
           <div className="grid">
-            <div className="photo">
+            <div
+              className="photo"
+              data-gsap="clip-reveal-left"
+              data-gsap-mobile="clip-smooth-down"
+            >
               <img alt="Rahul Singh" src={img("rahul-singh.jpg")} />
             </div>
             <div className="panel">
@@ -389,8 +393,8 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
             </div>
           </div>
         </section>
+        <PropertyMarquee />
       </main>
-      <PropertyMarquee />
     </>
   );
 }
