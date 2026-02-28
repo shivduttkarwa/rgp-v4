@@ -526,7 +526,7 @@
   .about-page .img-overlay {
     padding: 1.375rem;
     display: grid;
-    align-content: end;
+    align-content: center;
   }
 
   .about-page .img-overlay img {

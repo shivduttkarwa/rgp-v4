@@ -3921,6 +3921,27 @@ class GSAPAnimations {
         gsap.set(targets, { clearProps: 'will-change,clip-path' });
       },
     });
+
+    // Animate image scale back to 1 in sync with the clip — prevents the
+    // GPU layer snap (visible as a shift) when clearProps fires on the container.
+    targets.forEach(target => {
+      const img = target.tagName === 'IMG' ? target : target.querySelector('img');
+      if (img && img !== target) {
+        gsap.to(img, {
+          scale: 1,
+          duration,
+          ease: 'power3.inOut',
+          delay,
+          scrollTrigger: {
+            trigger: el,
+            start,
+            toggleActions: 'play none none none',
+            once: true,
+          },
+          onComplete: () => gsap.set(img, { clearProps: 'willChange,transform' }),
+        });
+      }
+    });
   }
 
   // ── Char Reveal: each character slides up from behind a word-level clip mask ──
@@ -3977,10 +3998,10 @@ class GSAPAnimations {
 
     if (!allChars.length) return;
 
-    const start    = el.hasAttribute('data-gsap-start')    ? config.start    : 'top 80%';
+    const start = el.hasAttribute('data-gsap-start') ? config.start : 'top 80%';
     const duration = el.hasAttribute('data-gsap-duration') && Number.isFinite(config.duration) ? config.duration : 0.7;
-    const delay    = el.hasAttribute('data-gsap-delay')    && Number.isFinite(config.delay)    ? config.delay    : 0;
-    const stagger  = config.stagger !== null               ? config.stagger  : 0.022;
+    const delay = el.hasAttribute('data-gsap-delay') && Number.isFinite(config.delay) ? config.delay : 0;
+    const stagger = config.stagger !== null ? config.stagger : 0.022;
 
     gsap.set(allChars, { y: '115%', opacity: 0 });
     gsap.to(allChars, {
