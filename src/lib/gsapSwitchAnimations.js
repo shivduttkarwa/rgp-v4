@@ -3887,7 +3887,7 @@ class GSAPAnimations {
       window.matchMedia &&
       window.matchMedia('(max-width: 991px)').matches;
     const baseStart = el.hasAttribute('data-gsap-start') ? config.start : 'top 85%';
-    const duration = el.hasAttribute('data-gsap-duration') && Number.isFinite(config.duration) ? config.duration : 1.8;
+    const duration = el.hasAttribute('data-gsap-duration') && Number.isFinite(config.duration) ? config.duration : 1.1;
     const delay = el.hasAttribute('data-gsap-delay') && Number.isFinite(config.delay) ? config.delay : 0;
     const stagger = config.stagger !== null ? config.stagger : 0;
 
