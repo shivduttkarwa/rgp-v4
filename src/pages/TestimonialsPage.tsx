@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import HeroSection from "../sections/HeroSection";
 import RGPSplitSlider from "../components/reusable/SplitSlider";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
+import gsap from "gsap";
 import "./TestimonialPage.css";
 
 interface Testimonial {
@@ -622,8 +623,8 @@ const VoiceMosaic: React.FC = () => (
     <div className="tp-mosaic__header">
       <span
         className="tp-mosaic__kicker"
-        data-gsap="fade-up"
-        data-gsap-start="top 100%"
+        data-gsap="fade-in"
+        data-gsap-start="top 85%"
       >
         Real Voices
       </span>
@@ -715,7 +716,11 @@ const TickerCol: React.FC<TickerColProps> = ({ items, speed, reversed }) => (
 const TickerWall: React.FC = () => (
   <section className="tp-ticker">
     <div className="tp-ticker__header">
-      <span className="tp-ticker__kicker" data-gsap="fade-up">
+      <span
+        className="tp-ticker__kicker"
+        data-gsap="fade-in"
+        data-gsap-start="top 85%"
+      >
         All Reviews
       </span>
       <h2
@@ -768,7 +773,7 @@ const FinalCTA: React.FC = () => (
           data-gsap-stagger="0.3"
         >
           <div className="tp-cta__meta-item">
-            <span className="tp-cta__meta-value">4.9</span>
+            <span className="tp-cta__meta-value">5</span>
             <span className="tp-cta__meta-label">Avg Rating</span>
           </div>
           <div className="tp-cta__meta-item">
@@ -835,6 +840,21 @@ const FinalCTA: React.FC = () => (
 ───────────────────────────────────────────────────────────────────────────── */
 const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
   const pageRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ready || !statsRef.current) return;
+    const stats = statsRef.current.querySelectorAll<HTMLElement>(".t-hero__stat");
+    gsap.set(stats, { y: 24, opacity: 0 });
+    gsap.to(stats, {
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      stagger: 0.18,
+      ease: "power3.out",
+      delay: 2.3,
+    });
+  }, [ready]);
 
   useEffect(() => {
     const guards = [
@@ -882,7 +902,7 @@ const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
           subtitle={`${testimonials.length} verified experiences — refined, discreet service from start to finish.`}
           footer={
             <div className="t-hero__stats-slab">
-              <div className="t-hero__stats">
+              <div className="t-hero__stats" ref={statsRef}>
                 <div className="t-hero__stat">
                   <span className="t-hero__stat-value">
                     5<span className="t-hero__stat-star">★</span>
