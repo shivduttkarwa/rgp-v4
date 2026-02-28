@@ -255,7 +255,12 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
                 </svg>
                 <span>Instagram</span>
               </a>
-              <a href="#" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/realgoldproperties/"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -275,7 +280,12 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
                 </svg>
                 <span>LinkedIn</span>
               </a>
-              <a href="#" aria-label="YouTube">
+              <a
+                href="https://www.youtube.com/channel/UCYR_dNuG3WPJhg7AZAhkkvg"
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
