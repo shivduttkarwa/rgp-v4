@@ -3,27 +3,43 @@
    ═══════════════════════════════════════════════════ */
 
 :root {
-  --rgp-max:    90rem;                           /* 1440px */
-  --rgp-pad:    clamp(1.125rem, 2vw, 1.75rem);  /* 18–28px */
-  --rgp-radius: 1.125rem;                        /* 18px */
+  --rgp-max: 90rem; /* 1440px */
+  --rgp-pad: clamp(1.125rem, 2vw, 1.75rem); /* 18–28px */
+  --rgp-radius: 1.125rem; /* 18px */
 
   --font-title: "Bona Nova SC", serif;
-  --font-body:  "Bricolage Grotesque", sans-serif;
+  --font-body: "Bricolage Grotesque", sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { height: 100%; scrollbar-gutter: stable; }
+html {
+  height: 100%;
+  scrollbar-gutter: stable;
+}
 
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   background: var(--rg-beige-light);
   color: var(--rg-text-dark);
   overflow-x: hidden;
   height: 100%;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* ─── HERO WRAPPER ─── */
 .rgp-hero-wrap {
@@ -86,8 +102,12 @@ a { color: inherit; text-decoration: none; }
   transition: opacity 2200ms cubic-bezier(0.22, 0.7, 0.2, 1);
 }
 
-.rgp-hero__bg--ready .rgp-hero__bg-video  { opacity: 1; }
-.rgp-hero__bg--ready .rgp-hero__bg-poster { opacity: 0; }
+.rgp-hero__bg--ready .rgp-hero__bg-video {
+  opacity: 1;
+}
+.rgp-hero__bg--ready .rgp-hero__bg-poster {
+  opacity: 0;
+}
 
 /* ─── VIGNETTE ─── */
 .rgp-hero__vignette {
@@ -115,8 +135,8 @@ a { color: inherit; text-decoration: none; }
   z-index: 5;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* ← move up/down by changing this or padding */
-  align-items: center;      /* ← move left/right by changing this or padding */
+  justify-content: center; /* ← move up/down by changing this or padding */
+  align-items: center; /* ← move left/right by changing this or padding */
   text-align: center;
   padding: 5rem var(--rgp-pad);
   pointer-events: none;
@@ -146,8 +166,12 @@ a { color: inherit; text-decoration: none; }
   will-change: transform, opacity;
 }
 
-.rgp-hero__title-text .rg-gold  { color: #f9c307; }
-.rgp-hero__title-text .rg-amber { color: #f9c307; }
+.rgp-hero__title-text .rg-gold {
+  color: #f9c307;
+}
+.rgp-hero__title-text .rg-amber {
+  color: #f9c307;
+}
 
 /* ─── SUBTITLE ─── */
 .rgp-hero__subtitle {
@@ -179,13 +203,15 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.07em;
   box-shadow: 0 4px 28px rgba(249, 195, 7, 0.38);
   transition:
-    transform   0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow  0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    color       0.35s ease;
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.35s ease;
 }
 
 /* Disable the fill-sweep from BtnSecondary */
-.rgp-hero__cta .btn-secondary::before { display: none; }
+.rgp-hero__cta .btn-secondary::before {
+  display: none;
+}
 
 /* Left-to-right shine sweep */
 .rgp-hero__cta .btn-secondary::after {
@@ -213,7 +239,9 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 8px 36px rgba(249, 195, 7, 0.5);
 }
 
-.rgp-hero__cta .btn-secondary:hover::after { left: 130%; }
+.rgp-hero__cta .btn-secondary:hover::after {
+  left: 130%;
+}
 
 .rgp-hero__cta .btn-secondary .bs-text::after {
   content: "→";
@@ -246,12 +274,18 @@ a { color: inherit; text-decoration: none; }
   }
 
   /*
-    Mobile content position:
-    ↑ increase padding-bottom to push content up
-    ↓ decrease padding-bottom to let it sit lower
+    Mobile layout — title/subtitle stay near top, CTA pins to bottom.
+    ↑ title/subtitle: adjust padding-top
+    ↓ CTA from bottom: adjust padding-bottom
   */
   .rgp-hero__content {
-    padding-bottom: 10rem;
+    justify-content: flex-start;
+    padding-top: 10rem; /* ← moves title/subtitle up or down */
+    padding-bottom: 10rem; /* ← gap between CTA and bottom edge */
+  }
+
+  .rgp-hero__cta {
+    margin-top: auto; /* ← pins CTA to bottom, independent of title/subtitle */
   }
 
   .rgp-hero__footer {
