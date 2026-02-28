@@ -150,18 +150,14 @@ const ServiceSelection = ({
         </header>
 
         {/* Service Cards */}
-        <div
-          className="svc__grid"
-          data-gsap="clip-smooth-down"
-          data-gsap-stagger="0.14"
-          data-gsap-delay="0.1"
-          data-gsap-mobile="clip-smooth-down"
-          data-gsap-mobile-cards-start="top 90%"
-        >
-          {services.map((service) => (
+        <div className="svc__grid">
+          {services.map((service, i) => (
             <article
               key={service.id}
               className={`svc-card svc-card--${service.theme}`}
+              data-gsap="clip-smooth-down"
+              data-gsap-delay={`${i * 0.14}`}
+              data-gsap-start="top 88%"
             >
               <h3 className="svc-card__word">
                 {service.id.charAt(0).toUpperCase() + service.id.slice(1)}
