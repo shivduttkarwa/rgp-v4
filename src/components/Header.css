@@ -37,6 +37,14 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rg-header__logo:focus-visible {
+  outline: 2px solid var(--rg-gold);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .rg-header__logo img {
