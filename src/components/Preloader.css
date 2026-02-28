@@ -98,8 +98,8 @@
 
 .logo-fill {
   fill: var(--gold);
-  clip-path: inset(0 100% 0 0);
-  animation: preloaderFillLeftToRight var(--fill-duration) ease-out forwards;
+  clip-path: inset(100% 0 0 0);
+  animation: preloaderFillBottomToTop var(--fill-duration) ease-out forwards;
   animation-delay: var(--fill-delay);
 }
 
@@ -134,9 +134,9 @@
   }
 }
 
-@keyframes preloaderFillLeftToRight {
+@keyframes preloaderFillBottomToTop {
   0% {
-    clip-path: inset(0 100% 0 0);
+    clip-path: inset(100% 0 0 0);
   }
   100% {
     clip-path: inset(0 0 0 0);
