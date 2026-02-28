@@ -17,7 +17,6 @@ const img = (name: string) => `${base}images/${name}`;
 export default function AboutPage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLHeadingElement | null>(null);
-  const introMaxProgressRef = useRef(0);
   const navigate = useNavigate();
   const splitVideoRef = useRef<HTMLVideoElement | null>(null);
   const [splitFullPlay, setSplitFullPlay] = useState(false);
@@ -81,105 +80,62 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const el = introRef.current;
-    if (!el || el.dataset.linesSplit === "true") return;
-    el.dataset.linesSplit = "true";
+    if (!el || el.dataset.wordReveal === "true") return;
+    el.dataset.wordReveal = "true";
 
-    const fragment = document.createDocumentFragment();
-    const nodes = Array.from(el.childNodes);
-
-    nodes.forEach((node) => {
+    // Walk nodes recursively, wrapping each word in overflow:hidden + inner
+    // span for the clip-up reveal — preserves child elements like gold-word spans.
+    const processNode = (node: Node, parent: HTMLElement) => {
       if (node.nodeType === Node.TEXT_NODE) {
-        const text = node.textContent || "";
-        text.split(/(\s+)/).forEach((part) => {
-          if (!part) return;
+        (node.textContent || "").split(/(\s+)/).forEach((part) => {
           if (/^\s+$/.test(part)) {
-            fragment.appendChild(document.createTextNode(part));
-          } else {
-            const span = document.createElement("span");
-            span.className = "intro-word";
-            span.textContent = part;
-            fragment.appendChild(span);
+            parent.appendChild(document.createTextNode(part));
+          } else if (part) {
+            const outer = document.createElement("span");
+            outer.style.cssText =
+              "display:inline-block;overflow:hidden;vertical-align:bottom;line-height:inherit";
+            const inner = document.createElement("span");
+            inner.className = "iw-inner";
+            inner.style.display = "inline-block";
+            inner.textContent = part;
+            outer.appendChild(inner);
+            parent.appendChild(outer);
           }
         });
       } else if (node.nodeType === Node.ELEMENT_NODE) {
-        const element = node as HTMLElement;
-        if (element.tagName.toLowerCase() === "br") {
-          fragment.appendChild(document.createTextNode(" "));
-          return;
-        }
-        const text = element.textContent || "";
-        const span = document.createElement("span");
-        const isGold = element.classList.contains("gold-word");
-        span.className = isGold ? "intro-word gold-word" : "intro-word";
-        span.textContent = text;
-        fragment.appendChild(span);
+        const elem = node as HTMLElement;
+        const clone = document.createElement(elem.tagName.toLowerCase());
+        Array.from(elem.attributes).forEach((a) =>
+          clone.setAttribute(a.name, a.value),
+        );
+        Array.from(elem.childNodes).forEach((child) =>
+          processNode(child, clone),
+        );
+        parent.appendChild(clone);
       }
-    });
+    };
 
+    const original = Array.from(el.childNodes);
     el.innerHTML = "";
-    el.appendChild(fragment);
+    const tmp = document.createElement("div");
+    original.forEach((n) => processNode(n, tmp));
+    while (tmp.firstChild) el.appendChild(tmp.firstChild);
 
-    const words = Array.from(el.querySelectorAll<HTMLElement>(".intro-word"));
-    if (!words.length) return;
+    const inners = Array.from(el.querySelectorAll<HTMLElement>(".iw-inner"));
+    if (!inners.length) return;
 
-    // Group words by rendered line (supports responsive line wrapping).
-    const lines: HTMLElement[][] = [];
-    let currentTop: number | null = null;
-    let lineWords: HTMLElement[] = [];
-
-    words.forEach((word) => {
-      const top = word.offsetTop;
-      if (currentTop === null) currentTop = top;
-      if (Math.abs(top - currentTop) > 2) {
-        lines.push(lineWords);
-        lineWords = [];
-        currentTop = top;
-      }
-      lineWords.push(word);
-    });
-    if (lineWords.length) lines.push(lineWords);
-
-    el.innerHTML = "";
-    lines.forEach((line) => {
-      const lineWrap = document.createElement("span");
-      lineWrap.className = "intro-line";
-      const lineText = document.createElement("span");
-      lineText.className = "intro-line-text";
-      lineWrap.appendChild(lineText);
-      line.forEach((word, i) => {
-        lineText.appendChild(word);
-        if (i < line.length - 1) {
-          lineText.appendChild(document.createTextNode(" "));
-        }
-      });
-      el.appendChild(lineWrap);
-    });
-
-    const lineTexts = el.querySelectorAll<HTMLElement>(".intro-line-text");
-    gsap.set(lineTexts, { yPercent: 100, autoAlpha: 0 });
-    const tl = gsap.to(lineTexts, {
-      yPercent: 0,
+    gsap.set(inners, { y: "110%", autoAlpha: 0 });
+    gsap.to(inners, {
+      y: "0%",
       autoAlpha: 1,
-      duration: 0.7,
-      ease: "power3.out",
-      stagger: 0.12,
-      paused: true,
-    });
-
-    introMaxProgressRef.current = 0;
-    ScrollTrigger.create({
-      trigger: el,
-      start: "top 85%",
-      end: "top 35%",
-      scrub: true,
-      onUpdate: (self) => {
-        const next = Math.max(self.progress, introMaxProgressRef.current);
-        introMaxProgressRef.current = next;
-        tl.progress(next);
-        if (next >= 1) {
-          tl.progress(1);
-          self.kill();
-        }
+      duration: 0.65,
+      ease: "power2.out",
+      stagger: 0.055,
+      scrollTrigger: {
+        trigger: el,
+        start: "top 82%",
+        toggleActions: "play none none none",
+        once: true,
       },
     });
   }, []);
