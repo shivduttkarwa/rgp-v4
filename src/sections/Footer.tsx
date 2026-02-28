@@ -1,6 +1,6 @@
 // Footer.tsx
 import { useEffect, useLayoutEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Footer.css";
@@ -12,8 +12,16 @@ interface FooterProps {
 }
 
 const Footer = ({ ready = false }: FooterProps) => {
+  const location = useLocation();
   const footerRef = useRef<HTMLElement>(null);
   const watermarkRef = useRef<HTMLDivElement>(null);
+
+  const handleSamePage = (to: string) => (e: React.MouseEvent) => {
+    if (location.pathname === to) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   // Hide letters before first paint — no flicker
   useLayoutEffect(() => {
@@ -78,7 +86,7 @@ const Footer = ({ ready = false }: FooterProps) => {
       <div className="rg-footer__main">
         {/* Brand */}
         <div className="rg-footer__brand">
-          <Link to="/" className="rg-footer__logo">
+          <Link to="/" className="rg-footer__logo" onClick={handleSamePage("/")}>
             <img
               src={`${import.meta.env.BASE_URL}images/RGP-logo.png`}
               alt="Real Gold Properties"
@@ -99,22 +107,22 @@ const Footer = ({ ready = false }: FooterProps) => {
           <h4>Properties</h4>
           <ul className="rg-footer__links">
             <li>
-              <Link to="/properties">Luxury Villas</Link>
+              <Link to="/properties" onClick={handleSamePage("/properties")}>Luxury Villas</Link>
             </li>
             <li>
-              <Link to="/properties">Apartments</Link>
+              <Link to="/properties" onClick={handleSamePage("/properties")}>Apartments</Link>
             </li>
             <li>
-              <Link to="/properties">Penthouses</Link>
+              <Link to="/properties" onClick={handleSamePage("/properties")}>Penthouses</Link>
             </li>
             <li>
-              <Link to="/properties">Commercial</Link>
+              <Link to="/properties" onClick={handleSamePage("/properties")}>Commercial</Link>
             </li>
             <li>
-              <Link to="/properties">Off-Plan</Link>
+              <Link to="/properties" onClick={handleSamePage("/properties")}>Off-Plan</Link>
             </li>
             <li>
-              <Link to="/properties">Townhouses</Link>
+              <Link to="/properties" onClick={handleSamePage("/properties")}>Townhouses</Link>
             </li>
           </ul>
         </nav>
@@ -124,19 +132,19 @@ const Footer = ({ ready = false }: FooterProps) => {
           <h4>Company</h4>
           <ul className="rg-footer__links">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={handleSamePage("/")}>Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about" onClick={handleSamePage("/about")}>About</Link>
             </li>
             <li>
-              <Link to="/properties">Properties</Link>
+              <Link to="/properties" onClick={handleSamePage("/properties")}>Properties</Link>
             </li>
             <li>
-              <Link to="/testimonials">Testimonials</Link>
+              <Link to="/testimonials" onClick={handleSamePage("/testimonials")}>Testimonials</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact" onClick={handleSamePage("/contact")}>Contact</Link>
             </li>
           </ul>
         </nav>
@@ -146,22 +154,22 @@ const Footer = ({ ready = false }: FooterProps) => {
           <h4>Services</h4>
           <ul className="rg-footer__links">
             <li>
-              <Link to="/contact">Buy Property</Link>
+              <Link to="/contact" onClick={handleSamePage("/contact")}>Buy Property</Link>
             </li>
             <li>
-              <Link to="/contact">Sell Property</Link>
+              <Link to="/contact" onClick={handleSamePage("/contact")}>Sell Property</Link>
             </li>
             <li>
-              <Link to="/contact">Property Management</Link>
+              <Link to="/contact" onClick={handleSamePage("/contact")}>Property Management</Link>
             </li>
             <li>
-              <Link to="/contact">Investment Advisory</Link>
+              <Link to="/contact" onClick={handleSamePage("/contact")}>Investment Advisory</Link>
             </li>
             <li>
-              <Link to="/contact">Mortgage Help</Link>
+              <Link to="/contact" onClick={handleSamePage("/contact")}>Mortgage Help</Link>
             </li>
             <li>
-              <Link to="/contact">Valuation</Link>
+              <Link to="/contact" onClick={handleSamePage("/contact")}>Valuation</Link>
             </li>
           </ul>
         </nav>
@@ -291,13 +299,13 @@ const Footer = ({ ready = false }: FooterProps) => {
 
         <ul className="rg-footer__legal">
           <li>
-            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/privacy" onClick={handleSamePage("/privacy")}>Privacy Policy</Link>
           </li>
           <li>
-            <Link to="/terms">Terms of Service</Link>
+            <Link to="/terms" onClick={handleSamePage("/terms")}>Terms of Service</Link>
           </li>
           <li>
-            <Link to="/cookies">Cookie Preferences</Link>
+            <Link to="/cookies" onClick={handleSamePage("/cookies")}>Cookie Preferences</Link>
           </li>
         </ul>
       </div>
