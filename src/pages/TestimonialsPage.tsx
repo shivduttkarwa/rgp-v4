@@ -909,7 +909,11 @@ const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
         />
         <div className="t-section-heading">
           <header className="t-section-heading__header">
-            <span className="t-section-heading__eyebrow" data-gsap="fade-up">
+            <span
+              className="t-section-heading__eyebrow"
+              data-gsap="fade-in"
+              data-gsap-start="top 100%"
+            >
               Client Voices
             </span>
             <h2

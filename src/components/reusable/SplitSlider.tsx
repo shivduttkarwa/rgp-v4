@@ -184,13 +184,6 @@ const SplitSlider: React.FC<SplitSliderProps> = ({
       watchSlidesProgress: true,
     });
 
-    // Initialize first slide
-    const firstSlide = textSlidesRef.current[0];
-    if (firstSlide) {
-      const items = firstSlide.querySelectorAll(".rgp-slider__anim-item");
-      gsap.set(items, { y: 0, opacity: 1 });
-    }
-
     return () => {
       picSwiperRef.current?.destroy();
     };
@@ -312,7 +305,6 @@ const SplitSlider: React.FC<SplitSliderProps> = ({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [currentIndex, goToSlide]);
 
-
   return (
     <section
       ref={sectionRef}
@@ -330,6 +322,7 @@ const SplitSlider: React.FC<SplitSliderProps> = ({
                 <div
                   key={index}
                   className="swiper-slide rgp-slider__media-slide"
+                  {...(index === 0 ? { "data-gsap": "clip-smooth-down", "data-gsap-start": "top 70%" } : {})}
                 >
                   <img
                     className="rgp-slider__media-img"
@@ -356,20 +349,29 @@ const SplitSlider: React.FC<SplitSliderProps> = ({
                 data-theme={slide.theme}
               >
                 <div className="rgp-slider__text-card">
-                  <h3 className="rgp-slider__kicker rgp-slider__anim-item">
+                  <h3
+                    className="rgp-slider__kicker rgp-slider__anim-item"
+                    {...(index === 0 ? { "data-gsap": "fade-up", "data-gsap-start": "top 70%", "data-gsap-delay": "0" } : {})}
+                  >
                     {slide.kicker}
                   </h3>
                   <h2 className="rgp-slider__title">
                     {slide.titleLines.map((line, lineIndex) => (
                       <span key={lineIndex} className="rgp-slider__title-line">
-                        <span className="rgp-slider__title-inner rgp-slider__anim-item">
+                        <span
+                          className="rgp-slider__title-inner rgp-slider__anim-item"
+                          {...(index === 0 ? { "data-gsap": "fade-up", "data-gsap-start": "top 70%", "data-gsap-delay": `${0.1 + lineIndex * 0.1}` } : {})}
+                        >
                           {line}
                         </span>
                       </span>
                     ))}
                   </h2>
                   <div className="rgp-slider__desc-wrap">
-                    <p className="rgp-slider__desc rgp-slider__anim-item">
+                    <p
+                      className="rgp-slider__desc rgp-slider__anim-item"
+                      {...(index === 0 ? { "data-gsap": "fade-up", "data-gsap-start": "top 70%", "data-gsap-delay": "0.4" } : {})}
+                    >
                       {slide.description}
                     </p>
                   </div>
@@ -378,12 +380,16 @@ const SplitSlider: React.FC<SplitSliderProps> = ({
                       <a
                         href={slide.linkUrl}
                         className="rgp-slider__link rgp-slider__anim-item"
+                        {...(index === 0 ? { "data-gsap": "fade-up", "data-gsap-start": "top 70%", "data-gsap-delay": "0.5" } : {})}
                       >
                         <LinkArrowIcon />
                         <span>{slide.linkText}</span>
                       </a>
                     ) : (
-                      <span className="rgp-slider__author rgp-slider__anim-item">
+                      <span
+                        className="rgp-slider__author rgp-slider__anim-item"
+                        {...(index === 0 ? { "data-gsap": "fade-up", "data-gsap-start": "top 70%", "data-gsap-delay": "0.5" } : {})}
+                      >
                         {slide.linkText}
                       </span>
                     )}
