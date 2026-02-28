@@ -68,6 +68,17 @@ export default function Header({ ready = false }: { ready?: boolean }) {
     }
   }, [location.pathname, publicUrl]);
 
+  // Fade header bg out when mobile menu opens, restore on close
+  useEffect(() => {
+    if (!headerBgRef.current) return;
+    if (mobileOpen) {
+      gsap.to(headerBgRef.current, { opacity: 0, duration: 0.3, ease: "power2.out", overwrite: true });
+    } else {
+      const shouldShow = window.scrollY > 100;
+      gsap.to(headerBgRef.current, { opacity: shouldShow ? 1 : 0, duration: 0.3, ease: "power2.out", overwrite: true });
+    }
+  }, [mobileOpen]);
+
   // Slide header in after hero finishes on homepage
   useEffect(() => {
     if (!ready || !headerRef.current) return;
