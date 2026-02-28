@@ -71,9 +71,9 @@ a {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 3, 46, 0.85) 0%,
-    rgba(0, 3, 46, 0.35) 45%,
-    rgba(0, 3, 46, 0.15) 100%
+    rgba(0, 3, 46, 0.72) 0%,
+    rgba(0, 3, 46, 0.18) 40%,
+    rgba(0, 3, 46, 0.0) 100%
   );
   mix-blend-mode: multiply;
   pointer-events: none;

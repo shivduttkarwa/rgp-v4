@@ -148,7 +148,7 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
         showCta
         ctaLabel="Book a Free Appraisal"
         ctaOnClick={() => navigate("/contact")}
-        bgImage="images/h.jpg"
+        bgImage="images/about-hero.jpg"
         titleLine1={
           <>
             Meet <span className="rg-gold">Rahul</span> Singh

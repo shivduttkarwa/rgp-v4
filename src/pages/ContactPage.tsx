@@ -40,7 +40,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
         ready={ready}
         showVideo={false}
         showCta={false}
-        bgImage="images/hero1.jpg"
+        bgImage="images/contact-hero.jpg"
         titleLine1={
           <>
             Get In <span className="rg-gold">Touch</span>

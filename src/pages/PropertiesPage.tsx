@@ -236,7 +236,7 @@ export default function PropertiesPage() {
       <HeroSection
         ready={true}
         showVideo={false}
-        bgImage="images/hero-rpg-brisbane.jpg"
+        bgImage="images/prop-hero.jpg"
         titleLine1={
           <>
             Our <span className="rg-gold">Premium</span>

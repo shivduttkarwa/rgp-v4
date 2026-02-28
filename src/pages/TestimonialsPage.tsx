@@ -896,7 +896,7 @@ const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
           ready={ready}
           showVideo={false}
           showCta={false}
-          bgImage="images/hero1.jpg"
+          bgImage="images/testi-hero.jpg"
           titleLine1={
             <>
               Client <span className="rg-gold">Stories</span>
