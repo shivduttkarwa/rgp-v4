@@ -535,7 +535,8 @@ a.rg-footer__contact-item:hover svg {
   }
 
   .rg-footer__watermark-text {
-    font-size: clamp(3.12rem, 16.8vw, 10.2rem);
+    font-size: clamp(2.65rem, 14.3vw, 8.67rem);
+    letter-spacing: 0.04em;
   }
 
   .rg-footer__watermark-letter {
@@ -611,6 +612,7 @@ a.rg-footer__contact-item:hover svg {
   }
 
   .rg-footer__watermark-text {
-    font-size: clamp(2.64rem, 16.8vw, 6.72rem);
+    font-size: clamp(2.24rem, 14.3vw, 5.71rem);
+    letter-spacing: 0.03em;
   }
 }

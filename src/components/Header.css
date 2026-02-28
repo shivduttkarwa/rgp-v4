@@ -13,7 +13,7 @@
 .rg-header__bg {
   position: absolute;
   inset: 0;
-  background: rgba(8, 13, 60, 0.78);
+  background: rgba(8, 13, 60, 0.88);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   opacity: 0;
@@ -208,7 +208,9 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
   flex-shrink: 0;
 }
 
@@ -269,7 +271,9 @@
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   letter-spacing: 0.04em;
-  transition: color 0.22s ease, padding-left 0.22s ease;
+  transition:
+    color 0.22s ease,
+    padding-left 0.22s ease;
 }
 
 .rg-header__mobile-link:hover,
@@ -294,7 +298,10 @@
   letter-spacing: 0.07em;
   text-decoration: none;
   width: fit-content;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .rg-header__mobile-cta:hover {
