@@ -1,8 +1,26 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import HeroSection from "../sections/HeroSection";
+import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import "./ContactPage.css";
 
 export default function ContactPage({ ready = false }: { ready?: boolean }) {
+  const pageRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const guards = [
+      "clipRevealInit", "clipRevealRtlInit", "clipRevealTopInit",
+      "clipRevealLeftInit", "clipRevealRightInit", "wordRevealInit",
+      "wordWriteInit", "clipSmoothInit", "clipSmoothDownInit", "charRevealInit",
+    ];
+    guards.forEach((key) => {
+      pageRef.current
+        ?.querySelectorAll<HTMLElement>(`[data-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}]`)
+        .forEach((el) => delete el.dataset[key]);
+    });
+    const cleanup = initGsapSwitchAnimations(pageRef.current);
+    return cleanup;
+  }, []);
+
   const [intent, setIntent] = useState("Buy");
   const [budget, setBudget] = useState(5_000_000);
   const [success, setSuccess] = useState(false);
@@ -17,7 +35,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
   };
 
   return (
-    <main className="contact-page">
+    <main className="contact-page" ref={pageRef}>
       <HeroSection
         ready={ready}
         showVideo={false}
@@ -43,11 +61,11 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
         {/* LEFT */}
         <section className="left">
           <div>
-            <h1 className="hero-title">
+            <h1 className="hero-title" data-gsap="char-reveal" data-gsap-start="top 90%">
               Let's Talk
               <em>Appraisal.</em>
             </h1>
-            <p className="tagline">
+            <p className="tagline" data-gsap="fade-up" data-gsap-delay="0.15">
               Whether you're buying, selling, or investing — our advisors are ready to guide
               you through every step.
             </p>
@@ -55,7 +73,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
 
           <div>
             <nav className="c-list">
-              <a href="tel:+61450009291" className="c-item">
+              <a href="tel:+61450009291" className="c-item" data-gsap="fade-up" data-gsap-delay="0.1">
                 <div>
                   <p className="c-key">Phone</p>
                   <p className="c-val">0450 009 291</p>
@@ -64,7 +82,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
               </a>
-              <a href="mailto:admin@realgoldproperties.com.au" className="c-item">
+              <a href="mailto:admin@realgoldproperties.com.au" className="c-item" data-gsap="fade-up" data-gsap-delay="0.2">
                 <div>
                   <p className="c-key">Email</p>
                   <p className="c-val">admin@realgoldproperties.com.au</p>
@@ -73,7 +91,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
               </a>
-              <a href="#" className="c-item">
+              <a href="#" className="c-item" data-gsap="fade-up" data-gsap-delay="0.3">
                 <div>
                   <p className="c-key">Visit</p>
                   <p className="c-val">Forest Lake, Brisbane QLD 4078</p>
@@ -84,7 +102,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
               </a>
             </nav>
 
-            <div className="hours">
+            <div className="hours" data-gsap="fade-up" data-gsap-delay="0.15">
               <p className="h-label">Office Hours</p>
               <div className="h-row"><span className="h-day">Mon – Thu</span><span className="h-time">9:00 – 18:00</span></div>
               <div className="h-row"><span className="h-day">Friday</span><span className="h-time">9:00 – 13:00</span></div>
@@ -92,7 +110,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
               <div className="h-row"><span className="h-day">Sunday</span><span className="h-time">By appointment</span></div>
             </div>
 
-            <div className="quote">
+            <div className="quote" data-gsap="fade-up" data-gsap-delay="0.1">
               <blockquote>
                 "Real estate is not just a transaction — it is the beginning of a life lived better."
               </blockquote>
@@ -103,17 +121,17 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
 
         {/* RIGHT */}
         <section className="right">
-          <p className="form-eyebrow">Begin your enquiry</p>
-          <h2 className="form-heading">
+          <p className="form-eyebrow" data-gsap="fade-up">Begin your enquiry</p>
+          <h2 className="form-heading" data-gsap="char-reveal" data-gsap-start="top 85%">
             Tell us what you're
             <br />
             <em>looking for.</em>
           </h2>
-          <p className="form-sub">
+          <p className="form-sub" data-gsap="fade-up" data-gsap-delay="0.15">
             Fill in the details and a specialist will respond within one business day.
           </p>
 
-          <div className="intents">
+          <div className="intents" data-gsap="fade-up" data-gsap-delay="0.2">
             {["Buy", "Sell", "Rent", "Invest", "Off-Plan", "Valuation"].map((label) => (
               <button
                 key={label}
@@ -127,6 +145,9 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
           </div>
 
           <form
+            data-gsap="clip-smooth-down"
+            data-gsap-delay="0.25"
+            data-gsap-start="top 85%"
             onSubmit={(e) => {
               e.preventDefault();
               setSuccess(true);

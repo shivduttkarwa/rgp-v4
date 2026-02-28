@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, useMemo } from "react";
+import { useLayoutEffect, useRef, useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import gsap from "gsap";
@@ -18,6 +18,7 @@ import {
   type Category,
 } from "../components/reusable/PropertyCard";
 import { allProperties } from "../data/listingProperties";
+import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import "./PropertiesPage.css";
 import "../sections/ServiceSelection.css";
 
@@ -88,6 +89,23 @@ const applyFilters = (items: Property[], f: Filters) =>
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PropertiesPage() {
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const guards = [
+      "clipRevealInit", "clipRevealRtlInit", "clipRevealTopInit",
+      "clipRevealLeftInit", "clipRevealRightInit", "wordRevealInit",
+      "wordWriteInit", "clipSmoothInit", "clipSmoothDownInit", "charRevealInit",
+    ];
+    guards.forEach((key) => {
+      pageRef.current
+        ?.querySelectorAll<HTMLElement>(`[data-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}]`)
+        .forEach((el) => delete el.dataset[key]);
+    });
+    const cleanup = initGsapSwitchAnimations(pageRef.current);
+    return cleanup;
+  }, []);
+
   // activeFilters drives UI controls (immediate feedback)
   // displayedFilters drives the grid (lags 280ms behind for exit animation)
   const [activeFilters, setActiveFilters] = useState<Filters>(DEFAULT_FILTERS);
@@ -205,7 +223,7 @@ export default function PropertiesPage() {
     activeFilters.baths !== "any";
 
   return (
-    <div className="ap-page">
+    <div className="ap-page" ref={pageRef}>
       <HeroSection
         ready={true}
         showVideo={false}
@@ -226,7 +244,7 @@ export default function PropertiesPage() {
 
       {/* ── Filter Slab ───────────────────────────────────────────────── */}
       <div className="ap-filter-slab">
-        <div className="ap-filter-slab__inner">
+        <div className="ap-filter-slab__inner" data-gsap="fade-up" data-gsap-start="top 95%">
           <div className="ap-filter-row">
             <div className="ap-filter-wrapper">
               <div ref={filterTabsRef} className="ap-filter-tabs">

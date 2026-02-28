@@ -620,8 +620,18 @@ const MOSAIC_PICKS = [
 const VoiceMosaic: React.FC = () => (
   <section className="tp-mosaic">
     <div className="tp-mosaic__header">
-      <span className="tp-mosaic__kicker">Real Voices</span>
-      <h2 className="tp-mosaic__title">
+      <span
+        className="tp-mosaic__kicker"
+        data-gsap="fade-up"
+        data-gsap-start="top 100%"
+      >
+        Real Voices
+      </span>
+      <h2
+        className="tp-mosaic__title"
+        data-gsap="char-reveal"
+        data-gsap-start="top 85%"
+      >
         Stories That <em>Define</em> Us
       </h2>
     </div>
@@ -705,8 +715,14 @@ const TickerCol: React.FC<TickerColProps> = ({ items, speed, reversed }) => (
 const TickerWall: React.FC = () => (
   <section className="tp-ticker">
     <div className="tp-ticker__header">
-      <span className="tp-ticker__kicker">All Reviews</span>
-      <h2 className="tp-ticker__title">
+      <span className="tp-ticker__kicker" data-gsap="fade-up">
+        All Reviews
+      </span>
+      <h2
+        className="tp-ticker__title"
+        data-gsap="char-reveal"
+        data-gsap-start="top 85%"
+      >
         The Full <em>Chorus</em>
       </h2>
     </div>
@@ -730,17 +746,27 @@ const FinalCTA: React.FC = () => (
   <section className="tp-cta">
     <div className="tp-cta__inner">
       <div className="tp-cta__panel">
-        <span className="tp-cta__kicker">Next Step</span>
-        <h2 className="tp-cta__heading">
+        <span className="tp-cta__kicker" data-gsap="fade-up">
+          Next Step
+        </span>
+        <h2
+          className="tp-cta__heading"
+          data-gsap="char-reveal"
+          data-gsap-start="top 85%"
+        >
           Book a Free
           <br />
           <em>Appraisal</em>
         </h2>
-        <p className="tp-cta__body">
+        <p className="tp-cta__body" data-gsap="fade-up" data-gsap-delay="0.15">
           Get a clear price range, honest advice, and a plan that positions your
           property for a confident sale.
         </p>
-        <div className="tp-cta__meta">
+        <div
+          className="tp-cta__meta"
+          data-gsap="zoom-in"
+          data-gsap-stagger="0.3"
+        >
           <div className="tp-cta__meta-item">
             <span className="tp-cta__meta-value">4.9</span>
             <span className="tp-cta__meta-label">Avg Rating</span>
@@ -755,7 +781,12 @@ const FinalCTA: React.FC = () => (
           </div>
         </div>
         <div className="tp-cta__actions">
-          <a href="/contact" className="tp-cta__btn tp-cta__btn--solid">
+          <a
+            href="/contact"
+            className="tp-cta__btn tp-cta__btn--solid"
+            data-gsap="btn-clip-reveal"
+            data-gsap-delay="0.2"
+          >
             Book Your Appraisal
             <svg
               viewBox="0 0 24 24"
@@ -766,18 +797,26 @@ const FinalCTA: React.FC = () => (
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="/contact" className="tp-cta__btn tp-cta__btn--ghost">
+          <a
+            href="/contact"
+            className="tp-cta__btn tp-cta__btn--ghost"
+            data-gsap="btn-clip-reveal"
+            data-gsap-delay="0.32"
+          >
             Talk to Rahul
           </a>
         </div>
       </div>
 
-      <div className="tp-cta__visual">
+      <div
+        className="tp-cta__visual"
+        data-gsap="clip-smooth-down"
+        data-gsap-delay="0.15"
+        data-gsap-start="top 85%"
+      >
         <div className="tp-cta__medallion">
           <span className="tp-cta__medallion-rot" aria-hidden="true" />
-          <span className="tp-cta__medallion-num">
-            {testimonials.length}+
-          </span>
+          <span className="tp-cta__medallion-num">{testimonials.length}+</span>
           <span className="tp-cta__medallion-label">Verified Reviews</span>
         </div>
         <div className="tp-cta__avatar-fan">
