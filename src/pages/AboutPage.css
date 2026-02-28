@@ -10,11 +10,13 @@
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 .about-page .container {
+  max-width: var(--rg-max);
   margin: 0 auto;
-  padding: 0 var(--pad);
+  padding: 0 var(--rg-pad);
 }
 
 .about-page .section {

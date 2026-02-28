@@ -6,6 +6,13 @@
   overflow: hidden;
 }
 
+/* Header wrap */
+.rgMarquee .wrap {
+  max-width: var(--rg-max);
+  margin: 0 auto;
+  padding: 0 var(--rg-pad);
+}
+
 /* Rail + fades */
 .rgMarquee__rail {
   position: relative;
