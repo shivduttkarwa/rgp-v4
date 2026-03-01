@@ -417,35 +417,21 @@ export default function PropertiesPage() {
             <span className="svc-cta__eyebrow" data-gsap="fade-up">
               {PAGE_CTA.eyebrow}
             </span>
-            <h3
-              className="svc-cta__title"
-              data-gsap="char-reveal"
-              data-gsap-start="top 85%"
-            >
+            <h3 className="svc-cta__title">
               {PAGE_CTA.title} <em>{PAGE_CTA.titleEm}</em>
             </h3>
-            <p
-              className="svc-cta__text"
-              data-gsap="fade-up"
-              data-gsap-delay="0.15"
-            >
-              {PAGE_CTA.text}
-            </p>
+            <p className="svc-cta__text">{PAGE_CTA.text}</p>
 
             <div className="svc-cta__actions">
               <Link
                 to={PAGE_CTA.primaryHref}
                 className="svc-cta__btn svc-cta__btn--primary"
-                data-gsap="btn-clip-reveal"
-                data-gsap-delay="0.2"
               >
                 <MessageCircle size={20} />
                 <span>{PAGE_CTA.primaryLabel}</span>
                 <ArrowRight size={18} />
               </Link>
               <a
-                data-gsap="btn-clip-reveal"
-                data-gsap-delay="0.2"
                 href={PAGE_CTA.secondaryHref}
                 className="svc-cta__btn svc-cta__btn--secondary"
               >
@@ -454,11 +440,7 @@ export default function PropertiesPage() {
               </a>
             </div>
 
-            <div
-              data-gsap="zoom-in"
-              data-gsap-stagger="0.3 "
-              className="svc-cta__trust"
-            >
+            <div className="svc-cta__trust">
               <div className="svc-cta__trust-item">
                 <span className="svc-cta__trust-value">150+</span>
                 <span className="svc-cta__trust-label">Local Deals Closed</span>
