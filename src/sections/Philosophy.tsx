@@ -1,5 +1,9 @@
 // HomeTestimonials (Philosophy.tsx)
 import { useRef, useState, useEffect } from "react";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -19,7 +23,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     kicker: "SUNNYBANK · SOLD",
     title: "SARAH M.",
-    video: "https://www.w3schools.com/html/mov_bbb.mp4",
+    video: `${base}vids/rgp-video.mp4`,
     poster:
       "https://files.staging.peachworlds.com/website/dbf16c23-6134-4df6-a509-bd2a6b79ab37/chatgpt-image-3-apr-2025-16-33-58.webp",
     tintVar: "gold",
@@ -27,7 +31,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     kicker: "UNDERWOOD · PURCHASED",
     title: "JAMES & LISA",
-    video: "https://www.w3schools.com/html/mov_bbb.mp4",
+    video: `${base}vids/rgp-video.mp4`,
     poster:
       "https://files.staging.peachworlds.com/website/d80b404a-7e8e-40ee-a08c-cbab3f8a7ad3/chatgpt-image-3-apr-2025-16-23-38.webp",
     tintVar: "amber",
@@ -35,7 +39,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     kicker: "EIGHT MILE PLAINS · APPRAISAL",
     title: "DAVID K.",
-    video: "https://www.w3schools.com/html/mov_bbb.mp4",
+    video: `${base}vids/rgp-video.mp4`,
     poster:
       "https://files.staging.peachworlds.com/website/504aad69-04e9-4c61-8e60-4bf340ec746f/chatgpt-image-3-apr-2025-16-23-32.webp",
     tintVar: "crimson",
