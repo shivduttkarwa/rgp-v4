@@ -1342,8 +1342,8 @@ const properties: PropertyData[] = [
       { url: "https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/ab561b342de46fa5bfff21d97871ff1a1bb4afa9784dd4eb939863cd560b8e1c/image.jpg", alt: "73 Mount Moogerah Drive Image 31" },
       { url: "https://i2.au.reastatic.net/768x512-crop,format=jpeg,r=255,g=255,b=255/eb9325ca8138ae50f9d4c4207e95b5c5f1abe83558d01678c42d58b68fe184d0/image.jpg", alt: "73 Mount Moogerah Drive Image 32" },
     ],
-    videoTourUrl: "https://www.youtube.com/embed/ikNIhMvYnWU",
-    videoThumbnail: "https://img.youtube.com/vi/ikNIhMvYnWU/0.jpg",
+    videoTourUrl: "https://www.youtube.com/embed/qdccmLWTTEs",
+    videoThumbnail: "https://img.youtube.com/vi/qdccmLWTTEs/0.jpg",
     stats: [
       { icon: "bed", value: "5", label: "Bedrooms" },
       { icon: "bath", value: "3", label: "Bathrooms" },

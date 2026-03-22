@@ -192,7 +192,7 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
                   <video
                     ref={splitVideoRef}
                     className="split-video"
-                    src={`${base}vids/prop1.mp4`}
+                    src={`${base}vids/rgp-video.mp4`}
                     muted
                     playsInline
                     loop={!splitFullPlay}
