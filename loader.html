@@ -4,404 +4,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Luxury Real Estate Loader</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@200;300&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* =================================
+               🎛️ CONTROL KNOBS - ADJUST HERE
+               ================================= */
+
+            /* COLORS */
+            --gold: #F9C206;
+            --bg-dark: #050505;
+            --bg-gradient-center: #1a1a1a;
+            --text-muted: #666;
+
+            /* LOGO SIZE */
+            --logo-width: 200px;
+            --logo-height: 140px;
+
+            /* BORDER ANIMATION */
+            --border-duration: 3s;
+            /* How long border takes to draw */
+            --border-width: 3px;
+            /* Thickness of border */
+            --border-glow: 6px;
+            /* Glow spread around border */
+
+            /* FILL ANIMATION */
+            --fill-delay: 2s;
+            /* When fill starts (after border) */
+            --fill-duration: 1.6s;
+            /* How long fill takes */
+
+            /* GLOW */
+            --glow-delay: 3s;
+            /* When glow starts */
+            --glow-duration: 0.6s;
+            /* How long glow fade-in takes */
+            --glow-blur: 15px;
+            /* Glow blur amount */
+            --glow-opacity: 0.3;
+            /* Final glow opacity */
+
+            /* TEXT */
+            --title-delay: 2.4s;
+            /* When title appears */
+            --subtitle-delay: 2.6s;
+            /* When subtitle appears */
+            --text-duration: 0.5s;
+            /* Text fade-in duration */
+
+            /* LOADER */
+            --loader-hide-delay: 5000;
+            /* When loader hides (in JS - milliseconds) */
+            --loader-fade-duration: 1s;
+            /* Loader fade-out duration */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-dark);
+            min-height: 100vh;
+        }
+
+        /* ================================
+           FULL PAGE LOADER
+           ================================ */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, var(--bg-gradient-center) 0%, var(--bg-dark) 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 50px;
+            z-index: 99999;
+            transition: opacity var(--loader-fade-duration) ease,
+                visibility var(--loader-fade-duration) ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ================================
+           LOGO CONTAINER
+           ================================ */
+        .logo-container {
+            position: relative;
+            width: var(--logo-width);
+            height: var(--logo-height);
+        }
+
+        .logo-svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Border stroke */
+        .logo-stroke {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: var(--border-width);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1500;
+            stroke-dashoffset: 1500;
+            animation: drawBorder var(--border-duration) ease-out forwards;
+            filter: drop-shadow(0 0 var(--border-glow) rgba(249, 194, 6, 0.5));
+        }
+
+        /* Gold fill - left to right */
+        .logo-fill {
+            fill: var(--gold);
+            clip-path: inset(0 100% 0 0);
+            animation: fillLeftToRight var(--fill-duration) ease-out forwards;
+            animation-delay: var(--fill-delay);
+        }
+
+        /* Glow */
+        .logo-glow {
+            fill: var(--gold);
+            opacity: 0;
+            filter: blur(var(--glow-blur));
+            animation: glowIn var(--glow-duration) ease-out forwards;
+            animation-delay: var(--glow-delay);
+        }
+
+        /* Animations */
+        @keyframes drawBorder {
+            0% {
+                stroke-dashoffset: 1500;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes fillLeftToRight {
+            0% {
+                clip-path: inset(0 100% 0 0);
+            }
+
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        @keyframes glowIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: var(--glow-opacity);
+            }
+        }
+
+        /* ================================
+           LOADER TEXT
+           ================================ */
+        .loader-text {
+            text-align: center;
+        }
+
+        .loader-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0;
+            animation: fadeInText var(--text-duration) ease-out forwards;
+            animation-delay: var(--title-delay);
+        }
+
+        .loader-subtitle {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeInText var(--text-duration) ease-out forwards;
+            animation-delay: var(--subtitle-delay);
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- =========================
-RGP Split Rail Slider (SAFE)
-- Shows slide 1 even without Swiper
-- When Swiper loads: synced vertical sliders + smooth text slide up/down
-========================= -->
+    <!-- LOADER -->
+    <div class="loader" id="loader">
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap"
-  rel="stylesheet"
-/>
+        <div class="logo-container">
+            <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 349 243">
 
-<!-- Swiper CSS (must load) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+                <!-- Glow layer -->
+                <path class="logo-glow"
+                    d="M 176.00 10.00 L 161.00 25.00 L 160.00 25.00 L 160.00 26.00 L 159.00 27.00 L 158.00 27.00 L 61.00 124.00 L 60.00 124.00 L 16.00 168.00 L 16.00 169.00 L 14.00 171.00 L 14.00 172.00 L 13.00 173.00 L 13.00 174.00 L 12.00 175.00 L 12.00 176.00 L 11.00 177.00 L 11.00 180.00 L 10.00 181.00 L 10.00 191.00 L 11.00 192.00 L 11.00 196.00 L 12.00 197.00 L 12.00 199.00 L 13.00 200.00 L 13.00 201.00 L 14.00 202.00 L 14.00 204.00 L 16.00 206.00 L 16.00 207.00 L 17.00 208.00 L 17.00 209.00 L 19.00 211.00 L 19.00 212.00 L 30.00 223.00 L 31.00 223.00 L 33.00 225.00 L 34.00 225.00 L 36.00 227.00 L 37.00 227.00 L 38.00 228.00 L 39.00 228.00 L 40.00 229.00 L 42.00 229.00 L 43.00 230.00 L 45.00 230.00 L 46.00 231.00 L 50.00 231.00 L 51.00 232.00 L 59.00 232.00 L 60.00 231.00 L 64.00 231.00 L 65.00 230.00 L 67.00 230.00 L 68.00 229.00 L 69.00 229.00 L 70.00 228.00 L 71.00 228.00 L 73.00 226.00 L 74.00 226.00 L 78.00 222.00 L 79.00 222.00 L 81.00 220.00 L 81.00 219.00 L 121.00 179.00 L 121.00 178.00 L 161.00 138.00 L 161.00 137.00 L 177.00 121.00 L 187.00 131.00 L 187.00 132.00 L 201.00 146.00 L 201.00 147.00 L 214.00 160.00 L 214.00 161.00 L 227.00 174.00 L 227.00 175.00 L 240.00 188.00 L 240.00 189.00 L 254.00 203.00 L 254.00 204.00 L 267.00 217.00 L 267.00 218.00 L 277.00 228.00 L 278.00 228.00 L 280.00 230.00 L 281.00 230.00 L 282.00 231.00 L 284.00 231.00 L 285.00 232.00 L 288.00 232.00 L 289.00 233.00 L 297.00 233.00 L 298.00 232.00 L 302.00 232.00 L 303.00 231.00 L 305.00 231.00 L 306.00 230.00 L 308.00 230.00 L 309.00 229.00 L 310.00 229.00 L 311.00 228.00 L 312.00 228.00 L 314.00 226.00 L 315.00 226.00 L 317.00 224.00 L 318.00 224.00 L 322.00 220.00 L 323.00 220.00 L 326.00 217.00 L 326.00 216.00 L 330.00 212.00 L 330.00 211.00 L 332.00 209.00 L 332.00 208.00 L 334.00 206.00 L 334.00 205.00 L 335.00 204.00 L 335.00 203.00 L 336.00 202.00 L 336.00 200.00 L 337.00 199.00 L 337.00 197.00 L 338.00 196.00 L 338.00 193.00 L 339.00 192.00 L 339.00 182.00 L 338.00 181.00 L 338.00 178.00 L 337.00 177.00 L 337.00 176.00 L 336.00 175.00 L 336.00 174.00 L 335.00 173.00 L 335.00 172.00 L 333.00 170.00 L 333.00 169.00 L 310.00 146.00 L 310.00 145.00 L 277.00 112.00 L 277.00 111.00 L 246.00 80.00 L 246.00 79.00 L 213.00 46.00 L 213.00 45.00 L 182.00 14.00 L 182.00 13.00 L 179.00 10.00 Z" />
 
-<section class="rgpRailDock" data-rgp-skin="s1">
-  <div class="rgpRailDock__shell">
-    <!-- LEFT: Media rail -->
-    <div class="rgpRailDock__mediaPane">
-      <div class="swiper rgpMediaRail">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide rgpMediaRail__slide">
-            <img
-              class="rgpMediaRail__img"
-              data-swiper-parallax-y="80%"
-              src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1800&q=80"
-              alt="Slide 1"
-              loading="lazy"
-            />
-          </div>
+                <!-- Gold fill -->
+                <path class="logo-fill"
+                    d="M 176.00 10.00 L 161.00 25.00 L 160.00 25.00 L 160.00 26.00 L 159.00 27.00 L 158.00 27.00 L 61.00 124.00 L 60.00 124.00 L 16.00 168.00 L 16.00 169.00 L 14.00 171.00 L 14.00 172.00 L 13.00 173.00 L 13.00 174.00 L 12.00 175.00 L 12.00 176.00 L 11.00 177.00 L 11.00 180.00 L 10.00 181.00 L 10.00 191.00 L 11.00 192.00 L 11.00 196.00 L 12.00 197.00 L 12.00 199.00 L 13.00 200.00 L 13.00 201.00 L 14.00 202.00 L 14.00 204.00 L 16.00 206.00 L 16.00 207.00 L 17.00 208.00 L 17.00 209.00 L 19.00 211.00 L 19.00 212.00 L 30.00 223.00 L 31.00 223.00 L 33.00 225.00 L 34.00 225.00 L 36.00 227.00 L 37.00 227.00 L 38.00 228.00 L 39.00 228.00 L 40.00 229.00 L 42.00 229.00 L 43.00 230.00 L 45.00 230.00 L 46.00 231.00 L 50.00 231.00 L 51.00 232.00 L 59.00 232.00 L 60.00 231.00 L 64.00 231.00 L 65.00 230.00 L 67.00 230.00 L 68.00 229.00 L 69.00 229.00 L 70.00 228.00 L 71.00 228.00 L 73.00 226.00 L 74.00 226.00 L 78.00 222.00 L 79.00 222.00 L 81.00 220.00 L 81.00 219.00 L 121.00 179.00 L 121.00 178.00 L 161.00 138.00 L 161.00 137.00 L 177.00 121.00 L 187.00 131.00 L 187.00 132.00 L 201.00 146.00 L 201.00 147.00 L 214.00 160.00 L 214.00 161.00 L 227.00 174.00 L 227.00 175.00 L 240.00 188.00 L 240.00 189.00 L 254.00 203.00 L 254.00 204.00 L 267.00 217.00 L 267.00 218.00 L 277.00 228.00 L 278.00 228.00 L 280.00 230.00 L 281.00 230.00 L 282.00 231.00 L 284.00 231.00 L 285.00 232.00 L 288.00 232.00 L 289.00 233.00 L 297.00 233.00 L 298.00 232.00 L 302.00 232.00 L 303.00 231.00 L 305.00 231.00 L 306.00 230.00 L 308.00 230.00 L 309.00 229.00 L 310.00 229.00 L 311.00 228.00 L 312.00 228.00 L 314.00 226.00 L 315.00 226.00 L 317.00 224.00 L 318.00 224.00 L 322.00 220.00 L 323.00 220.00 L 326.00 217.00 L 326.00 216.00 L 330.00 212.00 L 330.00 211.00 L 332.00 209.00 L 332.00 208.00 L 334.00 206.00 L 334.00 205.00 L 335.00 204.00 L 335.00 203.00 L 336.00 202.00 L 336.00 200.00 L 337.00 199.00 L 337.00 197.00 L 338.00 196.00 L 338.00 193.00 L 339.00 192.00 L 339.00 182.00 L 338.00 181.00 L 338.00 178.00 L 337.00 177.00 L 337.00 176.00 L 336.00 175.00 L 336.00 174.00 L 335.00 173.00 L 335.00 172.00 L 333.00 170.00 L 333.00 169.00 L 310.00 146.00 L 310.00 145.00 L 277.00 112.00 L 277.00 111.00 L 246.00 80.00 L 246.00 79.00 L 213.00 46.00 L 213.00 45.00 L 182.00 14.00 L 182.00 13.00 L 179.00 10.00 Z" />
 
-          <div class="swiper-slide rgpMediaRail__slide">
-            <img
-              class="rgpMediaRail__img"
-              data-swiper-parallax-y="80%"
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1800&q=80"
-              alt="Slide 2"
-              loading="lazy"
-            />
-          </div>
+                <!-- Border stroke -->
+                <path class="logo-stroke"
+                    d="M 176.00 10.00 L 161.00 25.00 L 160.00 25.00 L 160.00 26.00 L 159.00 27.00 L 158.00 27.00 L 61.00 124.00 L 60.00 124.00 L 16.00 168.00 L 16.00 169.00 L 14.00 171.00 L 14.00 172.00 L 13.00 173.00 L 13.00 174.00 L 12.00 175.00 L 12.00 176.00 L 11.00 177.00 L 11.00 180.00 L 10.00 181.00 L 10.00 191.00 L 11.00 192.00 L 11.00 196.00 L 12.00 197.00 L 12.00 199.00 L 13.00 200.00 L 13.00 201.00 L 14.00 202.00 L 14.00 204.00 L 16.00 206.00 L 16.00 207.00 L 17.00 208.00 L 17.00 209.00 L 19.00 211.00 L 19.00 212.00 L 30.00 223.00 L 31.00 223.00 L 33.00 225.00 L 34.00 225.00 L 36.00 227.00 L 37.00 227.00 L 38.00 228.00 L 39.00 228.00 L 40.00 229.00 L 42.00 229.00 L 43.00 230.00 L 45.00 230.00 L 46.00 231.00 L 50.00 231.00 L 51.00 232.00 L 59.00 232.00 L 60.00 231.00 L 64.00 231.00 L 65.00 230.00 L 67.00 230.00 L 68.00 229.00 L 69.00 229.00 L 70.00 228.00 L 71.00 228.00 L 73.00 226.00 L 74.00 226.00 L 78.00 222.00 L 79.00 222.00 L 81.00 220.00 L 81.00 219.00 L 121.00 179.00 L 121.00 178.00 L 161.00 138.00 L 161.00 137.00 L 177.00 121.00 L 187.00 131.00 L 187.00 132.00 L 201.00 146.00 L 201.00 147.00 L 214.00 160.00 L 214.00 161.00 L 227.00 174.00 L 227.00 175.00 L 240.00 188.00 L 240.00 189.00 L 254.00 203.00 L 254.00 204.00 L 267.00 217.00 L 267.00 218.00 L 277.00 228.00 L 278.00 228.00 L 280.00 230.00 L 281.00 230.00 L 282.00 231.00 L 284.00 231.00 L 285.00 232.00 L 288.00 232.00 L 289.00 233.00 L 297.00 233.00 L 298.00 232.00 L 302.00 232.00 L 303.00 231.00 L 305.00 231.00 L 306.00 230.00 L 308.00 230.00 L 309.00 229.00 L 310.00 229.00 L 311.00 228.00 L 312.00 228.00 L 314.00 226.00 L 315.00 226.00 L 317.00 224.00 L 318.00 224.00 L 322.00 220.00 L 323.00 220.00 L 326.00 217.00 L 326.00 216.00 L 330.00 212.00 L 330.00 211.00 L 332.00 209.00 L 332.00 208.00 L 334.00 206.00 L 334.00 205.00 L 335.00 204.00 L 335.00 203.00 L 336.00 202.00 L 336.00 200.00 L 337.00 199.00 L 337.00 197.00 L 338.00 196.00 L 338.00 193.00 L 339.00 192.00 L 339.00 182.00 L 338.00 181.00 L 338.00 178.00 L 337.00 177.00 L 337.00 176.00 L 336.00 175.00 L 336.00 174.00 L 335.00 173.00 L 335.00 172.00 L 333.00 170.00 L 333.00 169.00 L 310.00 146.00 L 310.00 145.00 L 277.00 112.00 L 277.00 111.00 L 246.00 80.00 L 246.00 79.00 L 213.00 46.00 L 213.00 45.00 L 182.00 14.00 L 182.00 13.00 L 179.00 10.00 Z" />
 
-          <div class="swiper-slide rgpMediaRail__slide">
-            <img
-              class="rgpMediaRail__img"
-              data-swiper-parallax-y="80%"
-              src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1800&q=80"
-              alt="Slide 3"
-              loading="lazy"
-            />
-          </div>
+            </svg>
         </div>
-      </div>
-    </div>
 
-    <!-- CENTER: Nav -->
-    <div class="rgpRailDock__nav" aria-label="Slider controls">
-      <button class="rgpNavOrb rgpNavOrb--prev" type="button" aria-label="Previous slide">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M14.5 6.5L9 12l5.5 5.5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-
-      <button class="rgpNavOrb rgpNavOrb--next" type="button" aria-label="Next slide">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M9.5 6.5L15 12l-5.5 5.5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-    </div>
-
-    <!-- RIGHT: Copy rail -->
-    <div class="rgpRailDock__copyPane">
-      <div class="swiper rgpCopyRail">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide rgpCopyRail__slide" data-skin="s1">
-            <div class="rgpCopyCard">
-              <div class="rgpCopyCard__kicker">our Purpose</div>
-
-              <h2 class="rgpCopyCard__title">
-                A CHRIST-CENTRED<br />
-                COMMUNITY
-              </h2>
-
-              <p class="rgpCopyCard__text">
-                William Clarke College was founded on a deep conviction that the teachings of the Bible—particularly
-                those concerning Jesus Christ as creator, sustainer, and redeemer—are true and transformative.
-              </p>
-
-              <a class="rgpCopyCard__link" href="#">
-                <span class="rgpCopyCard__arrow">→</span>
-                DISCOVER WHO WE ARE
-              </a>
-            </div>
-          </div>
-
-          <div class="swiper-slide rgpCopyRail__slide" data-skin="s2">
-            <div class="rgpCopyCard">
-              <div class="rgpCopyCard__kicker">our Purpose</div>
-
-              <h2 class="rgpCopyCard__title">
-                DEVELOPING<br />
-                EXTRAORDINARY<br />
-                LEARNERS
-              </h2>
-
-              <p class="rgpCopyCard__text">
-                We believe every student has the potential to be an Extraordinary Learner—someone who actively engages
-                with ideas, applies knowledge in meaningful ways, and grows through challenge.
-              </p>
-
-              <a class="rgpCopyCard__link" href="#">
-                <span class="rgpCopyCard__arrow">→</span>
-                DISCOVER WHO WE ARE
-              </a>
-            </div>
-          </div>
-
-          <div class="swiper-slide rgpCopyRail__slide" data-skin="s3">
-            <div class="rgpCopyCard">
-              <div class="rgpCopyCard__kicker">our Purpose</div>
-
-              <h2 class="rgpCopyCard__title">
-                WITH<br />
-                A PASSION TO<br />
-                SERVE OTHERS
-              </h2>
-
-              <p class="rgpCopyCard__text">
-                Grounded in our Christian foundation, we’re a community shaped by compassion and a commitment to serving
-                others. Students are encouraged to use their knowledge and talents to serve others.
-              </p>
-
-              <a class="rgpCopyCard__link" href="#">
-                <span class="rgpCopyCard__arrow">→</span>
-                DISCOVER WHO WE ARE
-              </a>
-            </div>
-          </div>
+        <div class="loader-text">
+            <h2 class="loader-title">Loading</h2>
+            <p class="loader-subtitle">Luxury Properties</p>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- fallback note (only visible if swiper is missing) -->
-  <noscript>
-    <p style="padding:12px; text-align:center;">Enable JavaScript to view the slider.</p>
-  </noscript>
-</section>
+    <script>
+        // Get the loader hide delay from CSS variable
+        const styles = getComputedStyle(document.documentElement);
+        const hideDelay = parseInt(styles.getPropertyValue('--loader-hide-delay')) || 5000;
 
-<style>
-  :root {
-    --rgp-s1: #ffc433; /* yellow */
-    --rgp-s2: #002855; /* navy */
-    --rgp-s3: #02223f; /* deep navy */
-  }
-
-  /* HARD reset to avoid "nothing visible" from external CSS */
-  .rgpRailDock, .rgpRailDock * { box-sizing: border-box; }
-  .rgpRailDock img { display:block; max-width:100%; }
-
-  .rgpRailDock{
-    width: 100%;
-    background: #fff;
-  }
-
-  /* layout */
-  .rgpRailDock__shell{
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 695px;
-    min-height: 520px;
-    overflow: hidden;
-  }
-
-  /* left */
-  .rgpRailDock__mediaPane{
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-  }
-  .rgpMediaRail{ height: 100%; }
-  .rgpMediaRail__slide{ height: 100%; overflow:hidden; }
-  .rgpMediaRail__img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate3d(0,0,0);
-    will-change: transform;
-  }
-
-  /* right */
-  .rgpRailDock__copyPane{
-    position: relative;
-    height: 100%;
-    display: grid;
-    place-items: center;
-    background: var(--rgp-s1);
-  }
-
-  .rgpRailDock[data-rgp-skin="s1"] .rgpRailDock__copyPane{ background: var(--rgp-s1); }
-  .rgpRailDock[data-rgp-skin="s2"] .rgpRailDock__copyPane{ background: var(--rgp-s2); }
-  .rgpRailDock[data-rgp-skin="s3"] .rgpRailDock__copyPane{ background: var(--rgp-s3); }
-
-  /* text swiper must fill */
-  .rgpCopyRail{ width:100%; height:100%; }
-  .rgpCopyRail__slide{
-    height:100%;
-    display:grid;
-    place-items:center;
-    padding: clamp(22px, 4vw, 56px);
-  }
-  .rgpCopyRail .swiper-wrapper{
-    transition-timing-function: cubic-bezier(.22,1,.36,1) !important;
-  }
-
-  .rgpCopyCard{
-    width: min(520px, 90%);
-    text-align: center;
-    color: #101010;
-  }
-  .rgpRailDock[data-rgp-skin="s2"] .rgpCopyCard,
-  .rgpRailDock[data-rgp-skin="s3"] .rgpCopyCard{
-    color: #fff;
-  }
-
-  .rgpCopyCard__kicker{
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    font-size: 14px;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    opacity: .92;
-    margin-bottom: 18px;
-  }
-
-  .rgpCopyCard__title{
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 700;
-    font-size: clamp(34px, 3.3vw, 56px);
-    line-height: .95;
-    letter-spacing: .02em;
-    margin: 0 0 18px;
-    text-transform: uppercase;
-  }
-
-  .rgpCopyCard__text{
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    font-size: clamp(14px, 1.05vw, 18px);
-    line-height: 1.7;
-    margin: 0 auto;
-    max-width: 46ch;
-    opacity: .92;
-  }
-
-  .rgpCopyCard__link{
-    display:inline-flex;
-    align-items:center;
-    gap: 12px;
-    margin-top: 34px;
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    text-decoration:none;
-    color: currentColor;
-    opacity: .96;
-  }
-  .rgpCopyCard__arrow{ font-size: 16px; transform: translateY(-1px); }
-
-  /* center nav */
-  .rgpRailDock__nav{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform: translate(-50%, -50%);
-    display:grid;
-    gap:12px;
-    z-index: 9;
-    pointer-events: none;
-  }
-
-  .rgpNavOrb{
-    width: 52px;
-    height: 52px;
-    border-radius: 999px;
-    border: 0;
-    background: rgba(255,255,255,.98);
-    color: #111;
-    box-shadow: 0 10px 30px rgba(0,0,0,.12);
-    display:grid;
-    place-items:center;
-    cursor:pointer;
-    pointer-events:auto;
-    transition: transform .18s ease, box-shadow .18s ease;
-  }
-  .rgpNavOrb svg{ width: 22px; height: 22px; }
-  .rgpNavOrb:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(0,0,0,.16); }
-
-  /* ✅ FAILSAFE: if Swiper is NOT initialized, show only first slide (so nothing is never blank) */
-  .rgpMediaRail:not(.swiper-initialized) .swiper-slide:not(:first-child),
-  .rgpCopyRail:not(.swiper-initialized) .swiper-slide:not(:first-child){
-    display:none;
-  }
-  .rgpMediaRail:not(.swiper-initialized) .swiper-wrapper,
-  .rgpCopyRail:not(.swiper-initialized) .swiper-wrapper{
-    transform:none !important;
-  }
-
-  /* responsive */
-  @media (max-width: 991px){
-    .rgpRailDock__shell{
-      grid-template-columns: 1fr;
-      height:auto;
-    }
-    .rgpRailDock__mediaPane{
-      height: 56vh;
-      min-height: 360px;
-    }
-    .rgpRailDock__copyPane{
-      min-height: 420px;
-    }
-    .rgpRailDock__nav{
-      top: calc(56vh - 10px);
-    }
-  }
-</style>
-
-<!-- Swiper JS (must load) -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script>
-  (function(){
-    const dock = document.querySelector(".rgpRailDock");
-    if(!dock) return;
-
-    // If Swiper didn't load for any reason, keep fallback visible.
-    if(typeof Swiper === "undefined"){
-      console.warn("Swiper not loaded. Check CDN or network.");
-      return;
-    }
-
-    const copyRail = new Swiper(".rgpCopyRail", {
-      direction: "vertical",
-      effect: "slide",
-      speed: 900,
-      allowTouchMove: false,
-      watchSlidesProgress: true,
-    });
-
-    const mediaRail = new Swiper(".rgpMediaRail", {
-      direction: "vertical",
-      speed: 900,
-      parallax: true,
-      slidesPerView: 1,
-      watchSlidesProgress: true,
-      navigation: {
-        nextEl: ".rgpNavOrb--next",
-        prevEl: ".rgpNavOrb--prev",
-      },
-      on: {
-        init(sw){
-          const skin = sw.activeIndex === 0 ? "s1" : sw.activeIndex === 1 ? "s2" : "s3";
-          dock.setAttribute("data-rgp-skin", skin);
-        },
-        slideChange(sw){
-          const skin = sw.activeIndex === 0 ? "s1" : sw.activeIndex === 1 ? "s2" : "s3";
-          dock.setAttribute("data-rgp-skin", skin);
-        }
-      }
-    });
-
-    // sync
-    mediaRail.controller.control = copyRail;
-    copyRail.controller.control = mediaRail;
-  })();
-</script>
-
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, hideDelay);
+        });
+    </script>
 
 </body>
 
