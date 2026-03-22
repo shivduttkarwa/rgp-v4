@@ -41,7 +41,7 @@ export default function Header({ ready = false }: { ready?: boolean }) {
               opacity: 1, scaleY: 1, duration: 0.25, ease: "power2.out", overwrite: true,
             });
           }
-        } else if (currentScrollY > 200) {
+        } else if (currentScrollY > 120) {
           gsap.to(headerRef.current, { y: "-100%", duration: 0.4, ease: "power3.out" });
         }
 
