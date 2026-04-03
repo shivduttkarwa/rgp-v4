@@ -513,7 +513,11 @@
   /* Image: only top corners rounded, bottom straight where panel attaches */
   .tv2-card__image {
     border-radius: 14px 14px 0 0;
-    height: clamp(220px, 48vw, 320px);
+    height: clamp(300px, 72vw, 420px);
+  }
+
+  .tv2-card__image img {
+    object-position: center 14%;
   }
 
   /* Hide blend + rest state — panel is always visible below image */
@@ -573,7 +577,11 @@
 
 @media (max-width: 420px) {
   .tv2-card__image {
-    height: clamp(200px, 55vw, 260px);
+    height: clamp(260px, 74vw, 320px);
+  }
+
+  .tv2-card__image img {
+    object-position: center 12%;
   }
 
   .tv2-panel__bio {
