@@ -293,9 +293,6 @@ export default function ExpressionOfInterestPage({
   const pageRef = useRef<HTMLElement>(null);
   const formTopRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
-  const [openSections, setOpenSections] = useState<string[]>(() =>
-    FORM_SECTIONS.map((section) => section.number),
-  );
 
   useEffect(() => {
     const guards = [
@@ -326,14 +323,6 @@ export default function ExpressionOfInterestPage({
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSuccess(true);
-  };
-
-  const toggleSection = (sectionNumber: string) => {
-    setOpenSections((current) =>
-      current.includes(sectionNumber)
-        ? current.filter((item) => item !== sectionNumber)
-        : [...current, sectionNumber],
-    );
   };
 
   return (
@@ -389,43 +378,23 @@ export default function ExpressionOfInterestPage({
               data-gsap-start="top 85%"
               data-gsap-delay="0.18"
             >
-              {FORM_SECTIONS.map((section) => {
-                const isOpen = openSections.includes(section.number);
-
-                return (
-                  <section
-                    key={section.number}
-                    className={`eoi-form__section${isOpen ? " is-open" : ""}`}
-                  >
-                    <button
-                      type="button"
-                      className="eoi-form__toggle"
-                      aria-expanded={isOpen}
-                      aria-controls={`eoi-panel-${section.number}`}
-                      onClick={() => toggleSection(section.number)}
-                    >
-                      <div className="eoi-form__section-head">
-                        <span className="eoi-form__section-no">{section.number}</span>
-                        <div>
-                          <h3 className="eoi-form__section-title">{section.title}</h3>
-                          <p className="eoi-form__section-body">{section.description}</p>
-                        </div>
-                      </div>
-                      <span className="eoi-form__chevron" aria-hidden="true" />
-                    </button>
-
-                    <div className="eoi-form__panel" id={`eoi-panel-${section.number}`}>
-                      <div className="eoi-form__panel-inner">
-                        <div className="eoi-form__grid">
-                          {section.fields.map((field) => (
-                            <Field key={field.id} field={field} />
-                          ))}
-                        </div>
-                      </div>
+              {FORM_SECTIONS.map((section) => (
+                <section key={section.number} className="eoi-form__section">
+                  <div className="eoi-form__section-head">
+                    <span className="eoi-form__section-no">{section.number}</span>
+                    <div>
+                      <h3 className="eoi-form__section-title">{section.title}</h3>
+                      <p className="eoi-form__section-body">{section.description}</p>
                     </div>
-                  </section>
-                );
-              })}
+                  </div>
+
+                  <div className="eoi-form__grid">
+                    {section.fields.map((field) => (
+                      <Field key={field.id} field={field} />
+                    ))}
+                  </div>
+                </section>
+              ))}
 
               <div className="eoi-submit">
                 <div className="eoi-submit__note">
