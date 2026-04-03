@@ -22,10 +22,10 @@ const MEMBERS: TeamMember[] = [
     id: 1,
     name: "Rahul Singh",
     role: "Founder & Chief Executive",
-    bio: "Visionary leader with over two decades of experience reshaping luxury real estate across three continents. Pioneer of the boutique estate concept.",
+    bio: "Founder and driving force behind RGP, building a boutique luxury real estate agency from the ground up. Brings a sharp investor mindset and deep market insight to every client engagement.",
     image: "images/rahul-singh.jpg",
     stats: [
-      { value: "12", label: "Years" },
+      { value: "5+", label: "Years" },
       { value: "$850M", label: "Volume" },
       { value: "120+", label: "Properties" },
     ],
@@ -37,15 +37,15 @@ const MEMBERS: TeamMember[] = [
   {
     id: 2,
     name: "Sarah Chen",
-    role: "Creative Director",
-    bio: "Award-winning designer bringing editorial elegance and cinematic vision to luxury property presentation. Former Art Director at Architectural Digest.",
+    role: "Senior Property Agent",
+    bio: "Specialist in premium residential properties with a sharp eye for matching clients to their ideal home. Known for a patient, consultative approach and strong follow-through.",
     image: "images/team3.png",
     stats: [
-      { value: "10", label: "Years" },
-      { value: "6", label: "Awards" },
-      { value: "80+", label: "Projects" },
+      { value: "5", label: "Years" },
+      { value: "$180M", label: "Closed" },
+      { value: "96%", label: "Retention" },
     ],
-    tags: ["Visual Identity", "Photography", "Brand Strategy"],
+    tags: ["Luxury Residential", "Buyer Consulting", "New Developments"],
     email: "sarah@luxestate.com",
     phone: "+91 98100 00002",
     social: { linkedin: "#" },
@@ -53,15 +53,15 @@ const MEMBERS: TeamMember[] = [
   {
     id: 3,
     name: "Michael Ross",
-    role: "Head of Global Sales",
-    bio: "Master negotiator with an unparalleled network of UHNW clients. Closed over $2B in transactions with a reputation for discretion and results.",
+    role: "Senior Property Agent",
+    bio: "Trusted for seamless transactions and deep local market knowledge. Specialises in off-market opportunities and exclusive listings for private clients.",
     image: "images/team4.png",
     stats: [
-      { value: "10", label: "Years" },
-      { value: "$620M", label: "Closed" },
-      { value: "94%", label: "Retention" },
+      { value: "5", label: "Years" },
+      { value: "$220M", label: "Closed" },
+      { value: "60+", label: "Properties" },
     ],
-    tags: ["Negotiations", "Private Clients", "Off-Market"],
+    tags: ["Off-Market Listings", "Negotiations", "Premium Rentals"],
     email: "michael@luxestate.com",
     phone: "+91 98100 00003",
     social: { linkedin: "#" },
@@ -69,15 +69,15 @@ const MEMBERS: TeamMember[] = [
   {
     id: 4,
     name: "Emma Williams",
-    role: "Principal Architect",
-    bio: "RIBA-certified architect merging sustainability with timeless design. Leads our in-house architectural evaluation and renovation advisory team.",
+    role: "Property Agent",
+    bio: "Detail-oriented agent with a background in interior design, offering clients a unique perspective on property potential, layout, and value-add opportunities.",
     image: "images/team2.png",
     stats: [
-      { value: "9", label: "Years" },
-      { value: "42", label: "Projects" },
-      { value: "3", label: "Countries" },
+      { value: "3", label: "Years" },
+      { value: "$95M", label: "Closed" },
+      { value: "40+", label: "Properties" },
     ],
-    tags: ["Sustainable Design", "Renovations", "Historic Properties"],
+    tags: ["Residential Sales", "Interior Advisory", "First-Time Buyers"],
     email: "emma@luxestate.com",
     phone: "+91 98100 00004",
     social: { linkedin: "#" },
@@ -85,15 +85,15 @@ const MEMBERS: TeamMember[] = [
   {
     id: 5,
     name: "David Park",
-    role: "Investment Director",
-    bio: "Former Goldman Sachs VP now directing strategic property investments. Specialises in portfolio optimisation for family offices and institutions.",
+    role: "Property Agent",
+    bio: "Results-driven agent with strong analytical skills and an investor mindset. Guides clients through both end-use and investment purchases with clarity and confidence.",
     image: "images/team5.png",
     stats: [
-      { value: "8", label: "Years" },
-      { value: "$320M", label: "AUM" },
-      { value: "22%", label: "Avg. ROI" },
+      { value: "2", label: "Years" },
+      { value: "$75M", label: "Closed" },
+      { value: "35+", label: "Properties" },
     ],
-    tags: ["Portfolio Strategy", "Family Offices", "Market Intelligence"],
+    tags: ["Investment Properties", "Resale", "Market Analysis"],
     email: "david@luxestate.com",
     phone: "+91 98100 00005",
     social: { linkedin: "#" },
@@ -159,12 +159,7 @@ export default function TeamV2() {
             key={m.id}
             className="tv2-card"
           >
-            {/* Index badge */}
-            <span className="tv2-card__index">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-
-            {/* Photo */}
+            {/* Photo — fills full card */}
             <div className="tv2-card__image">
               <img
                 src={`${BASE}${m.image}`}
@@ -173,8 +168,14 @@ export default function TeamV2() {
               />
             </div>
 
-            {/* Rest footer — always visible, hides when panel opens */}
-            <div className="tv2-card__footer">
+            {/* Gradient blend: image fades into card bg */}
+            <div className="tv2-card__blend" aria-hidden="true" />
+
+            {/* Rest state — index + name + role sit on the blend */}
+            <div className="tv2-card__rest">
+              <span className="tv2-card__index">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <h3 className="tv2-card__name">{m.name}</h3>
               <p className="tv2-card__role">{m.role}</p>
             </div>
@@ -182,6 +183,8 @@ export default function TeamV2() {
             {/* Hover panel — slides up */}
             <div className="tv2-card__panel" aria-hidden="true">
               <div className="tv2-card__panel-scroll">
+                <span className="tv2-panel__index">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="tv2-panel__name">{m.name}</h3>
                 <p className="tv2-panel__role">{m.role}</p>
                 <div className="tv2-panel__rule" />
                 <p className="tv2-panel__bio">{m.bio}</p>
