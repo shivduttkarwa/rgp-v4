@@ -33,6 +33,8 @@ type Filters = {
   showAll: boolean;
 };
 
+type ScrollAction = "none" | "preserve" | "gridTop";
+
 const DEFAULT_FILTERS: Filters = {
   cat: "all",
   price: "all",
@@ -90,6 +92,39 @@ const applyFilters = (items: Property[], f: Filters) =>
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PropertiesPage() {
   const pageRef = useRef<HTMLDivElement>(null);
+  const gridSectionRef = useRef<HTMLDivElement>(null);
+  const gridContainerRef = useRef<HTMLDivElement>(null);
+  const pendingScrollRef = useRef<{
+    mode: ScrollAction;
+    scrollY: number;
+    gridTop: number;
+  } | null>(null);
+
+  const preventPointerFocus = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
+  const finalizeGridTransition = () => {
+    if (gridContainerRef.current) {
+      gridContainerRef.current.style.minHeight = "";
+    }
+
+    const pendingScroll = pendingScrollRef.current;
+    if (!pendingScroll) return;
+
+    if (pendingScroll.mode === "preserve") {
+      window.scrollTo({ top: pendingScroll.scrollY, behavior: "auto" });
+    }
+
+    if (pendingScroll.mode === "gridTop") {
+      window.scrollTo({
+        top: Math.max(0, pendingScroll.gridTop - 110),
+        behavior: "auto",
+      });
+    }
+
+    pendingScrollRef.current = null;
+  };
 
   useEffect(() => {
     const guards = [
@@ -157,15 +192,53 @@ export default function PropertiesPage() {
   }, [activeFilters.cat]);
 
   // ── Filter Change Handler ────────────────────────────────────────────────
-  const changeFilters = (patch: Partial<Filters>) => {
+  const changeFilters = (
+    patch: Partial<Filters>,
+    scrollAction: ScrollAction = "none",
+  ) => {
     const next = { ...pendingRef.current, ...patch };
     pendingRef.current = next;
+
+    if (gridContainerRef.current && scrollAction !== "none") {
+      gridContainerRef.current.style.minHeight = `${gridContainerRef.current.offsetHeight}px`;
+    }
+
+    pendingScrollRef.current =
+      scrollAction === "none"
+        ? null
+        : {
+            mode: scrollAction,
+            scrollY: window.scrollY,
+            gridTop: gridSectionRef.current
+              ? gridSectionRef.current.getBoundingClientRect().top +
+                window.scrollY
+              : window.scrollY,
+          };
     setActiveFilters({ ...next });
     if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
     setIsExiting(true);
     exitTimerRef.current = setTimeout(() => {
       setDisplayedFilters({ ...next });
       setIsExiting(false);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const pendingScroll = pendingScrollRef.current;
+          if (!pendingScroll) return;
+
+          if (pendingScroll.mode === "preserve") {
+            window.scrollTo({ top: pendingScroll.scrollY, behavior: "auto" });
+          }
+
+          if (pendingScroll.mode === "gridTop") {
+            window.scrollTo({
+              top: Math.max(0, pendingScroll.gridTop - 110),
+              behavior: "auto",
+            });
+          }
+
+          pendingScrollRef.current = null;
+        });
+      });
     }, 280);
   };
 
@@ -203,7 +276,13 @@ export default function PropertiesPage() {
   // ── Isotope ──────────────────────────────────────────────────────────────
   // transitionDuration:0 — CSS animations handle all visual transitions
   useLayoutEffect(() => {
-    if (!gridRef.current || displayed.length === 0) return;
+    if (!gridRef.current || displayed.length === 0) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => finalizeGridTransition());
+      });
+      return;
+    }
+
     let iso: any = null;
     const timer = setTimeout(() => {
       if (!gridRef.current) return;
@@ -215,6 +294,9 @@ export default function PropertiesPage() {
           transitionDuration: 0,
         });
         isoRef.current = iso;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => finalizeGridTransition());
+        });
       });
     }, 60);
 
@@ -349,8 +431,8 @@ export default function PropertiesPage() {
       </div>
 
       {/* ── Grid ───────────────────────────────────────────────────────── */}
-      <div className="ap-grid-section">
-        <div className="ap-grid-container">
+      <div className="ap-grid-section" ref={gridSectionRef}>
+        <div className="ap-grid-container" ref={gridContainerRef}>
           {filtered.length === 0 ? (
             <div className="ap-empty">
               <p>No properties match your filters.</p>
@@ -385,8 +467,13 @@ export default function PropertiesPage() {
               <div className="ap-view-all">
                 {hasMore && (
                   <button
+                    type="button"
                     className="ap-view-btn"
-                    onClick={() => changeFilters({ showAll: true })}
+                    onMouseDown={preventPointerFocus}
+                    onClick={(event) => {
+                      event.currentTarget.blur();
+                      changeFilters({ showAll: true }, "preserve");
+                    }}
                   >
                     <span>View All {filtered.length} Properties</span>
                     <ArrowRight size={16} />
@@ -395,8 +482,13 @@ export default function PropertiesPage() {
                 {displayedFilters.showAll &&
                   filtered.length > INITIAL_COUNT && (
                     <button
+                      type="button"
                       className="ap-view-btn ap-view-btn--ghost"
-                      onClick={() => changeFilters({ showAll: false })}
+                      onMouseDown={preventPointerFocus}
+                      onClick={(event) => {
+                        event.currentTarget.blur();
+                        changeFilters({ showAll: false }, "gridTop");
+                      }}
                     >
                       Show Less
                     </button>

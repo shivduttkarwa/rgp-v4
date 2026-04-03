@@ -183,6 +183,7 @@
 /* ─── Grid Section ────────────────────────────────────────────────────────── */
 .ap-grid-section {
   padding: clamp(2.5rem, 5vw, 4rem) var(--rg-pad);
+  overflow-anchor: none;
 }
 
 .ap-grid-container {
@@ -256,6 +257,7 @@
   justify-content: center;
   gap: 1rem;
   margin-top: 2.5rem;
+  overflow-anchor: none;
 }
 
 .ap-view-btn {
