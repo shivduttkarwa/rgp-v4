@@ -284,7 +284,7 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
 
         {/* 4) TURN-KEY */}
         <section className="img-overlay">
-          <img alt="Modern home exterior" src={img("hero1.jpg")} />
+          <img alt="Modern home exterior" src={img("int.jpg")} />
           <div className="overlay-card" data-gsap="clip-reveal-left">
             <h3 className="h-serif">
               The Appraisal
