@@ -1,4 +1,9 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./TeamV2.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TeamMember {
   id: number;
@@ -99,6 +104,38 @@ const MEMBERS: TeamMember[] = [
 const BASE = import.meta.env.BASE_URL || "/";
 
 export default function TeamV2() {
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const cards = gridRef.current.querySelectorAll<HTMLElement>(".tv2-card");
+    if (!cards.length) return;
+
+    gsap.set(cards, { clipPath: "inset(100% 0 0 0)", willChange: "clip-path" });
+
+    const trigger = ScrollTrigger.create({
+      trigger: gridRef.current,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(cards, {
+          clipPath: "inset(0% 0 0 0)",
+          duration: 1.2,
+          ease: "power3.inOut",
+          stagger: 0.12,
+          onComplete: () => {
+            gsap.set(cards, { clearProps: "will-change,clip-path" });
+          },
+        });
+      },
+    });
+
+    return () => {
+      trigger.kill();
+    };
+  }, []);
+
   return (
     <section className="tv2">
 
@@ -120,14 +157,11 @@ export default function TeamV2() {
       <div className="tv2__rule" aria-hidden="true" />
 
       {/* ── Grid ── */}
-      <div className="tv2__grid">
+      <div className="tv2__grid" ref={gridRef}>
         {MEMBERS.map((m, i) => (
           <article
             key={m.id}
             className="tv2-card"
-            data-gsap="clip-smooth"
-            data-gsap-start="top 85%"
-            data-gsap-delay={String(i * 0.1)}
           >
             {/* Photo — fills full card */}
             <div className="tv2-card__image">
