@@ -259,6 +259,10 @@ body.menu-open {
   transform: translateX(0);
   transition-delay: 0.7s;
 }
+.overlay-menu.active .menu-item:nth-child(6) .menu-link {
+  transform: translateX(0);
+  transition-delay: 0.8s;
+}
 
 .overlay-menu.active .menu-item {
   border-color: var(--menu-border);
@@ -278,6 +282,9 @@ body.menu-open {
 }
 .overlay-menu.active .menu-item:nth-child(5) {
   transition-delay: 0.7s;
+}
+.overlay-menu.active .menu-item:nth-child(6) {
+  transition-delay: 0.8s;
 }
 
 .overlay-menu:not(.active) .menu-item {
@@ -299,6 +306,9 @@ body.menu-open {
   transition-delay: 0.1s;
 }
 .overlay-menu:not(.active) .menu-item:nth-child(5) .menu-link {
+  transition-delay: 0s;
+}
+.overlay-menu:not(.active) .menu-item:nth-child(6) .menu-link {
   transition-delay: 0s;
 }
 

@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { MAIN_NAV_ITEMS } from "./navigationItems";
 import "./Menu.css";
 
 interface MenuProps {
@@ -16,14 +17,7 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
   const navigate = useNavigate();
 
   const items = useMemo(
-    () => [
-      { label: "Home", to: "/" },
-      { label: "About", to: "/about" },
-      { label: "Properties", to: "/properties" },
-      { label: "Testimonials", to: "/testimonials" },
-      { label: "Contact", to: "/contact" },
-      { label: "Team", to: "/team" },
-    ],
+    () => [...MAIN_NAV_ITEMS],
     [],
   );
 

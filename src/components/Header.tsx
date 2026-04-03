@@ -2,16 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Menu from "./Menu";
 import gsap from "gsap";
+import { MAIN_NAV_ITEMS } from "./navigationItems";
 import "./Header.css";
-
-const NAV_ITEMS = [
-  { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Properties", to: "/properties" },
-  { label: "Testimonials", to: "/testimonials" },
-  { label: "Contact", to: "/contact" },
-  { label: "Team", to: "/team" },
-];
 
 export default function Header({ ready = false }: { ready?: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -105,7 +97,7 @@ export default function Header({ ready = false }: { ready?: boolean }) {
 
           {/* Desktop nav */}
           <nav className="rg-header__nav" aria-label="Main navigation">
-            {NAV_ITEMS.map(({ label, to }) => (
+            {MAIN_NAV_ITEMS.map(({ label, to }) => (
               <Link
                 key={to}
                 to={to}
