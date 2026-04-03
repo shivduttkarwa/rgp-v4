@@ -1,7 +1,5 @@
 .eoi-page {
-  background:
-    radial-gradient(circle at top left, rgba(249, 194, 6, 0.12), transparent 28%),
-    linear-gradient(180deg, #fffdf6 0%, #fff9eb 100%);
+  background: #fffdf6;
   color: var(--rg-text-dark);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -10,30 +8,6 @@
 .eoi-shell {
   position: relative;
   overflow: hidden;
-}
-
-.eoi-shell::before,
-.eoi-shell::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  pointer-events: none;
-}
-
-.eoi-shell::before {
-  width: 26rem;
-  height: 26rem;
-  top: 7rem;
-  right: -10rem;
-  background: radial-gradient(circle, rgba(249, 194, 6, 0.16), transparent 68%);
-}
-
-.eoi-shell::after {
-  width: 20rem;
-  height: 20rem;
-  bottom: 5rem;
-  left: -7rem;
-  background: radial-gradient(circle, rgba(15, 24, 112, 0.09), transparent 70%);
 }
 
 .eoi-shell__rule {
