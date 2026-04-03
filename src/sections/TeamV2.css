@@ -488,17 +488,17 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   RESPONSIVE — 2 columns  (≤ 640px)
+   RESPONSIVE — single column touch layout (≤ 860px)
    ═══════════════════════════════════════════════════════════ */
 
-@media (max-width: 640px) {
+@media (max-width: 860px) {
   .tv2 {
     padding: 4rem 1rem 5rem;
   }
 
   .tv2__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .tv2-card,
@@ -513,7 +513,7 @@
   /* Image: only top corners rounded, bottom straight where panel attaches */
   .tv2-card__image {
     border-radius: 14px 14px 0 0;
-    height: clamp(160px, 36vw, 220px);
+    height: clamp(220px, 48vw, 320px);
   }
 
   /* Hide blend + rest state — panel is always visible below image */
@@ -572,18 +572,6 @@
 }
 
 @media (max-width: 420px) {
-  .tv2__grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .tv2-card,
-  .tv2-card:nth-child(4),
-  .tv2-card:nth-child(5) {
-    grid-column: span 1;
-    margin-top: 0;
-  }
-
   .tv2-card__image {
     height: clamp(200px, 55vw, 260px);
   }
