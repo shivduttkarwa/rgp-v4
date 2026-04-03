@@ -84,7 +84,12 @@ export default function Header({ ready = false }: { ready?: boolean }) {
   useEffect(() => {
     if (!ready || !headerRef.current) return;
     if (location.pathname !== "/" && location.pathname !== publicUrl) return;
-    gsap.to(headerRef.current, { y: 0, duration: 0.7, ease: "power3.out", delay: 2.2 });
+    gsap.to(headerRef.current, {
+      y: 0,
+      duration: 0.55,
+      ease: "power3.out",
+      delay: 0.95,
+    });
   }, [ready, location.pathname, publicUrl]);
 
   return (
