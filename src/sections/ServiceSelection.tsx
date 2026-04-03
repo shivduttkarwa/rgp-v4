@@ -231,12 +231,12 @@ const ServiceSelection = ({
               className="svc-cta__trust"
             >
               <div className="svc-cta__trust-item">
-                <span className="svc-cta__trust-value">10+</span>
+                <span className="svc-cta__trust-value">5+</span>
                 <span className="svc-cta__trust-label">Years Experience</span>
               </div>
               <div className="svc-cta__trust-divider" />
               <div className="svc-cta__trust-item">
-                <span className="svc-cta__trust-value">500+</span>
+                <span className="svc-cta__trust-value">100+</span>
                 <span className="svc-cta__trust-label">Happy Clients</span>
               </div>
               <div className="svc-cta__trust-divider" />

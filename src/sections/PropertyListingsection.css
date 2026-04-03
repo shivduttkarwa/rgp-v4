@@ -373,26 +373,6 @@
   transform: translateX(0.25rem);
 }
 
-/* ===== Stats Bar ===== */
-.property-section .stats-bar {
-  margin-top: clamp(3rem, 6vw, 4.5rem);
-  background-color: var(--rg-gold);
-  border-radius: var(--rg-radius);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.property-section .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .property-section .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (hover: none) {
   /* Gold bottom border on active swiper card */
   .property-section .property-swiper .swiper-slide-active .property-card-wrap {
@@ -421,50 +401,6 @@
     pointer-events: none;
     border-radius: 0 0 var(--rg-radius) var(--rg-radius);
   }
-}
-
-.property-section .stat-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-@media (max-width: 480px) {
-  .property-section .stat-card {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-.property-section .stat-card-icon {
-  width: 3.5rem;
-  height: 3.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 3, 46, 0.12);
-  border-radius: 0.75rem;
-  color: #00032e;
-  flex-shrink: 0;
-}
-
-.property-section .stat-card-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.property-section .stat-card-value {
-  font-family: var(--font-title);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 400;
-  color: #00032e;
-  line-height: 1.2;
-}
-
-.property-section .stat-card-label {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: rgba(0, 3, 46, 0.65);
 }
 
 /* ===== Focus States ===== */

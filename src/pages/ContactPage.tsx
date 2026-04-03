@@ -104,10 +104,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
 
             <div className="hours" data-gsap="fade-up" data-gsap-delay="0.15">
               <p className="h-label">Office Hours</p>
-              <div className="h-row"><span className="h-day">Mon – Thu</span><span className="h-time">9:00 – 18:00</span></div>
-              <div className="h-row"><span className="h-day">Friday</span><span className="h-time">9:00 – 13:00</span></div>
-              <div className="h-row"><span className="h-day">Saturday</span><span className="h-time">10:00 – 16:00</span></div>
-              <div className="h-row"><span className="h-day">Sunday</span><span className="h-time">By appointment</span></div>
+              <div className="h-row"><span className="h-day">All days</span><span className="h-time">09:00 – 18:00</span></div>
             </div>
 
             <div className="quote" data-gsap="fade-up" data-gsap-delay="0.1">

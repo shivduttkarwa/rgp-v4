@@ -72,22 +72,6 @@ const Intro = () => {
         <div className="intro-img-corner intro-img-corner--tl" />
         <div className="intro-img-corner intro-img-corner--br" />
       </div>
-
-      {/* Stats — spans full width on mobile, sits at bottom */}
-      <div className="intro-stats" data-gsap="zoom-in" data-gsap-stagger="0.3">
-        <div className="stat-item">
-          <span className="stat-value">$885k</span>
-          <span className="stat-label">Median sold price</span>
-        </div>
-        <div className="stat-item">
-          <span className="stat-value">21</span>
-          <span className="stat-label">Median days advertised</span>
-        </div>
-        <div className="stat-item">
-          <span className="stat-value">14</span>
-          <span className="stat-label">Properties sold (as lead agent)</span>
-        </div>
-      </div>
     </section>
   );
 };

@@ -6,8 +6,6 @@ gsap.registerPlugin(ScrollTrigger);
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import {
-  Home,
-  MapPin,
   ArrowRight,
   ArrowLeft,
   CheckCircle,
@@ -536,52 +534,6 @@ const PropertyListingSection = () => {
             <span>View All Properties</span>
             <ArrowRight size={18} />
           </Link>
-        </div>
-
-        <div className="stats-bar" data-gsap="fade-up">
-          <div
-            className="stats-grid"
-            data-gsap="zoom-in"
-            data-gsap-stagger="0.22"
-            data-gsap-delay="0.2"
-          >
-            <div className="stat-card">
-              <div className="stat-card-icon">
-                <Home size={24} />
-              </div>
-              <div className="stat-card-content">
-                <span className="stat-card-value">150+</span>
-                <span className="stat-card-label">Properties Listed</span>
-              </div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-card-icon">
-                <CheckCircle size={24} />
-              </div>
-              <div className="stat-card-content">
-                <span className="stat-card-value">200+</span>
-                <span className="stat-card-label">Happy Clients</span>
-              </div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-card-icon">
-                <MapPin size={24} />
-              </div>
-              <div className="stat-card-content">
-                <span className="stat-card-value">5+</span>
-                <span className="stat-card-label">Cities Covered</span>
-              </div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-card-icon">
-                <Building2 size={24} />
-              </div>
-              <div className="stat-card-content">
-                <span className="stat-card-value">10+</span>
-                <span className="stat-card-label">Years Experience</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

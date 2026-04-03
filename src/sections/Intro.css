@@ -120,56 +120,6 @@
   background: rgba(249, 195, 7, 0.06);
 }
 
-/* Stats */
-.intro-stats {
-  display: flex;
-  gap: 0;
-  background: var(--rg-blue-500);
-  border-radius: 0.75rem;
-  padding: clamp(1.25rem, 3vh, 2rem) clamp(1.25rem, 3vw, 2rem);
-  /* Desktop: sits inside left column via absolute positioning workaround —
-     actually just align-self so it stays in the content flow */
-  grid-column: 1;
-  margin: 0 clamp(1.875rem, 5vw, 5rem) clamp(2.5rem, 6vh, 5rem);
-  align-self: end;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.25rem;
-  flex: 1;
-  padding: 0 clamp(1rem, 2vw, 1.5rem);
-  border-right: 0.0625rem solid rgba(249, 195, 7, 0.2);
-}
-
-.stat-item:first-child {
-  padding-left: 0;
-}
-
-.stat-item:last-child {
-  padding-right: 0;
-  border-right: none;
-}
-
-.stat-value {
-  font-family: var(--font-title);
-  font-size: clamp(1.375rem, 2.5vw, 1.875rem);
-  color: #ffe033;
-  line-height: 1;
-  text-shadow: 0 0 1.125rem rgba(255, 210, 0, 0.55);
-}
-
-.stat-label {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.0625rem;
-  text-transform: uppercase;
-  color: rgba(255, 224, 51, 0.7);
-}
-
 /* ─── Right Column: Image ─── */
 .intro-image {
   position: relative;
@@ -348,12 +298,6 @@
     height: 45vh;
     min-height: 17.5rem;
   }
-
-  .intro-stats {
-    order: 3;
-    margin: 0;
-    border-radius: 0;
-  }
 }
 
 @media (max-width: 480px) {
@@ -363,13 +307,5 @@
 
   .intro-text {
     font-size: 0.875rem;
-  }
-
-  .intro-stats {
-    gap: 0;
-  }
-
-  .stat-value {
-    font-size: 1.375rem;
   }
 }

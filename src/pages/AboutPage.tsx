@@ -148,7 +148,7 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
         showCta
         ctaLabel="Book a Free Appraisal"
         ctaOnClick={() => navigate("/contact")}
-        bgImage="images/about-hero.jpg"
+        bgImage="images/hero4.jpg"
         titleLine1={
           <>
             Meet <span className="rg-gold">Rahul</span> Singh
@@ -284,7 +284,7 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
 
         {/* 4) TURN-KEY */}
         <section className="img-overlay">
-          <img alt="Property walkthrough" src={img("hero2.jpg")} />
+          <img alt="Modern home exterior" src={img("hero1.jpg")} />
           <div className="overlay-card" data-gsap="clip-reveal-left">
             <h3 className="h-serif">
               The Appraisal

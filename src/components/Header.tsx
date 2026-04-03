@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { label: "Properties", to: "/properties" },
   { label: "Testimonials", to: "/testimonials" },
   { label: "Contact", to: "/contact" },
+  { label: "Team", to: "/team" },
 ];
 
 export default function Header({ ready = false }: { ready?: boolean }) {
