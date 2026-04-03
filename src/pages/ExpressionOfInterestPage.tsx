@@ -235,7 +235,12 @@ const FORM_SECTIONS: FieldSection[] = [
 
 function Field({ field }: { field: FieldConfig }) {
   return (
-    <div className={`eoi-field${field.full ? " eoi-field--full" : ""}`}>
+    <div
+      className={`eoi-field${field.full ? " eoi-field--full" : ""}`}
+      data-gsap="fade-up"
+      data-gsap-start="top 92%"
+      data-gsap-duration="0.65"
+    >
       <label className="eoi-field__label" htmlFor={field.id}>
         <span>{field.label}</span>
         {field.required ? <span className="eoi-field__required">*</span> : null}
@@ -371,13 +376,15 @@ export default function ExpressionOfInterestPage({
             <form
               className="eoi-form"
               onSubmit={handleSubmit}
-              data-gsap="clip-smooth-down"
-              data-gsap-start="top 85%"
-              data-gsap-delay="0.18"
             >
               {FORM_SECTIONS.map((section) => (
                 <section key={section.number} className="eoi-form__section">
-                  <div className="eoi-form__section-head">
+                  <div
+                    className="eoi-form__section-head"
+                    data-gsap="fade-up"
+                    data-gsap-start="top 90%"
+                    data-gsap-duration="0.7"
+                  >
                     <span className="eoi-form__section-no">{section.number}</span>
                     <div>
                       <h3 className="eoi-form__section-title">{section.title}</h3>
@@ -393,7 +400,12 @@ export default function ExpressionOfInterestPage({
                 </section>
               ))}
 
-              <div className="eoi-submit">
+              <div
+                className="eoi-submit"
+                data-gsap="fade-up"
+                data-gsap-start="top 90%"
+                data-gsap-duration="0.7"
+              >
                 <div className="eoi-submit__note">
                   <span className="eoi-submit__pill">Please review</span>
                   <p>
@@ -410,8 +422,9 @@ export default function ExpressionOfInterestPage({
 
             <div
               className="eoi-note"
-              data-gsap="clip-reveal"
+              data-gsap="clip-smooth-down"
               data-gsap-start="top 88%"
+              data-gsap-duration="0.95"
             >
               <span className="eoi-note__eyebrow">Important information</span>
               <p className="eoi-note__body">
