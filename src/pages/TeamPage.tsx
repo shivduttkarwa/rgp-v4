@@ -60,13 +60,6 @@ const VALUES = [
   },
 ];
 
-const AWARDS = [
-  { value: "$850M+", label: "Combined Sales Volume" },
-  { value: "500+", label: "Properties Transacted" },
-  { value: "97%", label: "Client Satisfaction" },
-  { value: "15+", label: "Industry Awards" },
-];
-
 export default function TeamPage({ ready = false }: { ready?: boolean }) {
   const navigate = useNavigate();
   const pageRef = useRef<HTMLDivElement>(null);
@@ -162,31 +155,6 @@ export default function TeamPage({ ready = false }: { ready?: boolean }) {
           </div>
         </section>
 
-        {/* ── Stats strip ── */}
-        <section className="tp-stats">
-          <div className="tp-container">
-            <div className="tp-stats__grid">
-              {AWARDS.map((s) => (
-                <div key={s.label} className="tp-stat">
-                  <span
-                    className="tp-stat__value"
-                    data-gsap="fade-up"
-                  >
-                    {s.value}
-                  </span>
-                  <span
-                    className="tp-stat__label"
-                    data-gsap="fade-up"
-                    data-gsap-delay="0.08"
-                  >
-                    {s.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* ── Join us CTA ── */}
         <section className="tp-join">
           <div className="tp-container">
@@ -254,7 +222,7 @@ export default function TeamPage({ ready = false }: { ready?: boolean }) {
                     loading="lazy"
                   />
                   <div className="tp-join__img-badge">
-                    <span className="tp-join__badge-num">12+</span>
+                    <span className="tp-join__badge-num">5+</span>
                     <span className="tp-join__badge-label">Years of Excellence</span>
                   </div>
                 </div>

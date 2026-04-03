@@ -238,67 +238,6 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   STATS STRIP
-   ═══════════════════════════════════════════════════════════ */
-
-.tp-stats {
-  background: var(--rg-navy);
-  padding: clamp(3rem, 6vw, 5rem) 0;
-}
-
-.tp-stats__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
-.tp-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.5rem;
-  padding: 0 1rem;
-  position: relative;
-}
-
-.tp-stat + .tp-stat::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 15%;
-  bottom: 15%;
-  width: 1px;
-  background: rgba(255, 253, 246, 0.12);
-}
-
-.tp-stat__value {
-  font-family: var(--font-title);
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
-  color: var(--rg-gold);
-  line-height: 1;
-}
-
-.tp-stat__label {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: rgba(255, 253, 246, 0.55);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-
-@media (max-width: 768px) {
-  .tp-stats__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem 1rem;
-  }
-
-  .tp-stat + .tp-stat::before {
-    display: none;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
    JOIN US SECTION
    ═══════════════════════════════════════════════════════════ */
 
