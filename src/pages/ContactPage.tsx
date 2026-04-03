@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from "react";
+import { ArrowRight, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import "./ContactPage.css";
@@ -230,6 +232,45 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
             </form>
           </section>
         </div>
+
+        <section
+          className="contact-cta"
+          data-gsap="clip-smooth-down"
+          data-gsap-start="top 88%"
+        >
+          <div className="contact-cta__copy">
+            <div className="contact-cta__badge" data-gsap="fade-up">
+              <FileText size={20} />
+              <span>Expression of Interest</span>
+            </div>
+            <h3
+              className="contact-cta__title"
+              data-gsap="char-reveal"
+              data-gsap-start="top 88%"
+            >
+              Need to submit a detailed property offer?
+            </h3>
+            <p
+              className="contact-cta__text"
+              data-gsap="fade-up"
+              data-gsap-delay="0.14"
+            >
+              Use our full Expression of Interest form to share buyer details,
+              offer terms, conditions, and solicitor information in one clean
+              submission.
+            </p>
+          </div>
+
+          <Link
+            to="/expressions-of-interest"
+            className="contact-cta__button"
+            data-gsap="btn-clip-reveal"
+            data-gsap-delay="0.2"
+          >
+            <span>Open the Form</span>
+            <ArrowRight size={18} />
+          </Link>
+        </section>
       </div>
 
       <div className={`succ${success ? " show" : ""}`} role="dialog" aria-modal="true">

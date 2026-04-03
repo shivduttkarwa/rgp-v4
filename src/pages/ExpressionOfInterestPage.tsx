@@ -26,7 +26,7 @@ type FieldSection = {
 };
 
 const YES_NO_OPTIONS = [
-  { label: "Select an option", value: "" },
+  { label: "Please select", value: "" },
   { label: "Yes", value: "yes" },
   { label: "No", value: "no" },
 ];
@@ -34,16 +34,16 @@ const YES_NO_OPTIONS = [
 const FORM_SECTIONS: FieldSection[] = [
   {
     number: "01",
-    title: "Property Details",
+    title: "Property & Primary Buyer",
     description:
-      "Start with the property and the primary buyer details, matching the same information requested in the reference form.",
+      "Provide the property address together with the first purchaser's full legal name and contact details.",
     fields: [
       {
         id: "propertyAddress",
         name: "property_address",
         label: "Property Address",
         type: "textarea",
-        placeholder: "Property Address",
+        placeholder: "Street address, suburb, state and postcode",
         required: true,
         rows: 3,
         full: true,
@@ -53,7 +53,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "buyer_1_full_legal_name",
         label: "Buyer 1 - Full Legal Name:",
         type: "text",
-        placeholder: "Buyer 1 - Full Legal Name",
+        placeholder: "Full legal name as it will appear on the contract",
         required: true,
         autoComplete: "name",
       },
@@ -62,7 +62,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "address_buyer_1",
         label: "Address - Buyer 1",
         type: "textarea",
-        placeholder: "Address - Buyer 1",
+        placeholder: "Current residential address",
         required: true,
         rows: 3,
         full: true,
@@ -72,7 +72,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "phone_buyer_1",
         label: "Phone - Buyer 1",
         type: "tel",
-        placeholder: "Phone - Buyer 1",
+        placeholder: "Best contact number",
         required: true,
         autoComplete: "tel",
       },
@@ -81,7 +81,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "email_buyer_1",
         label: "Email - Buyer 1",
         type: "email",
-        placeholder: "Email - Buyer 1",
+        placeholder: "Best email address",
         required: true,
         autoComplete: "email",
       },
@@ -89,16 +89,16 @@ const FORM_SECTIONS: FieldSection[] = [
   },
   {
     number: "02",
-    title: "Second Buyer",
+    title: "Second Buyer Details",
     description:
-      "Include the optional secondary purchaser details exactly where needed.",
+      "Complete this section only if a second purchaser will also be included on the contract.",
     fields: [
       {
         id: "buyer2FullLegalName",
         name: "buyer_2_full_legal_name",
         label: "Buyer 2 - Full Legal Name:",
         type: "text",
-        placeholder: "Buyer 2 - Full Legal Name",
+        placeholder: "Full legal name as it will appear on the contract",
         autoComplete: "name",
       },
       {
@@ -106,7 +106,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "address_buyer_2_if_different_to_buyer_1",
         label: "Address - Buyer 2 (if different to Buyer 1)",
         type: "textarea",
-        placeholder: "Address - Buyer 2 (if different to Buyer 1)",
+        placeholder: "Current residential address",
         rows: 3,
         full: true,
       },
@@ -115,7 +115,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "phone_buyer_2",
         label: "Phone - Buyer 2",
         type: "tel",
-        placeholder: "Phone - Buyer 2",
+        placeholder: "Best contact number",
         autoComplete: "tel",
       },
       {
@@ -123,7 +123,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "email_buyer_2",
         label: "Email - Buyer 2",
         type: "email",
-        placeholder: "Email - Buyer 2",
+        placeholder: "Best email address",
         autoComplete: "email",
       },
     ],
@@ -132,14 +132,14 @@ const FORM_SECTIONS: FieldSection[] = [
     number: "03",
     title: "Offer & Conditions",
     description:
-      "Keep the commercial terms, finance, building and pest, and additional conditions all together for an easy review.",
+      "Enter your proposed price, deposit amounts, finance terms, building and pest conditions, and any additional terms of the offer.",
     fields: [
       {
         id: "offerPrice",
         name: "offer_price",
         label: "Offer Price ($)",
         type: "number",
-        placeholder: "Offer Price ($)",
+        placeholder: "e.g. 950000",
         required: true,
       },
       {
@@ -147,7 +147,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "initial_deposit",
         label: "Initial Deposit ($)",
         type: "number",
-        placeholder: "Initial Deposit ($)",
+        placeholder: "e.g. 10000",
         required: true,
       },
       {
@@ -155,7 +155,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "balance_deposit",
         label: "Balance Deposit ($)",
         type: "number",
-        placeholder: "Balance Deposit ($)",
+        placeholder: "e.g. 40000",
       },
       {
         id: "financeSubject",
@@ -170,7 +170,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "finance_if_yes_how_many_days",
         label: "If yes, how many days?",
         type: "text",
-        placeholder: "If yes, how many days?",
+        placeholder: "e.g. 14 days",
       },
       {
         id: "buildingPestSubject",
@@ -184,7 +184,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "building_pest_if_yes_how_many_days",
         label: "If yes, how many days?",
         type: "text",
-        placeholder: "If yes, how many days?",
+        placeholder: "e.g. 7 days",
       },
       {
         id: "otherConditions",
@@ -199,7 +199,7 @@ const FORM_SECTIONS: FieldSection[] = [
         name: "if_yes_please_state_brief_details",
         label: "If yes, please state brief details",
         type: "textarea",
-        placeholder: "If yes, please state brief details",
+        placeholder: "List any special conditions, inclusions, or requests",
         rows: 3,
         full: true,
       },
@@ -207,16 +207,16 @@ const FORM_SECTIONS: FieldSection[] = [
   },
   {
     number: "04",
-    title: "Legal & Privacy",
+    title: "Solicitor & Privacy",
     description:
-      "Wrap up the same solicitor and database fields from the source form in a more polished finish.",
+      "Provide your solicitor or conveyancer details and let us know whether we may keep your information on file.",
     fields: [
       {
         id: "solicitorDetails",
         name: "solicitor_details",
         label: "Solicitor Details",
         type: "textarea",
-        placeholder: "Solicitor Details",
+        placeholder: "Firm name, contact person, phone number, and email",
         required: true,
         rows: 3,
         full: true,
@@ -331,7 +331,7 @@ export default function ExpressionOfInterestPage({
         ready={ready}
         showVideo={false}
         showCta
-        ctaLabel="Start the Form"
+        ctaLabel="Complete the Form"
         ctaOnClick={() =>
           formTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
         }
@@ -346,7 +346,7 @@ export default function ExpressionOfInterestPage({
             Interest <span className="rg-amber">Form</span>
           </>
         }
-        subtitle="A dedicated full-page offer form with the same field set as your reference, reimagined in the Real Gold design language."
+        subtitle="Use this form to submit your offer, purchaser details, and purchase conditions for the property you wish to secure."
       />
 
       <section className="eoi-shell">
@@ -354,20 +354,17 @@ export default function ExpressionOfInterestPage({
         <div className="eoi-wrap" ref={formTopRef}>
           <div className="eoi-main">
             <div className="eoi-heading" data-gsap="fade-up">
-              <span className="eoi-heading__eyebrow">Same fields, refined presentation</span>
               <h2 className="eoi-heading__title" data-gsap="char-reveal" data-gsap-start="top 88%">
-                Submit your offer with
-                <br />
-                <em>clarity and confidence.</em>
+                Expression of Interest Form
               </h2>
               <p className="eoi-heading__body" data-gsap="fade-up" data-gsap-delay="0.14">
-                The field set below mirrors the reference Expression of Interest
-                form, while the layout, spacing, and styling now sit comfortably
-                inside the Real Gold Properties brand.
-              </p>
-              <p className="eoi-heading__body" data-gsap="fade-up" data-gsap-delay="0.18">
-                Each section can be opened or closed smoothly, so the experience
-                feels lighter while keeping every field exactly where it should be.
+                I/We acknowledge that if this offer is accepted, I/We will be
+                required to enter into and execute a contract of sale on these
+                terms. I/We acknowledge that we may be one of several parties
+                making offers to the seller for their consideration. Both
+                purchaser and seller must sign a contract of sale before this
+                offer becomes legally binding. An offer may be withdrawn at any
+                time before signing a contract of sale.
               </p>
             </div>
 
@@ -398,10 +395,10 @@ export default function ExpressionOfInterestPage({
 
               <div className="eoi-submit">
                 <div className="eoi-submit__note">
-                  <span className="eoi-submit__pill">Protected submission</span>
+                  <span className="eoi-submit__pill">Please review</span>
                   <p>
-                    Required fields are marked with an asterisk. This page is designed
-                    and ready; backend delivery can be connected whenever you want.
+                    Required fields are marked with an asterisk. Please check all
+                    details carefully before submitting your Expression of Interest.
                   </p>
                 </div>
 
@@ -411,16 +408,21 @@ export default function ExpressionOfInterestPage({
               </div>
             </form>
 
-            <div className="eoi-note" data-gsap="fade-up" data-gsap-delay="0.24">
-              <span className="eoi-note__eyebrow">Before you submit</span>
+            <div
+              className="eoi-note"
+              data-gsap="clip-reveal"
+              data-gsap-start="top 88%"
+            >
+              <span className="eoi-note__eyebrow">Important information</span>
               <p className="eoi-note__body">
-                If this offer is accepted, the purchaser will be required to
-                enter into and execute a contract of sale on these terms.
+                Submitting an Expression of Interest does not create a legally
+                binding contract. If your offer is accepted, you will be asked
+                to sign a formal contract of sale on the agreed terms.
               </p>
               <p className="eoi-note__body">
-                Multiple parties may submit offers for the seller&apos;s
-                consideration, and an offer may be withdrawn at any time before
-                a contract of sale is signed by both purchaser and seller.
+                The seller may consider multiple offers at the same time, and an
+                offer may be withdrawn at any point before a contract of sale
+                has been signed by both purchaser and seller.
               </p>
             </div>
           </div>
@@ -431,12 +433,12 @@ export default function ExpressionOfInterestPage({
         <div className="eoi-success__card">
           <span className="eoi-success__mark">✦</span>
           <h2>
-            Submission <em>received.</em>
+            Expression of Interest <em>submitted.</em>
           </h2>
           <div className="eoi-success__rule" />
           <p>
-            Your Expression of Interest has been captured in this demo flow.
-            The page design is complete and can be wired to a live endpoint next.
+            Thank you for your submission. Our team will review your details
+            and be in touch shortly regarding the next steps for your offer.
           </p>
           <button
             type="button"
