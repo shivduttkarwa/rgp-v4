@@ -513,11 +513,11 @@
   /* Image: only top corners rounded, bottom straight where panel attaches */
   .tv2-card__image {
     border-radius: 14px 14px 0 0;
-    height: clamp(300px, 72vw, 420px);
+    height: clamp(230px, 58vw, 320px);
   }
 
   .tv2-card__image img {
-    object-position: center 14%;
+    object-position: center 12%;
   }
 
   /* Hide blend + rest state — panel is always visible below image */
@@ -544,40 +544,44 @@
   .tv2-card__panel-scroll {
     height: auto;
     overflow-y: visible;
-    padding: 0.9rem 1rem 1rem;
+    padding: 1rem 1rem 1.05rem;
   }
 
   .tv2-panel__bio {
-    display: none;
+    display: block;
+    font-size: 0.84rem;
+    line-height: 1.62;
+    margin-bottom: 0.9rem;
   }
 
   .tv2-panel__stats {
-    margin-bottom: 0.65rem;
-    padding-bottom: 0.65rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.85rem;
   }
 
   .tv2-panel__stat-val {
-    font-size: 1.1rem;
+    font-size: 1.18rem;
   }
 
   .tv2-panel__tags {
-    display: none;
+    display: flex;
+    margin-bottom: 0.9rem;
   }
 
   .tv2-panel__actions {
-    gap: 5px;
-    margin-top: 0.75rem;
+    gap: 6px;
+    margin-top: 0.2rem;
   }
 
   .tv2-panel__btn {
-    font-size: 0.72rem;
-    padding: 7px 11px;
+    font-size: 0.74rem;
+    padding: 7px 12px;
   }
 }
 
 @media (max-width: 420px) {
   .tv2-card__image {
-    height: clamp(260px, 74vw, 320px);
+    height: clamp(210px, 62vw, 260px);
   }
 
   .tv2-card__image img {
@@ -585,11 +589,10 @@
   }
 
   .tv2-panel__bio {
-    display: block;
     font-size: 0.82rem;
   }
 
   .tv2-panel__tags {
-    display: flex;
+    margin-bottom: 0.8rem;
   }
 }

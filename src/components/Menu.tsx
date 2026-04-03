@@ -102,26 +102,40 @@ export default function Menu({
 
     let lastScrollTop = 0;
     let headerHidden = false;
+    let hiddenAnchorScrollTop = 0;
 
-    const updateHeader = (hidden: boolean) => {
+    const updateHeader = (hidden: boolean, currentScrollTop: number) => {
       if (headerHidden === hidden) return;
       headerHidden = hidden;
+      if (hidden) {
+        hiddenAnchorScrollTop = currentScrollTop;
+      }
       onHeaderHiddenChange?.(hidden);
     };
 
     const handleOverlayScroll = () => {
       const currentScrollTop = overlay.scrollTop;
+      const delta = currentScrollTop - lastScrollTop;
 
-      if (currentScrollTop <= 4) {
-        updateHeader(false);
+      if (currentScrollTop <= 8) {
+        updateHeader(false, currentScrollTop);
         lastScrollTop = currentScrollTop;
         return;
       }
 
-      if (currentScrollTop > lastScrollTop) {
-        updateHeader(true);
-      } else if (currentScrollTop < lastScrollTop) {
-        updateHeader(false);
+      if (!headerHidden) {
+        if (delta > 4 && currentScrollTop > 24) {
+          updateHeader(true, currentScrollTop);
+        }
+      } else {
+        if (delta > 0) {
+          hiddenAnchorScrollTop = Math.max(hiddenAnchorScrollTop, currentScrollTop);
+        }
+
+        const movedUpEnough = hiddenAnchorScrollTop - currentScrollTop >= 56;
+        if (movedUpEnough) {
+          updateHeader(false, currentScrollTop);
+        }
       }
 
       lastScrollTop = currentScrollTop;
