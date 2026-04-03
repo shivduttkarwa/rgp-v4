@@ -1,7 +1,3 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 import "./TeamV2.css";
 
 interface TeamMember {
@@ -103,37 +99,8 @@ const MEMBERS: TeamMember[] = [
 const BASE = import.meta.env.BASE_URL || "/";
 
 export default function TeamV2() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const cards = section.querySelectorAll<HTMLElement>(".tv2-card");
-    if (!cards.length) return;
-
-    gsap.set(cards, { y: 60, autoAlpha: 0 });
-
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: "top 72%",
-      once: true,
-      onEnter: () => {
-        gsap.to(cards, {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: 0.1,
-        });
-      },
-    });
-
-    return () => st.kill();
-  }, []);
-
   return (
-    <section className="tv2" ref={sectionRef}>
+    <section className="tv2">
 
       {/* ── Header ── */}
       <header className="tv2__header">
@@ -158,6 +125,9 @@ export default function TeamV2() {
           <article
             key={m.id}
             className="tv2-card"
+            data-gsap="clip-smooth"
+            data-gsap-start="top 85%"
+            data-gsap-delay={String(i * 0.1)}
           >
             {/* Photo — fills full card */}
             <div className="tv2-card__image">

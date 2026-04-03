@@ -133,7 +133,7 @@
 
 .tv2-card__image {
   position: relative;
-  height: clamp(320px, 26vw, 420px);
+  height: clamp(352px, 28.6vw, 462px);
   overflow: hidden;
   background: var(--rg-beige-dark);
 }
