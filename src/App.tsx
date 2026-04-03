@@ -15,6 +15,9 @@ const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const CookiesPage = lazy(() => import("./pages/CookiesPage"));
 const TeamPage = lazy(() => import("./pages/TeamPage"));
+const ExpressionOfInterestPage = lazy(
+  () => import("./pages/ExpressionOfInterestPage"),
+);
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +47,10 @@ function App() {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/cookies" element={<CookiesPage />} />
             <Route path="/team" element={<TeamPage ready={loaded} />} />
+            <Route
+              path="/expressions-of-interest"
+              element={<ExpressionOfInterestPage ready={loaded} />}
+            />
           </Routes>
         </Suspense>
         <Footer ready={loaded} />

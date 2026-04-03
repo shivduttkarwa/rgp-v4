@@ -535,6 +535,33 @@ const PropertyListingSection = () => {
             <ArrowRight size={18} />
           </Link>
         </div>
+
+        <div className="stats-bar" data-gsap="fade-up">
+          <div className="listing-cta" data-gsap="zoom-in" data-gsap-delay="0.16">
+            <div className="listing-cta__copy">
+              <div className="listing-cta__badge">
+                <Building2 size={20} />
+                <span>Expression of Interest</span>
+              </div>
+              <h3 className="listing-cta__title">
+                Ready to make an offer on a property you love?
+              </h3>
+              <p className="listing-cta__text">
+                Complete our full Expression of Interest form with the exact
+                buyer, offer, condition, and solicitor details needed for a
+                clean review.
+              </p>
+            </div>
+
+            <Link
+              to="/expressions-of-interest"
+              className="listing-cta__button"
+            >
+              <span>Open the Form</span>
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

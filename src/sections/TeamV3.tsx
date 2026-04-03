@@ -153,7 +153,7 @@ const teamData: TeamMember[] = [
 
 const TeamV3: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [hoveredMember, setHoveredMember] = useState<string | null>(null);
+  const [, setHoveredMember] = useState<string | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
