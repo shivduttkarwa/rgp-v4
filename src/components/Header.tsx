@@ -9,9 +9,20 @@ export default function Header({ ready = false }: { ready?: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const headerBgRef = useRef<HTMLDivElement>(null);
+  const mobileMenuEffectInit = useRef(false);
   const location = useLocation();
   const publicUrl = import.meta.env.BASE_URL || "/";
   const logoSrc = `${import.meta.env.BASE_URL}images/RGP-logo.png`;
+
+  const setHeaderVisible = (visible: boolean, immediate = false) => {
+    if (!headerRef.current) return;
+    gsap.to(headerRef.current, {
+      y: visible ? 0 : "-100%",
+      duration: immediate ? 0.18 : 0.28,
+      ease: "power3.out",
+      overwrite: true,
+    });
+  };
 
   // Close mobile nav on route change
   useEffect(() => {
@@ -64,11 +75,18 @@ export default function Header({ ready = false }: { ready?: boolean }) {
   // Fade header bg out when mobile menu opens, restore on close
   useEffect(() => {
     if (!headerBgRef.current) return;
+    if (!mobileMenuEffectInit.current) {
+      mobileMenuEffectInit.current = true;
+      return;
+    }
+
     if (mobileOpen) {
       gsap.to(headerBgRef.current, { opacity: 0, duration: 0.3, ease: "power2.out", overwrite: true });
+      setHeaderVisible(true);
     } else {
       const shouldShow = window.scrollY > 100;
       gsap.to(headerBgRef.current, { opacity: shouldShow ? 1 : 0, duration: 0.3, ease: "power2.out", overwrite: true });
+      setHeaderVisible(true);
     }
   }, [mobileOpen]);
 
@@ -132,7 +150,15 @@ export default function Header({ ready = false }: { ready?: boolean }) {
       </header>
 
       {/* Mobile overlay menu */}
-      <Menu isOpen={mobileOpen} onOpenChange={setMobileOpen} showButton={false} />
+      <Menu
+        isOpen={mobileOpen}
+        onOpenChange={setMobileOpen}
+        onHeaderHiddenChange={(hidden) => {
+          if (!mobileOpen) return;
+          setHeaderVisible(!hidden, true);
+        }}
+        showButton={false}
+      />
     </>
   );
 }

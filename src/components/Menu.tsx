@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MAIN_NAV_ITEMS } from "./navigationItems";
 import "./Menu.css";
@@ -6,12 +6,19 @@ import "./Menu.css";
 interface MenuProps {
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  onHeaderHiddenChange?: (hidden: boolean) => void;
   showButton?: boolean;
 }
 
-export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuProps) {
+export default function Menu({
+  isOpen,
+  onOpenChange,
+  onHeaderHiddenChange,
+  showButton = true,
+}: MenuProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const overlayRef = useRef<HTMLElement>(null);
   const isControlled = typeof isOpen === "boolean";
   const open = isControlled ? isOpen : internalOpen;
   const navigate = useNavigate();
@@ -77,6 +84,56 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
     if (!open) setQuery("");
   }, [open]);
 
+  useEffect(() => {
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+
+    onHeaderHiddenChange?.(false);
+
+    if (!open) {
+      overlay.scrollTop = 0;
+      return;
+    }
+
+    const isMobileMenu = window.matchMedia?.("(max-width: 900px)").matches;
+    if (!isMobileMenu) return;
+
+    overlay.scrollTop = 0;
+
+    let lastScrollTop = 0;
+    let headerHidden = false;
+
+    const updateHeader = (hidden: boolean) => {
+      if (headerHidden === hidden) return;
+      headerHidden = hidden;
+      onHeaderHiddenChange?.(hidden);
+    };
+
+    const handleOverlayScroll = () => {
+      const currentScrollTop = overlay.scrollTop;
+
+      if (currentScrollTop <= 4) {
+        updateHeader(false);
+        lastScrollTop = currentScrollTop;
+        return;
+      }
+
+      if (currentScrollTop > lastScrollTop) {
+        updateHeader(true);
+      } else if (currentScrollTop < lastScrollTop) {
+        updateHeader(false);
+      }
+
+      lastScrollTop = currentScrollTop;
+    };
+
+    overlay.addEventListener("scroll", handleOverlayScroll, { passive: true });
+    return () => {
+      overlay.removeEventListener("scroll", handleOverlayScroll);
+      onHeaderHiddenChange?.(false);
+    };
+  }, [open, onHeaderHiddenChange]);
+
   return (
     <>
       {/* Hamburger Button */}
@@ -95,7 +152,7 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
       )}
 
       {/* Overlay Menu */}
-      <nav className={`overlay-menu ${open ? "active" : ""}`}>
+      <nav ref={overlayRef} className={`overlay-menu ${open ? "active" : ""}`}>
         {/* Animated Background Panels */}
         <div className="menu-bg">
           <div className="menu-bg-panel"></div>
