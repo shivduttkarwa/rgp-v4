@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import BtnSecondary from "../components/BtnSecondary";
 import "./HeroSection.css";
@@ -89,7 +89,7 @@ export default function HeroSection({
   }, []);
 
   // Set initial states on mount — bg fully visible, only content hidden
-  useEffect(() => {
+  useLayoutEffect(() => {
     const bg = bgRef.current;
     const vignette = vignetteRef.current;
     const titleOne = titleOneRef.current;
@@ -107,7 +107,7 @@ export default function HeroSection({
   }, []);
 
   // Animate titles + subtitle + CTA after ready
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ready) return;
 
     const titleOne = titleOneRef.current;
@@ -173,7 +173,7 @@ export default function HeroSection({
     gsap.set([...titleOneChars, ...titleTwoChars], { y: 40, opacity: 0 });
     gsap.set([titleOne, titleTwo], { opacity: 1 });
 
-    const tl = gsap.timeline({ delay: 0.9 });
+    const tl = gsap.timeline();
     tl.to(titleOneChars, {
       y: 0,
       opacity: 1,
