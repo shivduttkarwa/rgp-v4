@@ -319,9 +319,6 @@ const Footer = ({ ready = false }: FooterProps) => {
           <li>
             <Link to="/terms" onClick={handleSamePage("/terms")}>Collection Notice for Privacy Purposes and Consent</Link>
           </li>
-          <li>
-            <Link to="/cookies" onClick={handleSamePage("/cookies")}>Cookie Preferences</Link>
-          </li>
         </ul>
       </div>
 
