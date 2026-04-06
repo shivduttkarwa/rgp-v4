@@ -5,6 +5,7 @@
   color: var(--rg-text-dark);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 .contact-shell {
@@ -716,15 +717,37 @@
 @media (max-width: 480px) {
   .left,
   .right {
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.25rem;
   }
 
   .contact-cta {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1.25rem;
   }
 
   .contact-cta__button {
     width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .left,
+  .right {
+    padding: 2rem 1rem;
+  }
+
+  .contact-cta {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 1rem;
+  }
+
+  .fgrid {
+    gap: 1rem;
+  }
+
+  .contact-cta__title {
+    font-size: 1.5rem;
   }
 }
