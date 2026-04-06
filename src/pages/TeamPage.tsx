@@ -129,7 +129,9 @@ export default function TeamPage({ ready = false }: { ready?: boolean }) {
                   key={v.number}
                   className="tp-vc"
                   data-gsap="clip-smooth"
-                  data-gsap-delay={String(i * 0.1)}
+                  data-gsap-duration="0.75"
+                  data-gsap-start="top 92%"
+                  data-gsap-delay={String(i * 0.08)}
                 >
                   {/* Ghost watermark number */}
                   <span className="tp-vc__ghost" aria-hidden="true">{v.number}</span>
