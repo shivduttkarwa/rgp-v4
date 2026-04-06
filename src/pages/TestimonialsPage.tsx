@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import HeroSection from "../sections/HeroSection";
 import RGPSplitSlider from "../components/reusable/SplitSlider";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
@@ -841,27 +841,42 @@ const FinalCTA: React.FC = () => (
 const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
   const pageRef = useRef<HTMLDivElement>(null);
   const slabRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!ready || !slabRef.current || !statsRef.current) return;
+  useLayoutEffect(() => {
+    if (!ready || !slabRef.current) return;
+
     const slab = slabRef.current;
-    const stats = statsRef.current.querySelectorAll<HTMLElement>(".t-hero__stat");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // slab slides up first
-    gsap.set(slab, { y: 32, opacity: 0 });
-    gsap.to(slab, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 2.1 });
+    if (prefersReducedMotion) {
+      gsap.set(slab, {
+        autoAlpha: 1,
+        clipPath: "inset(0 0 0% 0)",
+        webkitClipPath: "inset(0 0 0% 0)",
+      });
+      return;
+    }
 
-    // then stats stagger in
-    gsap.set(stats, { y: 20, opacity: 0 });
-    gsap.to(stats, {
-      y: 0,
-      opacity: 1,
-      duration: 0.65,
-      stagger: 0.18,
-      ease: "power3.out",
-      delay: 2.6,
+    gsap.set(slab, {
+      autoAlpha: 1,
+      clipPath: "inset(0 0 100% 0)",
+      webkitClipPath: "inset(0 0 100% 0)",
+      willChange: "clip-path",
     });
+
+    const tl = gsap.timeline();
+
+    // Match the home hero panel reveal: top-to-bottom clip, starting right after subtitle.
+    tl.to(slab, {
+      clipPath: "inset(0 0 0% 0)",
+      webkitClipPath: "inset(0 0 0% 0)",
+      duration: 1.0,
+      ease: "power3.inOut",
+    }, 1);
+
+    return () => {
+      tl.kill();
+    };
   }, [ready]);
 
   useEffect(() => {
@@ -910,7 +925,7 @@ const TestimonialPage: React.FC<{ ready?: boolean }> = ({ ready = false }) => {
           subtitle={`${testimonials.length} verified experiences — refined, discreet service from start to finish.`}
           footer={
             <div className="t-hero__stats-slab" ref={slabRef}>
-              <div className="t-hero__stats" ref={statsRef}>
+              <div className="t-hero__stats">
                 <div className="t-hero__stat">
                   <span className="t-hero__stat-value">
                     5<span className="t-hero__stat-star">★</span>

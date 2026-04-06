@@ -66,6 +66,9 @@
   display: flex;
   justify-content: center;
   padding: 2rem 2rem 0;
+  clip-path: inset(0 0 100% 0);
+  -webkit-clip-path: inset(0 0 100% 0);
+  will-change: clip-path;
 }
 
 .t-hero__stats {
