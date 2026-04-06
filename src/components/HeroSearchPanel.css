@@ -9,7 +9,7 @@
   display: flex;
   gap: 0.25rem;
   padding: 0.4rem;
-  background: rgba(0, 3, 30, 0.5);
+  background: rgba(0, 2, 18, 0.62);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -27,7 +27,7 @@
   gap: 0.625rem;
   padding: 0.9rem 2rem;
   background: transparent;
-  border: 1.5px solid transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 9px;
   cursor: pointer;
   font-family: var(--font-body, "Bricolage Grotesque", sans-serif);
@@ -87,7 +87,7 @@
 
 /* ─── Label ─── */
 .hsp__tab-label {
-  font-size: 1.0625rem;
+  font-size: 1.275rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -117,6 +117,6 @@
   }
 
   .hsp__tab-label {
-    font-size: 0.875rem;
+    font-size: 1.05rem;
   }
 }
