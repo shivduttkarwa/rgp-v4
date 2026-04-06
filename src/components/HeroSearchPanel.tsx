@@ -22,7 +22,7 @@ export default function HeroSearchPanel() {
           type="button"
         >
           <span className="hsp__tab-badge">
-            <Icon size={20} aria-hidden="true" />
+            <Icon size={26} aria-hidden="true" strokeWidth={1.75} />
           </span>
           <span className="hsp__tab-label">{label}</span>
         </button>
