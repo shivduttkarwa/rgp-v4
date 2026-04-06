@@ -7,7 +7,7 @@ export default function PrivacyPage() {
         <div className="legal-hero__inner">
           <span className="legal-hero__eyebrow">Real Gold Properties</span>
           <h1 className="legal-hero__title">Privacy Policy</h1>
-          <p className="legal-hero__meta">Last updated: February 2026</p>
+          <p className="legal-hero__meta">Last updated: April 2026</p>
         </div>
       </div>
 
@@ -15,161 +15,242 @@ export default function PrivacyPage() {
         <div className="legal-content__inner">
 
           <div className="legal-section">
-            <h2>Overview</h2>
             <p>
-              Real Gold Properties Pty Ltd ("we", "our", or "us") is committed to protecting your
-              personal information in accordance with the <em>Privacy Act 1988</em> (Cth) and the
-              Australian Privacy Principles (APPs). This Privacy Policy explains how we collect,
-              use, disclose, and safeguard your information when you visit our website or engage
-              with our services.
+              At Real Gold Properties, we are committed to protecting your privacy and ensuring that your
+              personal information is handled in a safe, transparent, and responsible manner. We
+              understand the importance of confidentiality and take our obligations seriously.
             </p>
             <p>
-              By using our website or engaging our services, you consent to the practices described
-              in this policy. We encourage you to read it carefully.
+              This Privacy Policy outlines how we collect, use, disclose, store, and protect your personal
+              information in accordance with the <em>Privacy Act 1988</em> (Cth) and the Australian Privacy
+              Principles.
             </p>
           </div>
 
           <div className="legal-section">
-            <h2>Information We Collect</h2>
-            <p>We may collect the following types of personal information:</p>
-            <ul>
-              <li>Full name, email address, phone number, and postal address</li>
-              <li>Property preferences, budget, and enquiry details submitted via contact forms</li>
-              <li>Financial information where required for property transactions (handled securely)</li>
-              <li>Browser type, IP address, and device information collected automatically via cookies</li>
-              <li>Records of your communications with us, including emails and call logs</li>
-            </ul>
+            <h2>1. What is Personal Information?</h2>
             <p>
-              We only collect information that is necessary for the purposes for which it is
-              collected, and we take reasonable steps to ensure it is accurate, up to date, and
-              complete.
+              "Personal information" refers to any information or opinion about an identified individual, or
+              an individual who is reasonably identifiable, regardless of whether the information is true or
+              recorded in a material form.
             </p>
-          </div>
-
-          <div className="legal-section">
-            <h2>How We Use Your Information</h2>
-            <p>Your personal information is used to:</p>
+            <p>This may include, but is not limited to:</p>
             <ul>
-              <li>Respond to property enquiries and provide personalised advisory services</li>
-              <li>Facilitate property purchases, sales, leasing, and investment transactions</li>
-              <li>Send relevant property listings, market updates, and service communications</li>
-              <li>Improve the functionality and user experience of our website</li>
-              <li>Meet legal and regulatory obligations, including those under Queensland real estate law</li>
-              <li>Maintain records required by the <em>Property Occupations Act 2014</em> (Qld)</li>
+              <li>Your full name</li>
+              <li>Residential or postal address</li>
+              <li>Email address and telephone number</li>
+              <li>Occupation or employment details</li>
+              <li>Identification details provided during transactions</li>
+              <li>Any additional information you voluntarily provide to us</li>
             </ul>
           </div>
 
           <div className="legal-section">
-            <h2>Disclosure to Third Parties</h2>
+            <h2>2. What Information We Collect</h2>
             <p>
-              We do not sell, trade, or rent your personal information to third parties for their
-              marketing purposes. We may share your information with:
+              We may collect and hold a range of personal information necessary to deliver our services
+              effectively, including:
             </p>
             <ul>
-              <li>Solicitors, conveyancers, and financial institutions involved in your transaction</li>
-              <li>Property management and maintenance contractors where applicable</li>
-              <li>Government bodies or regulatory authorities as required by law</li>
-              <li>Technology service providers who assist us in delivering our services (under strict confidentiality agreements)</li>
+              <li><strong>Identification and Contact Information:</strong> such as your name, address, phone number, and email</li>
+              <li><strong>Property-Related Information:</strong> including property enquiries, preferences, transaction details, and inspection records</li>
+              <li><strong>Communication Records:</strong> including correspondence, enquiries, feedback, complaints, or survey responses</li>
+              <li><strong>Website Data:</strong> information submitted through online forms, registrations, or subscriptions</li>
             </ul>
             <p>
-              Where we disclose information to overseas recipients, we take reasonable steps to
-              ensure those recipients handle your information in accordance with the APPs.
+              In addition, we may collect non-personal information such as aggregated data, analytics, and
+              browsing behaviour that does not directly identify you.
             </p>
           </div>
 
           <div className="legal-section">
-            <h2>Marketing Communications</h2>
+            <h2>3. How We Collect Your Information</h2>
             <p>
-              With your consent, we may send you information about properties, market insights,
-              and services we believe may be of interest to you. You may opt out of marketing
-              communications at any time by:
+              We collect personal information directly from you wherever practicable and lawful to do so.
+              This may occur when you:
             </p>
             <ul>
-              <li>Clicking the "Unsubscribe" link in any email we send</li>
-              <li>Contacting us directly at <a href="mailto:admin@realgoldproperties.com.au">admin@realgoldproperties.com.au</a></li>
+              <li>Visit, access, or interact with our website</li>
+              <li>Contact us via phone, email, or online enquiry forms</li>
+              <li>Attend property inspections, meetings, or consultations</li>
+              <li>Engage our services or enter into agreements or contracts</li>
+              <li>Participate in promotions, surveys, or provide feedback</li>
+            </ul>
+            <p>We may also collect personal information from third parties where permitted, including:</p>
+            <ul>
+              <li>Professional advisors such as lawyers, accountants, or financial consultants</li>
+              <li>Public registers and government records</li>
+              <li>Service providers and business partners</li>
+              <li>Referrals or other parties where you have provided consent</li>
+            </ul>
+          </div>
+
+          <div className="legal-section">
+            <h2>4. Cookies and Website Analytics</h2>
+            <p>
+              Our website may utilise cookies and similar technologies to enhance your browsing
+              experience and improve functionality.
+            </p>
+            <p>Cookies allow us to:</p>
+            <ul>
+              <li>Recognise your device and preferences</li>
+              <li>Monitor website traffic and usage patterns</li>
+              <li>Analyse performance and improve our services</li>
             </ul>
             <p>
-              We will process opt-out requests promptly and no later than within five business days.
+              These cookies generally do not identify you personally. However, they may be linked to
+              personal information you have provided.
+            </p>
+            <p>
+              You can manage or disable cookies through your browser settings, although doing so may
+              affect your experience on our website.
+            </p>
+            <p>
+              We may also collect technical data such as IP addresses, browser type, pages visited, and
+              timestamps for analytical and security purposes.
             </p>
           </div>
 
           <div className="legal-section">
-            <h2>Data Security</h2>
+            <h2>5. Purpose of Collecting Your Information</h2>
+            <p>We collect, hold, use, and disclose your personal information for purposes including:</p>
+            <ul>
+              <li>Providing and managing our real estate services</li>
+              <li>Responding to enquiries and communicating with you</li>
+              <li>Processing property transactions and related activities</li>
+              <li>Personalising and improving our website and services</li>
+              <li>Conducting internal administration, research, and analytics</li>
+              <li>Sending marketing communications where permitted by law</li>
+              <li>Maintaining accurate and up-to-date records</li>
+              <li>Complying with legal, regulatory, and contractual obligations</li>
+            </ul>
+          </div>
+
+          <div className="legal-section">
+            <h2>6. Disclosure of Personal Information</h2>
             <p>
-              We take reasonable technical and organisational measures to protect your personal
-              information from misuse, loss, unauthorised access, modification, or disclosure.
-              These include secure server infrastructure, access controls, and encrypted data
-              transmission (SSL/TLS).
+              We may disclose your personal information where necessary for business operations or where
+              required by law. This may include disclosure to:
             </p>
+            <ul>
+              <li>Our employees, agents, and contractors</li>
+              <li>Third-party service providers (including IT, marketing, and administrative support)</li>
+              <li>Professional advisors such as solicitors, accountants, or consultants</li>
+              <li>Financial institutions or payment processors</li>
+              <li>Government bodies, regulators, or law enforcement agencies</li>
+            </ul>
             <p>
-              While we take all reasonable precautions, no data transmission over the internet
-              can be guaranteed as completely secure. You provide information at your own risk.
+              We take reasonable steps to ensure that any third parties handling your information do so
+              securely and in accordance with applicable privacy laws.
             </p>
           </div>
 
           <div className="legal-section">
-            <h2>Cookies</h2>
+            <h2>7. Direct Marketing</h2>
             <p>
-              Our website uses cookies to enhance your browsing experience and to analyse site
-              traffic. For full details on how we use cookies and how to manage your preferences,
-              please refer to our <a href="/cookies">Cookie Policy</a>.
+              From time to time, we may send you marketing communications about properties, services,
+              or promotions that may be of interest to you.
+            </p>
+            <p>
+              These communications may be delivered via email, SMS, or other channels in compliance
+              with applicable laws, including the <em>Spam Act 2003</em> (Cth).
+            </p>
+            <p>You may opt out of receiving marketing communications at any time by:</p>
+            <ul>
+              <li>Clicking the "unsubscribe" link in our communications; or</li>
+              <li>Contacting us directly using the details below</li>
+            </ul>
+          </div>
+
+          <div className="legal-section">
+            <h2>8. Access and Correction of Your Information</h2>
+            <p>
+              You have the right to request access to the personal information we hold about you and to
+              request corrections if that information is inaccurate, incomplete, or outdated.
+            </p>
+            <p>Upon receiving your request, we will take reasonable steps to:</p>
+            <ul>
+              <li>Provide access to your information (where permitted by law); and</li>
+              <li>Correct or update your information as required</li>
+            </ul>
+            <p>
+              We may refuse access in certain circumstances permitted by law, in which case we will
+              provide written reasons.
             </p>
           </div>
 
           <div className="legal-section">
-            <h2>Access and Correction</h2>
+            <h2>9. Overseas Disclosure</h2>
             <p>
-              You have the right to request access to the personal information we hold about you
-              and to request corrections if you believe it is inaccurate, incomplete, or
-              out of date. We will respond to access requests within 30 days.
+              In some cases, your personal information may be disclosed to or stored by service providers
+              located outside Australia, such as cloud or IT service providers.
             </p>
             <p>
-              In some circumstances we may be required to refuse access. If we do, we will
-              provide written reasons for that refusal.
-            </p>
-          </div>
-
-          <div className="legal-section">
-            <h2>Complaints</h2>
-            <p>
-              If you believe we have not complied with this policy or the Australian Privacy
-              Principles, please contact us in the first instance. We will acknowledge your
-              complaint within five business days and endeavour to resolve it within 30 days.
-            </p>
-            <p>
-              If you are not satisfied with our response, you may lodge a complaint with the
-              Office of the Australian Information Commissioner (OAIC) at{" "}
-              <a href="https://www.oaic.gov.au" target="_blank" rel="noopener noreferrer">
-                www.oaic.gov.au
-              </a>.
+              Where this occurs, we take reasonable steps to ensure that overseas recipients handle your
+              personal information in a manner consistent with the Australian Privacy Principles.
             </p>
           </div>
 
           <div className="legal-section">
-            <h2>Changes to This Policy</h2>
+            <h2>10. Security of Personal Information</h2>
             <p>
-              We may update this Privacy Policy from time to time to reflect changes in our
-              practices or applicable law. The most current version will always be published on
-              this page with the updated date shown at the top.
+              We are committed to safeguarding your personal information and have implemented
+              appropriate technical and organisational measures, including:
+            </p>
+            <ul>
+              <li>Secure data storage systems and encryption technologies</li>
+              <li>Access controls and authentication procedures</li>
+              <li>Ongoing monitoring and system updates</li>
+              <li>Staff training and confidentiality obligations</li>
+            </ul>
+            <p>
+              Despite these measures, no data transmission over the internet can be guaranteed as
+              completely secure. Any information transmitted to us is done at your own risk.
             </p>
           </div>
 
           <div className="legal-section">
-            <h2>Contact Us</h2>
-            <p>For any privacy-related enquiries, please contact our Privacy Officer:</p>
+            <h2>11. Third-Party Websites</h2>
+            <p>
+              Our website may contain links to third-party websites for your convenience. We do not
+              control or endorse these websites and are not responsible for their privacy practices.
+            </p>
+            <p>
+              We recommend reviewing the privacy policies of any third-party websites you visit.
+            </p>
+          </div>
+
+          <div className="legal-section">
+            <h2>12. Contact Us and Complaints</h2>
+            <p>
+              If you have any questions, concerns, or complaints regarding this Privacy Policy or the
+              handling of your personal information, please contact us:
+            </p>
             <div className="legal-contact-block">
-              <p>Real Gold Properties Pty Ltd</p>
-              <p>PO Box 4024, Forest Lake QLD 4078, Australia</p>
+              <p>Real Gold Properties</p>
+              <p>PO Box 4024 Forest Lake, 4078, QLD, Australia</p>
               <p>
                 Email:{" "}
                 <a href="mailto:admin@realgoldproperties.com.au">
                   admin@realgoldproperties.com.au
                 </a>
               </p>
-              <p>
-                Phone: <a href="tel:+61450009291">0450 009 291</a>
-              </p>
             </div>
+            <p>
+              We will respond to your enquiry within a reasonable timeframe and take all reasonable steps
+              to resolve any issues promptly and fairly.
+            </p>
+          </div>
+
+          <div className="legal-section">
+            <h2>13. Changes to This Privacy Policy</h2>
+            <p>
+              We reserve the right to update or amend this Privacy Policy at any time to reflect changes in
+              our practices, legal requirements, or industry standards.
+            </p>
+            <p>
+              The most current version will always be published on our website.
+            </p>
           </div>
 
         </div>
