@@ -162,8 +162,12 @@ a {
   letter-spacing: 0.02em;
   color: #ffffff;
   text-transform: uppercase;
-  text-shadow: 0 0.1875rem 2.5rem rgba(0, 0, 0, 0.4);
-  will-change: transform, opacity;
+  text-shadow: none;
+  filter:
+    drop-shadow(0 0.0625rem 0.125rem rgba(0, 0, 0, 0.48))
+    drop-shadow(0 0.5rem 1.5rem rgba(0, 0, 0, 0.22));
+  mix-blend-mode: screen;
+  will-change: transform, opacity, filter;
 }
 
 .rgp-hero__title-text .rg-gold {
@@ -180,11 +184,15 @@ a {
   font-size: clamp(0.772rem, 1.425vw, 1.069rem);
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.92);
+  color: #ffffff;
   line-height: 1.65;
   max-width: 46ch;
-  text-shadow: 0 0.125rem 0.9375rem rgba(0, 0, 0, 0.3);
-  will-change: transform, opacity;
+  text-shadow: none;
+  filter:
+    drop-shadow(0 0.0625rem 0.125rem rgba(0, 0, 0, 0.44))
+    drop-shadow(0 0.375rem 1rem rgba(0, 0, 0, 0.18));
+  mix-blend-mode: screen;
+  will-change: transform, opacity, filter;
 }
 
 /* ─── CTA ─── */
