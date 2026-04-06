@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { MapPin, Phone, Share2 } from "lucide-react";
 import { MAIN_NAV_ITEMS } from "./navigationItems";
 import "./Menu.css";
 
@@ -288,7 +289,7 @@ export default function Menu({
 
             <div className="menu-info-row">
               <div className="menu-info-block">
-                <div className="menu-info-label">Location</div>
+                <div className="menu-info-label"><MapPin size={13} />Location</div>
                 <p className="menu-info-text">
                   PO Box 4024
                   <br />
@@ -297,7 +298,7 @@ export default function Menu({
               </div>
 
               <div className="menu-info-block">
-                <div className="menu-info-label">Contact</div>
+                <div className="menu-info-label"><Phone size={13} />Contact</div>
                 <p className="menu-info-text">
                   <a href="mailto:admin@realgoldproperties.com.au">
                     admin@realgoldproperties.com.au
@@ -309,7 +310,7 @@ export default function Menu({
             </div>
 
             <div className="menu-socialWrap">
-              <div className="menu-socialLabel">Social</div>
+              <div className="menu-socialLabel"><Share2 size={13} />Social</div>
               <div className="menu-social">
               <a href="#" aria-label="Instagram">
                 <svg
