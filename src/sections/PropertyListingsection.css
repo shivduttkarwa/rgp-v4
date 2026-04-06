@@ -508,25 +508,31 @@
 /* ===== Responsive Adjustments ===== */
 @media (max-width: 480px) {
   .property-section .filter-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    justify-content: flex-start;
-    padding-bottom: 0.25rem;
-  }
-
-  .property-section .filter-wrapper::-webkit-scrollbar {
-    display: none;
+    overflow-x: visible;
+    justify-content: center;
+    padding-bottom: 0;
   }
 
   .property-section .filter-tabs {
-    width: max-content;
-    flex-wrap: nowrap;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .property-section .filter-pill {
+    display: none;
   }
 
   .property-section .filter-tab {
-    flex-shrink: 0;
-    padding: 0.625rem 0.875rem;
-    font-size: 0.8125rem;
+    flex: 1 1 calc(50% - 0.25rem);
+    justify-content: center;
+    padding: 0.55rem 0.5rem;
+    font-size: 0.78rem;
+  }
+
+  .property-section .filter-tab.active {
+    background-color: var(--rg-gold);
+    color: var(--rg-navy);
   }
 }
 

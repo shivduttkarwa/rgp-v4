@@ -36,6 +36,7 @@
   justify-content: space-between;
   opacity: 0;
   animation: rise 0.8s 0.05s ease forwards;
+  min-width: 0;
 }
 
 .hero-title {
@@ -117,10 +118,12 @@
 
 .c-val {
   font-family: var(--font-title);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--rg-text-dark);
   line-height: 1.4;
   transition: color 0.2s;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .c-item:hover .c-val {
@@ -220,6 +223,14 @@
   justify-content: center;
   opacity: 0;
   animation: rise 0.8s 0.18s ease forwards;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.right form {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .contact-cta {
