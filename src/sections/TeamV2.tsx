@@ -114,25 +114,50 @@ export default function TeamV2() {
 
     gsap.set(cards, { clipPath: "inset(100% 0 0 0)", willChange: "clip-path" });
 
-    const trigger = ScrollTrigger.create({
-      trigger: gridRef.current,
-      start: "top 85%",
-      once: true,
-      onEnter: () => {
-        gsap.to(cards, {
-          clipPath: "inset(0% 0 0 0)",
-          duration: 1.2,
-          ease: "power3.inOut",
-          stagger: 0.12,
-          onComplete: () => {
-            gsap.set(cards, { clearProps: "will-change,clip-path" });
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const triggers: ReturnType<typeof ScrollTrigger.create>[] = [];
+
+    if (isMobile) {
+      cards.forEach((card) => {
+        const t = ScrollTrigger.create({
+          trigger: card,
+          start: "top 92%",
+          once: true,
+          onEnter: () => {
+            gsap.to(card, {
+              clipPath: "inset(0% 0 0 0)",
+              duration: 0.75,
+              ease: "power3.inOut",
+              onComplete: () => {
+                gsap.set(card, { clearProps: "will-change,clip-path" });
+              },
+            });
           },
         });
-      },
-    });
+        triggers.push(t);
+      });
+    } else {
+      const t = ScrollTrigger.create({
+        trigger: gridRef.current,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(cards, {
+            clipPath: "inset(0% 0 0 0)",
+            duration: 1.2,
+            ease: "power3.inOut",
+            stagger: 0.12,
+            onComplete: () => {
+              gsap.set(cards, { clearProps: "will-change,clip-path" });
+            },
+          });
+        },
+      });
+      triggers.push(t);
+    }
 
     return () => {
-      trigger.kill();
+      triggers.forEach((t) => t.kill());
     };
   }, []);
 
