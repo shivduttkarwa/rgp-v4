@@ -32,7 +32,7 @@ const MEMBERS: TeamMember[] = [
     ],
     tags: ["Luxury Estates", "Investment Strategy", "Market Analysis"],
     email: "rahul@luxestate.com",
-    phone: "+91 98100 00001",
+    phone: "+61450009291",
     social: { linkedin: "#" },
   },
   {
@@ -48,7 +48,7 @@ const MEMBERS: TeamMember[] = [
     ],
     tags: ["Luxury Residential", "Buyer Consulting", "New Developments"],
     email: "sarah@luxestate.com",
-    phone: "+91 98100 00002",
+    phone: "+61400000002",
     social: { linkedin: "#" },
   },
   {
@@ -64,7 +64,7 @@ const MEMBERS: TeamMember[] = [
     ],
     tags: ["Off-Market Listings", "Negotiations", "Premium Rentals"],
     email: "michael@luxestate.com",
-    phone: "+91 98100 00003",
+    phone: "+61400000003",
     social: { linkedin: "#" },
   },
   {
@@ -80,7 +80,7 @@ const MEMBERS: TeamMember[] = [
     ],
     tags: ["Residential Sales", "Interior Advisory", "First-Time Buyers"],
     email: "emma@luxestate.com",
-    phone: "+91 98100 00004",
+    phone: "+61400000004",
     social: { linkedin: "#" },
   },
   {
@@ -96,7 +96,7 @@ const MEMBERS: TeamMember[] = [
     ],
     tags: ["Investment Properties", "Resale", "Market Analysis"],
     email: "david@luxestate.com",
-    phone: "+91 98100 00005",
+    phone: "+61400000005",
     social: { linkedin: "#" },
   },
 ];
