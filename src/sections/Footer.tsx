@@ -144,6 +144,9 @@ const Footer = ({ ready = false }: FooterProps) => {
               <Link to="/testimonials" onClick={handleSamePage("/testimonials")}>Testimonials</Link>
             </li>
             <li>
+              <Link to="/team" onClick={handleSamePage("/team")}>Team</Link>
+            </li>
+            <li>
               <Link to="/contact" onClick={handleSamePage("/contact")}>Contact</Link>
             </li>
           </ul>
