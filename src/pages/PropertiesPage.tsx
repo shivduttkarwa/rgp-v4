@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState, useMemo, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import gsap from "gsap";
 import {
@@ -91,6 +91,7 @@ const applyFilters = (items: Property[], f: Filters) =>
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PropertiesPage() {
+  const [searchParams] = useSearchParams();
   const pageRef = useRef<HTMLDivElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
   const gridContainerRef = useRef<HTMLDivElement>(null);
@@ -150,11 +151,25 @@ export default function PropertiesPage() {
     return cleanup;
   }, []);
 
+  // Seed initial filters from URL params (set by HeroSearchPanel)
+  const VALID_CATS: Category[] = ["for-sale", "sold", "for-rent"];
+  const paramCat   = searchParams.get("cat") as Category | null;
+  const paramPrice = searchParams.get("price") ?? "all";
+  const paramBeds  = searchParams.get("beds")  ?? "any";
+  const paramBaths = searchParams.get("baths") ?? "any";
+  const initialFilters: Filters = {
+    cat:     paramCat && VALID_CATS.includes(paramCat) ? paramCat : "all",
+    price:   paramPrice,
+    beds:    paramBeds,
+    baths:   paramBaths,
+    showAll: false,
+  };
+
   // activeFilters drives UI controls (immediate feedback)
   // displayedFilters drives the grid (lags 280ms behind for exit animation)
-  const [activeFilters, setActiveFilters] = useState<Filters>(DEFAULT_FILTERS);
+  const [activeFilters, setActiveFilters] = useState<Filters>(initialFilters);
   const [displayedFilters, setDisplayedFilters] =
-    useState<Filters>(DEFAULT_FILTERS);
+    useState<Filters>(initialFilters);
   const [isExiting, setIsExiting] = useState(false);
 
   const pendingRef = useRef<Filters>(DEFAULT_FILTERS);

@@ -16,6 +16,7 @@ type HeroSectionProps = {
   bgVideo?: string;
   bgPoster?: string;
   footer?: ReactNode;
+  panel?: ReactNode;
 };
 
 /* ═══════════════════════════════════════════════════
@@ -43,6 +44,7 @@ export default function HeroSection({
   bgVideo = "vids/hero-rgp.mp4",
   bgPoster,
   footer,
+  panel,
 }: HeroSectionProps) {
   const publicUrl = import.meta.env.BASE_URL || "/";
   const bgRef = useRef<HTMLDivElement>(null);
@@ -102,8 +104,14 @@ export default function HeroSection({
     gsap.set(bg, { opacity: 1, scale: 1 });
     gsap.set(vignette, { opacity: 0.5 });
     gsap.set([titleOne, titleTwo], { y: 50, opacity: 0 });
-    gsap.set([revealSub, revealCta], { x: -60, opacity: 0 });
-    if (revealCta) gsap.set(revealCta, { scale: 0.9 });
+    gsap.set([revealSub], { x: -60, opacity: 0 });
+    if (revealCta) {
+      if (panel) {
+        gsap.set(revealCta, { clipPath: "inset(0 0 100% 0)", opacity: 1, willChange: "clip-path" });
+      } else {
+        gsap.set(revealCta, { x: -60, opacity: 0, scale: 0.9 });
+      }
+    }
   }, []);
 
   // Animate titles + subtitle + CTA after ready
@@ -198,11 +206,19 @@ export default function HeroSection({
       0.9,
     );
     if (revealCta) {
-      tl.to(
-        revealCta,
-        { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power4.out" },
-        1,
-      );
+      if (panel) {
+        tl.to(
+          revealCta,
+          { clipPath: "inset(0 0 0% 0)", duration: 1.0, ease: "power3.inOut" },
+          1.1,
+        );
+      } else {
+        tl.to(
+          revealCta,
+          { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power4.out" },
+          1,
+        );
+      }
     }
 
     return () => {
@@ -281,11 +297,15 @@ export default function HeroSection({
             {subtitle}
           </div>
 
-          {showCta && (
+          {panel ? (
+            <div className="rgp-hero__cta rgp-hero__cta--panel" ref={revealCtaRef}>
+              {panel}
+            </div>
+          ) : showCta ? (
             <div className="rgp-hero__cta" ref={revealCtaRef}>
               <BtnSecondary label={ctaLabel} onClick={ctaOnClick} />
             </div>
-          )}
+          ) : null}
         </div>
 
         {/* ── FOOTER ── */}

@@ -254,6 +254,15 @@ a {
   transform: translateX(6px);
 }
 
+/* ─── CTA panel (search bar replaces button) ─── */
+.rgp-hero__cta--panel {
+  pointer-events: auto;
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 /* ─── FOOTER ─── */
 .rgp-hero__footer {
   position: absolute;

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
+import HeroSearchPanel from "../components/HeroSearchPanel";
 import Intro from "../sections/Intro";
 
 import PortfolioShowcase from "../sections/PortfolioShowcase";
@@ -44,6 +45,7 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
       <HeroSection
         ready={ready}
         ctaOnClick={() => navigate("/properties")}
+        panel={<HeroSearchPanel />}
       />
 
       <Intro />
