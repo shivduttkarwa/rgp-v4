@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState, useMemo, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import gsap from "gsap";
 import {
@@ -91,6 +91,7 @@ const applyFilters = (items: Property[], f: Filters) =>
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PropertiesPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const pageRef = useRef<HTMLDivElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
@@ -345,7 +346,9 @@ export default function PropertiesPage() {
           </>
         }
         subtitle="Browse our curated portfolio of for-sale, sold and rental properties across South-East Queensland."
-        showCta={false}
+        showCta
+        ctaLabel="Talk to an Expert"
+        ctaOnClick={() => navigate("/contact")}
       />
 
       {/* ── Filter Slab ───────────────────────────────────────────────── */}

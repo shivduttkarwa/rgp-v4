@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
+import BtnSecondary from "../components/BtnSecondary";
 import Team from "../sections/TeamV2";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import "./TeamPage.css";
@@ -87,9 +88,13 @@ export default function TeamPage({ ready = false }: { ready?: boolean }) {
       <HeroSection
         ready={ready}
         showVideo={false}
-        showCta
-        ctaLabel="Book a Consultation"
-        ctaOnClick={() => navigate("/contact")}
+        showCta={false}
+        panel={
+          <BtnSecondary
+            label="Book a Consultation"
+            onClick={() => navigate("/contact")}
+          />
+        }
         bgImage="images/about-hero.jpg"
         titleLine1={<>Meet Our</>}
         titleLine2={

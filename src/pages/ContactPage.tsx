@@ -54,6 +54,24 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
           </>
         }
         subtitle="Our team is ready to guide you — from first enquiry to final key."
+        panel={
+          <div className="contact-hero-actions">
+            <a
+              href="tel:+61450009291"
+              className="btn-secondary contact-hero-actions__link contact-hero-actions__link--primary"
+              aria-label="Call us"
+            >
+              <span className="bs-text">Call Us</span>
+            </a>
+            <a
+              href="mailto:admin@realgoldproperties.com.au"
+              className="btn-secondary contact-hero-actions__link contact-hero-actions__link--secondary"
+              aria-label="Email us"
+            >
+              <span className="bs-text">Email Us</span>
+            </a>
+          </div>
+        }
       />
 
       <div className="contact-shell">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
+import BtnSecondary from "../components/BtnSecondary";
 
 import "./AboutPage.css";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
@@ -145,9 +146,13 @@ export default function AboutPage({ ready = false }: { ready?: boolean }) {
       <HeroSection
         ready={ready}
         showVideo={false}
-        showCta
-        ctaLabel="Book a Free Appraisal"
-        ctaOnClick={() => navigate("/contact")}
+        showCta={false}
+        panel={
+          <BtnSecondary
+            label="Book a Free Appraisal"
+            onClick={() => navigate("/contact")}
+          />
+        }
         bgImage="images/hero4.jpg"
         titleLine1={
           <>
