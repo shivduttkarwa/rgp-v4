@@ -115,7 +115,7 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--rg-beige-light);
+  background: #ffffff;
   color: var(--rg-text-dark);
   min-height: 100vh;
 }

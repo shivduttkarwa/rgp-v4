@@ -4,7 +4,7 @@
 
 .ap-page {
   min-height: 100vh;
-  background: var(--rg-beige-light);
+  background: #ffffff;
 }
 
 /* ─── Filter Slab (matches PropertyListingSection) ───────────────────────── */
@@ -184,6 +184,7 @@
 .ap-grid-section {
   padding: clamp(2.5rem, 5vw, 4rem) var(--rg-pad);
   overflow-anchor: none;
+  background: #ffffff;
 }
 
 .ap-grid-container {

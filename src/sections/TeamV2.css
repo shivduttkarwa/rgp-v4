@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 .tv2 {
-  background: var(--rg-beige-light);
+  background: #ffffff;
   padding: clamp(5rem, 8vw, 7.5rem) clamp(1.5rem, 3vw, 3rem);
   overflow: hidden;
 }

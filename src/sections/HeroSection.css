@@ -30,7 +30,7 @@ body {
     Roboto,
     Arial,
     sans-serif;
-  background: var(--rg-beige-light);
+  background: #ffffff;
   color: var(--rg-text-dark);
   overflow-x: hidden;
   height: 100%;
