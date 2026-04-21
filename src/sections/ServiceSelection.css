@@ -90,6 +90,20 @@
   border-radius: calc(var(--rg-radius) + 0.25rem);
   overflow: hidden;
   min-height: 22rem;
+  box-shadow: 0 0.75rem 2rem rgba(15, 24, 112, 0.08);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.svc-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
 }
 
 @media (max-width: 1024px) {
@@ -110,42 +124,54 @@
 
 /* Buy Card */
 .svc-card--buy {
-  background-color: #162496;
-  border: 0.0625rem solid transparent;
+  background-color: #eef3ff;
+  border: 0.0625rem solid #cad8ff;
 }
-.svc-card--buy .svc-card__word { color: #ffffff; }
-.svc-card--buy .svc-card__desc { color: rgba(255, 255, 255, 0.75); }
+.svc-card--buy::before { background-color: var(--rg-blue-400); }
+.svc-card--buy .svc-card__word { color: var(--rg-text-dark); }
+.svc-card--buy .svc-card__desc { color: var(--rg-text-medium); }
 .svc-card--buy .svc-card__btn {
-  background-color: #ffffff;
-  color: #162496;
+  background: var(--rg-blue-500);
+  color: #ffffff;
 }
-.svc-card--buy .svc-card__btn:hover { background-color: #e8f0ff; }
+.svc-card--buy .svc-card__btn:hover { background: var(--rg-blue-400); }
 
 /* Sell Card */
 .svc-card--sell {
-  background-color: #2563eb;
-  border: 0.0625rem solid transparent;
+  background-color: #fff8e8;
+  border: 0.0625rem solid #f2db9f;
 }
-.svc-card--sell .svc-card__word { color: #ffffff; }
-.svc-card--sell .svc-card__desc { color: rgba(255, 255, 255, 0.82); }
+.svc-card--sell::before { background-color: var(--rg-gold); }
+.svc-card--sell .svc-card__word { color: var(--rg-text-dark); }
+.svc-card--sell .svc-card__desc { color: var(--rg-text-medium); }
 .svc-card--sell .svc-card__btn {
-  background-color: #ffffff;
-  color: #2563eb;
+  background: var(--rg-gold);
+  color: var(--rg-navy);
 }
-.svc-card--sell .svc-card__btn:hover { background-color: #e8eeff; }
+.svc-card--sell .svc-card__btn:hover { background: var(--rg-amber); }
 
 /* Rent Card */
 .svc-card--rent {
-  background-color: #fdf4e3;
-  border: 0.0625rem solid rgba(15, 24, 112, 0.12);
+  background-color: #f2f5fa;
+  border: 0.0625rem solid #d4ddeb;
 }
-.svc-card--rent .svc-card__word { color: #0f1870; }
+.svc-card--rent::before { background-color: #6f86ad; }
+.svc-card--rent .svc-card__word { color: var(--rg-text-dark); }
 .svc-card--rent .svc-card__desc { color: var(--rg-text-medium); }
 .svc-card--rent .svc-card__btn {
-  background-color: #0f1870;
+  background: var(--rg-navy);
   color: #ffffff;
 }
-.svc-card--rent .svc-card__btn:hover { background-color: #162496; }
+.svc-card--rent .svc-card__btn:hover { background: var(--rg-blue-400); }
+
+.svc-card:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2.2rem rgba(15, 24, 112, 0.14);
+}
+
+.svc-card--buy:hover { border-color: #9eb8ff; }
+.svc-card--sell:hover { border-color: #e7c56e; }
+.svc-card--rent:hover { border-color: #a9bbd7; }
 
 /* ===== Big Word ===== */
 .svc-card__word {
@@ -196,7 +222,7 @@
 .svc-cta {
   position: relative;
   min-height: 30vh;
-  background: linear-gradient(135deg, #0c2d6e 0%, #1251b5 42%, #1a8ee0 75%, #38b2f8 100%);
+  background-color: var(--rg-blue-500);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -206,7 +232,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 60% 40%, rgba(255, 255, 255, 0.07) 0%, transparent 65%);
+  background: rgba(255, 255, 255, 0.05);
   pointer-events: none;
 }
 
@@ -298,9 +324,9 @@
 }
 
 .svc-cta__btn--primary {
-  background-color: #ffffff;
-  color: #0c2d6e;
-  box-shadow: 0 4px 20px rgba(12, 45, 110, 0.25);
+  background: var(--rg-gold);
+  color: var(--rg-navy);
+  box-shadow: 0 4px 20px rgba(15, 24, 112, 0.28);
   transition:
     background-color 0.25s ease,
     color 0.25s ease,
@@ -309,10 +335,10 @@
 }
 
 .svc-cta__btn--primary:hover {
-  background-color: #e8f0ff;
-  color: #0c2d6e;
+  background: var(--rg-amber);
+  color: var(--rg-navy);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(12, 45, 110, 0.32);
+  box-shadow: 0 8px 28px rgba(15, 24, 112, 0.35);
 }
 
 .svc-cta__btn--secondary {

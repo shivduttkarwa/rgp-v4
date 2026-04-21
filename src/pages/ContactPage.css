@@ -252,7 +252,7 @@
   margin: 0 var(--rg-pad) clamp(3rem, 6vw, 5rem);
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border-radius: var(--rg-radius);
-  background: linear-gradient(135deg, #0c2d6e 0%, #1251b5 42%, #1a8ee0 75%, #38b2f8 100%);
+  background-color: var(--rg-blue-500);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -314,15 +314,15 @@
   min-height: 3.625rem;
   padding: 1rem 1.75rem;
   border-radius: 0.625rem;
-  background-color: #ffffff;
-  color: #0c2d6e;
+  background-color: var(--rg-gold);
+  color: #03071e;
   text-decoration: none;
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 700;
   white-space: nowrap;
   position: relative;
-  box-shadow: 0 4px 20px rgba(12, 45, 110, 0.25);
+  box-shadow: 0 4px 20px rgba(249, 195, 7, 0.3);
   transition:
     background-color 0.25s ease,
     transform 0.2s ease,
@@ -330,10 +330,10 @@
 }
 
 .contact-cta__button:hover {
-  background-color: #e8f0ff;
-  color: #0c2d6e;
+  background-color: #fad840;
+  color: #03071e;
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(12, 45, 110, 0.32);
+  box-shadow: 0 10px 26px rgba(249, 195, 7, 0.3);
 }
 
 .contact-cta__button svg {
