@@ -544,7 +544,6 @@ const PropertyListingSection = () => {
           text="Complete our full Expression of Interest form with the exact buyer, offer, condition, and solicitor details needed for a clean review."
           buttonLabel="Open the Form"
           buttonTo="/expressions-of-interest"
-          bgImage="images/int.jpg"
           minHeight="100vh"
           mobileMinHeight="70vh"
         />

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import RgButton from "@/components/reusable/RgButton";
 import assetUrl from "@/lib/assetUrl";
 import "./eoi-cta.css";
@@ -11,8 +11,6 @@ export type EoiCtaProps = {
   buttonLabel: ReactNode;
   buttonTo: string;
   bgImage?: string;
-  bgVideo?: string;
-  posterImage?: string;
   minHeight?: string;
   mobileMinHeight?: string;
   className?: string;
@@ -25,17 +23,12 @@ export default function EoiCta({
   text,
   buttonLabel,
   buttonTo,
-  bgImage = "images/int.jpg",
-  bgVideo,
-  posterImage,
+  bgImage = "images/hero-11.jpg",
   minHeight = "100vh",
   mobileMinHeight = "70vh",
   className = "",
 }: EoiCtaProps) {
-  const [videoReady, setVideoReady] = useState(false);
-  const poster = posterImage ?? bgImage;
-  const posterSrc = assetUrl(typeof poster === "string" ? poster : "");
-  const videoSrc = assetUrl(bgVideo);
+  const bgSrc = assetUrl(typeof bgImage === "string" ? bgImage : "");
 
   const style = {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -45,35 +38,11 @@ export default function EoiCta({
 
   return (
     <section
-      className={[
-        "eoi-cta",
-        bgVideo ? "eoi-cta--has-video" : "",
-        videoReady ? "eoi-cta--video-ready" : "",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={["eoi-cta", className].filter(Boolean).join(" ")}
       style={style}
     >
-      {posterSrc ? (
-        <img className="eoi-cta__poster" src={posterSrc} alt="" aria-hidden="true" />
-      ) : null}
-
-      {bgVideo ? (
-        <video
-          className="eoi-cta__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={posterSrc || undefined}
-          onCanPlay={() => setVideoReady(true)}
-          onLoadedData={() => setVideoReady(true)}
-          onError={() => setVideoReady(false)}
-        >
-          <source src={videoSrc} />
-        </video>
+      {bgSrc ? (
+        <img className="eoi-cta__poster" src={bgSrc} alt="" aria-hidden="true" />
       ) : null}
 
       <div className="eoi-cta__inner">
