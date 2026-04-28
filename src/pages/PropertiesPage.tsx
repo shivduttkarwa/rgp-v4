@@ -528,7 +528,7 @@ export default function PropertiesPage() {
           { title: "Inspection‑ready planning" },
           { title: "Negotiation that protects" },
         ]}
-        bgImage="/images/int.jpg"
+        bgImage="images/int.jpg"
         bgVideo={`${import.meta.env.BASE_URL}vids/cta-2-vid.mp4`}
         minHeight="100vh"
       />
