@@ -552,7 +552,7 @@ export default function PropertiesPage() {
 
             <div className="svc-cta__trust">
               <div className="svc-cta__trust-item">
-                <span className="svc-cta__trust-value">150+</span>
+                <span className="svc-cta__trust-value">100+</span>
                 <span className="svc-cta__trust-label">Local Deals Closed</span>
               </div>
               <div className="svc-cta__trust-divider" />

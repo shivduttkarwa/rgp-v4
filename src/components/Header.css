@@ -13,9 +13,9 @@
 .rg-header__bg {
   position: absolute;
   inset: 0;
-  background: rgba(8, 13, 60, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: #001f49;
+  
+  
   opacity: 0;
   z-index: 0;
   border-bottom: 1px solid rgba(249, 195, 7, 0.18);

@@ -35,7 +35,7 @@ export default function HeroSection({
     </>
   ),
   subtitle =
-    "350+ premium properties delivered — luxury villas, penthouses & exclusive estates crafted for those who demand the extraordinary.",
+    "Premium properties delivered — residential houses, units, land, and exclusive estates crafted for those who demand the extraordinary.",
   ctaLabel = "Explore Properties",
   ctaOnClick,
   showCta = true,

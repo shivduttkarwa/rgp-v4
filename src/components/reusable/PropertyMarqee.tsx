@@ -242,7 +242,7 @@ export default function PropertyMarquee() {
             data-gsap="char-reveal"
             data-gsap-start="top 85%"
           >
-            Explore <em>Signature Homes</em>
+            Explore <em>Premium Homes</em>
           </h2>
           <p
             className="section-subtitle"

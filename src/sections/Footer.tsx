@@ -95,7 +95,7 @@ const Footer = ({ ready = false }: FooterProps) => {
           </Link>
 
           <p className="rg-footer__brand-desc">
-            Elevating real estate experiences since 2012. Connecting discerning
+            Elevating real estate experiences since 2024. Connecting discerning
             buyers with extraordinary properties across Queensland.
           </p>
 

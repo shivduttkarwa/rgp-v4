@@ -14,8 +14,8 @@
   --rg-blue-100: #e0e7ff;
   --rg-blue-200: #c7d2fe;
   --rg-blue-300: #a5b4fc;
-  --rg-blue-400: #162496; /* vivid brand blue */
-  --rg-blue-500: #0f1870; /* deep brand navy */
+  --rg-blue-400: #001f49;; /* vivid brand blue */
+  --rg-blue-500: #001f49;; /* deep brand navy */
 
   /* ── Gold-warm tones ── */
   --rg-warm-100: #fffbea;
@@ -25,7 +25,7 @@
   --rg-warm-500: #d4a200;
 
   /* Text Colors — dark on light backgrounds */
-  --rg-text-dark: #0f1870;
+  --rg-text-dark: #001f49;;
   --rg-text-medium: rgba(15, 24, 112, 0.68);
   --rg-text-light: rgba(15, 24, 112, 0.45);
 
@@ -35,11 +35,11 @@
   --rg-crimson: #f9c307;
 
   /* Legacy aliases (re-mapped for light theme) */
-  --rg-navy: #0f1870; /* deep brand navy — used for dark text, outlines */
-  --rg-dark: #0f1870;
+  --rg-navy: #001f49;; /* deep brand navy — used for dark text, outlines */
+  --rg-dark: #001f49;;
   --rg-darker: #fffdf6; /* maps to page bg (used as section bg in Philosophy) */
-  --rg-ink: #0f1870;
-  --rg-ink-2: rgba(15, 24, 112, 0.68);
+  --rg-ink: #001f49;
+  --rg-ink-2: #001f49;
 
   /* Layout */
   --rg-max: 90rem;
@@ -52,7 +52,7 @@
 
   /* Extended theme (About page) */
   --bg: #f7f8fc;
-  --ink: #0f1870;
+  --ink: #001f49;;
   --green: #f9c307; /* primary accent → gold */
   --green-2: #d4a200; /* darker gold */
   --line: rgba(15, 24, 112, 0.12);

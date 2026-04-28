@@ -419,25 +419,6 @@ export default function ExpressionOfInterestPage({
                 </button>
               </div>
             </form>
-
-            <div
-              className="eoi-note"
-              data-gsap="clip-smooth-down"
-              data-gsap-start="top 88%"
-              data-gsap-duration="0.95"
-            >
-              <span className="eoi-note__eyebrow">Important information</span>
-              <p className="eoi-note__body">
-                Submitting an Expression of Interest does not create a legally
-                binding contract. If your offer is accepted, you will be asked
-                to sign a formal contract of sale on the agreed terms.
-              </p>
-              <p className="eoi-note__body">
-                The seller may consider multiple offers at the same time, and an
-                offer may be withdrawn at any point before a contract of sale
-                has been signed by both purchaser and seller.
-              </p>
-            </div>
           </div>
         </div>
       </section>

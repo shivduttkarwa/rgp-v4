@@ -221,23 +221,30 @@
 
 .svc-cta {
   position: relative;
-  min-height: 30vh;
-  background-color: var(--rg-blue-500);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
+  background-image: url("/images/hero1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .svc-cta::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.05);
+  background:
+    linear-gradient(0deg, rgba(0, 31, 73, 0.46), rgba(0, 31, 73, 0.46)),
+    radial-gradient(80% 70% at 50% 0%, rgba(249, 195, 7, 0.12), transparent 60%);
   pointer-events: none;
+  z-index: 0;
 }
 
 .svc-cta__container {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: var(--rg-max);
   margin: 0 auto;
