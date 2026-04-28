@@ -170,46 +170,23 @@
   color: var(--rg-gold);
 }
 
-.hours {
-  margin-top: 3rem;
-  padding: 1.4rem 0;
-  border-top: 1px solid rgba(15, 24, 112, 0.12);
-  border-bottom: 1px solid rgba(15, 24, 112, 0.12);
+.c-item--static {
+  cursor: default;
+  padding-left: 0;
 }
 
-.h-label {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--rg-gold);
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
+.c-item--static:hover {
+  padding-left: 0;
 }
 
-.h-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.55rem 0;
+.c-item--static::before {
+  display: none;
 }
 
-.h-row:first-of-type {
-  border-top: none;
-}
-
-.h-day {
-  font-size: 0.92rem;
-  color: var(--rg-text-medium);
-  font-weight: 400;
-}
-
-.h-time {
-  font-family: var(--font-title);
-  font-size: 1rem;
+.c-val--time {
   font-style: italic;
-  color: var(--rg-text-dark);
+  text-align: right;
+  white-space: nowrap;
 }
 
 .quote {
@@ -404,7 +381,6 @@
 }
 
 .fgrid--last .fg input,
-.fgrid--last .fg select,
 .fgrid--last .fg textarea {
   border-bottom: none;
 }
@@ -434,7 +410,6 @@
 }
 
 .fg input,
-.fg select,
 .fg textarea {
   font-family: var(--font-title);
   font-size: 1.1rem;
@@ -452,6 +427,96 @@
   border-radius: 0;
 }
 
+.fg__select {
+  width: min(13.2rem, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--rg-text-dark);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(15, 24, 112, 0.12);
+  padding: 0.5rem 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.fg__select-val.is-placeholder {
+  color: var(--rg-text-light);
+  font-style: italic;
+}
+
+.fg__chev {
+  flex-shrink: 0;
+  color: var(--rg-text-light);
+  transform: rotate(0deg);
+  transition: transform 0.24s ease, color 0.24s ease;
+}
+
+.fg--select.is-open .fg__chev {
+  transform: rotate(180deg);
+  color: var(--rg-gold);
+}
+
+.fg--select.is-open .fg__select {
+  border-color: var(--rg-gold);
+}
+
+.fg__menu {
+  position: absolute;
+  left: 0;
+  transform: translateY(-8px);
+  width: min(13.2rem, 100%);
+  top: calc(100% + 0.65rem);
+  background: #ffffff;
+  border: 1px solid rgba(15, 24, 112, 0.14);
+  border-radius: 0.9rem;
+  box-shadow: 0 18px 45px rgba(15, 24, 112, 0.12);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    max-height 260ms ease,
+    opacity 180ms ease,
+    transform 220ms ease;
+  z-index: 10;
+}
+
+.fg--select.is-open .fg__menu {
+  max-height: 18rem;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.fg__opt {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--rg-text-dark);
+  text-align: left;
+}
+
+.fg__opt:hover {
+  background: rgba(249, 195, 7, 0.12);
+}
+
+.fg__opt.is-active {
+  background: rgba(249, 195, 7, 0.2);
+}
+
 .fg input::placeholder,
 .fg textarea::placeholder {
   color: var(--rg-text-light);
@@ -459,7 +524,6 @@
 }
 
 .fg input:focus,
-.fg select:focus,
 .fg textarea:focus {
   border-color: var(--rg-gold);
 }
@@ -469,12 +533,6 @@
   height: 6rem;
   line-height: 1.7;
 }
-
-.fg select option {
-  font-family: var(--font-body);
-  background: var(--rg-beige-light);
-}
-
 
 .budget {
   margin-bottom: 1.8rem;

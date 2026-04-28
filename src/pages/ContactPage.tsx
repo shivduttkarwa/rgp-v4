@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FileText, Mail, Phone, Send } from "lucide-react";
+import { ChevronDown, FileText, Mail, Phone, Send } from "lucide-react";
 import HeroSection from "../sections/HeroSection";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import RgButton from "@/components/reusable/RgButton";
@@ -7,6 +7,7 @@ import "./ContactPage.css";
 
 export default function ContactPage({ ready = false }: { ready?: boolean }) {
   const pageRef = useRef<HTMLElement>(null);
+  const ptWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const guards = [
@@ -26,6 +27,36 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
   const [intent, setIntent] = useState("Buy");
   const [budget, setBudget] = useState(5_000_000);
   const [success, setSuccess] = useState(false);
+  const [propertyType, setPropertyType] = useState<string>("");
+  const [ptOpen, setPtOpen] = useState(false);
+
+  const PROPERTY_TYPES = [
+    "Apartment",
+    "Villa / Townhouse",
+    "Penthouse",
+    "Commercial",
+    "Plot / Land",
+  ];
+
+  useEffect(() => {
+    const onDocMouseDown = (e: MouseEvent) => {
+      if (!ptOpen) return;
+      const wrap = ptWrapRef.current;
+      if (!wrap) return;
+      if (e.target instanceof Node && !wrap.contains(e.target)) setPtOpen(false);
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPtOpen(false);
+    };
+
+    document.addEventListener("mousedown", onDocMouseDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onDocMouseDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [ptOpen]);
 
   const formatBudget = (value: number) => {
     if (value >= 20_000_000) return "A$ 20M+";
@@ -122,12 +153,15 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
               </a>
-            </nav>
 
-            <div className="hours" data-gsap="fade-up" data-gsap-delay="0.15">
-              <p className="h-label">Office Hours</p>
-              <div className="h-row"><span className="h-day">All days</span><span className="h-time">09:00 – 18:00</span></div>
-            </div>
+              <div className="c-item c-item--static" data-gsap="fade-up" data-gsap-delay="0.15">
+                <div>
+                  <p className="c-key">Office Hours</p>
+                  <p className="c-val">All days</p>
+                </div>
+                <p className="c-val c-val--time">09:00 – 18:00</p>
+              </div>
+            </nav>
 
             <div className="quote" data-gsap="fade-up" data-gsap-delay="0.1">
               <blockquote>
@@ -189,16 +223,60 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
                 <label htmlFor="ph">Phone</label>
                 <input id="ph" type="tel" placeholder="+61 4 0000 0000" />
               </div>
-              <div className="fg full">
+              <div
+                className={`fg full fg--select${ptOpen ? " is-open" : ""}`}
+                ref={ptWrapRef}
+              >
                 <label htmlFor="pt">Property Type</label>
-                <select id="pt">
-                  <option value="">Any type</option>
-                  <option>Apartment</option>
-                  <option>Villa / Townhouse</option>
-                  <option>Penthouse</option>
-                  <option>Commercial</option>
-                  <option>Plot / Land</option>
-                </select>
+                <button
+                  id="pt"
+                  type="button"
+                  className="fg__select"
+                  aria-haspopup="listbox"
+                  aria-expanded={ptOpen}
+                  aria-controls="pt-listbox"
+                  onClick={() => setPtOpen((v) => !v)}
+                >
+                  <span className={`fg__select-val${propertyType ? "" : " is-placeholder"}`}>
+                    {propertyType || "Any type"}
+                  </span>
+                  <ChevronDown size={18} className="fg__chev" aria-hidden="true" />
+                </button>
+
+                <div
+                  id="pt-listbox"
+                  className="fg__menu"
+                  role="listbox"
+                  aria-label="Property type options"
+                >
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={!propertyType}
+                    className={`fg__opt${!propertyType ? " is-active" : ""}`}
+                    onClick={() => {
+                      setPropertyType("");
+                      setPtOpen(false);
+                    }}
+                  >
+                    Any type
+                  </button>
+                  {PROPERTY_TYPES.map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      role="option"
+                      aria-selected={propertyType === t}
+                      className={`fg__opt${propertyType === t ? " is-active" : ""}`}
+                      onClick={() => {
+                        setPropertyType(t);
+                        setPtOpen(false);
+                      }}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
