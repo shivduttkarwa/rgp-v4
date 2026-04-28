@@ -130,7 +130,6 @@
 
 /* ── 1) GOLD (pc-view-btn) ── */
 .rg-btn--gold,
-section.project-feature .rg-btn--gold,
 section.project-feature .pc-view-btn {
   display: inline-flex;
   align-items: center;
@@ -145,8 +144,13 @@ section.project-feature .pc-view-btn {
   text-decoration: none;
   background-color: var(--rg-gold);
   color: #00032e;
-  align-self: flex-start;
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Keep the original portfolio placement only inside that section */
+section.project-feature .rg-btn--gold,
+section.project-feature .pc-view-btn {
+  align-self: flex-start;
   margin-top: 0.25rem;
 }
 

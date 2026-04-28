@@ -8,6 +8,7 @@ import PortfolioShowcase from "../sections/PortfolioShowcase";
 import PropertyListingSection from "@/sections/PropertyListingSection";
 import ServiceSelection from "@/sections/ServiceSelection";
 import PhilosophyPillars from "@/sections/Philosophy";
+import RgpCta from "@/components/reusable/RgpCta";
 
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 export default function HomePage({ ready = false }: { ready?: boolean }) {
@@ -53,6 +54,19 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
       <PropertyListingSection />
 
       <ServiceSelection />
+      <RgpCta
+        eyebrow="Need Guidance?"
+        title="Not Sure Where to"
+        titleEm="Start?"
+        text="Our experienced advisors are here to understand your needs and guide you through every step of your real estate journey."
+        primary={{ label: "Talk to an Expert", to: "/contact" }}
+        secondary={{ label: "0450 009 291", href: "tel:+61450009291" }}
+        stats={[
+          { value: "5+", label: "Years Experience" },
+          { value: "100+", label: "Happy Clients" },
+          { value: "24/7", label: "Support Available" },
+        ]}
+      />
       <PhilosophyPillars />
 
       <PortfolioShowcase />

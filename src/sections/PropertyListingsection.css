@@ -5,7 +5,8 @@
 
 /* ===== Section Base ===== */
 .property-section {
-  padding: clamp(3rem, 8vw, 6rem) 0;
+  padding-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: 0;
   background-color: #ffffff;
   overflow: hidden;
 }
@@ -427,7 +428,16 @@
 @media (max-width: 900px) {
   .property-section .listing-cta {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+
+  .property-section .listing-cta__copy {
+    max-width: 46rem;
+  }
+
+  .property-section .listing-cta__button {
+    align-self: center;
   }
 }
 

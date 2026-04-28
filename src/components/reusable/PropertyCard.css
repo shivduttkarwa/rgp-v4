@@ -206,10 +206,6 @@
   transition: color 0.3s ease;
 }
 
-.property-card:hover .card-title {
-  color: var(--rg-gold);
-}
-
 .property-card .card-location {
   display: flex;
   align-items: center;

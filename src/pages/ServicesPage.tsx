@@ -3,6 +3,7 @@ import BtnSecondary from "../components/BtnSecondary";
 import HeroSection from "../sections/HeroSection";
 import PropertyMarqee from "../components/reusable/PropertyMarqee";
 import ServiceSelection from "../sections/ServiceSelection";
+import RgpCta from "@/components/reusable/RgpCta";
 import "./AboutPage.css";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import gsap from "gsap";
@@ -311,16 +312,19 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
               theme: "rent",
             },
           ]}
-          cta={{
-            eyebrow: "Ready to Move?",
-            title: "Get a",
-            titleEm: "Tailored Plan",
-            text: "Tell us your goal and timeline — we’ll map the smartest path and execute with precision.",
-            primaryLabel: "Book a Consultation",
-            primaryHref: "/contact",
-            secondaryLabel: "0450 009 291",
-            secondaryHref: "tel:+61450009291",
-          }}
+        />
+        <RgpCta
+          eyebrow="Ready to Move?"
+          title="Get a"
+          titleEm="Tailored Plan"
+          text="Tell us your goal and timeline — we’ll map the smartest path and execute with precision."
+          primary={{ label: "Book a Consultation", to: "/contact" }}
+          secondary={{ label: "0450 009 291", href: "tel:+61450009291" }}
+          stats={[
+            { value: "5+", label: "Years Experience" },
+            { value: "100+", label: "Happy Clients" },
+            { value: "24/7", label: "Support Available" },
+          ]}
         />
 
         {/* 4) TURN-KEY */}

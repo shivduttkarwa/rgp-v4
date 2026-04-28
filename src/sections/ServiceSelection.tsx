@@ -6,8 +6,6 @@ import {
   TrendingUp,
   Search,
   CalendarCheck,
-  MessageCircle,
-  Phone,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./ServiceSelection.css";
@@ -30,17 +28,6 @@ type ServiceHeader = {
   title: string;
   titleEm: string;
   subtitle: string;
-};
-
-type ServiceCta = {
-  eyebrow: string;
-  title: string;
-  titleEm: string;
-  text: string;
-  primaryLabel: string;
-  primaryHref: string;
-  secondaryLabel: string;
-  secondaryHref: string;
 };
 
 const DEFAULT_SERVICES: ServiceItem[] = [
@@ -105,25 +92,12 @@ const DEFAULT_HEADER: ServiceHeader = {
     "Whether you're buying, selling, or renting — we're here to make your real estate journey seamless and rewarding.",
 };
 
-const DEFAULT_CTA: ServiceCta = {
-  eyebrow: "Need Guidance?",
-  title: "Not Sure Where to",
-  titleEm: "Start?",
-  text: "Our experienced advisors are here to understand your needs and guide you through every step of your real estate journey.",
-  primaryLabel: "Talk to an Expert",
-  primaryHref: "/contact",
-  secondaryLabel: "0450 009 291",
-  secondaryHref: "tel:+61450009291",
-};
-
 const ServiceSelection = ({
   services = DEFAULT_SERVICES,
   header = DEFAULT_HEADER,
-  cta = DEFAULT_CTA,
 }: {
   services?: ServiceItem[];
   header?: ServiceHeader;
-  cta?: ServiceCta;
 }) => {
   return (
     <section className="svc">
@@ -171,81 +145,6 @@ const ServiceSelection = ({
               </div>
             </article>
           ))}
-        </div>
-      </div>
-
-      {/* CTA Banner */}
-      <div className="svc-cta">
-        <div className="svc-cta__container">
-          {/* Decorative Elements */}
-          <div className="svc-cta__decor svc-cta__decor--left" />
-          <div className="svc-cta__decor svc-cta__decor--right" />
-
-          {/* Content */}
-          <div className="svc-cta__content">
-            <span className="svc-cta__eyebrow" data-gsap="fade-up">
-              {cta.eyebrow}
-            </span>
-            <h3
-              className="svc-cta__title"
-              data-gsap="char-reveal"
-              data-gsap-start="top 85%"
-            >
-              {cta.title} <em>{cta.titleEm}</em>
-            </h3>
-            <p
-              className="svc-cta__text"
-              data-gsap="fade-up"
-              data-gsap-delay="0.15"
-            >
-              {cta.text}
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="svc-cta__actions">
-              <Link
-                to="/contact"
-                className="svc-cta__btn svc-cta__btn--primary"
-                data-gsap="btn-clip-reveal"
-                data-gsap-delay="0.2"
-              >
-                <MessageCircle size={20} />
-                <span>{cta.primaryLabel}</span>
-                <ArrowRight size={18} />
-              </Link>
-              <a
-                data-gsap="btn-clip-reveal"
-                data-gsap-delay="0.2"
-                href={cta.secondaryHref}
-                className="svc-cta__btn svc-cta__btn--secondary"
-              >
-                <Phone size={18} />
-                <span>{cta.secondaryLabel}</span>
-              </a>
-            </div>
-
-            {/* Trust Indicators */}
-            <div
-              data-gsap="zoom-in"
-              data-gsap-stagger="0.3 "
-              className="svc-cta__trust"
-            >
-              <div className="svc-cta__trust-item">
-                <span className="svc-cta__trust-value">5+</span>
-                <span className="svc-cta__trust-label">Years Experience</span>
-              </div>
-              <div className="svc-cta__trust-divider" />
-              <div className="svc-cta__trust-item">
-                <span className="svc-cta__trust-value">100+</span>
-                <span className="svc-cta__trust-label">Happy Clients</span>
-              </div>
-              <div className="svc-cta__trust-divider" />
-              <div className="svc-cta__trust-item">
-                <span className="svc-cta__trust-value">24/7</span>
-                <span className="svc-cta__trust-label">Support Available</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
