@@ -192,13 +192,17 @@
 }
 
 @media (max-width: 480px) {
+  .cta2 {
+    min-height: 90vh;
+  }
+
   .cta2__actions {
     flex-direction: column;
     align-items: stretch;
   }
 
   .cta2__commitments {
-    width: 100%;
+    display: none;
   }
 }
 
