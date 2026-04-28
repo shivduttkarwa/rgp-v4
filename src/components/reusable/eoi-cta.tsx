@@ -23,7 +23,7 @@ export default function EoiCta({
   text,
   buttonLabel,
   buttonTo,
-  bgImage = "images/hero-11.jpg",
+  bgImage = "images/eoi-cta.jpg",
   minHeight = "100vh",
   mobileMinHeight = "70vh",
   className = "",
