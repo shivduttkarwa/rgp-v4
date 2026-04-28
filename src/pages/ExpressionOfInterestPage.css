@@ -255,7 +255,7 @@
 
 .eoi-submit__button {
   border: 0;
-  border-radius: 999px;
+  border-radius: 0.625rem;
   padding: 1rem 1.6rem;
   background: linear-gradient(135deg, #f9c206 0%, #d4a200 100%);
   color: #00032e;
