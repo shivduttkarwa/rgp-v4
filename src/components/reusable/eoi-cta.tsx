@@ -11,6 +11,7 @@ export type EoiCtaProps = {
   buttonLabel: ReactNode;
   buttonTo: string;
   bgImage?: string;
+  mobileBgImage?: string;
   minHeight?: string;
   mobileMinHeight?: string;
   className?: string;
@@ -24,11 +25,13 @@ export default function EoiCta({
   buttonLabel,
   buttonTo,
   bgImage = "images/eoi-cta.jpg",
+  mobileBgImage = "images/eoi-cta-mob.jpg",
   minHeight = "100vh",
   mobileMinHeight = "70vh",
   className = "",
 }: EoiCtaProps) {
   const bgSrc = assetUrl(typeof bgImage === "string" ? bgImage : "");
+  const mobileBgSrc = assetUrl(typeof mobileBgImage === "string" ? mobileBgImage : "");
 
   const style = {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -42,7 +45,12 @@ export default function EoiCta({
       style={style}
     >
       {bgSrc ? (
-        <img className="eoi-cta__poster" src={bgSrc} alt="" aria-hidden="true" />
+        <picture className="eoi-cta__poster" aria-hidden="true">
+          {mobileBgSrc ? (
+            <source media="(max-width: 480px)" srcSet={mobileBgSrc} />
+          ) : null}
+          <img src={bgSrc} alt="" />
+        </picture>
       ) : null}
 
       <div className="eoi-cta__inner">
