@@ -7,9 +7,26 @@
 
 /* ---- Hero ---- */
 .legal-hero {
-  background: #00032e;
+  background-color: #00032e;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 148px 40px 72px;
   position: relative;
+}
+
+.legal-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 3, 46, 0.45);
+}
+
+.legal-hero__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .legal-hero::after {
@@ -20,11 +37,7 @@
   right: 40px;
   height: 1px;
   background: rgba(249, 195, 7, 0.2);
-}
-
-.legal-hero__inner {
-  max-width: 900px;
-  margin: 0 auto;
+  z-index: 1;
 }
 
 .legal-hero__eyebrow {
