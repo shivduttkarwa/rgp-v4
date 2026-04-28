@@ -228,10 +228,6 @@ export default function TeamPage({ ready = false }: { ready?: boolean }) {
                     alt="Our office environment"
                     loading="lazy"
                   />
-                  <div className="tp-join__img-badge">
-                    <span className="tp-join__badge-num">5+</span>
-                    <span className="tp-join__badge-label">Years of Excellence</span>
-                  </div>
                 </div>
               </div>
             </div>

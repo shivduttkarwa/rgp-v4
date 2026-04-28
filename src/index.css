@@ -107,6 +107,140 @@
   text-align: center;
 }
 
+/* ════════════════════════════════════════════════════════
+   UNIVERSAL BUTTON THEMES (only 3 variants)
+   Gold  — matches .pc-view-btn
+   Blue  — matches .ap-view-btn
+   Outline — matches .view-all-btn
+   ════════════════════════════════════════════════════════ */
+
+/* Base */
+.rg-btn,
+.pc-view-btn,
+.ap-view-btn,
+.view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+}
+
+/* ── 1) GOLD (pc-view-btn) ── */
+.rg-btn--gold,
+section.project-feature .rg-btn--gold,
+section.project-feature .pc-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1rem 1.875rem;
+  border: none;
+  border-radius: 0.625rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: var(--rg-gold);
+  color: #00032e;
+  align-self: flex-start;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  margin-top: 0.25rem;
+}
+
+.rg-btn--gold:hover,
+section.project-feature .rg-btn--gold:hover,
+section.project-feature .pc-view-btn:hover {
+  background-color: #fad840;
+  color: #00032e;
+}
+
+.rg-btn--gold svg,
+section.project-feature .rg-btn--gold svg,
+section.project-feature .pc-view-btn svg {
+  flex-shrink: 0;
+}
+
+/* ── 2) BLUE (ap-view-btn) ── */
+.rg-btn--blue,
+.ap-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.25rem;
+  background: var(--rg-navy);
+  color: #fff;
+  border: 2px solid var(--rg-navy);
+  border-radius: 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.rg-btn--blue:hover,
+.ap-view-btn:hover {
+  background: transparent;
+  color: var(--rg-navy);
+}
+
+.rg-btn--blue svg,
+.ap-view-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.rg-btn--blue:hover svg,
+.ap-view-btn:hover svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .rg-btn--blue,
+  .ap-view-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ── 3) OUTLINE (view-all-btn) ── */
+.rg-btn--outline,
+.property-section .view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: 0.125rem solid rgba(15, 24, 112, 0.25);
+  border-radius: var(--rg-radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--rg-navy);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rg-btn--outline:hover,
+.property-section .view-all-btn:hover {
+  border-color: var(--rg-gold);
+  color: var(--rg-navy);
+  background-color: rgba(249, 195, 7, 0.08);
+}
+
+.rg-btn--outline svg,
+.property-section .view-all-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.rg-btn--outline:hover svg,
+.property-section .view-all-btn:hover svg {
+  transform: translateX(0.25rem);
+}
+
 * {
   margin: 0;
   padding: 0;

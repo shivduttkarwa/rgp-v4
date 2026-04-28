@@ -538,10 +538,12 @@ const PropertyListingSection = () => {
 
         <div
           className="stats-bar"
-          data-gsap="clip-smooth-down"
-          data-gsap-start="top 88%"
         >
-          <div className="listing-cta">
+          <div
+            className="listing-cta"
+            data-gsap="clip-smooth-down"
+            data-gsap-start="top 88%"
+          >
             <div className="listing-cta__copy">
               <div className="listing-cta__badge" data-gsap="fade-up">
                 <Building2 size={20} />

@@ -341,35 +341,6 @@
   pointer-events: none;
 }
 
-.tp-join__img-badge {
-  position: absolute;
-  bottom: 1.75rem;
-  left: 1.75rem;
-  z-index: 2;
-  background: #162496;
-  color: #ffffff;
-  border-radius: 14px;
-  padding: 1rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.tp-join__badge-num {
-  font-family: var(--font-title);
-  font-size: 2rem;
-  line-height: 1;
-  font-weight: 400;
-}
-
-.tp-join__badge-label {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
 @media (max-width: 860px) {
   .tp-join__inner {
     grid-template-columns: 1fr;
@@ -387,15 +358,5 @@
 @media (max-width: 480px) {
   .tp-join__img-wrap {
     aspect-ratio: 4 / 3;
-  }
-
-  .tp-join__img-badge {
-    bottom: 1.25rem;
-    left: 1.25rem;
-    padding: 0.75rem 1.1rem;
-  }
-
-  .tp-join__badge-num {
-    font-size: 1.6rem;
   }
 }

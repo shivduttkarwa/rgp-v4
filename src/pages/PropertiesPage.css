@@ -261,35 +261,7 @@
   overflow-anchor: none;
 }
 
-.ap-view-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 2.25rem;
-  background: var(--rg-navy);
-  color: #fff;
-  border: 2px solid var(--rg-navy);
-  border-radius: 0.65rem;
-  font-family: var(--font-body);
-  font-size: 0.92rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.ap-view-btn:hover {
-  background: transparent;
-  color: var(--rg-navy);
-}
-
-.ap-view-btn svg {
-  transition: transform 0.2s ease;
-}
-
-.ap-view-btn:hover svg {
-  transform: translateX(4px);
-}
+/* Button theme styles are defined globally in src/index.css */
 
 .ap-view-btn--ghost {
   background: transparent;
@@ -431,10 +403,5 @@
 
   .ap-card__price-val {
     font-size: 1.1rem;
-  }
-
-  .ap-view-btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.85rem;
   }
 }
