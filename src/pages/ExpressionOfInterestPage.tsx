@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import HeroSection from "../sections/HeroSection";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
+import RgButton from "@/components/reusable/RgButton";
+import { Send } from "lucide-react";
 import "./ExpressionOfInterestPage.css";
 
 type FieldType = "text" | "email" | "tel" | "number" | "textarea" | "select";
@@ -414,33 +416,45 @@ export default function ExpressionOfInterestPage({
                   </p>
                 </div>
 
-                <button type="submit" className="eoi-submit__button">
-                  Submit Expression of Interest
-                </button>
+                <RgButton
+                  variant="gold"
+                  type="submit"
+                  className="eoi-submit__button"
+                  label="Submit Expression of Interest"
+                  endIcon={<Send size={18} aria-hidden="true" />}
+                />
               </div>
             </form>
           </div>
         </div>
       </section>
 
-      <div className={`eoi-success${success ? " is-visible" : ""}`} role="dialog" aria-modal="true">
+      <div
+        className={`eoi-success${success ? " is-visible" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Expression of Interest submitted"
+        onMouseDown={(e) => {
+          if (e.target === e.currentTarget) setSuccess(false);
+        }}
+      >
         <div className="eoi-success__card">
+          <button
+            type="button"
+            className="eoi-success__close"
+            onClick={() => setSuccess(false)}
+            aria-label="Close message"
+          >
+            ×
+          </button>
           <span className="eoi-success__mark">✦</span>
           <h2>
             Expression of Interest <em>submitted.</em>
           </h2>
           <div className="eoi-success__rule" />
           <p>
-            Thank you for your submission. Our team will review your details
-            and be in touch shortly regarding the next steps for your offer.
+            Thank you — we’ve received your Expression of Interest. Our team will review your offer details and contact you shortly with next steps.
           </p>
-          <button
-            type="button"
-            className="eoi-success__button"
-            onClick={() => setSuccess(false)}
-          >
-            Return to form
-          </button>
         </div>
       </div>
     </main>
