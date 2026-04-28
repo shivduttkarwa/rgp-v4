@@ -568,4 +568,9 @@
   .about-page .avail .photo img {
     position: relative;
   }
+
+/* Ensure consistent breathing room before global footer (prod + dev) */
+.about-page .rgMarquee {
+  margin-bottom: clamp(1.5rem, 4vw, 3.5rem);
+}
 }
