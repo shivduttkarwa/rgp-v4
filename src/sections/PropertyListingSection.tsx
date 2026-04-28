@@ -440,7 +440,7 @@ const PropertyListingSection = () => {
           <div
             ref={filterTabsRef}
             className="filter-tabs"
-            data-gsap="fade-right"
+            data-gsap="fade-up"
             data-gsap-stagger="0.09"
             data-gsap-delay="0.25"
           >

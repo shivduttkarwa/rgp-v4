@@ -257,4 +257,14 @@
   .intro-text {
     font-size: 0.875rem;
   }
+
+  .intro-cta-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .intro-cta-group .rg-btn {
+    width: clamp(14.5rem, 78vw, 17.5rem);
+    white-space: nowrap;
+  }
 }
