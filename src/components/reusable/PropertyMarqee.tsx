@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
 import { PropertyCard } from "./PropertyCard";
 import { allProperties } from "../../data/listingProperties";
+import RgButton from "@/components/reusable/RgButton";
 import "../../sections/PropertyListingsection.css";
 import "./PropertyMarqee.css";
 
@@ -280,13 +280,12 @@ export default function PropertyMarquee() {
       </div>
 
       <div className="rgMarquee__cta">
-        <Link
+        <RgButton
           to="/properties"
-          className="rgMarquee__cta-btn"
+          variant="blue"
+          label="View All Properties"
           data-gsap="btn-clip-reveal"
-        >
-          <span>View All Properties</span>
-        </Link>
+        />
       </div>
     </section>
   );

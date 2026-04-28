@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { ArrowRight, FileText } from "lucide-react";
-import { Link } from "react-router-dom";
+import { FileText, Mail, Phone, Send } from "lucide-react";
 import HeroSection from "../sections/HeroSection";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
+import RgButton from "@/components/reusable/RgButton";
 import "./ContactPage.css";
 
 export default function ContactPage({ ready = false }: { ready?: boolean }) {
@@ -56,20 +56,22 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
         subtitle="Our team is ready to guide you — from first enquiry to final key."
         panel={
           <div className="contact-hero-actions">
-            <a
+            <RgButton
               href="tel:+61450009291"
-              className="btn-secondary contact-hero-actions__link contact-hero-actions__link--primary"
+              variant="gold"
+              className="contact-hero-actions__link contact-hero-actions__link--primary"
               aria-label="Call us"
-            >
-              <span className="bs-text">Call Us</span>
-            </a>
-            <a
+              label="Call Us"
+              endIcon={<Phone size={18} aria-hidden="true" />}
+            />
+            <RgButton
               href="mailto:admin@realgoldproperties.com.au"
-              className="btn-secondary contact-hero-actions__link contact-hero-actions__link--secondary"
+              variant="blue"
+              className="contact-hero-actions__link contact-hero-actions__link--secondary"
               aria-label="Email us"
-            >
-              <span className="bs-text">Email Us</span>
-            </a>
+              label="Email Us"
+              endIcon={<Mail size={18} aria-hidden="true" />}
+            />
           </div>
         }
       />
@@ -238,9 +240,12 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
             </div>
 
             <div className="srow">
-              <button type="submit" className="btn">
-                Send Enquiry
-              </button>
+              <RgButton
+                variant="gold"
+                type="submit"
+                label="Send Enquiry"
+                endIcon={<Send size={18} aria-hidden="true" />}
+              />
               <p className="s-note">
                 We respond within
                 <br />
@@ -279,15 +284,15 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
             </p>
           </div>
 
-          <Link
+          <RgButton
             to="/expressions-of-interest"
+            variant="gold"
             className="contact-cta__button"
             data-gsap="btn-clip-reveal"
             data-gsap-delay="0.2"
-          >
-            <span>Open the Form</span>
-            <ArrowRight size={18} />
-          </Link>
+            label="Open the Form"
+            arrowSize={18}
+          />
         </section>
       </div>
 

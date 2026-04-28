@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
 import RgButton from "@/components/reusable/RgButton";
 import Team from "../sections/TeamV2";
@@ -191,25 +190,18 @@ export default function TeamPage({ ready = false }: { ready?: boolean }) {
                   data-gsap="fade-up"
                   data-gsap-delay="0.2"
                 >
-                  <Link to="/contact" className="tp-btn-primary">
-                    Get in Touch
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </Link>
-                  <Link to="/about" className="tp-btn-ghost">
-                    Learn About Us
-                  </Link>
+                  <RgButton
+                    variant="gold"
+                    to="/contact"
+                    label="Get in Touch"
+                    arrowSize={16}
+                  />
+                  <RgButton
+                    variant="blue"
+                    to="/about"
+                    label="Learn About Us"
+                    arrowSize={16}
+                  />
                 </div>
               </div>
 

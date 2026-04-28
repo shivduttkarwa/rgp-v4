@@ -17,7 +17,7 @@ import {
 } from "../components/reusable/PropertyCard";
 import { allProperties } from "../data/listingProperties";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
-import RgpCta from "@/components/reusable/RgpCta";
+import Cta2 from "@/components/reusable/cta-2";
 import "./PropertiesPage.css";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -51,7 +51,7 @@ const categoryTabs = [
 const PAGE_CTA = {
   eyebrow: "Need Help Choosing?",
   title: "Let’s Find Your",
-  titleEm: "Perfect Property",
+  titleEm: "Perfect Home",
   text: "Tell us what you’re looking for and we’ll shortlist the best options, arrange inspections, and guide you through every step.",
   primaryLabel: "Talk to an Expert",
   primaryHref: "/contact",
@@ -499,7 +499,7 @@ export default function PropertiesPage() {
                   filtered.length > INITIAL_COUNT && (
                     <button
                       type="button"
-                      className="ap-view-btn ap-view-btn--ghost"
+                      className="ap-view-btn"
                       onMouseDown={preventPointerFocus}
                       onClick={(event) => {
                         event.currentTarget.blur();
@@ -516,18 +516,20 @@ export default function PropertiesPage() {
       </div>
 
       {/* ── CTA ───────────────────────────────────────────────────────── */}
-      <RgpCta
+      <Cta2
         eyebrow={PAGE_CTA.eyebrow}
         title={PAGE_CTA.title}
         titleEm={PAGE_CTA.titleEm}
         text={PAGE_CTA.text}
         primary={{ label: PAGE_CTA.primaryLabel, to: PAGE_CTA.primaryHref }}
         secondary={{ label: PAGE_CTA.secondaryLabel, href: PAGE_CTA.secondaryHref }}
-        stats={[
-          { value: "100+", label: "Local Deals Closed" },
-          { value: "24/7", label: "Buyer Support" },
-          { value: "100%", label: "Client Satisfaction" },
+        commitments={[
+          { title: "Data‑backed guidance" },
+          { title: "Inspection‑ready planning" },
+          { title: "Negotiation that protects" },
         ]}
+        bgImage="/images/int.jpg"
+        minHeight="70vh"
       />
     </div>
   );

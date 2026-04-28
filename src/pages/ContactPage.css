@@ -27,6 +27,17 @@
   pointer-events: auto;
 }
 
+/* Match label size to the 18px lucide icons */
+.contact-hero-actions__link.rg-btn {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1;
+}
+
+/* Disable the global blue-button "lift" for hero panel buttons */
+.contact-hero-actions__link.rg-btn--blue:hover {
+  transform: translateY(0);
+}
+
 .top-rule {
   height: 2px;
   background: linear-gradient(
@@ -307,33 +318,9 @@
 }
 
 .contact-cta__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
+  /* Keep only layout constraints; visual styles come from universal `RgButton` */
   min-height: 3.625rem;
-  padding: 1rem 1.75rem;
-  border-radius: 0.625rem;
-  background-color: var(--rg-gold);
-  color: #03071e;
-  text-decoration: none;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 700;
   white-space: nowrap;
-  position: relative;
-  box-shadow: 0 4px 20px rgba(249, 195, 7, 0.3);
-  transition:
-    background-color 0.25s ease,
-    transform 0.2s ease,
-    box-shadow 0.25s ease;
-}
-
-.contact-cta__button:hover {
-  background-color: #fad840;
-  color: #03071e;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(249, 195, 7, 0.3);
 }
 
 .contact-cta__button svg {
