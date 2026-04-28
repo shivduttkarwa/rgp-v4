@@ -6,8 +6,8 @@
 .preloader {
   /* COLORS */
   --gold: var(--rg-gold);
-  --bg-dark: #0a1234;
-  --bg-gradient-center: #0a1234;
+  --bg-dark: var(--rg-blue-500, #001f49);
+  --bg-gradient-center: var(--rg-blue-500, #001f49);
   --text-muted: #666;
 
   /* LOGO SIZE */
