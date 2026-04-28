@@ -7,7 +7,7 @@
 
 .eoi-shell {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .eoi-shell__rule {
@@ -200,22 +200,12 @@
   position: relative;
 }
 
-.eoi-select::after {
-  content: "";
-  position: absolute;
-  right: 1.05rem;
-  top: 50%;
-  width: 0.62rem;
-  height: 0.62rem;
-  border-right: 2px solid rgba(15, 24, 112, 0.72);
-  border-bottom: 2px solid rgba(15, 24, 112, 0.72);
-  transform: translateY(-70%) rotate(45deg);
-  pointer-events: none;
+.eoi-field__control--select {
+  padding: 0;
 }
 
-.eoi-field__control--select {
-  appearance: none;
-  padding-right: 2.8rem;
+.eoi-field__control--select .rg-select__trigger {
+  min-height: 0;
 }
 
 .eoi-submit {

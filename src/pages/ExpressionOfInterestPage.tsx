@@ -3,6 +3,7 @@ import HeroSection from "../sections/HeroSection";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import RgButton from "@/components/reusable/RgButton";
 import { Send } from "lucide-react";
+import RgSelect from "@/components/reusable/RgSelect";
 import "./ExpressionOfInterestPage.css";
 
 type FieldType = "text" | "email" | "tel" | "number" | "textarea" | "select";
@@ -261,19 +262,15 @@ function Field({ field }: { field: FieldConfig }) {
 
       {field.type === "select" ? (
         <div className="eoi-select">
-          <select
-            id={field.id}
-            name={field.name}
-            required={field.required}
-            defaultValue=""
-            className="eoi-field__control eoi-field__control--select"
-          >
-            {field.options?.map((option) => (
-              <option key={option.label} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="eoi-field__control eoi-field__control--select">
+            <RgSelect
+              id={field.id}
+              name={field.name}
+              required={field.required}
+              defaultValue={field.options?.[0]?.value ?? ""}
+              options={field.options ?? []}
+            />
+          </div>
         </div>
       ) : null}
 
