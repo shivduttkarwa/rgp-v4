@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import RgButton from "@/components/reusable/RgButton";
+import EoiCta from "@/components/reusable/eoi-cta";
 import {
   ArrowRight,
   ArrowLeft,
@@ -537,47 +537,17 @@ const PropertyListingSection = () => {
           </Link>
         </div>
 
-        <div
-          className="stats-bar"
-        >
-          <div
-            className="listing-cta"
-            data-gsap="clip-smooth-down"
-            data-gsap-start="top 88%"
-          >
-            <div className="listing-cta__copy">
-              <div className="listing-cta__badge" data-gsap="fade-up">
-                <Building2 size={20} />
-                <span>Expression of Interest</span>
-              </div>
-              <h3
-                className="listing-cta__title"
-                data-gsap="char-reveal"
-                data-gsap-start="top 88%"
-              >
-                Ready to make an offer on a property you love?
-              </h3>
-              <p
-                className="listing-cta__text"
-                data-gsap="fade-up"
-                data-gsap-delay="0.14"
-              >
-                Complete our full Expression of Interest form with the exact
-                buyer, offer, condition, and solicitor details needed for a
-                clean review.
-              </p>
-            </div>
-
-            <RgButton
-              variant="gold"
-              to="/expressions-of-interest"
-              label="Open the Form"
-              className="listing-cta__button"
-              data-gsap="btn-clip-reveal"
-              data-gsap-delay="0.2"
-            />
-          </div>
-        </div>
+        <EoiCta
+          badgeIcon={<Building2 size={20} />}
+          badgeText="Expression of Interest"
+          title="Ready to make an offer on a property you love?"
+          text="Complete our full Expression of Interest form with the exact buyer, offer, condition, and solicitor details needed for a clean review."
+          buttonLabel="Open the Form"
+          buttonTo="/expressions-of-interest"
+          bgImage="/images/int.jpg"
+          minHeight="100vh"
+          mobileMinHeight="70vh"
+        />
       </div>
     </section>
   );
