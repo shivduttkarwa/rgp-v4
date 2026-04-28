@@ -27,7 +27,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
   const [intent, setIntent] = useState("Buy");
   const [budget, setBudget] = useState(5_000_000);
   const [success, setSuccess] = useState(false);
-  const [propertyType, setPropertyType] = useState<string>("");
+  const [propertyType, setPropertyType] = useState<string>("Any type");
   const [ptOpen, setPtOpen] = useState(false);
 
   const PROPERTY_TYPES = [
@@ -237,9 +237,7 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
                   aria-controls="pt-listbox"
                   onClick={() => setPtOpen((v) => !v)}
                 >
-                  <span className={`fg__select-val${propertyType ? "" : " is-placeholder"}`}>
-                    {propertyType || "Any type"}
-                  </span>
+                  <span className="fg__select-val">{propertyType}</span>
                   <ChevronDown size={18} className="fg__chev" aria-hidden="true" />
                 </button>
 
@@ -252,10 +250,10 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
                   <button
                     type="button"
                     role="option"
-                    aria-selected={!propertyType}
-                    className={`fg__opt${!propertyType ? " is-active" : ""}`}
+                    aria-selected={propertyType === "Any type"}
+                    className={`fg__opt${propertyType === "Any type" ? " is-active" : ""}`}
                     onClick={() => {
-                      setPropertyType("");
+                      setPropertyType("Any type");
                       setPtOpen(false);
                     }}
                   >

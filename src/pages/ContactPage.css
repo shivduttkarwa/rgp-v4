@@ -445,11 +445,6 @@
   text-align: left;
 }
 
-.fg__select-val.is-placeholder {
-  color: var(--rg-text-light);
-  font-style: italic;
-}
-
 .fg__chev {
   flex-shrink: 0;
   color: var(--rg-text-light);
