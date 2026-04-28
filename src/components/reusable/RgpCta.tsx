@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import RgButton from "@/components/reusable/RgButton";
+import assetUrl from "@/lib/assetUrl";
 import "./RgpCta.css";
 
 export type RgpCtaStat = {
@@ -36,7 +37,7 @@ export default function RgpCta({
   primary,
   secondary,
   stats = [],
-  bgImage = "/images/hero1.jpg",
+  bgImage = "images/hero1.jpg",
   bgVideo,
   posterImage,
   minHeight = "100vh",
@@ -45,9 +46,10 @@ export default function RgpCta({
   const [videoReady, setVideoReady] = useState(false);
 
   const poster = posterImage ?? bgImage;
+  const posterSrc = assetUrl(typeof poster === "string" ? poster : "");
+  const videoSrc = assetUrl(bgVideo);
   const style = {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    ["--rgp-cta-bg" as any]: `url("${poster}")`,
     ["--rgp-cta-min-h" as any]: minHeight,
   };
 
@@ -63,6 +65,10 @@ export default function RgpCta({
         .join(" ")}
       style={style}
     >
+      {posterSrc ? (
+        <img className="rgp-cta__poster" src={posterSrc} alt="" aria-hidden="true" />
+      ) : null}
+
       {bgVideo ? (
         <video
           className="rgp-cta__video"
@@ -71,12 +77,12 @@ export default function RgpCta({
           loop
           playsInline
           preload="metadata"
-          poster={poster}
+          poster={posterSrc || undefined}
           onCanPlay={() => setVideoReady(true)}
           onLoadedData={() => setVideoReady(true)}
           onError={() => setVideoReady(false)}
         >
-          <source src={bgVideo} />
+          <source src={videoSrc} />
         </video>
       ) : null}
       <div className="rgp-cta__container">

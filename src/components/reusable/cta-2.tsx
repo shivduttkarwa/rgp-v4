@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import RgButton from "@/components/reusable/RgButton";
+import assetUrl from "@/lib/assetUrl";
 import "./cta-2.css";
 
 export type Cta2Stat = {
@@ -46,7 +47,7 @@ export default function Cta2({
   primary,
   secondary,
   commitments = DEFAULT_COMMITMENTS,
-  bgImage = "/images/hero1.jpg",
+  bgImage = "images/hero1.jpg",
   bgVideo,
   posterImage,
   minHeight = "100vh",
@@ -55,9 +56,10 @@ export default function Cta2({
   const [videoReady, setVideoReady] = useState(false);
 
   const poster = posterImage ?? bgImage;
+  const posterSrc = assetUrl(typeof poster === "string" ? poster : "");
+  const videoSrc = assetUrl(bgVideo);
   const style = {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    ["--cta2-bg" as any]: `url("${poster}")`,
     ["--cta2-min-h" as any]: minHeight,
   };
 
@@ -73,6 +75,10 @@ export default function Cta2({
         .join(" ")}
       style={style}
     >
+      {posterSrc ? (
+        <img className="cta2__poster" src={posterSrc} alt="" aria-hidden="true" />
+      ) : null}
+
       {bgVideo ? (
         <video
           className="cta2__video"
@@ -81,12 +87,12 @@ export default function Cta2({
           loop
           playsInline
           preload="metadata"
-          poster={poster}
+          poster={posterSrc || undefined}
           onCanPlay={() => setVideoReady(true)}
           onLoadedData={() => setVideoReady(true)}
           onError={() => setVideoReady(false)}
         >
-          <source src={bgVideo} />
+          <source src={videoSrc} />
         </video>
       ) : null}
       <div className="cta2__container">

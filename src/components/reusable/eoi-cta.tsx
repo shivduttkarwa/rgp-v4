@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import RgButton from "@/components/reusable/RgButton";
+import assetUrl from "@/lib/assetUrl";
 import "./eoi-cta.css";
 
 export type EoiCtaProps = {
@@ -24,7 +25,7 @@ export default function EoiCta({
   text,
   buttonLabel,
   buttonTo,
-  bgImage = "/images/int.jpg",
+  bgImage = "images/int.jpg",
   bgVideo,
   posterImage,
   minHeight = "100vh",
@@ -33,10 +34,11 @@ export default function EoiCta({
 }: EoiCtaProps) {
   const [videoReady, setVideoReady] = useState(false);
   const poster = posterImage ?? bgImage;
+  const posterSrc = assetUrl(typeof poster === "string" ? poster : "");
+  const videoSrc = assetUrl(bgVideo);
 
   const style = {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    ["--eoi-bg" as any]: `url("${poster}")`,
     ["--eoi-min-h" as any]: minHeight,
     ["--eoi-min-h-m" as any]: mobileMinHeight,
   };
@@ -53,6 +55,10 @@ export default function EoiCta({
         .join(" ")}
       style={style}
     >
+      {posterSrc ? (
+        <img className="eoi-cta__poster" src={posterSrc} alt="" aria-hidden="true" />
+      ) : null}
+
       {bgVideo ? (
         <video
           className="eoi-cta__video"
@@ -61,12 +67,12 @@ export default function EoiCta({
           loop
           playsInline
           preload="metadata"
-          poster={poster}
+          poster={posterSrc || undefined}
           onCanPlay={() => setVideoReady(true)}
           onLoadedData={() => setVideoReady(true)}
           onError={() => setVideoReady(false)}
         >
-          <source src={bgVideo} />
+          <source src={videoSrc} />
         </video>
       ) : null}
 
