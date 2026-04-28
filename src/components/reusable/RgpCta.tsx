@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import RgButton from "@/components/reusable/RgButton";
 import "./RgpCta.css";
 
@@ -22,6 +22,8 @@ export type RgpCtaProps = {
   secondary?: RgpCtaLink;
   stats?: RgpCtaStat[];
   bgImage?: string;
+  bgVideo?: string;
+  posterImage?: string;
   minHeight?: string;
   className?: string;
 };
@@ -35,17 +37,48 @@ export default function RgpCta({
   secondary,
   stats = [],
   bgImage = "/images/hero1.jpg",
+  bgVideo,
+  posterImage,
   minHeight = "100vh",
   className = "",
 }: RgpCtaProps) {
+  const [videoReady, setVideoReady] = useState(false);
+
+  const poster = posterImage ?? bgImage;
   const style = {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    ["--rgp-cta-bg" as any]: `url("${bgImage}")`,
+    ["--rgp-cta-bg" as any]: `url("${poster}")`,
     ["--rgp-cta-min-h" as any]: minHeight,
   };
 
   return (
-    <section className={`rgp-cta${className ? ` ${className}` : ""}`} style={style}>
+    <section
+      className={[
+        "rgp-cta",
+        bgVideo ? "rgp-cta--has-video" : "",
+        videoReady ? "rgp-cta--video-ready" : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={style}
+    >
+      {bgVideo ? (
+        <video
+          className="rgp-cta__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={poster}
+          onCanPlay={() => setVideoReady(true)}
+          onLoadedData={() => setVideoReady(true)}
+          onError={() => setVideoReady(false)}
+        >
+          <source src={bgVideo} />
+        </video>
+      ) : null}
       <div className="rgp-cta__container">
         <div className="rgp-cta__content">
           <span className="rgp-cta__eyebrow" data-gsap="fade-up">

@@ -529,7 +529,8 @@ export default function PropertiesPage() {
           { title: "Negotiation that protects" },
         ]}
         bgImage="/images/int.jpg"
-        minHeight="70vh"
+        bgVideo={`${import.meta.env.BASE_URL}vids/cta-2-vid.mp4`}
+        minHeight="100vh"
       />
     </div>
   );

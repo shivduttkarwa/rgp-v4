@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import RgButton from "@/components/reusable/RgButton";
 import "./cta-2.css";
 
@@ -26,6 +26,8 @@ export type Cta2Props = {
   secondary?: Cta2Link;
   commitments?: Cta2Commitment[];
   bgImage?: string;
+  bgVideo?: string;
+  posterImage?: string;
   minHeight?: string;
   className?: string;
 };
@@ -45,35 +47,58 @@ export default function Cta2({
   secondary,
   commitments = DEFAULT_COMMITMENTS,
   bgImage = "/images/hero1.jpg",
-  minHeight = "70vh",
+  bgVideo,
+  posterImage,
+  minHeight = "100vh",
   className = "",
 }: Cta2Props) {
+  const [videoReady, setVideoReady] = useState(false);
+
+  const poster = posterImage ?? bgImage;
   const style = {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    ["--cta2-bg" as any]: `url("${bgImage}")`,
+    ["--cta2-bg" as any]: `url("${poster}")`,
     ["--cta2-min-h" as any]: minHeight,
   };
 
   return (
-    <section className={`cta2${className ? ` ${className}` : ""}`} style={style}>
+    <section
+      className={[
+        "cta2",
+        bgVideo ? "cta2--has-video" : "",
+        videoReady ? "cta2--video-ready" : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={style}
+    >
+      {bgVideo ? (
+        <video
+          className="cta2__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={poster}
+          onCanPlay={() => setVideoReady(true)}
+          onLoadedData={() => setVideoReady(true)}
+          onError={() => setVideoReady(false)}
+        >
+          <source src={bgVideo} />
+        </video>
+      ) : null}
       <div className="cta2__container">
         <div className="cta2__grid">
           <div className="cta2__copy">
-            <span className="cta2__eyebrow" data-gsap="fade-up">
-              {eyebrow}
-            </span>
+            <span className="cta2__eyebrow">{eyebrow}</span>
 
-            <h3
-              className="cta2__title"
-              data-gsap="char-reveal"
-              data-gsap-start="top 85%"
-            >
+            <h3 className="cta2__title">
               {title} {titleEm ? <em>{titleEm}</em> : null}
             </h3>
 
-            <p className="cta2__text" data-gsap="fade-up" data-gsap-delay="0.15">
-              {text}
-            </p>
+            <p className="cta2__text">{text}</p>
 
             <div className="cta2__actions">
               {primary.to ? (
@@ -81,16 +106,12 @@ export default function Cta2({
                   variant="gold"
                   to={primary.to}
                   label={primary.label}
-                  data-gsap="btn-clip-reveal"
-                  data-gsap-delay="0.2"
                 />
               ) : (
                 <RgButton
                   variant="gold"
                   href={primary.href ?? "#"}
                   label={primary.label}
-                  data-gsap="btn-clip-reveal"
-                  data-gsap-delay="0.2"
                 />
               )}
 
@@ -100,16 +121,12 @@ export default function Cta2({
                     variant="outline"
                     to={secondary.to}
                     label={secondary.label}
-                    data-gsap="btn-clip-reveal"
-                    data-gsap-delay="0.2"
                   />
                 ) : (
                   <RgButton
                     variant="outline"
                     href={secondary.href ?? "#"}
                     label={secondary.label}
-                    data-gsap="btn-clip-reveal"
-                    data-gsap-delay="0.2"
                   />
                 )
               ) : null}
@@ -117,11 +134,7 @@ export default function Cta2({
           </div>
 
           {commitments.length ? (
-            <div
-              className="cta2__commitments"
-              data-gsap="zoom-in"
-              data-gsap-stagger="0.25"
-            >
+            <div className="cta2__commitments">
               {commitments.map((c, idx) => (
                 <div key={idx} className="cta2__commitment">
                   <span className="cta2__commitment-title">{c.title}</span>
