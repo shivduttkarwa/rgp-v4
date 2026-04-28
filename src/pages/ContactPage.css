@@ -276,7 +276,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 80% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 65%);
+  background: radial-gradient(
+    ellipse at 80% 50%,
+    rgba(255, 255, 255, 0.06) 0%,
+    transparent 62%
+  );
   pointer-events: none;
 }
 
