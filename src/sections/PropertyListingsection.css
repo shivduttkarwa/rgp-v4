@@ -422,38 +422,7 @@
   font-size: 0.98rem;
 }
 
-.property-section .listing-cta__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  min-height: 3.625rem;
-  padding: 1rem 1.75rem;
-  border-radius: 0.625rem;
-  background: var(--rg-gold);
-  color: #03071e;
-  text-decoration: none;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 700;
-  white-space: nowrap;
-  transition:
-    background 0.25s ease,
-    transform 0.2s ease,
-    box-shadow 0.25s ease;
-  box-shadow: 0 4px 20px rgba(249, 195, 7, 0.3);
-}
-
-.property-section .listing-cta__button:hover {
-  background: #fad840;
-  color: #03071e;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(249, 195, 7, 0.3);
-}
-
-.property-section .listing-cta__button svg {
-  flex-shrink: 0;
-}
+/* Button theme styles are defined globally in src/index.css */
 
 @media (max-width: 900px) {
   .property-section .listing-cta {

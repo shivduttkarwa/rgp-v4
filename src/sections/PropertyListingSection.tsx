@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import RgButton from "@/components/reusable/RgButton";
 import {
   ArrowRight,
   ArrowLeft,
@@ -567,15 +568,14 @@ const PropertyListingSection = () => {
               </p>
             </div>
 
-            <Link
+            <RgButton
+              variant="gold"
               to="/expressions-of-interest"
+              label="Open the Form"
               className="listing-cta__button"
               data-gsap="btn-clip-reveal"
               data-gsap-delay="0.2"
-            >
-              <span>Open the Form</span>
-              <ArrowRight size={18} />
-            </Link>
+            />
           </div>
         </div>
       </div>

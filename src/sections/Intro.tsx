@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import RgButton from "@/components/reusable/RgButton";
 import "./Intro.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -32,25 +32,22 @@ const Intro = () => {
         </p>
 
         <div className="intro-cta-group">
-          <Link
+          <RgButton
+            variant="blue"
             to="/contact"
-            className="intro-cta intro-cta--primary"
+            label="Book a Free Appraisal"
+            arrowSize={16}
             data-gsap="btn-clip-reveal"
             data-gsap-delay="0.2"
-          >
-            <span>Book a Free Appraisal</span>
-            <svg viewBox="0 0 24 24">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </Link>
-          <Link
+          />
+          <RgButton
+            variant="outline"
             to="/about"
-            className="intro-cta intro-cta--ghost"
+            label="Meet Rahul"
+            arrowSize={16}
             data-gsap="btn-clip-reveal"
             data-gsap-delay="0.3"
-          >
-            <span>Meet Rahul</span>
-          </Link>
+          />
         </div>
       </div>
 

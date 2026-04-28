@@ -161,6 +161,13 @@ section.project-feature .pc-view-btn:hover {
 section.project-feature .rg-btn--gold svg,
 section.project-feature .pc-view-btn svg {
   flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.rg-btn--gold:hover svg,
+section.project-feature .rg-btn--gold:hover svg,
+section.project-feature .pc-view-btn:hover svg {
+  transform: translateX(4px);
 }
 
 /* ── 2) BLUE (ap-view-btn) ── */
@@ -173,19 +180,30 @@ section.project-feature .pc-view-btn svg {
   background: var(--rg-navy);
   color: #fff;
   border: 2px solid var(--rg-navy);
-  border-radius: 0.65rem;
+  border-radius: 0.625rem;
   font-family: var(--font-body);
   font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
-  transition: all 0.25s ease;
+  position: relative;
+  transform: translateY(0);
+  box-shadow: 0 0.6rem 1.5rem rgba(0, 31, 73, 0.12);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease;
 }
 
 .rg-btn--blue:hover,
 .ap-view-btn:hover {
-  background: transparent;
-  color: var(--rg-navy);
+  background: #001a3d;
+  border-color: #001a3d;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 0.9rem 2rem rgba(0, 31, 73, 0.18);
 }
 
 .rg-btn--blue svg,
@@ -215,7 +233,7 @@ section.project-feature .pc-view-btn svg {
   padding: 1rem 2rem;
   background-color: transparent;
   border: 0.125rem solid rgba(15, 24, 112, 0.25);
-  border-radius: var(--rg-radius);
+  border-radius: 0.625rem;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1rem;
@@ -226,19 +244,19 @@ section.project-feature .pc-view-btn svg {
 
 .rg-btn--outline:hover,
 .property-section .view-all-btn:hover {
-  border-color: var(--rg-gold);
-  color: var(--rg-navy);
-  background-color: rgba(249, 195, 7, 0.08);
+  border-color: var(--rg-navy);
+  color: #ffffff;
+  background-color: var(--rg-navy);
 }
 
 .rg-btn--outline svg,
 .property-section .view-all-btn svg {
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .rg-btn--outline:hover svg,
 .property-section .view-all-btn:hover svg {
-  transform: translateX(0.25rem);
+  transform: translateX(4px);
 }
 
 * {
