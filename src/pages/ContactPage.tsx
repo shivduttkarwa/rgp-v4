@@ -372,20 +372,33 @@ export default function ContactPage({ ready = false }: { ready?: boolean }) {
         </section>
       </div>
 
-      <div className={`succ${success ? " show" : ""}`} role="dialog" aria-modal="true">
-        <div className="sc">
-          <span className="sc-orn">✦</span>
-          <h2>
+      <div
+        className={`succ-modal${success ? " show" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Enquiry received"
+        onMouseDown={(e) => {
+          if (e.target === e.currentTarget) setSuccess(false);
+        }}
+      >
+        <div className="succ-modal__card" role="document">
+          <button
+            type="button"
+            className="succ-modal__close"
+            onClick={() => setSuccess(false)}
+            aria-label="Close message"
+          >
+            ×
+          </button>
+
+          <span className="succ-modal__orn" aria-hidden="true">✦</span>
+          <h2 className="succ-modal__title">
             Enquiry <em>Received.</em>
           </h2>
-          <div className="sc-rule" />
-          <p>
-            Thank you for reaching out to Real Gold Properties. One of our
-            advisors will be in touch with you within one business day.
+          <div className="succ-modal__rule" aria-hidden="true" />
+          <p className="succ-modal__text">
+            Thank you for reaching out to Real Gold Properties. One of our advisors will be in touch with you within one business day.
           </p>
-          <button type="button" className="sc-btn" onClick={() => setSuccess(false)}>
-            Return to page
-          </button>
         </div>
       </div>
     </main>
