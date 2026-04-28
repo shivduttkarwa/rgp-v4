@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import HeroSection from "../sections/HeroSection";
-import BtnSecondary from "../components/BtnSecondary";
+import RgButton from "@/components/reusable/RgButton";
 import Team from "../sections/TeamV2";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import "./TeamPage.css";
@@ -62,7 +62,6 @@ const VALUES = [
 ];
 
 export default function TeamPage({ ready = false }: { ready?: boolean }) {
-  const navigate = useNavigate();
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -90,10 +89,7 @@ export default function TeamPage({ ready = false }: { ready?: boolean }) {
         showVideo={false}
         showCta={false}
         panel={
-          <BtnSecondary
-            label="Book a Consultation"
-            onClick={() => navigate("/contact")}
-          />
+          <RgButton variant="gold" to="/contact" label="Book a Consultation" arrowSize={16} />
         }
         bgImage="images/about-hero.jpg"
         titleLine1={<>Meet Our</>}

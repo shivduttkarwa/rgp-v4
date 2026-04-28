@@ -99,7 +99,7 @@
 /* Prose below a section title */
 .rg-section-subtitle {
   font-family: var(--font-body);
-  color: var(--rg-text-medium);
+  color: var(--rg-blue-500);
   font-size: 1rem;
   line-height: 1.7;
   max-width: 56ch;
@@ -236,21 +236,21 @@ section.project-feature .pc-view-btn:hover svg {
   gap: 0.75rem;
   padding: 1rem 2rem;
   background-color: transparent;
-  border: 0.125rem solid rgba(15, 24, 112, 0.25);
+  border: 0.125rem solid var(--rg-blue-500);
   border-radius: 0.625rem;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1rem;
-  color: var(--rg-navy);
+  color: var(--rg-blue-500);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .rg-btn--outline:hover,
 .property-section .view-all-btn:hover {
-  border-color: var(--rg-navy);
+  border-color: var(--rg-blue-500);
   color: #ffffff;
-  background-color: var(--rg-navy);
+  background-color: var(--rg-blue-500);
 }
 
 .rg-btn--outline svg,

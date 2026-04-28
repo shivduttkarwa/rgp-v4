@@ -1,6 +1,6 @@
 import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import BtnSecondary from "../components/BtnSecondary";
+import RgButton from "@/components/reusable/RgButton";
 import "./HeroSection.css";
 
 type HeroSectionProps = {
@@ -106,11 +106,11 @@ export default function HeroSection({
     gsap.set([titleOne, titleTwo], { y: 50, opacity: 0 });
     gsap.set([revealSub], { x: -60, opacity: 0 });
     if (revealCta) {
-      if (panel) {
-        gsap.set(revealCta, { clipPath: "inset(0 0 100% 0)", opacity: 1, willChange: "clip-path" });
-      } else {
-        gsap.set(revealCta, { x: -60, opacity: 0, scale: 0.9 });
-      }
+      gsap.set(revealCta, {
+        clipPath: "inset(0 0 100% 0)",
+        opacity: 1,
+        willChange: "clip-path",
+      });
     }
   }, []);
 
@@ -206,19 +206,11 @@ export default function HeroSection({
       0.9,
     );
     if (revealCta) {
-      if (panel) {
-        tl.to(
-          revealCta,
-          { clipPath: "inset(0 0 0% 0)", duration: 1.0, ease: "power3.inOut" },
-          1.1,
-        );
-      } else {
-        tl.to(
-          revealCta,
-          { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power4.out" },
-          1,
-        );
-      }
+      tl.to(
+        revealCta,
+        { clipPath: "inset(0 0 0% 0)", duration: 1.0, ease: "power3.inOut" },
+        1.1,
+      );
     }
 
     return () => {
@@ -303,7 +295,12 @@ export default function HeroSection({
             </div>
           ) : showCta ? (
             <div className="rgp-hero__cta" ref={revealCtaRef}>
-              <BtnSecondary label={ctaLabel} onClick={ctaOnClick} />
+              <RgButton
+                variant="gold"
+                onClick={ctaOnClick}
+                label={ctaLabel}
+                arrowSize={16}
+              />
             </div>
           ) : null}
         </div>

@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   MapPin, Bed, Bath, Square, Car,
-  Heart, ArrowRight, Tag, CheckCircle, Clock, Eye,
+  Heart, Tag, CheckCircle, Clock, Eye,
 } from "lucide-react";
 import RgButton from "@/components/reusable/RgButton";
 import "./PropertyCard.css";

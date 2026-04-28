@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import BtnSecondary from "../components/BtnSecondary";
 import HeroSection from "../sections/HeroSection";
 import PropertyMarqee from "../components/reusable/PropertyMarqee";
 import ServiceSelection from "../sections/ServiceSelection";
 import RgpCta from "@/components/reusable/RgpCta";
+import RgButton from "@/components/reusable/RgButton";
 import "./AboutPage.css";
 import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
 import gsap from "gsap";
@@ -227,9 +227,11 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
                   details so you can focus on the decision that matters.
                 </p>
                 <div className="split-cta">
-                  <BtnSecondary
+                  <RgButton
                     data-gsap="btn-clip-reveal"
                     data-gsap-delay="0.2"
+                    variant="outline"
+                    to="/properties"
                     label="Explore Our Homes"
                   />
                 </div>
@@ -341,7 +343,11 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
               competition and protect your final result.
             </p>
             <div className="overlay-cta">
-              <BtnSecondary label="Request a Valuation" />
+              <RgButton
+                variant="gold"
+                to="/contact"
+                label="Request a Valuation"
+              />
             </div>
           </div>
         </section>
@@ -368,9 +374,10 @@ export default function ServicesPage({ ready = false }: { ready?: boolean }) {
                 your property protected and performing.
               </p>
               <div className="avail-cta">
-                <BtnSecondary
+                <RgButton
+                  variant="outline"
+                  to="/properties"
                   label="View Available Rentals"
-                  color="#00032e"
                   className="avail-cta__btn"
                 />
               </div>

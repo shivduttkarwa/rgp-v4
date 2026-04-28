@@ -201,67 +201,6 @@ a {
   pointer-events: auto;
 }
 
-.rgp-hero__cta .btn-secondary {
-  background: var(--rg-gold);
-  color: #00032e;
-  border-color: var(--rg-gold);
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 1rem 2.5rem;
-  letter-spacing: 0.07em;
-  box-shadow: 0 4px 28px rgba(249, 195, 7, 0.38);
-  transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.35s ease;
-}
-
-/* Disable the fill-sweep from BtnSecondary */
-.rgp-hero__cta .btn-secondary::before {
-  display: none;
-}
-
-/* Left-to-right shine sweep */
-.rgp-hero__cta .btn-secondary::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -110%;
-  width: 55%;
-  height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.38) 50%,
-    transparent 100%
-  );
-  transform: skewX(-18deg);
-  transition: left 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.rgp-hero__cta .btn-secondary:hover {
-  color: #00032e;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 36px rgba(249, 195, 7, 0.5);
-}
-
-.rgp-hero__cta .btn-secondary:hover::after {
-  left: 130%;
-}
-
-.rgp-hero__cta .btn-secondary .bs-text::after {
-  content: "→";
-  display: inline-block;
-  margin-left: 0.55rem;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.rgp-hero__cta .btn-secondary:hover .bs-text::after {
-  transform: translateX(6px);
-}
-
 /* ─── CTA panel (search bar replaces button) ─── */
 .rgp-hero__cta--panel {
   pointer-events: auto;

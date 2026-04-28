@@ -58,7 +58,7 @@
 .property-section .section-subtitle {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.125rem);
-  color: var(--rg-text-light);
+  color: var(--rg-blue-500);
   max-width: 38rem;
   margin: 0 auto;
   line-height: 1.7;

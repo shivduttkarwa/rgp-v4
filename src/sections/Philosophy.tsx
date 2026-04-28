@@ -4,12 +4,12 @@ import { useRef, useState, useEffect } from "react";
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
-import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./Philosophy.css";
+import RgButton from "@/components/reusable/RgButton";
 
 type Testimonial = {
   kicker: string;
@@ -222,22 +222,13 @@ export default function PhilosophyPillars() {
 
         {/* CTA */}
         <div className="rg-philo__cta-row">
-          <Link
+          <RgButton
+            variant="blue"
             to="/testimonials"
-            className="rg-philo__cta-btn"
+            label="Read All Reviews"
+            arrowSize={16}
             data-gsap="btn-clip-reveal"
-          >
-            <span>Read All Reviews</span>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </Link>
+          />
         </div>
       </div>
     </section>

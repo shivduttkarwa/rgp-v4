@@ -6,39 +6,10 @@
 /* ===== Section Base ===== */
 .svc {
   position: relative;
-  overflow: hidden;
-  background-color: #001f49;
-  isolation: isolate;
-}
-
-/* Full-bleed blurred background image (reference-style) */
-.svc::before {
-  content: "";
-  position: absolute;
-  inset: -40px;
-  background-image: url("/images/hero1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: blur(16px) saturate(1.05);
-  transform: scale(1.06);
-  z-index: 0;
-}
-
-/* Darken + add depth so text/cards read cleanly */
-.svc::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(0, 31, 73, 0.72), rgba(0, 31, 73, 0.78)),
-    radial-gradient(70% 70% at 50% 0%, rgba(249, 195, 7, 0.12), transparent 60%);
-  z-index: 0;
+  background-color: #ffffff;
 }
 
 .svc__container {
-  position: relative;
-  z-index: 1;
   width: 100%;
   max-width: var(--rg-max);
   margin: 0 auto;
@@ -69,7 +40,7 @@
   font-family: var(--font-title);
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 400;
-  color: #ffffff;
+  color: var(--rg-text-dark);
   margin: 0 0 1.25rem 0;
   line-height: 1.15;
 }
@@ -82,7 +53,7 @@
 .svc__subtitle {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.125rem);
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--rg-blue-500);
   margin: 0;
   line-height: 1.7;
 }
@@ -115,30 +86,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 2rem 2rem;
-  border-radius: calc(var(--rg-radius) + 0.4rem);
+  padding: 2.1rem 2rem 1.8rem;
+  border-radius: calc(var(--rg-radius) + 0.35rem);
   overflow: hidden;
-  min-height: 22rem;
-  background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  min-height: 20.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(15, 24, 112, 0.10);
   box-shadow:
-    0 1rem 2.8rem rgba(0, 0, 0, 0.28),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+    0 1.1rem 2.6rem rgba(15, 24, 112, 0.10),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
     border-color 0.25s ease;
-}
-
-.svc-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 0.22rem;
 }
 
 @media (max-width: 1024px) {
@@ -155,105 +115,57 @@
   }
 }
 
-/* ===== Card Themes ===== */
-
-/* Buy Card */
-.svc-card--buy {
-  --svc-accent: rgba(255, 255, 255, 0.92);
-}
-.svc-card--buy::before { background-color: rgba(255, 255, 255, 0.85); }
-.svc-card--buy .svc-card__word { color: #ffffff; }
-.svc-card--buy .svc-card__desc { color: rgba(255, 255, 255, 0.74); }
-.svc-card--buy .svc-card__btn {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-.svc-card--buy .svc-card__btn:hover { background: rgba(255, 255, 255, 0.18); }
-
-/* Sell Card */
-.svc-card--sell {
-  --svc-accent: rgba(249, 195, 7, 0.95);
-}
-.svc-card--sell::before { background-color: rgba(249, 195, 7, 0.95); }
-.svc-card--sell .svc-card__word { color: #ffffff; }
-.svc-card--sell .svc-card__desc { color: rgba(255, 255, 255, 0.74); }
-.svc-card--sell .svc-card__btn {
-  background: rgba(249, 195, 7, 0.92);
-  color: #001f49;
-  border: 1px solid rgba(249, 195, 7, 0.92);
-}
-.svc-card--sell .svc-card__btn:hover { background: #fad840; }
-
-/* Rent Card */
-.svc-card--rent {
-  --svc-accent: rgba(255, 255, 255, 0.78);
-}
-.svc-card--rent::before { background-color: rgba(255, 255, 255, 0.70); }
-.svc-card--rent .svc-card__word { color: #ffffff; }
-.svc-card--rent .svc-card__desc { color: rgba(255, 255, 255, 0.74); }
-.svc-card--rent .svc-card__btn {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-.svc-card--rent .svc-card__btn:hover { background: rgba(255, 255, 255, 0.18); }
-
 .svc-card:hover {
   transform: translateY(-0.35rem);
-  box-shadow:
-    0 1.4rem 3.2rem rgba(0, 0, 0, 0.34),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+  box-shadow: 0 1.4rem 3.2rem rgba(15, 24, 112, 0.14);
 }
 
-.svc-card:hover { border-color: rgba(255, 255, 255, 0.24); }
+.svc-card:hover { border-color: rgba(249, 195, 7, 0.28); }
+
+/* ===== Card Top ===== */
+.svc-card__top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.svc-card__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: rgba(0, 31, 73, 0.06);
+  color: var(--rg-blue-500);
+  border: 1px solid rgba(15, 24, 112, 0.10);
+}
 
 /* ===== Big Word ===== */
 .svc-card__word {
   font-family: var(--font-title);
-  font-size: clamp(3.25rem, 5.5vw, 5rem);
+  font-size: clamp(3.25rem, 5.3vw, 4.75rem);
   font-weight: 400;
   line-height: 1;
-  margin: 0 0 1.25rem 0;
-  letter-spacing: -0.01em;
+  margin: 0 0 1rem 0;
+  color: var(--rg-text-dark);
+  letter-spacing: -0.02em;
 }
 
 /* ===== Description ===== */
 .svc-card__desc {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.65;
   margin: 0;
-  flex: 1;
+  color: var(--rg-text-medium);
 }
 
 /* ===== Card Footer ===== */
 .svc-card__footer {
-  margin-top: 2rem;
-}
-
-.svc-card__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.375rem;
-  border-radius: 0.625rem;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition:
-    background-color 0.25s ease,
-    transform 0.2s ease;
-}
-
-.svc-card__btn:hover {
-  transform: translateY(-1px);
-}
-
-.svc-card__btn svg {
-  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 /* CTA banner is now the reusable RgpCta component (src/components/reusable/RgpCta.tsx). */

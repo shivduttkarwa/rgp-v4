@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "./PortfolioShowcase.css";
@@ -7,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import RgButton from "@/components/reusable/RgButton";
 
 const publicUrl = import.meta.env.BASE_URL || "/";
 
@@ -283,13 +282,13 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       </div>
                     </div>
 
-                    <Link
+                    <RgButton
+                      variant="gold"
                       to={`/properties/${project.id}`}
+                      label="View Property"
+                      arrowSize={16}
                       className="pc-view-btn"
-                    >
-                      <span>View Property</span>
-                      <ArrowRight size={16} />
-                    </Link>
+                    />
                   </div>
 
                   {/* Decorative corner */}
@@ -394,13 +393,13 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       <span className="pc-feat-label">Sq Ft</span>
                     </div>
                   </div>
-                  <Link
+                  <RgButton
+                    variant="gold"
                     to={`/properties/${project.id}`}
+                    label="View Property"
+                    arrowSize={16}
                     className="pc-view-btn"
-                  >
-                    <span>View Property</span>
-                    <ArrowRight size={16} />
-                  </Link>
+                  />
                 </div>
                 <div className="pc-corner" aria-hidden="true" />
               </article>

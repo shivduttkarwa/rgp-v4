@@ -1,772 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glassmorphic Search Bar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            overflow: hidden;
-        }
-
-        /* Animated background blobs */
-        .bg-blob {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: float 8s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        .blob-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #ff6b6b, #ee5a24);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .blob-2 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, #4834d4, #686de0);
-            top: 50%;
-            right: -80px;
-            animation-delay: -2s;
-        }
-
-        .blob-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #00d2d3, #01a3a4);
-            bottom: -80px;
-            left: 30%;
-            animation-delay: -4s;
-        }
-
-        .blob-4 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, #f368e0, #ff6348);
-            top: 20%;
-            left: 60%;
-            animation-delay: -6s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(30px, -30px) scale(1.05); }
-            50% { transform: translate(-20px, 20px) scale(0.95); }
-            75% { transform: translate(20px, 10px) scale(1.02); }
-        }
-
-        /* Main container */
-        .search-container {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        /* Heading */
-        .heading {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .heading h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-        }
-
-        .heading p {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 300;
-        }
-
-        /* Label tabs */
-        .label-tabs {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 0;
-            justify-content: center;
-        }
-
-        .label-tab {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px 32px;
-            border-radius: 20px 20px 0 0;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-bottom: none;
-            min-width: 130px;
-            overflow: hidden;
-        }
-
-        .label-tab::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            border-radius: inherit;
-        }
-
-        .label-tab:hover::before {
-            opacity: 1;
-        }
-
-        .label-tab:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .label-tab.active {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: translateY(-4px);
-        }
-
-        .label-tab.active .tab-icon {
-            transform: scale(1.1);
-        }
-
-        .label-tab.active .tab-glow {
-            opacity: 1;
-        }
-
-        .tab-glow {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 3px;
-            border-radius: 3px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .label-tab:nth-child(1) .tab-glow { background: linear-gradient(90deg, #00d2d3, #01a3a4); box-shadow: 0 0 15px rgba(0, 210, 211, 0.5); }
-        .label-tab:nth-child(2) .tab-glow { background: linear-gradient(90deg, #f368e0, #a55eea); box-shadow: 0 0 15px rgba(243, 104, 224, 0.5); }
-        .label-tab:nth-child(3) .tab-glow { background: linear-gradient(90deg, #ff6b6b, #ee5a24); box-shadow: 0 0 15px rgba(255, 107, 107, 0.5); }
-        .label-tab:nth-child(4) .tab-glow { background: linear-gradient(90deg, #feca57, #ff9f43); box-shadow: 0 0 15px rgba(254, 202, 87, 0.5); }
-
-        .tab-icon {
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 14px;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .label-tab:nth-child(1) .tab-icon { background: linear-gradient(135deg, rgba(0, 210, 211, 0.2), rgba(1, 163, 164, 0.1)); }
-        .label-tab:nth-child(2) .tab-icon { background: linear-gradient(135deg, rgba(243, 104, 224, 0.2), rgba(165, 94, 234, 0.1)); }
-        .label-tab:nth-child(3) .tab-icon { background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(238, 90, 36, 0.1)); }
-        .label-tab:nth-child(4) .tab-icon { background: linear-gradient(135deg, rgba(254, 202, 87, 0.2), rgba(255, 159, 67, 0.1)); }
-
-        .tab-icon svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .label-tab:nth-child(1) .tab-icon svg { color: #00d2d3; filter: drop-shadow(0 0 6px rgba(0,210,211,0.4)); }
-        .label-tab:nth-child(2) .tab-icon svg { color: #f368e0; filter: drop-shadow(0 0 6px rgba(243,104,224,0.4)); }
-        .label-tab:nth-child(3) .tab-icon svg { color: #ff6b6b; filter: drop-shadow(0 0 6px rgba(255,107,107,0.4)); }
-        .label-tab:nth-child(4) .tab-icon svg { color: #feca57; filter: drop-shadow(0 0 6px rgba(254,202,87,0.4)); }
-
-        .tab-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .label-tab.active .tab-label {
-            color: #fff;
-        }
-
-        .label-tab:hover .tab-label {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Search bar glass panel */
-        .search-glass {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(40px) saturate(150%);
-            -webkit-backdrop-filter: blur(40px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 0 0 24px 24px;
-            padding: 28px 28px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .search-glass::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-        }
-
-        .search-glass::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.03), transparent 60%);
-            pointer-events: none;
-        }
-
-        .search-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .search-input-wrapper {
-            flex: 1;
-            position: relative;
-        }
-
-        .search-input-wrapper .search-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.4);
-            width: 20px;
-            height: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 18px 24px 18px 52px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            color: #fff;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            outline: none;
-            transition: all 0.3s ease;
-            letter-spacing: 0.2px;
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.35);
-            font-weight: 300;
-        }
-
-        .search-input:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05),
-                        inset 0 1px 1px rgba(255,255,255,0.05);
-        }
-
-        .search-input:focus ~ .search-icon,
-        .search-input-wrapper:hover .search-icon {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Filter dropdowns */
-        .filter-select-wrapper {
-            position: relative;
-            min-width: 150px;
-        }
-
-        .filter-select {
-            width: 100%;
-            padding: 18px 40px 18px 18px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            transition: all 0.3s ease;
-        }
-
-        .filter-select option {
-            background: #1a1a2e;
-            color: #fff;
-        }
-
-        .filter-select:hover, .filter-select:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .filter-select-wrapper::after {
-            content: '';
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 5px solid rgba(255, 255, 255, 0.4);
-            pointer-events: none;
-        }
-
-        /* Search button */
-        .search-btn {
-            padding: 18px 36px;
-            border: none;
-            border-radius: 16px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-            color: #fff;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.35);
-        }
-
-        .search-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #764ba2, #667eea);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5);
-        }
-
-        .search-btn:hover::before {
-            opacity: 1;
-        }
-
-        .search-btn:active {
-            transform: translateY(0);
-        }
-
-        .search-btn svg, .search-btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .search-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Quick filters / tags */
-        .quick-filters {
-            display: flex;
-            gap: 8px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-
-        .quick-filter {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.78rem;
-            font-weight: 400;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .quick-filter:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .quick-filter svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        .popular-label {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            padding-right: 8px;
-        }
-
-        /* Ripple effect */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(0);
-            animation: ripple 0.6s ease-out;
-            pointer-events: none;
-        }
-
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .label-tabs {
-                gap: 6px;
-            }
-
-            .label-tab {
-                padding: 14px 16px;
-                min-width: 80px;
-                border-radius: 14px 14px 0 0;
-            }
-
-            .tab-icon {
-                width: 36px;
-                height: 36px;
-                border-radius: 10px;
-            }
-
-            .tab-icon svg {
-                width: 18px;
-                height: 18px;
-            }
-
-            .tab-label {
-                font-size: 0.72rem;
-            }
-
-            .search-row {
-                flex-direction: column;
-            }
-
-            .search-glass {
-                border-radius: 0 0 20px 20px;
-                padding: 20px 16px;
-            }
-
-            .filter-select-wrapper {
-                min-width: 100%;
-            }
-
-            .search-btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .heading h1 {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Subtle animated particle overlay */
-        .particles {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            animation: drift linear infinite;
-        }
-
-        @keyframes drift {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Service Cards</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 18px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .card {
+      text-decoration: none;
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: 0.3s ease;
+      color: #111827;
+      position: relative;
+      overflow: hidden;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+    }
+
+    .buy::before {
+      background: #2563eb;
+    }
+
+    .sell::before {
+      background: #16a34a;
+    }
+
+    .rent::before {
+      background: #ea580c;
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .buy .icon {
+      background: rgba(37, 99, 235, 0.12);
+      color: #2563eb;
+    }
+
+    .sell .icon {
+      background: rgba(22, 163, 74, 0.12);
+      color: #16a34a;
+    }
+
+    .rent .icon {
+      background: rgba(234, 88, 12, 0.12);
+      color: #ea580c;
+    }
+
+    h3 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+
+    .cta {
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #111827;
+      transition: 0.3s ease;
+    }
+
+    .card:hover .cta {
+      gap: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .service-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Background blobs -->
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
-    <div class="bg-blob blob-3"></div>
-    <div class="bg-blob blob-4"></div>
-
-    <!-- Particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Main Search Container -->
-    <div class="search-container">
-        <div class="heading">
-            <h1>Find Your Dream Home</h1>
-            <p>Search properties across thousands of listings</p>
+  <div class="service-cards">
+    
+    <a href="#" class="card buy">
+      <div>
+        <div class="icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M3 10.5L12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+          </svg>
         </div>
+        <h3>Buy</h3>
+        <p>Find your next home.</p>
+      </div>
+      <span class="cta">Explore →</span>
+    </a>
 
-        <!-- Tab Labels -->
-        <div class="label-tabs">
-            <div class="label-tab active" onclick="setActive(this)" data-placeholder="Search properties to buy...">
-                <div class="tab-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        <polyline points="9 22 9 12 15 12 15 22"/>
-                    </svg>
-                </div>
-                <span class="tab-label">Buy</span>
-                <div class="tab-glow"></div>
-            </div>
-            <div class="label-tab" onclick="setActive(this)" data-placeholder="Search properties to rent...">
-                <div class="tab-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        <line x1="6" y1="11" x2="6" y2="11"/>
-                        <line x1="18" y1="11" x2="18" y2="11"/>
-                    </svg>
-                </div>
-                <span class="tab-label">Rent</span>
-                <div class="tab-glow"></div>
-            </div>
-            <div class="label-tab" onclick="setActive(this)" data-placeholder="Search sold properties...">
-                <div class="tab-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                        <polyline points="22 4 12 14.01 9 11.01"/>
-                    </svg>
-                </div>
-                <span class="tab-label">Sold</span>
-                <div class="tab-glow"></div>
-            </div>
-            <div class="label-tab" onclick="setActive(this)" data-placeholder="Search for agents near you...">
-                <div class="tab-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                </div>
-                <span class="tab-label">Agent</span>
-                <div class="tab-glow"></div>
-            </div>
+    <a href="#" class="card sell">
+      <div>
+        <div class="icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M20 12V7a2 2 0 0 0-2-2h-5"></path>
+            <path d="M14 3l-4 4 4 4"></path>
+            <path d="M4 12v5a2 2 0 0 0 2 2h5"></path>
+            <path d="M10 21l4-4-4-4"></path>
+          </svg>
         </div>
+        <h3>Sell</h3>
+        <p>Get the best value fast.</p>
+      </div>
+      <span class="cta">List Now →</span>
+    </a>
 
-        <!-- Glass Search Bar -->
-        <div class="search-glass">
-            <div class="search-row">
-                <div class="search-input-wrapper">
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search properties to buy...">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"/>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                    </svg>
-                </div>
-                <div class="filter-select-wrapper">
-                    <select class="filter-select">
-                        <option>All Types</option>
-                        <option>House</option>
-                        <option>Apartment</option>
-                        <option>Condo</option>
-                        <option>Townhouse</option>
-                        <option>Land</option>
-                    </select>
-                </div>
-                <div class="filter-select-wrapper">
-                    <select class="filter-select">
-                        <option>Price Range</option>
-                        <option>$0 - $200k</option>
-                        <option>$200k - $500k</option>
-                        <option>$500k - $1M</option>
-                        <option>$1M - $5M</option>
-                        <option>$5M+</option>
-                    </select>
-                </div>
-                <button class="search-btn" onclick="createRipple(event)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"/>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                    </svg>
-                    <span>Search</span>
-                </button>
-            </div>
-
-            <!-- Quick Filters -->
-            <div class="quick-filters">
-                <span class="popular-label">Popular:</span>
-                <div class="quick-filter" onclick="this.classList.toggle('active')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    New York
-                </div>
-                <div class="quick-filter" onclick="this.classList.toggle('active')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    Los Angeles
-                </div>
-                <div class="quick-filter" onclick="this.classList.toggle('active')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    Miami
-                </div>
-                <div class="quick-filter" onclick="this.classList.toggle('active')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    San Francisco
-                </div>
-                <div class="quick-filter" onclick="this.classList.toggle('active')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    Chicago
-                </div>
-            </div>
+    <a href="#" class="card rent">
+      <div>
+        <div class="icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="8" cy="15" r="4"></circle>
+            <path d="M10.85 12.15L19 4"></path>
+            <path d="M18 3h3v3"></path>
+          </svg>
         </div>
-    </div>
+        <h3>Rent</h3>
+        <p>Move in without the wait.</p>
+      </div>
+      <span class="cta">View Homes →</span>
+    </a>
 
-    <script>
-        // Set active tab
-        function setActive(element) {
-            document.querySelectorAll('.label-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            element.classList.add('active');
+  </div>
 
-            // Update placeholder
-            const placeholder = element.getAttribute('data-placeholder');
-            document.getElementById('searchInput').placeholder = placeholder;
-
-            // Focus input
-            document.getElementById('searchInput').focus();
-        }
-
-        // Ripple effect on button
-        function createRipple(event) {
-            const button = event.currentTarget;
-            const ripple = document.createElement('span');
-            const rect = button.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = event.clientX - rect.left - size / 2;
-            const y = event.clientY - rect.top - size / 2;
-
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            ripple.classList.add('ripple');
-
-            button.appendChild(ripple);
-
-            setTimeout(() => ripple.remove(), 600);
-        }
-
-        // Create floating particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = particle.style.height = (Math.random() * 3 + 1) + 'px';
-                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                particle.style.animationDelay = (Math.random() * 10) + 's';
-                particle.style.opacity = Math.random() * 0.3;
-                container.appendChild(particle);
-            }
-        }
-
-        createParticles();
-
-        // Keyboard support
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const searchBtn = document.querySelector('.search-btn');
-                searchBtn.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    searchBtn.style.transform = '';
-                }, 150);
-            }
-        });
-    </script>
 </body>
 </html>

@@ -2,12 +2,11 @@ import {
   Home,
   Key,
   Building,
-  ArrowRight,
   TrendingUp,
   Search,
   CalendarCheck,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import RgButton from "@/components/reusable/RgButton";
 import "./ServiceSelection.css";
 
 type ServiceItem = {
@@ -128,20 +127,30 @@ const ServiceSelection = ({
           {services.map((service, i) => (
             <article
               key={service.id}
-              className={`svc-card svc-card--${service.theme}`}
+              className="svc-card"
               data-gsap="clip-smooth-down"
               data-gsap-delay={`${i * 0.14}`}
               data-gsap-start="top 88%"
             >
+              <div className="svc-card__top" aria-hidden="true">
+                <span className="svc-card__icon">
+                  <service.icon size={18} />
+                </span>
+              </div>
+
               <h3 className="svc-card__word">
                 {service.id.charAt(0).toUpperCase() + service.id.slice(1)}
               </h3>
+
               <p className="svc-card__desc">{service.description}</p>
+
               <div className="svc-card__footer">
-                <Link to="/contact" className="svc-card__btn">
-                  <span>{service.cta}</span>
-                  <ArrowRight size={16} />
-                </Link>
+                <RgButton
+                  variant="blue"
+                  to="/contact"
+                  label={service.cta}
+                  arrowSize={16}
+                />
               </div>
             </article>
           ))}
