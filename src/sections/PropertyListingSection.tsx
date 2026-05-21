@@ -434,13 +434,13 @@ const PropertyListingSection = () => {
 
         <div
           className="filter-wrapper"
-          data-gsap="fade-up"
+          data-gsap="fade-in"
           data-gsap-delay="0.1"
         >
           <div
             ref={filterTabsRef}
             className="filter-tabs"
-            data-gsap="fade-up"
+            data-gsap="fade-in"
             data-gsap-stagger="0.09"
             data-gsap-delay="0.25"
           >
