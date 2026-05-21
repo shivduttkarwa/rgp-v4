@@ -1,0 +1,65 @@
+public\images\about-intro.jpg
+public\images\h.jpg
+public\images\hero-11.jpg
+public\images\hero-22.jpg
+public\images\hero-33.jpg
+public\images\int.jpg
+public\images\ps1 (1).jpg
+public\images\ps1 (2).jpg
+public\images\ps1 (3).jpg
+public\images\ps1 (4).jpg
+public\images\ps1 (5).jpg
+public\images\team2.png
+public\images\team3.png
+public\images\team4.png
+public\images\team5.png
+src\components\Header.css
+src\components\Header.tsx
+src\components\HeroSearchPanel.tsx
+src\components\Menu.css
+src\components\Menu.tsx
+src\components\Preloader.css
+src\components\reusable\PropertyCard.css
+src\components\reusable\PropertyCard.tsx
+src\components\reusable\PropertyMarqee.css
+src\components\reusable\PropertyMarqee.tsx
+src\index.css
+src\lib\gsapSwitchAnimations.js
+src\pages\AboutPage.css
+src\pages\AboutPage.tsx
+src\pages\CollectionNoticePage.tsx
+src\pages\ContactPage.css
+src\pages\ContactPage.tsx
+src\pages\ExpressionOfInterestPage.css
+src\pages\ExpressionOfInterestPage.tsx
+src\pages\HomePage.tsx
+src\pages\LegalPage.css
+src\pages\PageShell.css
+src\pages\PrivacyPage.tsx
+src\pages\PropertiesPage.css
+src\pages\PropertiesPage.tsx
+src\pages\PropertyPage.tsx
+src\pages\ServicesPage.tsx
+src\pages\TeamPage.css
+src\pages\TeamPage.tsx
+src\pages\TestimonialPage.css
+src\pages\TestimonialsPage.tsx
+src\sections\Differ.css
+src\sections\Footer.css
+src\sections\Footer.tsx
+src\sections\HeroSection.css
+src\sections\HeroSection.tsx
+src\sections\Intro.css
+src\sections\Intro.tsx
+src\sections\Philosophy.css
+src\sections\Philosophy.tsx
+src\sections\PortfolioShowcase.css
+src\sections\PortfolioShowcase.tsx
+src\sections\PropertyListingsection.css
+src\sections\PropertyListingSection.tsx
+src\sections\ServiceSelection.css
+src\sections\ServiceSelection.tsx
+src\sections\Team.css
+src\sections\TeamV2.css
+src\sections\TeamV3.css
+src\sections\TestSection.css
